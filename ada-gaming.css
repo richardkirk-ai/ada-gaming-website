@@ -243,17 +243,15 @@ img { display: block; max-width: 100%; }
   background: rgba(212,168,67,0.08);
 }
 .user-avatar {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background: var(--ag-gold-grad);
-  color: var(--ag-ink-on-gold);
-  font-size: 12px;
-  font-weight: 900;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(212,168,67,0.35);
 }
 .user-name {
   font-size: 12px;
