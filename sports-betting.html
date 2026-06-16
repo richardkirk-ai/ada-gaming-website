@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ada Gaming — Premier League Betting</title>
+<link rel="stylesheet" href="ada-gaming.css">
+<style>
+/* ── Page head ────────────────────────────────────────────── */
+.page-head {
+  padding: 52px 0 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.page-head .display-gold { font-size: clamp(40px, 5vw, 68px); }
+.page-head p { font-size: 17px; color: var(--ag-text-2); margin: 0; max-width: 58ch; }
+
+/* ── League tabs ──────────────────────────────────────────── */
+.league-tabs {
+  display: flex;
+  gap: 10px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--ag-gold-border);
+  margin-bottom: 32px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.league-tabs::-webkit-scrollbar { display: none; }
+.league-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1.5px solid var(--ag-gold-border);
+  background: transparent;
+  color: var(--ag-text-2);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background 120ms, color 120ms, border-color 120ms;
+}
+.league-tab:hover { background: rgba(212,168,67,0.1); color: var(--ag-gold-1); }
+.league-tab.active {
+  background: var(--ag-gold-grad);
+  color: var(--ag-ink-on-gold);
+  border-color: transparent;
+}
+.league-tab .tab-icon { font-size: 16px; }
+
+/* ── Matchday filter row ──────────────────────────────────── */
+.filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.day-tabs { display: flex; gap: 6px; }
+.day-tab {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--ag-gold-border);
+  background: transparent;
+  color: var(--ag-text-3);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background 120ms, color 120ms;
+}
+.day-tab:hover { background: rgba(212,168,67,0.08); color: var(--ag-text-2); }
+.day-tab.active {
+  background: var(--ag-panel-2);
+  color: var(--ag-gold-1);
+  border-color: var(--ag-gold-border-strong);
+}
+.odds-format {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--ag-text-3);
+}
+.format-toggle {
+  display: flex;
+  gap: 2px;
+  background: var(--ag-panel);
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid var(--ag-gold-border);
+}
+.format-btn {
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--ag-text-3);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  transition: background 120ms, color 120ms;
+}
+.format-btn.active {
+  background: var(--ag-gold-grad);
+  color: var(--ag-ink-on-gold);
+}
+
+/* ── Fixture card ─────────────────────────────────────────── */
+.fixtures-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 60px; }
+
+.fixture-card {
+  border-radius: 14px;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--ag-panel) 0%, var(--ag-bg-2) 100%);
+  border: 1.5px solid var(--ag-gold-border);
+  transition: border-color 160ms;
+}
+.fixture-card:hover { border-color: var(--ag-gold-border-strong); }
+
+.fixture-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: rgba(212,168,67,0.05);
+  border-bottom: 1px solid var(--ag-gold-border);
+}
+.fixture-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--ag-text-3);
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+.fixture-meta .pl-badge {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--ag-gold-grad);
+  color: var(--ag-ink-on-gold);
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+.more-markets-btn {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ag-gold-1);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.fixture-body {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Team columns */
+.team-col { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.team-col.away { align-items: center; }
+.team-badge {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  background: var(--ag-surface);
+  border: 1.5px solid var(--ag-gold-border);
+  flex-shrink: 0;
+}
+.team-label {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ag-text);
+  text-align: center;
+}
+.team-record { font-size: 11px; color: var(--ag-text-3); letter-spacing: 0.04em; }
+
+/* Centre kick-off */
+.fixture-centre { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.kickoff-time {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  background: var(--ag-gold-text-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1;
+}
+.kickoff-date { font-size: 11px; color: var(--ag-text-3); letter-spacing: 0.06em; }
+.vs-text {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ag-text-muted);
+  margin-top: 4px;
+}
+
+/* Markets grid */
+.markets-grid {
+  padding: 0 20px 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.market-block { display: flex; flex-direction: column; gap: 8px; }
+.market-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ag-text-3);
+  padding-left: 2px;
+}
+.market-buttons { display: flex; gap: 6px; }
+.mkt-btn {
+  flex: 1;
+  padding: 10px 6px;
+  border-radius: 9px;
+  border: 1.5px solid var(--ag-gold-border);
+  background: var(--ag-surface);
+  text-align: center;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 120ms, border-color 120ms, transform 100ms;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.mkt-btn:hover {
+  background: rgba(212,168,67,0.14);
+  border-color: var(--ag-gold-border-strong);
+  transform: translateY(-1px);
+}
+.mkt-btn.selected {
+  background: var(--ag-gold-grad);
+  border-color: transparent;
+}
+.mkt-btn.selected .mkt-outcome { color: var(--ag-ink-on-gold); }
+.mkt-btn.selected .mkt-odd { color: var(--ag-ink-on-gold); }
+.mkt-outcome { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ag-text-3); }
+.mkt-odd { font-size: 15px; font-weight: 900; color: var(--ag-gold-1); letter-spacing: 0.02em; }
+
+/* First goalscorer strip */
+.goalscorer-strip {
+  padding: 0 20px 18px;
+  border-top: 1px dashed rgba(212,168,67,0.15);
+  padding-top: 14px;
+}
+.gs-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ag-text-3);
+  margin-bottom: 10px;
+}
+.gs-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+.gs-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--ag-gold-border);
+  background: var(--ag-surface);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 120ms, border-color 120ms;
+}
+.gs-btn:hover { background: rgba(212,168,67,0.1); border-color: var(--ag-gold-border-strong); }
+.gs-player { font-size: 12px; font-weight: 700; color: var(--ag-text-2); }
+.gs-odd { font-size: 13px; font-weight: 900; color: var(--ag-gold-1); }
+
+/* ── Bet slip sidebar ─────────────────────────────────────── */
+.betting-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 32px;
+  align-items: start;
+}
+.bet-slip {
+  position: sticky;
+  top: 24px;
+  border-radius: 16px;
+  background: linear-gradient(160deg, var(--ag-panel) 0%, var(--ag-bg-2) 100%);
+  border: 1.5px solid var(--ag-gold-border-strong);
+  overflow: hidden;
+}
+.bet-slip-header {
+  padding: 16px 20px;
+  background: var(--ag-gold-grad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.bet-slip-header h3 {
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ag-ink-on-gold);
+}
+.bet-count {
+  background: var(--ag-ink-on-gold);
+  color: var(--ag-gold-1);
+  font-size: 11px;
+  font-weight: 900;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bet-slip-body { padding: 18px 20px; }
+.bet-slip-empty {
+  text-align: center;
+  padding: 32px 20px;
+  color: var(--ag-text-3);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.bet-slip-empty .empty-icon { font-size: 36px; margin-bottom: 10px; display: block; }
+.bet-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--ag-gold-border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.bet-item:last-child { border-bottom: none; }
+.bet-match { font-size: 11px; color: var(--ag-text-3); letter-spacing: 0.04em; }
+.bet-selection { font-size: 13px; font-weight: 700; color: var(--ag-text); }
+.bet-odd { font-size: 14px; font-weight: 900; color: var(--ag-gold-1); }
+.stake-row {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.stake-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ag-text-3); }
+.stake-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 9px;
+  border: 1.5px solid var(--ag-gold-border);
+  background: var(--ag-surface);
+  color: var(--ag-text);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  outline: none;
+  transition: border-color 120ms;
+}
+.stake-input:focus { border-color: var(--ag-gold-1); }
+.est-return {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--ag-text-2);
+  margin-top: 4px;
+}
+.est-return strong { color: var(--ag-green); font-weight: 800; }
+.place-bet-btn {
+  width: 100%;
+  margin-top: 14px;
+  padding: 16px;
+  border-radius: 10px;
+  border: none;
+  background: var(--ag-green);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: filter 120ms;
+}
+.place-bet-btn:hover { filter: brightness(1.1); }
+.place-bet-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+@media (max-width: 1100px) {
+  .betting-layout { grid-template-columns: 1fr; }
+  .bet-slip { position: static; }
+  .markets-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .markets-grid { grid-template-columns: 1fr; }
+  .fixture-body { grid-template-columns: 1fr; gap: 12px; }
+  .fixture-centre { flex-direction: row; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="rg-bar">18+ | Play Responsibly | <a href="#">BeGambleAware.org</a> | T&amp;Cs apply. Demo site only.</div>
+
+<div class="wrap">
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <img src="logo.png" alt="Ada Gaming" width="52" height="52" style="border-radius:50%;display:block;filter:drop-shadow(0 4px 14px rgba(212,168,67,0.4));">
+      <span class="brand-name">
+        <span class="brand-title">Ada Gaming</span>
+        <span class="brand-tag">Betting &middot; Casino &middot; Live</span>
+      </span>
+    </a>
+    <nav class="site-nav">
+      <a href="sports-betting.html" class="active">Sports</a>
+      <a href="live-casino.html">Casino</a>
+      <a href="index.html">Promotions</a>
+    </nav>
+    <div class="header-actions">
+      <span class="age-pill">18+</span>
+      <button class="login-btn" type="button">Log in</button>
+      <a class="btn-gold" href="index.html">Join now</a>
+    </div>
+  </header>
+</div>
+
+<hr class="gold-rule">
+
+<main class="wrap">
+  <section class="page-head">
+    <p class="eyebrow">Sports betting</p>
+    <h1 class="display-gold">Premier League</h1>
+    <p>Bet on this weekend&rsquo;s Premier League fixtures. Click any odds to add to your bet slip. All prices are for demonstration purposes only.</p>
+  </section>
+
+  <!-- League tabs -->
+  <div class="league-tabs">
+    <button class="league-tab active" type="button"><span class="tab-icon">&#9917;</span> Premier League</button>
+    <button class="league-tab" type="button"><span class="tab-icon">&#127942;</span> Champions League</button>
+    <button class="league-tab" type="button"><span class="tab-icon">&#127981;</span> Championship</button>
+    <button class="league-tab" type="button"><span class="tab-icon">&#127988;</span> FA Cup</button>
+    <button class="league-tab" type="button"><span class="tab-icon">&#127468;&#127463;</span> Bundesliga</button>
+    <button class="league-tab" type="button"><span class="tab-icon">&#127470;&#127481;</span> Serie A</button>
+    <button class="league-tab" type="button"><span class="tab-icon">&#127466;&#127480;</span> La Liga</button>
+  </div>
+
+  <!-- Filter row -->
+  <div class="filter-row">
+    <div class="day-tabs">
+      <button class="day-tab" type="button">Today</button>
+      <button class="day-tab active" type="button">Weekend</button>
+      <button class="day-tab" type="button">Next 7 days</button>
+    </div>
+    <div class="odds-format">
+      <span>Odds:</span>
+      <div class="format-toggle">
+        <button class="format-btn active" type="button">Decimal</button>
+        <button class="format-btn" type="button">Fractional</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="betting-layout">
+
+    <!-- ── Fixtures ── -->
+    <div class="fixtures-list" id="fixtures-list">
+      <!-- Rendered by JS -->
+    </div>
+
+    <!-- ── Bet slip ── -->
+    <aside class="bet-slip">
+      <div class="bet-slip-header">
+        <h3>Bet Slip</h3>
+        <span class="bet-count" id="bet-count">0</span>
+      </div>
+      <div class="bet-slip-body" id="bet-slip-body">
+        <div class="bet-slip-empty">
+          <span class="empty-icon">&#127183;</span>
+          Select odds from any fixture to build your bet slip
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <span class="footer-head">Sports</span>
+        <a href="sports-betting.html">Premier League</a>
+        <a href="sports-betting.html">Champions League</a>
+        <a href="sports-betting.html">In-play betting</a>
+        <a href="sports-betting.html">Accumulators</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-head">Casino</span>
+        <a href="live-casino.html">Slots</a>
+        <a href="live-casino.html">Live Roulette</a>
+        <a href="live-casino.html">Live Blackjack</a>
+        <a href="live-casino.html">Game Shows</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-head">Promotions</span>
+        <a href="index.html">Welcome offer</a>
+        <a href="index.html">Free bets</a>
+        <a href="index.html">Acca insurance</a>
+        <a href="index.html">Loyalty rewards</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-head">Help</span>
+        <a href="index.html">Responsible gambling</a>
+        <a href="index.html">Self-exclusion</a>
+        <a href="index.html">Deposit limits</a>
+        <a href="index.html">Contact us</a>
+      </div>
+    </div>
+    <hr class="gold-rule">
+    <div class="rg-logos">
+      <span class="rg-badge">18+</span>
+      <span class="rg-badge">UKGC Licensed</span>
+      <span class="rg-badge">BeGambleAware</span>
+      <span class="rg-badge">GamStop</span>
+      <span class="rg-badge">GamCare</span>
+    </div>
+    <div class="footer-legal">
+      <span>Ada Gaming is a demo experience. No real money wagering. Gambling can be addictive &mdash; please play responsibly.</span>
+      <span>&copy; 2026 Ada Gaming</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* ── Fixture data ─────────────────────────────────────────── */
+  var FIXTURES = [
+    {
+      id: 1,
+      kickoff: "15:00", date: "Sat 18 Jan",
+      home: { name: "Manchester City", badge: "&#127928;", record: "W5 D1 L1" },
+      away: { name: "Brighton", badge: "&#9734;", record: "W3 D2 L2" },
+      odds: { h: 1.44, d: 4.50, a: 7.00 },
+      btts: { y: 1.91, n: 1.67 },
+      ou: { o: 1.73, u: 1.91 },
+      scorers: [
+        { name: "E. Haaland", odd: 3.50 },
+        { name: "P. Foden", odd: 4.50 },
+        { name: "M. Caicedo", odd: 10.00 },
+        { name: "D. Welbeck", odd: 15.00 }
+      ]
+    },
+    {
+      id: 2,
+      kickoff: "15:00", date: "Sat 18 Jan",
+      home: { name: "Arsenal", badge: "&#128308;", record: "W4 D2 L1" },
+      away: { name: "Tottenham", badge: "&#9733;", record: "W3 D1 L3" },
+      odds: { h: 2.10, d: 3.60, a: 3.20 },
+      btts: { y: 1.95, n: 2.10 },
+      ou: { o: 1.91, u: 1.73 },
+      scorers: [
+        { name: "B. Saka", odd: 4.50 },
+        { name: "G. Jesus", odd: 5.00 },
+        { name: "D. Solanke", odd: 8.00 },
+        { name: "M. Son", odd: 6.00 }
+      ]
+    },
+    {
+      id: 3,
+      kickoff: "15:00", date: "Sat 18 Jan",
+      home: { name: "Liverpool", badge: "&#128308;", record: "W6 D0 L1" },
+      away: { name: "Man United", badge: "&#128308;", record: "W2 D2 L3" },
+      odds: { h: 1.73, d: 3.60, a: 3.25 },
+      btts: { y: 1.57, n: 2.38 },
+      ou: { o: 2.10, u: 1.73 },
+      scorers: [
+        { name: "M. Salah", odd: 3.25 },
+        { name: "C. Gakpo", odd: 6.00 },
+        { name: "B. Fernandes", odd: 5.00 },
+        { name: "R. Hojlund", odd: 6.50 }
+      ]
+    },
+    {
+      id: 4,
+      kickoff: "15:00", date: "Sat 18 Jan",
+      home: { name: "Chelsea", badge: "&#128153;", record: "W4 D1 L2" },
+      away: { name: "Nott'm Forest", badge: "&#128308;", record: "W3 D3 L1" },
+      odds: { h: 1.95, d: 3.60, a: 8.00 },
+      btts: { y: 1.73, n: 1.91 },
+      ou: { o: 1.67, u: 1.91 },
+      scorers: [
+        { name: "C. Palmer", odd: 3.25 },
+        { name: "N. Jackson", odd: 4.50 },
+        { name: "CH-Odoi", odd: 9.00 },
+        { name: "C. Wood", odd: 11.00 }
+      ]
+    },
+    {
+      id: 5,
+      kickoff: "17:30", date: "Sat 18 Jan",
+      home: { name: "West Ham", badge: "&#128296;", record: "W2 D2 L3" },
+      away: { name: "Aston Villa", badge: "&#128316;", record: "W4 D1 L2" },
+      odds: { h: 3.20, d: 3.40, a: 1.73 },
+      btts: { y: 1.91, n: 1.67 },
+      ou: { o: 1.91, u: 1.73 },
+      scorers: [
+        { name: "J. Bowen", odd: 4.50 },
+        { name: "O. Watkins", odd: 3.75 },
+        { name: "M. Rogers", odd: 9.00 },
+        { name: "M. Antonio", odd: 5.50 }
+      ]
+    },
+    {
+      id: 6,
+      kickoff: "14:00", date: "Sun 19 Jan",
+      home: { name: "Everton", badge: "&#128153;", record: "W2 D3 L2" },
+      away: { name: "Bournemouth", badge: "&#128308;", record: "W3 D2 L2" },
+      odds: { h: 1.95, d: 3.40, a: 4.50 },
+      btts: { y: 1.73, n: 1.91 },
+      ou: { o: 1.67, u: 1.91 },
+      scorers: [
+        { name: "D. Calvert-Lewin", odd: 7.50 },
+        { name: "Evanilson", odd: 4.50 },
+        { name: "A. Semenyo", odd: 6.50 },
+        { name: "D. McNeil", odd: 10.00 }
+      ]
+    },
+    {
+      id: 7,
+      kickoff: "16:30", date: "Sun 19 Jan",
+      home: { name: "Fulham", badge: "&#9898;", record: "W3 D2 L2" },
+      away: { name: "Wolves", badge: "&#129453;", record: "W2 D2 L3" },
+      odds: { h: 2.20, d: 3.40, a: 3.50 },
+      btts: { y: 1.57, n: 2.38 },
+      ou: { o: 1.73, u: 1.91 },
+      scorers: [
+        { name: "R. Jimenez", odd: 4.50 },
+        { name: "A. Iwobi", odd: 6.50 },
+        { name: "M. Cunha", odd: 5.50 },
+        { name: "A. Traore", odd: 6.00 }
+      ]
+    },
+    {
+      id: 8,
+      kickoff: "20:00", date: "Sun 19 Jan",
+      home: { name: "Ipswich Town", badge: "&#128304;", record: "W1 D2 L4" },
+      away: { name: "Crystal Palace", badge: "&#128316;", record: "W3 D1 L3" },
+      odds: { h: 2.60, d: 3.40, a: 2.50 },
+      btts: { y: 1.73, n: 1.91 },
+      ou: { o: 1.67, u: 1.91 },
+      scorers: [
+        { name: "L. Delap", odd: 3.75 },
+        { name: "J-P. Mateta", odd: 4.50 },
+        { name: "E. Nketiah", odd: 9.00 },
+        { name: "O. Hutchinson", odd: 10.00 }
+      ]
+    }
+  ];
+
+  /* ── Bet slip state ───────────────────────────────────────── */
+  var betSlip = [];
+
+  function fmtOdd(val) {
+    return val.toFixed(2);
+  }
+
+  /* ── Build fixtures ───────────────────────────────────────── */
+  var list = document.getElementById("fixtures-list");
+
+  FIXTURES.forEach(function (fx) {
+    var card = document.createElement("div");
+    card.className = "fixture-card";
+    card.innerHTML =
+      '<div class="fixture-header">' +
+        '<div class="fixture-meta">' +
+          '<span class="pl-badge">Premier League</span>' +
+          fx.date + " &middot; " + fx.kickoff + " GMT" +
+        '</div>' +
+        '<button class="more-markets-btn" type="button">More markets &rsaquo;</button>' +
+      '</div>' +
+      '<div class="fixture-body">' +
+        '<div class="team-col">' +
+          '<div class="team-badge">' + fx.home.badge + '</div>' +
+          '<span class="team-label">' + fx.home.name + '</span>' +
+          '<span class="team-record">' + fx.home.record + '</span>' +
+        '</div>' +
+        '<div class="fixture-centre">' +
+          '<div style="display:flex;flex-direction:column;align-items:center;gap:4px">' +
+            '<div class="kickoff-time">' + fx.kickoff + '</div>' +
+            '<div class="kickoff-date">' + fx.date + '</div>' +
+            '<div class="vs-text">vs</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="team-col away">' +
+          '<div class="team-badge">' + fx.away.badge + '</div>' +
+          '<span class="team-label">' + fx.away.name + '</span>' +
+          '<span class="team-record">' + fx.away.record + '</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="markets-grid">' +
+        '<div class="market-block">' +
+          '<div class="market-label">Match Result (1X2)</div>' +
+          '<div class="market-buttons">' +
+            mkMktBtn("H" + fx.id, fx.home.name + " Win", fx.odds.h, fx.home.name + " v " + fx.away.name) +
+            mkMktBtn("D" + fx.id, "Draw", fx.odds.d, fx.home.name + " v " + fx.away.name) +
+            mkMktBtn("A" + fx.id, fx.away.name + " Win", fx.odds.a, fx.home.name + " v " + fx.away.name) +
+          '</div>' +
+        '</div>' +
+        '<div class="market-block">' +
+          '<div class="market-label">Both Teams to Score</div>' +
+          '<div class="market-buttons">' +
+            mkMktBtn("BTTSY" + fx.id, "Yes", fx.btts.y, fx.home.name + " v " + fx.away.name) +
+            mkMktBtn("BTTSN" + fx.id, "No", fx.btts.n, fx.home.name + " v " + fx.away.name) +
+          '</div>' +
+        '</div>' +
+        '<div class="market-block">' +
+          '<div class="market-label">Goals Over / Under 2.5</div>' +
+          '<div class="market-buttons">' +
+            mkMktBtn("OVR" + fx.id, "Over 2.5", fx.ou.o, fx.home.name + " v " + fx.away.name) +
+            mkMktBtn("UND" + fx.id, "Under 2.5", fx.ou.u, fx.home.name + " v " + fx.away.name) +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="goalscorer-strip">' +
+        '<div class="gs-label">First Goalscorer</div>' +
+        '<div class="gs-buttons">' +
+          fx.scorers.map(function (s) {
+            return mkGsBtn("GS" + fx.id + "_" + s.name.replace(/\s/g,""), s.name, s.odd, fx.home.name + " v " + fx.away.name);
+          }).join("") +
+        '</div>' +
+      '</div>';
+
+    list.appendChild(card);
+  });
+
+  function mkMktBtn(id, label, odd, match) {
+    return '<button class="mkt-btn" type="button" data-bet-id="' + id + '" data-label="' + label + '" data-odd="' + odd + '" data-match="' + match + '">' +
+      '<span class="mkt-outcome">' + label + '</span>' +
+      '<span class="mkt-odd">' + fmtOdd(odd) + '</span>' +
+    '</button>';
+  }
+  function mkGsBtn(id, player, odd, match) {
+    return '<button class="gs-btn" type="button" data-bet-id="' + id + '" data-label="' + player + ' (1st scorer)" data-odd="' + odd + '" data-match="' + match + '">' +
+      '<span class="gs-player">' + player + '</span>' +
+      '<span class="gs-odd">' + fmtOdd(odd) + '</span>' +
+    '</button>';
+  }
+
+  /* ── Bet slip interactions ────────────────────────────────── */
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest("[data-bet-id]");
+    if (!btn) return;
+
+    var id = btn.dataset.betId;
+    var label = btn.dataset.label;
+    var odd = parseFloat(btn.dataset.odd);
+    var match = btn.dataset.match;
+
+    var idx = betSlip.findIndex(function (b) { return b.id === id; });
+    if (idx > -1) {
+      betSlip.splice(idx, 1);
+      btn.classList.remove("selected");
+    } else {
+      betSlip.push({ id: id, label: label, odd: odd, match: match });
+      btn.classList.add("selected");
+    }
+    renderSlip();
+  });
+
+  function renderSlip() {
+    var body = document.getElementById("bet-slip-body");
+    var count = document.getElementById("bet-count");
+    count.textContent = String(betSlip.length);
+
+    if (betSlip.length === 0) {
+      body.innerHTML = '<div class="bet-slip-empty"><span class="empty-icon">&#127183;</span>Select odds from any fixture to build your bet slip</div>';
+      return;
+    }
+
+    var totalOdds = betSlip.reduce(function (acc, b) { return acc * b.odd; }, 1);
+    var stake = 10;
+    var ret = (totalOdds * stake).toFixed(2);
+
+    var html = betSlip.map(function (b) {
+      return '<div class="bet-item">' +
+        '<div class="bet-match">' + b.match + '</div>' +
+        '<div class="bet-selection">' + b.label + '</div>' +
+        '<div class="bet-odd">' + fmtOdd(b.odd) + '</div>' +
+      '</div>';
+    }).join("");
+
+    if (betSlip.length > 1) {
+      html += '<div class="bet-item"><div class="bet-match">Accumulator</div><div class="bet-selection">Combined odds</div><div class="bet-odd">' + fmtOdd(totalOdds) + '</div></div>';
+    }
+
+    html += '<div class="stake-row">' +
+      '<span class="stake-label">Stake (&pound;)</span>' +
+      '<input class="stake-input" type="number" value="10" min="0.10" step="0.10">' +
+      '<div class="est-return"><span>Est. return</span><strong>&pound;' + ret + '</strong></div>' +
+    '</div>' +
+    '<button class="place-bet-btn" type="button">Place bet</button>';
+
+    body.innerHTML = html;
+
+    body.querySelector(".stake-input").addEventListener("input", function () {
+      var s = parseFloat(this.value) || 0;
+      body.querySelector(".est-return strong").textContent = "&pound;" + (totalOdds * s).toFixed(2);
+    });
+    body.querySelector(".place-bet-btn").addEventListener("click", function () {
+      alert("Demo only — no real bets placed. 18+ | BeGambleAware.org");
+    });
+  }
+})();
+</script>
+
+<!-- Ada embed -->
+<script>
+  window.adaSettings = {
+    handle: "rkirk-gaming-demo",
+    hideMask: false
+  };
+</script>
+<script src="https://static.ada.support/embed2.js" async></script>
+
+</body>
+</html>

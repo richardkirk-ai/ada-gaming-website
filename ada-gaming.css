@@ -1,0 +1,329 @@
+/* Ada Gaming — Global Stylesheet */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Barlow+Condensed:wght@600;700;800;900&display=swap');
+
+/* ── Design tokens ────────────────────────────────────────── */
+:root {
+  --ag-bg:          #0E0928;
+  --ag-bg-2:        #160D3A;
+  --ag-panel:       #1E1450;
+  --ag-panel-2:     #251A60;
+  --ag-surface:     #2E2270;
+
+  --ag-gold-1:      #D4A843;
+  --ag-gold-2:      #B8922C;
+  --ag-gold-3:      #F0CC6A;
+  --ag-gold-grad:   linear-gradient(135deg, #F0CC6A 0%, #D4A843 45%, #A87820 100%);
+  --ag-gold-text-grad: linear-gradient(90deg, #F0CC6A 0%, #D4A843 60%, #C9A040 100%);
+  --ag-gold-border: rgba(212, 168, 67, 0.28);
+  --ag-gold-border-strong: rgba(212, 168, 67, 0.55);
+  --ag-ink-on-gold: #1A0E00;
+
+  --ag-green:       #2ECC71;
+  --ag-green-dim:   rgba(46, 204, 113, 0.18);
+  --ag-red:         #E74C3C;
+  --ag-blue:        #3498DB;
+
+  --ag-text:        #F5F1FF;
+  --ag-text-2:      #C0B4E8;
+  --ag-text-3:      #8A7DB8;
+  --ag-text-muted:  #5A4E88;
+
+  --ag-ease:        cubic-bezier(0.22, 1, 0.36, 1);
+  --ag-radius:      14px;
+}
+
+/* ── Reset ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter Tight', system-ui, sans-serif;
+  background: var(--ag-bg);
+  color: var(--ag-text);
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: inherit; }
+img { display: block; max-width: 100%; }
+
+/* ── Layout ───────────────────────────────────────────────── */
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 36px; }
+@media (max-width: 768px) { .wrap { padding: 0 18px; } }
+
+/* ── Typography ───────────────────────────────────────────── */
+.display-gold {
+  font-family: 'Barlow Condensed', 'Inter Tight', sans-serif;
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  background: var(--ag-gold-text-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ag-gold-1);
+}
+.section-title {
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--ag-gold-text-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Buttons ──────────────────────────────────────────────── */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: 999px;
+  border: none;
+  background: var(--ag-gold-grad);
+  color: var(--ag-ink-on-gold);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: filter 140ms var(--ag-ease), transform 120ms var(--ag-ease);
+  box-shadow: 0 4px 22px rgba(212,168,67,0.35);
+}
+.btn-gold:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 30px;
+  border-radius: 999px;
+  border: 1.5px solid var(--ag-gold-border-strong);
+  background: transparent;
+  color: var(--ag-gold-1);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background 140ms var(--ag-ease), border-color 140ms var(--ag-ease);
+}
+.btn-outline:hover { background: rgba(212,168,67,0.1); border-color: var(--ag-gold-1); }
+
+.btn-green {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: none;
+  background: var(--ag-green);
+  color: #fff;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: filter 120ms var(--ag-ease);
+}
+.btn-green:hover { filter: brightness(1.1); }
+
+/* ── Gold card ────────────────────────────────────────────── */
+.gold-card {
+  background: linear-gradient(160deg, var(--ag-panel) 0%, var(--ag-bg-2) 100%);
+  border: 1.5px solid var(--ag-gold-border);
+  border-radius: var(--ag-radius);
+  transition: border-color 160ms var(--ag-ease), transform 180ms var(--ag-ease), box-shadow 180ms var(--ag-ease);
+}
+.gold-card:hover {
+  border-color: var(--ag-gold-border-strong);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 18px 0;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.brand img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: block;
+  filter: drop-shadow(0 4px 14px rgba(212,168,67,0.4));
+}
+.brand-name { display: flex; flex-direction: column; }
+.brand-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: var(--ag-gold-text-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.1;
+}
+.brand-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ag-text-3);
+  margin-top: 1px;
+}
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  margin-left: auto;
+}
+.site-nav a {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ag-text-2);
+  transition: color 120ms var(--ag-ease);
+  position: relative;
+}
+.site-nav a:hover,
+.site-nav a.active { color: var(--ag-gold-1); }
+.site-nav a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0; right: 0;
+  height: 2px;
+  background: var(--ag-gold-grad);
+  border-radius: 2px;
+}
+.header-actions { display: flex; align-items: center; gap: 14px; margin-left: 24px; }
+.age-pill {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1.5px solid var(--ag-gold-border);
+  color: var(--ag-gold-1);
+}
+.login-btn {
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1.5px solid var(--ag-gold-border-strong);
+  background: transparent;
+  color: var(--ag-gold-1);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background 120ms var(--ag-ease);
+}
+.login-btn:hover { background: rgba(212,168,67,0.1); }
+
+/* ── Gold rule ────────────────────────────────────────────── */
+.gold-rule {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ag-gold-border-strong) 25%, var(--ag-gold-1) 50%, var(--ag-gold-border-strong) 75%, transparent);
+}
+
+/* ── Responsible gambling banner ──────────────────────────── */
+.rg-bar {
+  background: rgba(14,9,40,0.8);
+  border-bottom: 1px solid rgba(212,168,67,0.1);
+  padding: 7px 0;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ag-text-3);
+}
+.rg-bar a { color: var(--ag-gold-2); text-decoration: underline; }
+
+/* ── Footer ───────────────────────────────────────────────── */
+.site-footer {
+  margin-top: 80px;
+  padding: 56px 0 0 0;
+  border-top: 1px solid var(--ag-gold-border);
+  background: var(--ag-bg-2);
+}
+.footer-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  padding-bottom: 48px;
+}
+.footer-col { display: flex; flex-direction: column; gap: 12px; }
+.footer-head {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ag-gold-1);
+  margin-bottom: 4px;
+}
+.footer-col a {
+  font-size: 13px;
+  color: var(--ag-text-3);
+  transition: color 120ms var(--ag-ease);
+}
+.footer-col a:hover { color: var(--ag-text-2); }
+.footer-legal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 20px 0;
+  font-size: 11px;
+  color: var(--ag-text-muted);
+  letter-spacing: 0.04em;
+}
+.rg-logos {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 0;
+  border-top: 1px solid var(--ag-gold-border);
+}
+.rg-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ag-text-muted);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+@media (max-width: 768px) {
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .site-nav { display: none; }
+}

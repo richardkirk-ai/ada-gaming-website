@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ada Gaming — Betting &amp; Casino</title>
+<link rel="stylesheet" href="ada-gaming.css">
+<style>
+/* ── Hero ─────────────────────────────────────────────────── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  padding: 80px 0 72px;
+}
+.hero-copy { display: flex; flex-direction: column; gap: 28px; }
+.hero-copy .display-gold { font-size: clamp(64px, 8vw, 108px); }
+.hero-sub {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ag-text-2);
+  max-width: 46ch;
+}
+.hero-cta-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+
+/* ── Hero visual ──────────────────────────────────────────── */
+.hero-visual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.hero-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.hero-cat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 36px 24px;
+  text-align: center;
+  border-radius: 18px;
+  background: linear-gradient(160deg, var(--ag-panel) 0%, var(--ag-bg-2) 100%);
+  border: 1.5px solid var(--ag-gold-border);
+  transition: border-color 160ms, transform 180ms;
+  text-decoration: none;
+}
+.hero-cat:hover { border-color: var(--ag-gold-border-strong); transform: translateY(-4px); }
+.hero-cat-icon {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+}
+.hero-cat-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--ag-gold-text-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Floating jackpot badge */
+.jackpot-badge {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  background: var(--ag-gold-grad);
+  color: var(--ag-ink-on-gold);
+  border-radius: 14px;
+  padding: 12px 18px;
+  text-align: center;
+  box-shadow: 0 8px 28px rgba(212,168,67,0.45);
+  z-index: 2;
+}
+.jackpot-badge .jb-label { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; }
+.jackpot-badge .jb-amount { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 900; line-height: 1.1; }
+
+/* Slots preview strip */
+.slots-strip {
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: linear-gradient(160deg, var(--ag-panel) 0%, var(--ag-bg-2) 100%);
+  border: 1.5px solid var(--ag-gold-border);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.slots-strip-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ag-gold-1);
+  white-space: nowrap;
+}
+.slot-icons { display: flex; gap: 8px; align-items: center; flex: 1; }
+.slot-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--ag-surface);
+  border: 1px solid var(--ag-gold-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+/* ── Promo banner ─────────────────────────────────────────── */
+.promo-banner {
+  margin: 0;
+  padding: 36px 48px;
+  border-radius: 20px;
+  background: linear-gradient(120deg, #1A1050 0%, #2A1A70 50%, #1A1050 100%);
+  border: 1.5px solid var(--ag-gold-border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  box-shadow: 0 0 60px rgba(212,168,67,0.12);
+  position: relative;
+  overflow: hidden;
+}
+.promo-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(212,168,67,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.promo-copy { display: flex; flex-direction: column; gap: 10px; }
+.promo-banner .display-gold { font-size: clamp(28px, 3vw, 44px); }
+.promo-sub { font-size: 15px; color: var(--ag-text-2); max-width: 46ch; }
+.promo-terms { font-size: 11px; color: var(--ag-text-3); }
+
+/* ── Quick links ──────────────────────────────────────────── */
+.quick-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 60px 0;
+}
+.ql-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 24px 26px;
+  border-radius: 14px;
+  background: linear-gradient(160deg, var(--ag-panel) 0%, var(--ag-bg-2) 100%);
+  border: 1.5px solid var(--ag-gold-border);
+  text-decoration: none;
+  transition: border-color 160ms, transform 180ms;
+}
+.ql-card:hover { border-color: var(--ag-gold-border-strong); transform: translateY(-3px); }
+.ql-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ag-surface);
+  border-radius: 12px;
+  border: 1px solid var(--ag-gold-border);
+}
+.ql-text { display: flex; flex-direction: column; gap: 3px; }
+.ql-title {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--ag-gold-text-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.ql-sub { font-size: 12px; color: var(--ag-text-3); }
+
+/* ── Featured section ─────────────────────────────────────── */
+.featured-section { padding: 20px 0 60px; }
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+.section-head a {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ag-gold-1);
+}
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.game-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--ag-panel) 0%, var(--ag-bg-2) 100%);
+  border: 1.5px solid var(--ag-gold-border);
+  transition: border-color 160ms, transform 180ms;
+  text-decoration: none;
+}
+.game-card:hover { border-color: var(--ag-gold-border-strong); transform: translateY(-4px); }
+.game-thumb {
+  width: 100%;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+  background: linear-gradient(160deg, var(--ag-panel-2), var(--ag-surface));
+  border-bottom: 1px solid var(--ag-gold-border);
+  position: relative;
+  overflow: hidden;
+}
+.game-thumb::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(212,168,67,0.08), transparent 60%);
+}
+.game-info { padding: 14px 16px 16px; }
+.game-name {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ag-text);
+  margin-bottom: 2px;
+}
+.game-provider { font-size: 11px; color: var(--ag-text-3); letter-spacing: 0.06em; }
+.game-rtp {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ag-green);
+  margin-top: 8px;
+}
+.game-play {
+  margin-top: 12px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: var(--ag-gold-grad);
+  color: var(--ag-ink-on-gold);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.game-play:hover { filter: brightness(1.08); }
+
+/* ── Live matches strip ───────────────────────────────────── */
+.live-strip {
+  padding: 20px 0 60px;
+}
+.match-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.match-mini {
+  padding: 20px 22px;
+  border-radius: 12px;
+  background: linear-gradient(160deg, var(--ag-panel) 0%, var(--ag-bg-2) 100%);
+  border: 1.5px solid var(--ag-gold-border);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-decoration: none;
+  transition: border-color 160ms;
+}
+.match-mini:hover { border-color: var(--ag-gold-border-strong); }
+.match-time-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.live-pill {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--ag-red);
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 999px;
+  animation: pulse-red 2s ease-in-out infinite;
+}
+@keyframes pulse-red {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+.soon-pill {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid var(--ag-gold-border);
+  color: var(--ag-gold-1);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+.match-kickoff { font-size: 11px; color: var(--ag-text-3); }
+.teams-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.team-name {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ag-text);
+  flex: 1;
+}
+.team-name.away { text-align: right; }
+.vs-divider { font-size: 10px; font-weight: 700; color: var(--ag-text-muted); flex-shrink: 0; letter-spacing: 0.12em; }
+.odds-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+}
+.odd-btn {
+  padding: 8px 4px;
+  border-radius: 8px;
+  border: 1px solid var(--ag-gold-border);
+  background: var(--ag-surface);
+  text-align: center;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 120ms, border-color 120ms;
+}
+.odd-btn:hover { background: rgba(212,168,67,0.15); border-color: var(--ag-gold-border-strong); }
+.odd-label { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ag-text-3); display: block; }
+.odd-val { font-size: 14px; font-weight: 800; color: var(--ag-gold-1); display: block; margin-top: 2px; }
+
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .quick-links { grid-template-columns: 1fr 1fr; }
+  .games-grid { grid-template-columns: repeat(2, 1fr); }
+  .match-mini-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .quick-links { grid-template-columns: 1fr; }
+  .games-grid { grid-template-columns: 1fr 1fr; }
+  .match-mini-grid { grid-template-columns: 1fr; }
+  .promo-banner { flex-direction: column; padding: 28px 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="rg-bar">18+ | Play Responsibly | <a href="#">BeGambleAware.org</a> | T&amp;Cs apply. Demo site only.</div>
+
+<div class="wrap">
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <img src="logo.png" alt="Ada Gaming" width="52" height="52" style="border-radius:50%;display:block;filter:drop-shadow(0 4px 14px rgba(212,168,67,0.4));">
+      <span class="brand-name">
+        <span class="brand-title">Ada Gaming</span>
+        <span class="brand-tag">Betting &middot; Casino &middot; Live</span>
+      </span>
+    </a>
+    <nav class="site-nav">
+      <a href="sports-betting.html">Sports</a>
+      <a href="live-casino.html">Casino</a>
+      <a href="index.html">Promotions</a>
+    </nav>
+    <div class="header-actions">
+      <span class="age-pill">18+</span>
+      <button class="login-btn" type="button">Log in</button>
+      <a class="btn-gold" href="index.html">Join now</a>
+    </div>
+  </header>
+</div>
+
+<hr class="gold-rule">
+
+<main>
+  <!-- ── Hero ── -->
+  <section class="wrap" style="padding-top:0">
+    <div class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">The home of sports &amp; casino</p>
+        <h1 class="display-gold">Betting<br>&amp; Gaming</h1>
+        <p class="hero-sub">Premier League odds, live casino tables and top slots — all in one place. Join Ada Gaming today and claim your welcome bonus.</p>
+        <div class="hero-cta-row">
+          <a class="btn-gold" href="index.html">Join now</a>
+          <a class="btn-outline" href="sports-betting.html">See today's odds</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="jackpot-badge">
+          <div class="jb-label">Jackpot</div>
+          <div class="jb-amount">£1.4M</div>
+        </div>
+        <div class="hero-cards">
+          <a class="hero-cat" href="sports-betting.html">
+            <div class="hero-cat-icon">&#9917;</div>
+            <span class="hero-cat-name">Sports<br>Betting</span>
+          </a>
+          <a class="hero-cat" href="live-casino.html">
+            <div class="hero-cat-icon">&#127183;</div>
+            <span class="hero-cat-name">Live<br>Casino</span>
+          </a>
+        </div>
+        <div class="slots-strip">
+          <span class="slots-strip-label">Featured Slots</span>
+          <div class="slot-icons">
+            <div class="slot-thumb">&#11088;</div>
+            <div class="slot-thumb">&#129473;</div>
+            <div class="slot-thumb">&#127808;</div>
+            <div class="slot-thumb">&#128142;</div>
+            <div class="slot-thumb">&#127881;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Welcome promo ── -->
+  <section class="wrap" style="padding-bottom:60px">
+    <div class="promo-banner">
+      <div class="promo-copy">
+        <p class="eyebrow">Welcome offer</p>
+        <h2 class="display-gold">Bet £10,<br>Get £40</h2>
+        <p class="promo-sub">New customers only. Place your first sports bet of £10+ and get £40 in free bets. Plus, 50 free spins on selected slots.</p>
+        <p class="promo-terms">18+ · New customers · T&amp;Cs apply · begambleaware.org</p>
+      </div>
+      <a class="btn-gold" href="index.html" style="font-size:14px;padding:18px 40px">Claim offer</a>
+    </div>
+  </section>
+
+  <!-- ── Quick links ── -->
+  <section class="wrap">
+    <div class="quick-links">
+      <a class="ql-card" href="sports-betting.html">
+        <div class="ql-icon">&#9917;</div>
+        <div class="ql-text">
+          <span class="ql-title">Premier League</span>
+          <span class="ql-sub">8 fixtures this weekend</span>
+        </div>
+      </a>
+      <a class="ql-card" href="live-casino.html">
+        <div class="ql-icon">&#127183;</div>
+        <div class="ql-text">
+          <span class="ql-title">Live Roulette</span>
+          <span class="ql-sub">Lightning Roulette &amp; more</span>
+        </div>
+      </a>
+      <a class="ql-card" href="live-casino.html">
+        <div class="ql-icon">&#127470;&#127462;</div>
+        <div class="ql-text">
+          <span class="ql-title">Crazy Time</span>
+          <span class="ql-sub">Multipliers up to 40x live now</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ── Featured slots ── -->
+  <section class="wrap featured-section">
+    <div class="section-head">
+      <h2 class="section-title">Featured Slots</h2>
+      <a href="live-casino.html">View all &rarr;</a>
+    </div>
+    <div class="games-grid">
+      <a class="game-card" href="live-casino.html">
+        <div class="game-thumb" style="background:linear-gradient(160deg,#1a0a40,#3a1060)">&#127774;</div>
+        <div class="game-info">
+          <div class="game-name">Starburst</div>
+          <div class="game-provider">NetEnt</div>
+          <div class="game-rtp">RTP 96.09%</div>
+          <button class="game-play" type="button">Play now</button>
+        </div>
+      </a>
+      <a class="game-card" href="live-casino.html">
+        <div class="game-thumb" style="background:linear-gradient(160deg,#1a0a00,#3a2000)">&#129470;</div>
+        <div class="game-info">
+          <div class="game-name">Book of Ra</div>
+          <div class="game-provider">Novomatic</div>
+          <div class="game-rtp">RTP 95.10%</div>
+          <button class="game-play" type="button">Play now</button>
+        </div>
+      </a>
+      <a class="game-card" href="live-casino.html">
+        <div class="game-thumb" style="background:linear-gradient(160deg,#001a10,#003020)">&#129473;</div>
+        <div class="game-info">
+          <div class="game-name">Gonzo's Quest</div>
+          <div class="game-provider">NetEnt</div>
+          <div class="game-rtp">RTP 96.00%</div>
+          <button class="game-play" type="button">Play now</button>
+        </div>
+      </a>
+      <a class="game-card" href="live-casino.html">
+        <div class="game-thumb" style="background:linear-gradient(160deg,#0a1a00,#1a3000)">&#127808;</div>
+        <div class="game-info">
+          <div class="game-name">Sweet Bonanza</div>
+          <div class="game-provider">Pragmatic Play</div>
+          <div class="game-rtp">RTP 96.51%</div>
+          <button class="game-play" type="button">Play now</button>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ── Live matches ── -->
+  <section class="wrap live-strip">
+    <div class="section-head">
+      <h2 class="section-title">Top Matches Today</h2>
+      <a href="sports-betting.html">All fixtures &rarr;</a>
+    </div>
+    <div class="match-mini-grid">
+      <a class="match-mini" href="sports-betting.html">
+        <div class="match-time-row">
+          <span class="live-pill">Live</span>
+          <span class="match-kickoff">62&prime;</span>
+        </div>
+        <div class="teams-row">
+          <span class="team-name">Arsenal</span>
+          <span class="vs-divider">1 – 1</span>
+          <span class="team-name away">Spurs</span>
+        </div>
+        <div class="odds-row">
+          <button class="odd-btn" type="button"><span class="odd-label">Home</span><span class="odd-val">2.10</span></button>
+          <button class="odd-btn" type="button"><span class="odd-label">Draw</span><span class="odd-val">3.60</span></button>
+          <button class="odd-btn" type="button"><span class="odd-label">Away</span><span class="odd-val">3.20</span></button>
+        </div>
+      </a>
+      <a class="match-mini" href="sports-betting.html">
+        <div class="match-time-row">
+          <span class="live-pill">Live</span>
+          <span class="match-kickoff">28&prime;</span>
+        </div>
+        <div class="teams-row">
+          <span class="team-name">Liverpool</span>
+          <span class="vs-divider">2 – 0</span>
+          <span class="team-name away">Man Utd</span>
+        </div>
+        <div class="odds-row">
+          <button class="odd-btn" type="button"><span class="odd-label">Home</span><span class="odd-val">1.73</span></button>
+          <button class="odd-btn" type="button"><span class="odd-label">Draw</span><span class="odd-val">3.60</span></button>
+          <button class="odd-btn" type="button"><span class="odd-label">Away</span><span class="odd-val">3.25</span></button>
+        </div>
+      </a>
+      <a class="match-mini" href="sports-betting.html">
+        <div class="match-time-row">
+          <span class="soon-pill">Today 17:30</span>
+          <span class="match-kickoff">KO</span>
+        </div>
+        <div class="teams-row">
+          <span class="team-name">West Ham</span>
+          <span class="vs-divider">vs</span>
+          <span class="team-name away">Aston Villa</span>
+        </div>
+        <div class="odds-row">
+          <button class="odd-btn" type="button"><span class="odd-label">Home</span><span class="odd-val">3.20</span></button>
+          <button class="odd-btn" type="button"><span class="odd-label">Draw</span><span class="odd-val">3.40</span></button>
+          <button class="odd-btn" type="button"><span class="odd-label">Away</span><span class="odd-val">1.73</span></button>
+        </div>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <span class="footer-head">Sports</span>
+        <a href="sports-betting.html">Premier League</a>
+        <a href="sports-betting.html">Champions League</a>
+        <a href="sports-betting.html">In-play betting</a>
+        <a href="sports-betting.html">Accumulators</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-head">Casino</span>
+        <a href="live-casino.html">Slots</a>
+        <a href="live-casino.html">Live Roulette</a>
+        <a href="live-casino.html">Live Blackjack</a>
+        <a href="live-casino.html">Game Shows</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-head">Promotions</span>
+        <a href="index.html">Welcome offer</a>
+        <a href="index.html">Free bets</a>
+        <a href="index.html">Loyalty rewards</a>
+        <a href="index.html">Refer a friend</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-head">Help</span>
+        <a href="index.html">Responsible gambling</a>
+        <a href="index.html">Self-exclusion</a>
+        <a href="index.html">Deposit limits</a>
+        <a href="index.html">Contact us</a>
+      </div>
+    </div>
+    <hr class="gold-rule">
+    <div class="rg-logos">
+      <span class="rg-badge">18+</span>
+      <span class="rg-badge">UKGC Licensed</span>
+      <span class="rg-badge">BeGambleAware</span>
+      <span class="rg-badge">GamStop</span>
+      <span class="rg-badge">GamCare</span>
+    </div>
+    <div class="footer-legal">
+      <span>Ada Gaming is a demo experience. No real money wagering. Gambling can be addictive — please play responsibly.</span>
+      <span>&copy; 2026 Ada Gaming</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Ada embed -->
+<script>
+  window.adaSettings = {
+    handle: "rkirk-gaming-demo",
+    hideMask: false
+  };
+</script>
+<script src="https://static.ada.support/embed2.js" async></script>
+
+</body>
+</html>
