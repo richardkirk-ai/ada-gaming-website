@@ -233,19 +233,34 @@ img { display: block; max-width: 100%; }
   border: 1.5px solid var(--ag-gold-border);
   color: var(--ag-gold-1);
 }
-.login-btn {
-  padding: 10px 22px;
+.user-pill {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 14px 6px 6px;
   border-radius: 999px;
   border: 1.5px solid var(--ag-gold-border-strong);
-  background: transparent;
-  color: var(--ag-gold-1);
+  background: rgba(212,168,67,0.08);
+}
+.user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ag-gold-grad);
+  color: var(--ag-ink-on-gold);
+  font-size: 12px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.user-name {
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  transition: background 120ms var(--ag-ease);
+  letter-spacing: 0.08em;
+  color: var(--ag-gold-1);
 }
-.login-btn:hover { background: rgba(212,168,67,0.1); }
 
 /* ── Gold rule ────────────────────────────────────────────── */
 .gold-rule {
