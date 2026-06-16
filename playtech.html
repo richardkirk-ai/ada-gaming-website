@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ada Gaming — Playtech IMS Integration</title>
+<link rel="stylesheet" href="ada-gaming.css">
+<style>
+/* ── Page head ────────────────────────────────────────────── */
+.page-head {
+  padding: 52px 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.page-head .display-gold { font-size: clamp(40px, 5vw, 68px); }
+.page-head p { font-size: 17px; color: var(--ag-text-2); margin: 0; max-width: 62ch; }
+
+/* ── Integration banner ───────────────────────────────────── */
+.int-banner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 28px;
+  border-radius: 14px;
+  background: linear-gradient(120deg, #160A30, #241260);
+  border: 1.5px solid var(--ag-gold-border-strong);
+  margin-bottom: 48px;
+  box-shadow: 0 0 40px rgba(212,168,67,0.08);
+}
+.int-banner-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--ag-gold-text-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.int-banner-divider {
+  width: 1px;
+  height: 36px;
+  background: var(--ag-gold-border-strong);
+  flex-shrink: 0;
+}
+.int-banner-text {
+  font-size: 13px;
+  color: var(--ag-text-2);
+  line-height: 1.5;
+  flex: 1;
+}
+.int-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ag-green);
+}
+.int-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--ag-green);
+  box-shadow: 0 0 0 3px rgba(46,204,113,0.2);
+  animation: pulse-green 2s ease-in-out infinite;
+}
+@keyframes pulse-green {
+  0%,100% { box-shadow: 0 0 0 3px rgba(46,204,113,0.2); }
+  50% { box-shadow: 0 0 0 7px rgba(46,204,113,0.06); }
+}
+
+/* ── Section label ────────────────────────────────────────── */
+.section-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ag-gold-1);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ag-gold-border);
+}
+
+/* ── Cards grid ───────────────────────────────────────────── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.cards-grid.auth-grid {
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 40px;
+}
+
+.api-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 22px 20px;
+  border-radius: 14px;
+  background: linear-gradient(160deg, var(--ag-panel) 0%, var(--ag-bg-2) 100%);
+  border: 1.5px solid var(--ag-gold-border);
+  cursor: pointer;
+  transition: border-color 160ms, transform 160ms, box-shadow 160ms;
+  position: relative;
+  user-select: none;
+}
+.api-card:hover {
+  border-color: var(--ag-gold-border-strong);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+}
+.api-card.active {
+  border-color: var(--ag-gold-1);
+  background: linear-gradient(160deg, var(--ag-panel-2) 0%, var(--ag-panel) 100%);
+  box-shadow: 0 0 0 1px rgba(212,168,67,0.3), 0 12px 36px rgba(0,0,0,0.5);
+}
+
+.card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--ag-surface);
+  border: 1px solid var(--ag-gold-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.api-card.active .card-icon {
+  background: rgba(212,168,67,0.15);
+  border-color: var(--ag-gold-border-strong);
+}
+
+.card-title {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--ag-gold-text-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.2;
+}
+.card-subtitle {
+  font-size: 11px;
+  color: var(--ag-text-3);
+  line-height: 1.45;
+}
+.card-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  align-self: flex-start;
+  margin-top: auto;
+}
+.card-tag.auth  { background: rgba(52,152,219,0.15); color: #5DADE2; border: 1px solid rgba(52,152,219,0.3); }
+.card-tag.rg    { background: rgba(46,204,113,0.12); color: #58D68D; border: 1px solid rgba(46,204,113,0.3); }
+.card-tag.player{ background: rgba(212,168,67,0.12); color: var(--ag-gold-1); border: 1px solid var(--ag-gold-border); }
+.card-tag.payment{background: rgba(155,89,182,0.15); color: #C39BD3; border: 1px solid rgba(155,89,182,0.3); }
+.card-tag.bonus { background: rgba(231,76,60,0.12); color: #F1948A; border: 1px solid rgba(231,76,60,0.3); }
+.card-tag.gaming{ background: rgba(26,188,156,0.12); color: #76D7C4; border: 1px solid rgba(26,188,156,0.3); }
+
+.card-arrow {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 14px;
+  color: var(--ag-gold-2);
+  opacity: 0;
+  transition: opacity 120ms, transform 120ms;
+}
+.api-card:hover .card-arrow,
+.api-card.active .card-arrow { opacity: 1; transform: translateX(3px); }
+
+/* ── Right panel ──────────────────────────────────────────── */
+.pt-layout {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 32px;
+  align-items: start;
+  margin-bottom: 60px;
+}
+.pt-layout.panel-closed { grid-template-columns: 1fr; }
+
+.detail-panel {
+  position: sticky;
+  top: 24px;
+  border-radius: 16px;
+  background: linear-gradient(160deg, var(--ag-panel) 0%, var(--ag-bg-2) 100%);
+  border: 1.5px solid var(--ag-gold-border-strong);
+  overflow: hidden;
+  display: none;
+}
+.detail-panel.open { display: flex; flex-direction: column; }
+
+.panel-header {
+  padding: 18px 22px 16px;
+  background: linear-gradient(120deg, rgba(212,168,67,0.12), rgba(212,168,67,0.04));
+  border-bottom: 1px solid var(--ag-gold-border);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.panel-icon-title { display: flex; align-items: center; gap: 12px; }
+.panel-icon {
+  width: 40px; height: 40px;
+  border-radius: 9px;
+  background: var(--ag-surface);
+  border: 1px solid var(--ag-gold-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.panel-title {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--ag-gold-text-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.2;
+}
+.panel-endpoint {
+  font-size: 10px;
+  color: var(--ag-text-3);
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+  font-family: 'Courier New', monospace;
+}
+.panel-close {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ag-gold-border);
+  background: transparent;
+  color: var(--ag-gold-text);
+  font-size: 15px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 120ms;
+}
+.panel-close:hover { background: rgba(212,168,67,0.12); }
+
+.panel-body {
+  padding: 20px 22px;
+  overflow-y: auto;
+  max-height: calc(100vh - 160px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ag-gold-border) transparent;
+}
+
+.panel-section-title {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ag-gold-1);
+  margin-bottom: 8px;
+}
+.panel-text {
+  font-size: 13px;
+  color: var(--ag-text-2);
+  line-height: 1.65;
+}
+.panel-text strong { color: var(--ag-text); font-weight: 700; }
+
+.data-field-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.data-field {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--ag-surface);
+  border: 1px solid var(--ag-gold-border);
+  font-size: 12px;
+}
+.df-key {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--ag-gold-1);
+  font-weight: 700;
+  min-width: 130px;
+  flex-shrink: 0;
+}
+.df-val { color: var(--ag-text-3); line-height: 1.4; }
+
+.panel-code {
+  background: rgba(0,0,0,0.35);
+  border: 1px solid var(--ag-gold-border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--ag-text-2);
+  line-height: 1.65;
+  overflow-x: auto;
+  white-space: pre;
+}
+.panel-code .key { color: #7EB8E8; }
+.panel-code .val { color: #A8E6A3; }
+.panel-code .str { color: #F0CC6A; }
+
+.use-case-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.use-case-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 12px;
+  color: var(--ag-text-2);
+  line-height: 1.5;
+}
+.use-case-item::before {
+  content: '→';
+  color: var(--ag-gold-1);
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── Most common topics ───────────────────────────────────── */
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 60px;
+}
+.topic-card {
+  padding: 22px;
+  border-radius: 14px;
+  background: linear-gradient(160deg, var(--ag-panel) 0%, var(--ag-bg-2) 100%);
+  border: 1.5px solid var(--ag-gold-border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.topic-icon { font-size: 26px; }
+.topic-title {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ag-text);
+}
+.topic-desc { font-size: 12px; color: var(--ag-text-3); line-height: 1.55; }
+
+@media (max-width: 1100px) {
+  .pt-layout { grid-template-columns: 1fr; }
+  .detail-panel { position: static; }
+  .cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .cards-grid, .cards-grid.auth-grid, .topics-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="rg-bar">18+ | Play Responsibly | <a href="#">BeGambleAware.org</a> | T&amp;Cs apply. Demo site only.</div>
+
+<div class="wrap">
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <img src="logo.png" alt="Ada Gaming" width="52" height="52" style="border-radius:50%;display:block;filter:drop-shadow(0 4px 14px rgba(212,168,67,0.4));">
+      <span class="brand-name">
+        <span class="brand-title">Ada Gaming</span>
+        <span class="brand-tag">Betting &middot; Casino &middot; Live</span>
+      </span>
+    </a>
+    <nav class="site-nav">
+      <a href="sports-betting.html">Sports</a>
+      <a href="live-casino.html">Casino</a>
+      <a href="playtech.html" class="active">Playtech</a>
+    </nav>
+    <div class="header-actions">
+      <span class="age-pill">18+</span>
+      <button class="login-btn" type="button">Log in</button>
+      <a class="btn-gold" href="index.html">Join now</a>
+    </div>
+  </header>
+</div>
+
+<hr class="gold-rule">
+
+<main class="wrap">
+  <section class="page-head">
+    <p class="eyebrow">Technical integration</p>
+    <h1 class="display-gold">Playtech IMS</h1>
+    <p>Ada integrates directly with the Playtech Information Management System (IMS) to retrieve real-time customer data during AI-powered chat sessions. Click any card below to explore the authentication flow and available API calls.</p>
+  </section>
+
+  <!-- Integration status banner -->
+  <div class="int-banner">
+    <div class="int-banner-logo">Playtech IMS</div>
+    <div class="int-banner-divider"></div>
+    <div class="int-banner-text">Ada authenticates every session via JWT before querying IMS endpoints. All data is retrieved in real time to personalise responses — account details, RG limits, bonuses, transactions and more.</div>
+    <div class="int-status"><div class="int-dot"></div>Integration live</div>
+  </div>
+
+  <div class="pt-layout" id="pt-layout">
+    <!-- Cards column -->
+    <div>
+
+      <!-- Authentication -->
+      <div class="section-label">Authentication</div>
+      <div class="cards-grid auth-grid" id="auth-grid">
+
+        <div class="api-card" data-id="jwt" tabindex="0">
+          <span class="card-arrow">&rsaquo;</span>
+          <div class="card-icon">&#128272;</div>
+          <div class="card-title">JWT Authentication</div>
+          <div class="card-subtitle">Secure session verification using signed JSON Web Tokens passed from the platform to Ada as sensitive metadata.</div>
+          <span class="card-tag auth">Authentication</span>
+        </div>
+
+        <div class="api-card" data-id="username" tabindex="0">
+          <span class="card-arrow">&rsaquo;</span>
+          <div class="card-icon">&#128100;</div>
+          <div class="card-title">Username Key Identifier</div>
+          <div class="card-subtitle">The username extracted from the JWT payload acts as the primary identifier for all downstream IMS API calls.</div>
+          <span class="card-tag auth">Authentication</span>
+        </div>
+
+      </div>
+
+      <!-- API Calls -->
+      <div class="section-label">IMS API Calls</div>
+      <div class="cards-grid" id="api-grid">
+
+        <div class="api-card" data-id="personal" tabindex="0">
+          <span class="card-arrow">&rsaquo;</span>
+          <div class="card-icon">&#128196;</div>
+          <div class="card-title">Personal Data</div>
+          <div class="card-subtitle">Full player profile including name, contact details, VIP level, account status and registration data.</div>
+          <span class="card-tag player">Player</span>
+        </div>
+
+        <div class="api-card" data-id="timeout" tabindex="0">
+          <span class="card-arrow">&rsaquo;</span>
+          <div class="card-icon">&#9203;</div>
+          <div class="card-title">Time Out Status</div>
+          <div class="card-subtitle">Active cooling-off periods applied to the player's account — start/end times, period type and notification settings.</div>
+          <span class="card-tag rg">Responsible Gaming</span>
+        </div>
+
+        <div class="api-card" data-id="selfexclusion" tabindex="0">
+          <span class="card-arrow">&rsaquo;</span>
+          <div class="card-icon">&#128683;</div>
+          <div class="card-title">Self-Exclusion</div>
+          <div class="card-subtitle">Active exclusions across all products (casino, sportsbook, poker, bingo) with allowed periods, end types and panic button settings.</div>
+          <span class="card-tag rg">Responsible Gaming</span>
+        </div>
+
+        <div class="api-card" data-id="rglimits" tabindex="0">
+          <span class="card-arrow">&rsaquo;</span>
+          <div class="card-icon">&#128200;</div>
+          <div class="card-title">Remaining RG Limits</div>
+          <div class="card-subtitle">Configured and remaining daily, weekly and monthly limits for bets, losses, deposits and login time — all in real time.</div>
+          <span class="card-tag rg">Responsible Gaming</span>
+        </div>
+
+        <div class="api-card" data-id="withdrawals" tabindex="0">
+          <span class="card-arrow">&rsaquo;</span>
+          <div class="card-icon">&#128184;</div>
+          <div class="card-title">Withdrawal History</div>
+          <div class="card-subtitle">Recent withdrawal transactions including amount, payment method, status (issued, pending, cancelled, approved) and timestamps.</div>
+          <span class="card-tag payment">Payments</span>
+        </div>
+
+        <div class="api-card" data-id="bonuses" tabindex="0">
+          <span class="card-arrow">&rsaquo;</span>
+          <div class="card-icon">&#127873;</div>
+          <div class="card-title">Active Bonuses</div>
+          <div class="card-subtitle">All active player bonuses including free spins, casino goodwill credits, wagering requirements, expiry rules and product eligibility.</div>
+          <span class="card-tag bonus">Bonuses</span>
+        </div>
+
+        <div class="api-card" data-id="games" tabindex="0">
+          <span class="card-arrow">&rsaquo;</span>
+          <div class="card-icon">&#127918;</div>
+          <div class="card-title">Available Games</div>
+          <div class="card-subtitle">Games eligible for play with a specific bonus, resolved via the bonus gaming context code to return game names and code names.</div>
+          <span class="card-tag gaming">Gaming</span>
+        </div>
+
+      </div>
+
+      <!-- Most handled topics -->
+      <div class="section-label" style="margin-top:8px">Most frequently handled topics</div>
+      <div class="topics-grid">
+        <div class="topic-card">
+          <div class="topic-icon">&#128737;</div>
+          <div class="topic-title">Responsible Gaming Tools</div>
+          <div class="topic-desc">Customers requesting to view or modify personal gaming limits (deposit, bet, loss, login, single bet). Ada retrieves current limits from IMS and supports updates in real time.</div>
+        </div>
+        <div class="topic-card">
+          <div class="topic-icon">&#129505;</div>
+          <div class="topic-title">Concerning Behaviour</div>
+          <div class="topic-desc">Detection and handling of conversations where a customer shows signs of problem gambling. Ada follows RG guidelines, provides support resources, escalates to an agent, or suspends the account.</div>
+        </div>
+        <div class="topic-card">
+          <div class="topic-icon">&#128179;</div>
+          <div class="topic-title">Withdrawal Status</div>
+          <div class="topic-desc">Customers querying pending or recent withdrawals. Ada retrieves transaction data from IMS and provides a clear, up-to-date status including expected processing times.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Detail panel -->
+    <aside class="detail-panel" id="detail-panel">
+      <div class="panel-header">
+        <div class="panel-icon-title">
+          <div class="panel-icon" id="p-icon"></div>
+          <div>
+            <div class="panel-title" id="p-title"></div>
+            <div class="panel-endpoint" id="p-endpoint"></div>
+          </div>
+        </div>
+        <button class="panel-close" id="panel-close" type="button" aria-label="Close">&#215;</button>
+      </div>
+      <div class="panel-body" id="panel-body"></div>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <span class="footer-head">Sports</span>
+        <a href="sports-betting.html">Premier League</a>
+        <a href="sports-betting.html">Champions League</a>
+        <a href="sports-betting.html">In-play betting</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-head">Casino</span>
+        <a href="live-casino.html">Slots</a>
+        <a href="live-casino.html">Live Roulette</a>
+        <a href="live-casino.html">Game Shows</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-head">Integration</span>
+        <a href="playtech.html">Playtech IMS</a>
+        <a href="playtech.html">API Reference</a>
+        <a href="playtech.html">Authentication</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-head">Help</span>
+        <a href="index.html">Responsible gambling</a>
+        <a href="index.html">Contact us</a>
+      </div>
+    </div>
+    <hr class="gold-rule">
+    <div class="footer-legal">
+      <span>Ada Gaming is a demo experience. No real money wagering. Gambling can be addictive &mdash; please play responsibly.</span>
+      <span>&copy; 2026 Ada Gaming</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* ── Panel content definitions ────────────────────────────── */
+  var PANELS = {
+    jwt: {
+      icon: "&#128272;",
+      title: "JWT Authentication",
+      endpoint: "Passed as sensitive metadata on session init",
+      tag: "auth",
+      function: "When a customer opens the Ada chat widget, the platform generates a signed JSON Web Token (JWT) for the authenticated session and passes it to Ada as sensitive metadata. Ada validates the token before any personalised interaction or data retrieval takes place.",
+      flow: [
+        "Customer opens chat widget on brand website or app",
+        "Platform generates a JWT token for the authenticated session",
+        "Token is passed to Ada as sensitive metadata",
+        "Ada validates the JWT signature and expiry",
+        "Customer's <strong>username</strong> is extracted from the payload",
+        "Username is used as the key identifier for all IMS API calls"
+      ],
+      fields: [
+        { k: "scope", v: 'Role scope — e.g. "user"' },
+        { k: "name", v: "Username (primary IMS identifier)" },
+        { k: "external_id", v: "Platform-scoped external account reference" },
+        { k: "exp", v: "Token expiry timestamp (Unix)" },
+        { k: "iat", v: "Token issued-at timestamp (Unix)" },
+        { k: "email", v: "Player email address" }
+      ],
+      codeLabel: "Example decoded JWT payload",
+      code: '{\n  "scope": "user",\n  "name": "Playtech058005",\n  "external_id": "10339094.france-showroom\n               -shared.playtechhorizon",\n  "exp": 1780575675,\n  "iat": 1780575075,\n  "email": "player@example.com"\n}'
+    },
+    username: {
+      icon: "&#128100;",
+      title: "Username Key Identifier",
+      endpoint: "Extracted from JWT — used in all IMS requests",
+      function: "The <strong>username</strong> field extracted from the JWT payload is the primary customer identifier used for every downstream IMS API call. It uniquely locates the customer account and enables retrieval of real-time, customer-specific data.",
+      flow: [
+        "JWT is validated by Ada",
+        "Username is extracted from the <code>name</code> claim",
+        "Username is passed as the key parameter in each IMS endpoint request",
+        "Enables lookup of: account details, transaction history, RG limits, bonuses, sanctions"
+      ],
+      fields: [
+        { k: "username", v: "Primary IMS account identifier (from JWT name claim)" }
+      ],
+      codeLabel: "How username is used in IMS requests",
+      code: '// All IMS calls use the username\n// extracted from the JWT payload:\n\nGET /ims/player/{username}/info\nGET /ims/player/{username}/limits\nGET /ims/player/{username}/bonuses\nGET /ims/player/{username}/transactions\nGET /ims/player/{username}/exclusions'
+    },
+    personal: {
+      icon: "&#128196;",
+      title: "Personal Data Extraction",
+      endpoint: "GetPlayerInfoResponse",
+      function: "Retrieves the full player profile from IMS including contact details, account configuration, VIP level, responsible gaming flags and registration information. This is typically the first call made after JWT validation to personalise the chat session.",
+      useCases: [
+        "Greet the customer by first name",
+        "Confirm account status before processing requests",
+        "Check frozen or suspended state before taking actions",
+        "Surface VIP level for personalised offers",
+        "Retrieve currency for financial responses"
+      ],
+      fields: [
+        { k: "firstName / lastName", v: "Player's full name" },
+        { k: "email", v: "Registered email address" },
+        { k: "signUpDate", v: "Account registration date" },
+        { k: "signupClientPlatform", v: 'Platform of registration (e.g. "casino")' },
+        { k: "city / countryCode", v: "Geographic location" },
+        { k: "currency", v: "Account currency (e.g. EUR, CAD)" },
+        { k: "vipLevel", v: "Player's VIP tier" },
+        { k: "frozen", v: "Account frozen flag (0 = active)" },
+        { k: "suspended", v: "Account suspended flag" },
+        { k: "noBonus", v: "Bonus eligibility flag" },
+        { k: "bonusSeeker", v: "Bonus-seeking behaviour flag" },
+        { k: "birthDate", v: "Player date of birth" },
+        { k: "language", v: "Preferred language" },
+        { k: "cellPhone / phone", v: "Contact numbers" },
+        { k: "ageVerificationStatus", v: "KYC age verification result" },
+        { k: "casinoName", v: "Assigned casino brand" }
+      ]
+    },
+    timeout: {
+      icon: "&#9203;",
+      title: "Time Out Extraction",
+      endpoint: "GetPlayerTimeoutResponse",
+      function: "Returns any active cooling-off periods (timeouts) applied to the player's account. Timeouts are voluntary or enforced temporary restrictions on gambling activity. Ada uses this to inform customers of their current timeout status and remaining duration.",
+      useCases: [
+        "Inform a player of their active timeout and when it ends",
+        "Prevent processing requests that are blocked by a timeout",
+        "Surface timeout details during responsible gaming conversations",
+        "Support agents with live timeout status"
+      ],
+      fields: [
+        { k: "code", v: "Timeout type code (e.g. 9303)" },
+        { k: "startTime", v: "When the timeout began" },
+        { k: "endTime", v: "When the timeout expires" },
+        { k: "period", v: "Timeout period type" },
+        { k: "state", v: "Active state (1 = active)" },
+        { k: "emailNotification", v: "Whether email notification was sent" },
+        { k: "networkClass", v: "Network scope of the restriction" }
+      ]
+    },
+    selfexclusion: {
+      icon: "&#128683;",
+      title: "Self-Exclusion",
+      endpoint: "Self-Exclusion endpoint",
+      function: "Returns the player's self-exclusion configuration, including which products are excluded, whether deposits are blocked, the panic button interval, and the available exclusion periods. Ada uses this data to correctly handle RG conversations and enforce restrictions.",
+      useCases: [
+        "Confirm which products a player is excluded from",
+        "Block requests that violate active exclusions",
+        "Provide accurate information on exclusion end dates",
+        "Surface panic button availability during crisis conversations",
+        "Escalate to a human agent when exclusion is active"
+      ],
+      fields: [
+        { k: "allowed", v: "Whether any gambling is currently allowed" },
+        { k: "products", v: "All products in scope (casino, bingo, sportsbook, poker, system)" },
+        { k: "disableBets", v: "Products on which betting is disabled" },
+        { k: "disableDeposits", v: "Whether all deposits are blocked" },
+        { k: "periods", v: "Available exclusion durations (1 day → open ended)" },
+        { k: "panicButtonInterval", v: "Minimum hours before panic button resets (e.g. 12 hrs)" },
+        { k: "endTypes", v: 'How exclusion can end: "manual" or "automatic"' },
+        { k: "emailNotifications", v: "Start and end notification flags" },
+        { k: "productSettings[].startDate", v: "Per-product exclusion start date" },
+        { k: "productSettings[].endDate", v: "Per-product exclusion end date" },
+        { k: "productSettings[].endType", v: "Per-product end type" }
+      ]
+    },
+    rglimits: {
+      icon: "&#128200;",
+      title: "Remaining RG Limits",
+      endpoint: "GetRemainingLimitsResponse",
+      function: "Returns all configured responsible gaming limits for the player — both the configured (maximum) value and the remaining amount for the current period. Covers bet, loss, deposit and login time limits across daily, weekly and monthly intervals. Login limits are returned in seconds.",
+      useCases: [
+        "Show a player their current deposit limit and how much remains",
+        "Confirm remaining betting allowance for the period",
+        "Inform players how to increase or decrease their limits",
+        "Surface limit reset dates for transparency",
+        "Support conversations about responsible gaming tools"
+      ],
+      fields: [
+        { k: "daily bet", v: "Maximum and remaining daily bet amount + reset date" },
+        { k: "weekly bet", v: "Maximum and remaining weekly bet amount + reset date" },
+        { k: "monthly bet", v: "Maximum and remaining monthly bet amount + reset date" },
+        { k: "daily loss", v: "Maximum and remaining daily loss limit" },
+        { k: "weekly loss", v: "Maximum and remaining weekly loss limit" },
+        { k: "monthly loss", v: "Maximum and remaining monthly loss limit" },
+        { k: "single bet", v: "Maximum single bet amount (no reset)" },
+        { k: "daily deposit", v: "Maximum and remaining daily deposit limit" },
+        { k: "weekly deposit", v: "Maximum and remaining weekly deposit limit" },
+        { k: "monthly deposit", v: "Maximum and remaining monthly deposit limit" },
+        { k: "daily login", v: "Maximum and remaining daily session time (seconds)" },
+        { k: "weekly login", v: "Maximum and remaining weekly session time (seconds)" },
+        { k: "monthly login", v: "Maximum and remaining monthly session time (seconds)" }
+      ]
+    },
+    withdrawals: {
+      icon: "&#128184;",
+      title: "Withdrawal History",
+      endpoint: "Withdrawal transactions endpoint",
+      function: "Returns a list of recent withdrawal transactions for the player, including payment method, amount, currency, timestamps and current status. Ada uses this to answer queries about pending or processed withdrawals without requiring agent involvement.",
+      useCases: [
+        "Tell a customer the status of their most recent withdrawal",
+        "Confirm how much was withdrawn and via which payment method",
+        "Explain expected processing times based on status",
+        "Identify cancelled or declined withdrawals and explain next steps"
+      ],
+      fields: [
+        { k: "localTransactionId", v: "Internal transaction reference" },
+        { k: "type", v: '"withdraw" — transaction type' },
+        { k: "methodCode", v: "Payment method code (e.g. InteracInstantViaSC)" },
+        { k: "methodName", v: 'Human-readable method name (e.g. "INTERAC®")' },
+        { k: "amount.amount", v: "Withdrawal amount (decimal string)" },
+        { k: "amount.currencyCode", v: "Currency (e.g. EUR, CAD)" },
+        { k: "status", v: "Current status: issued, pending, approved, declined, cancelled" },
+        { k: "withdrawRequestDate", v: "When the withdrawal was requested" },
+        { k: "withdrawRequestApprovalDate", v: "When it was approved for processing" },
+        { k: "clientPlatform", v: 'Platform used (e.g. "mobile")' },
+        { k: "paymentAccountDetails", v: "Masked account info for the payment method" },
+        { k: "withdrawRequestId", v: "Withdrawal request reference ID" }
+      ]
+    },
+    bonuses: {
+      icon: "&#127873;",
+      title: "Active Bonuses",
+      endpoint: "SearchPlayerBonusesResponse",
+      function: "Returns all active bonuses on the player's account, including free spins bonuses, goodwill credits and promotional awards. Each bonus includes wagering requirements, expiry rules, product eligibility and the gaming context code used to fetch eligible games.",
+      useCases: [
+        "Show a player their active bonuses and expiry dates",
+        "Explain wagering requirements remaining before withdrawal",
+        "Identify which games are eligible for a specific bonus",
+        "Confirm free spins count and remaining spins",
+        "Inform players about terms for declining bonuses on withdrawal"
+      ],
+      fields: [
+        { k: "bonusInstanceCode", v: "Unique identifier for this bonus instance" },
+        { k: "templateName", v: 'Internal template name (e.g. "FS Generic")' },
+        { k: "marketingName", v: 'Display name (e.g. "Free spins bonus")' },
+        { k: "playType", v: '"freespins" or "prewager" — bonus type' },
+        { k: "status", v: 'Current status (e.g. "accepted")' },
+        { k: "freeSpinsCount", v: "Total free spins awarded" },
+        { k: "freeSpinsCountRemaining", v: "Remaining spins not yet played" },
+        { k: "amount.amount", v: "Cash bonus amount (if applicable)" },
+        { k: "wagering.amount", v: "Amount wagered against requirement so far" },
+        { k: "initialWagering.amount", v: "Total wagering requirement to clear bonus" },
+        { k: "endDate", v: "Bonus expiry date" },
+        { k: "acceptDate", v: "When the bonus was accepted" },
+        { k: "declineOnWithdraw", v: "Whether bonus is voided if player withdraws" },
+        { k: "gamingContextCode", v: "Context code used to fetch eligible games" },
+        { k: "product", v: 'Product (e.g. "Casino")' }
+      ]
+    },
+    games: {
+      icon: "&#127918;",
+      title: "Available Games Extraction",
+      endpoint: "GetGameNameTranslationsResponse",
+      function: "Given a gaming context code from an active bonus, this call returns the list of games the player can use that bonus on. Each result includes the game display name and the unique code name used by the platform. Ada uses this to answer player queries about bonus-eligible games.",
+      useCases: [
+        "Tell a player which games they can play with their free spins",
+        "Resolve ambiguity when a player cannot find their bonus in a specific game",
+        "Confirm eligibility before a player starts wagering"
+      ],
+      fields: [
+        { k: "gameName", v: 'Display name of the game (e.g. "Buffalo Blitz II™")' },
+        { k: "gameCodeName", v: 'Platform code for the game (e.g. "gpas_bblitz2_pop")' }
+      ],
+      codeLabel: "Example response (3 eligible games)",
+      code: '[\n  {\n    "gameName": "Buffalo Blitz II™",\n    "gameCodeName": "gpas_bblitz2_pop"\n  },\n  {\n    "gameName": "Epic Ape 2™",\n    "gameCodeName": "gpas_eape2_pop"\n  },\n  {\n    "gameName": "Fire Blaze: Red Wizard™",\n    "gameCodeName": "gpas_rwizard_pop"\n  }\n]'
+    }
+  };
+
+  /* ── Panel render ─────────────────────────────────────────── */
+  var panel = document.getElementById("detail-panel");
+  var panelBody = document.getElementById("panel-body");
+  var layout = document.getElementById("pt-layout");
+  var activeCard = null;
+
+  function openPanel(id) {
+    var data = PANELS[id];
+    if (!data) return;
+
+    // Update header
+    document.getElementById("p-icon").innerHTML = data.icon;
+    document.getElementById("p-title").textContent = data.title;
+    document.getElementById("p-endpoint").textContent = data.endpoint;
+
+    // Build body
+    var html = "";
+
+    // Function description
+    html += "<div><div class='panel-section-title'>Function</div><p class='panel-text'>" + data.function + "</p></div>";
+
+    // Auth flow (for JWT / username)
+    if (data.flow) {
+      html += "<div><div class='panel-section-title'>Authentication flow</div><div class='use-case-list'>";
+      data.flow.forEach(function (step) {
+        html += "<div class='use-case-item'>" + step + "</div>";
+      });
+      html += "</div></div>";
+    }
+
+    // Use cases
+    if (data.useCases) {
+      html += "<div><div class='panel-section-title'>Ada use cases</div><div class='use-case-list'>";
+      data.useCases.forEach(function (u) {
+        html += "<div class='use-case-item'>" + u + "</div>";
+      });
+      html += "</div></div>";
+    }
+
+    // Data fields
+    if (data.fields && data.fields.length) {
+      html += "<div><div class='panel-section-title'>Data returned</div><div class='data-field-list'>";
+      data.fields.forEach(function (f) {
+        html += "<div class='data-field'><span class='df-key'>" + f.k + "</span><span class='df-val'>" + f.v + "</span></div>";
+      });
+      html += "</div></div>";
+    }
+
+    // Code snippet
+    if (data.code) {
+      html += "<div><div class='panel-section-title'>" + (data.codeLabel || "Example") + "</div><pre class='panel-code'>" + data.code + "</pre></div>";
+    }
+
+    panelBody.innerHTML = html;
+    panel.classList.add("open");
+    layout.classList.remove("panel-closed");
+    panelBody.scrollTop = 0;
+  }
+
+  function closePanel() {
+    panel.classList.remove("open");
+    layout.classList.add("panel-closed");
+    if (activeCard) { activeCard.classList.remove("active"); activeCard = null; }
+  }
+
+  // Card click handler
+  document.querySelectorAll(".api-card").forEach(function (card) {
+    card.addEventListener("click", function () {
+      var id = card.dataset.id;
+      if (activeCard === card) { closePanel(); return; }
+      if (activeCard) activeCard.classList.remove("active");
+      card.classList.add("active");
+      activeCard = card;
+      openPanel(id);
+    });
+    card.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); card.click(); }
+    });
+  });
+
+  document.getElementById("panel-close").addEventListener("click", closePanel);
+})();
+</script>
+
+<!-- Ada embed -->
+<script>
+  window.adaSettings = {
+    handle: "rkirk-gaming-demo",
+    hideMask: false
+  };
+</script>
+<script src="https://static.ada.support/embed2.js" async></script>
+
+</body>
+</html>
