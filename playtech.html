@@ -471,6 +471,7 @@
       <div class="section-label">IMS API Calls</div>
       <div class="cards-grid" id="api-grid">
 
+        <!-- Row 1: Personal, Withdrawals, Bonuses -->
         <div class="api-card" data-id="personal" tabindex="0">
           <span class="card-arrow">&rsaquo;</span>
           <div class="card-icon">&#128196;</div>
@@ -479,6 +480,23 @@
           <span class="card-tag player">Player</span>
         </div>
 
+        <div class="api-card" data-id="withdrawals" tabindex="0">
+          <span class="card-arrow">&rsaquo;</span>
+          <div class="card-icon">&#128184;</div>
+          <div class="card-title">Withdrawal History</div>
+          <div class="card-subtitle">Recent withdrawal transactions including amount, payment method, status (issued, pending, cancelled, approved) and timestamps.</div>
+          <span class="card-tag payment">Payments</span>
+        </div>
+
+        <div class="api-card" data-id="bonuses" tabindex="0">
+          <span class="card-arrow">&rsaquo;</span>
+          <div class="card-icon">&#127873;</div>
+          <div class="card-title">Active Bonuses</div>
+          <div class="card-subtitle">All active player bonuses including free spins, casino goodwill credits, wagering requirements, expiry rules and product eligibility.</div>
+          <span class="card-tag bonus">Bonuses</span>
+        </div>
+
+        <!-- Row 2: Responsible Gaming -->
         <div class="api-card" data-id="timeout" tabindex="0">
           <span class="card-arrow">&rsaquo;</span>
           <div class="card-icon">&#9203;</div>
@@ -503,23 +521,8 @@
           <span class="card-tag rg">Responsible Gaming</span>
         </div>
 
-        <div class="api-card" data-id="withdrawals" tabindex="0">
-          <span class="card-arrow">&rsaquo;</span>
-          <div class="card-icon">&#128184;</div>
-          <div class="card-title">Withdrawal History</div>
-          <div class="card-subtitle">Recent withdrawal transactions including amount, payment method, status (issued, pending, cancelled, approved) and timestamps.</div>
-          <span class="card-tag payment">Payments</span>
-        </div>
-
-        <div class="api-card" data-id="bonuses" tabindex="0">
-          <span class="card-arrow">&rsaquo;</span>
-          <div class="card-icon">&#127873;</div>
-          <div class="card-title">Active Bonuses</div>
-          <div class="card-subtitle">All active player bonuses including free spins, casino goodwill credits, wagering requirements, expiry rules and product eligibility.</div>
-          <span class="card-tag bonus">Bonuses</span>
-        </div>
-
-        <div class="api-card" data-id="games" tabindex="0">
+        <!-- Row 3: Available Games -->
+        <div class="api-card" data-id="games" tabindex="0" style="grid-column: 1 / -1;">
           <span class="card-arrow">&rsaquo;</span>
           <div class="card-icon">&#127918;</div>
           <div class="card-title">Available Games</div>
