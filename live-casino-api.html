@@ -314,8 +314,8 @@
 .concierge-panel {
   position: sticky;
   top: 20px;
-  height: calc(100vh - 40px);
-  min-height: 560px;
+  height: 50vh;
+  min-height: 480px;
   display: flex;
   flex-direction: column;
   background: #1A1050;
@@ -1197,26 +1197,17 @@ function selectGame(cardEl, name) {
       (g.bonus ? '&#10003; Bonus' : '&#10007; No bonus') +
     '</span>';
 
-  /* Update quick chips */
-  elChips.innerHTML = g.chips.map(function (c) {
-    return '<button class="cp-chip" onclick="sendChip(this)">' + esc(c) + '</button>';
+  /* Update quick chips — "Tell me about X" first, then game-specific chips */
+  var allChips = ['Tell me about ' + name].concat(g.chips);
+  elChips.innerHTML = allChips.map(function (c) {
+    return '<button class="cp-chip" onclick="sendChip(this, \'' + name + '\')">' + esc(c) + '</button>';
   }).join('');
-
-  /* Build Ada prompt */
-  var prompt = 'I\'m browsing the casino and looking at ' + name +
-    ' (' + g.type + ' by ' + g.provider + ', RTP ' + g.rtp + '). ' +
-    'Can you give me a quick overview and let me know if a bonus applies here?';
-
-  /* Show user message and send */
-  showMessages();
-  appendMsg('user', 'Tell me about ' + name);
-  dispatchToAda(prompt, name);
 }
 
 /* ─── Chip send ────────────────────────────────────────────── */
-function sendChip(btn) {
+function sendChip(btn, gameName) {
   var t = btn.textContent || btn.innerText;
-  doSend(t.trim());
+  doSend(t.trim(), gameName || null);
 }
 
 /* ─── Input handlers ───────────────────────────────────────── */
@@ -1230,12 +1221,12 @@ elSend.addEventListener('click', function () {
   doSend(elInput.value.trim());
 });
 
-function doSend(text) {
+function doSend(text, gameName) {
   if (!text) return;
   showMessages();
   appendMsg('user', text);
   elInput.value = '';
-  dispatchToAda(text, null);
+  dispatchToAda(text, gameName || null);
 }
 
 /* ─── Dispatch to Ada ──────────────────────────────────────── */
