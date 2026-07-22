@@ -6,15 +6,193 @@
 <title>Ada Gaming — Live Casino &amp; Slots</title>
 <link rel="stylesheet" href="ada-gaming.css">
 <style>
-/* ── Page head ────────────────────────────────────────────── */
-.page-head {
-  padding: 52px 0 36px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+
+/* ── Hero banner carousel ─────────────────────────────────── */
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  margin-bottom: 28px;
+  aspect-ratio: 1900 / 280;
+  max-height: 280px;
+  background: #0E0928;
 }
-.page-head .display-gold { font-size: clamp(40px, 5vw, 68px); }
-.page-head p { font-size: 17px; color: var(--ag-text-2); margin: 0; max-width: 58ch; }
+.hero-slides {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 600ms cubic-bezier(0.4,0,0.2,1);
+}
+.hero-slide {
+  flex: 0 0 100%;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+}
+.hero-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(14,9,40,0.5) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-prev, .hero-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(14,9,40,0.7);
+  border: 1px solid rgba(212,168,67,0.4);
+  color: var(--ag-gold-1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 2;
+  transition: background 140ms;
+}
+.hero-prev:hover, .hero-next:hover { background: rgba(212,168,67,0.25); }
+.hero-prev { left: 12px; }
+.hero-next { right: 12px; }
+.hero-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+.hero-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: background 200ms, width 200ms;
+}
+.hero-dot.active { background: var(--ag-gold-1); width: 18px; border-radius: 3px; }
+
+/* ── Top Winners strip ────────────────────────────────────── */
+.winners-strip {
+  display: flex;
+  gap: 12px;
+  padding-bottom: 28px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.winners-strip::-webkit-scrollbar { display: none; }
+.winner-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px 10px 10px;
+  background: linear-gradient(120deg, #1A1050, #2A1870);
+  border: 1px solid var(--ag-gold-border);
+  border-radius: 10px;
+  flex: 0 0 auto;
+  min-width: 220px;
+  max-width: 260px;
+}
+.winner-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #1a1050;
+}
+.winner-info { min-width: 0; }
+.winner-who { font-size: 11px; color: var(--ag-text-3); margin-bottom: 1px; }
+.winner-amount { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 900; background: var(--ag-gold-text-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.winner-game { font-size: 10px; color: var(--ag-text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.winners-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+/* ── Search + filter row ──────────────────────────────────── */
+.lobby-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 28px;
+  flex-wrap: wrap;
+}
+.lobby-search {
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+}
+.lobby-search input {
+  width: 100%;
+  padding: 11px 16px 11px 40px;
+  background: rgba(255,255,255,0.05);
+  border: 1.5px solid var(--ag-gold-border);
+  border-radius: 999px;
+  color: var(--ag-text);
+  font-size: 13px;
+  outline: none;
+  box-sizing: border-box;
+}
+.lobby-search input::placeholder { color: var(--ag-text-3); }
+.lobby-search input:focus { border-color: var(--ag-gold-border-strong); }
+.lobby-search svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.5;
+}
+.lobby-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1.5px solid var(--ag-gold-border);
+  border-radius: 999px;
+  color: var(--ag-text-2);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 140ms, background 140ms;
+}
+.lobby-filter:hover { border-color: var(--ag-gold-border-strong); background: rgba(212,168,67,0.08); }
+.lobby-filter svg { opacity: 0.5; }
+.lobby-sort {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--ag-text-3);
+  white-space: nowrap;
+}
+.lobby-sort select {
+  background: rgba(255,255,255,0.05);
+  border: 1.5px solid var(--ag-gold-border);
+  border-radius: 999px;
+  color: var(--ag-text-2);
+  font-size: 12px;
+  padding: 8px 14px;
+  cursor: pointer;
+  outline: none;
+}
 
 /* ── Category tabs ────────────────────────────────────────── */
 .cat-tabs {
@@ -60,53 +238,67 @@
   margin-bottom: 40px;
   box-shadow: 0 0 40px rgba(212,168,67,0.1);
 }
-.jt-label {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ag-gold-1);
-  white-space: nowrap;
-}
-.jt-amount {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 32px;
-  font-weight: 900;
-  background: var(--ag-gold-text-grad);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  letter-spacing: 0.04em;
-}
+.jt-label { font-size: 11px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ag-gold-1); white-space: nowrap; }
+.jt-amount { font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 900; background: var(--ag-gold-text-grad); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: 0.04em; }
 .jt-sub { font-size: 11px; color: var(--ag-text-3); }
 .jt-game { font-size: 13px; font-weight: 700; color: var(--ag-text-2); }
 
 /* ── Section head ─────────────────────────────────────────── */
 .section-head {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 }
-.section-head a {
+.section-head-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.view-more-btn {
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ag-gold-1);
+  color: var(--ag-text-2);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--ag-gold-border);
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 140ms, border-color 140ms;
+  white-space: nowrap;
 }
+.view-more-btn:hover { background: rgba(212,168,67,0.1); border-color: var(--ag-gold-border-strong); color: var(--ag-gold-1); }
+.arrow-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--ag-gold-border);
+  background: rgba(255,255,255,0.04);
+  color: var(--ag-text-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 140ms;
+}
+.arrow-btn:hover { background: rgba(212,168,67,0.12); color: var(--ag-gold-1); }
 
-/* ── Slots grid ───────────────────────────────────────────── */
-.slots-grid {
+/* ── Game tile (shared base) ──────────────────────────────── */
+.game-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 18px;
-  margin-bottom: 60px;
+  gap: 16px;
+  margin-bottom: 56px;
 }
-.slot-card {
+.game-grid-4 { grid-template-columns: repeat(4, 1fr); }
+.game-grid-5 { grid-template-columns: repeat(5, 1fr); }
+
+.game-card {
   display: flex;
   flex-direction: column;
-  border-radius: 14px;
+  border-radius: 12px;
   overflow: hidden;
   background: linear-gradient(160deg, var(--ag-panel) 0%, var(--ag-bg-2) 100%);
   border: 1.5px solid var(--ag-gold-border);
@@ -114,71 +306,42 @@
   cursor: pointer;
   position: relative;
 }
-.slot-card:hover {
+.game-card:hover {
   border-color: var(--ag-gold-border-strong);
   transform: translateY(-4px);
   box-shadow: 0 16px 40px rgba(0,0,0,0.6);
 }
-.slot-card:hover .slot-overlay { opacity: 1; }
+.game-card:hover .game-overlay { opacity: 1; }
 
-.slot-thumb {
+.game-thumb {
   width: 100%;
-  aspect-ratio: 3/2;
+  aspect-ratio: 428 / 268;
+  position: relative;
+  overflow: hidden;
+  background: #1a1050;
+}
+.game-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 300ms;
+}
+.game-card:hover .game-thumb img { transform: scale(1.04); }
+
+/* Emoji fallback thumb (for tables/shows) */
+.game-thumb-emoji {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 52px;
-  position: relative;
   border-bottom: 1px solid var(--ag-gold-border);
 }
-.slot-thumb::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 30%, rgba(212,168,67,0.1), transparent 65%);
-}
 
-.hot-badge {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  padding: 3px 9px;
-  border-radius: 999px;
-  background: var(--ag-red);
-  color: #fff;
-}
-.new-badge {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  padding: 3px 9px;
-  border-radius: 999px;
-  background: var(--ag-green);
-  color: #fff;
-}
-.jp-badge {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  padding: 3px 9px;
-  border-radius: 999px;
-  background: var(--ag-gold-grad);
-  color: var(--ag-ink-on-gold);
-}
-
-.slot-overlay {
+.game-overlay {
   position: absolute;
   inset: 0;
   background: rgba(14,9,40,0.75);
@@ -188,7 +351,7 @@
   opacity: 0;
   transition: opacity 160ms;
 }
-.slot-play-btn {
+.game-play-btn {
   padding: 12px 28px;
   border-radius: 999px;
   border: none;
@@ -202,98 +365,74 @@
   box-shadow: 0 4px 18px rgba(212,168,67,0.4);
 }
 
-.slot-info { padding: 12px 14px 14px; }
-.slot-name { font-size: 13px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ag-text); margin-bottom: 2px; }
-.slot-provider { font-size: 11px; color: var(--ag-text-3); letter-spacing: 0.06em; }
-.slot-meta {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 8px;
-  font-size: 11px;
-}
-.slot-rtp { color: var(--ag-green); font-weight: 700; }
-.slot-vol { color: var(--ag-text-muted); }
-
-/* ── Live tables ──────────────────────────────────────────── */
-.tables-section { margin-bottom: 60px; }
-.tables-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-}
-.table-card {
-  border-radius: 16px;
-  overflow: hidden;
-  background: linear-gradient(160deg, var(--ag-panel) 0%, var(--ag-bg-2) 100%);
-  border: 1.5px solid var(--ag-gold-border);
-  transition: border-color 160ms, transform 180ms;
-  cursor: pointer;
-}
-.table-card:hover { border-color: var(--ag-gold-border-strong); transform: translateY(-3px); }
-.table-card:hover .slot-overlay { opacity: 1; }
-.table-thumb {
-  width: 100%;
-  aspect-ratio: 16/9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 52px;
-  position: relative;
-  border-bottom: 1px solid var(--ag-gold-border);
-}
-
-.live-dot {
+/* Badges */
+.badge {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  background: rgba(14,9,40,0.7);
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(231,76,60,0.4);
-}
-.live-dot-circle {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--ag-red);
-  animation: pulse-red 2s ease-in-out infinite;
-}
-@keyframes pulse-red { 0%,100%{opacity:1} 50%{opacity:0.4} }
-.live-dot-label { font-size: 9px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ag-red); }
-
-.players-count {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--ag-text-2);
-  background: rgba(14,9,40,0.7);
+  top: 8px;
+  left: 8px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   padding: 3px 9px;
   border-radius: 999px;
+  z-index: 1;
 }
+.badge-hot { background: var(--ag-red); color: #fff; }
+.badge-new { background: var(--ag-green); color: #fff; }
+.badge-jackpot { background: var(--ag-gold-grad); color: var(--ag-ink-on-gold); }
 
-.table-info { padding: 14px 16px 16px; }
-.table-name { font-size: 14px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ag-text); margin-bottom: 3px; }
-.table-provider { font-size: 11px; color: var(--ag-text-3); margin-bottom: 10px; }
+.game-info { padding: 10px 12px 12px; }
+.game-name { font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ag-text); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.game-label { font-size: 10px; color: var(--ag-text-3); letter-spacing: 0.04em; }
+.game-meta { display: flex; justify-content: space-between; margin-top: 6px; font-size: 10px; }
+.game-rtp { color: var(--ag-green); font-weight: 700; }
+.game-vol { color: var(--ag-text-muted); }
+
+/* ── Live table specific ───────────────────────────────────── */
+.live-dot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(14,9,40,0.75);
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(231,76,60,0.4);
+  z-index: 1;
+}
+.live-dot-circle { width: 6px; height: 6px; border-radius: 50%; background: var(--ag-red); animation: pulse-red 2s ease-in-out infinite; }
+@keyframes pulse-red { 0%,100%{opacity:1} 50%{opacity:0.4} }
+.live-dot-label { font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ag-red); }
+.players-count {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ag-text-2);
+  background: rgba(14,9,40,0.75);
+  padding: 2px 8px;
+  border-radius: 999px;
+  z-index: 1;
+}
 .table-limits {
   display: flex;
   justify-content: space-between;
-  font-size: 11px;
+  font-size: 10px;
+  margin-top: 6px;
 }
 .limits-label { color: var(--ag-text-3); }
 .limits-val { font-weight: 700; color: var(--ag-gold-1); }
 
 /* ── Game shows ───────────────────────────────────────────── */
-.shows-section { margin-bottom: 60px; }
 .shows-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  margin-bottom: 56px;
 }
 .show-card {
   border-radius: 16px;
@@ -306,8 +445,15 @@
   flex-direction: column;
 }
 .show-card:hover { border-color: var(--ag-gold-border-strong); transform: translateY(-3px); }
-.show-card:hover .slot-overlay { opacity: 1; }
+.show-card:hover .game-overlay { opacity: 1; }
 .show-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  position: relative;
+  overflow: hidden;
+}
+.show-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.show-thumb-emoji {
   width: 100%;
   aspect-ratio: 16/9;
   display: flex;
@@ -317,19 +463,19 @@
   position: relative;
   border-bottom: 1px solid var(--ag-gold-border);
 }
-.show-info { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 6px; }
+.show-info { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 5px; }
 .show-name { font-size: 16px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; background: var(--ag-gold-text-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.show-provider { font-size: 11px; color: var(--ag-text-3); }
-.show-desc { font-size: 13px; color: var(--ag-text-2); line-height: 1.5; margin-top: 4px; }
-.show-bet-range { font-size: 12px; color: var(--ag-text-3); margin-top: 4px; }
+.show-provider { font-size: 10px; color: var(--ag-text-3); }
+.show-desc { font-size: 12px; color: var(--ag-text-2); line-height: 1.5; margin-top: 3px; }
+.show-bet-range { font-size: 11px; color: var(--ag-text-3); }
 .show-play {
-  margin-top: 14px;
-  padding: 12px;
-  border-radius: 9px;
+  margin-top: 12px;
+  padding: 11px;
+  border-radius: 8px;
   border: none;
   background: var(--ag-gold-grad);
   color: var(--ag-ink-on-gold);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -340,18 +486,17 @@
 
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 1200px) {
-  .slots-grid { grid-template-columns: repeat(4, 1fr); }
+  .game-grid-4 { grid-template-columns: repeat(3, 1fr); }
 }
-@media (max-width: 1024px) {
-  .slots-grid { grid-template-columns: repeat(3, 1fr); }
-  .tables-grid { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 900px) {
+  .game-grid-4 { grid-template-columns: repeat(2, 1fr); }
   .shows-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 640px) {
-  .slots-grid { grid-template-columns: repeat(2, 1fr); }
-  .tables-grid { grid-template-columns: 1fr; }
+  .game-grid-4 { grid-template-columns: repeat(2, 1fr); }
   .shows-grid { grid-template-columns: 1fr; }
   .jackpot-ticker { flex-wrap: wrap; gap: 12px; }
+  .lobby-controls { gap: 8px; }
 }
 </style>
 </head>
@@ -392,25 +537,128 @@
 <hr class="gold-rule">
 
 <main class="wrap">
-  <section class="page-head">
-    <p class="eyebrow">Live casino &amp; slots</p>
-    <h1 class="display-gold">Casino</h1>
-    <p>Hundreds of slots, live dealer tables and game shows — powered by Evolution, NetEnt, Pragmatic Play and more.</p>
-  </section>
 
-  <!-- Category tabs -->
+  <!-- ── Hero carousel ── -->
+  <div class="hero-carousel" id="heroCarousel">
+    <div class="hero-slides" id="heroSlides">
+      <div class="hero-slide">
+        <img src="https://www.playtechone.com/library/Casino%20Banners%202026/PTONE_banner_Desktop_1900_280%201.jpg" alt="New games now live">
+      </div>
+      <div class="hero-slide">
+        <img src="https://www.playtechone.com/library/Casino%20Banners%202026/Big-Bad-Towers_Other%20Banners_PTONE_banner_Desktop_1900x280.jpg" alt="Big Bad Towers">
+      </div>
+      <div class="hero-slide">
+        <img src="https://www.playtechone.com/library/Casino%20Banners%202026/MooMooMoo_Other%20Banners_PTONE_banner_Desktop_1900x280.jpg" alt="Moo Moo Moo">
+      </div>
+      <div class="hero-slide">
+        <img src="https://www.playtechone.com/library/Casino%20Banners%202025/Gold-Trio_PTONE_banner_Desktop_1900_280.jpg" alt="Gold Trio">
+      </div>
+    </div>
+    <button class="hero-prev" id="heroPrev">&#8249;</button>
+    <button class="hero-next" id="heroNext">&#8250;</button>
+    <div class="hero-dots" id="heroDots">
+      <div class="hero-dot active"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+    </div>
+  </div>
+
+  <!-- ── Top Winners ── -->
+  <div class="winners-head">
+    <h2 class="section-title">&#127942; Top Winners</h2>
+  </div>
+  <div class="winners-strip">
+    <div class="winner-card">
+      <img class="winner-thumb" src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/AgeOfTheDogsicon_428x268_1764232915323.jpg" alt="Age of the Dogs">
+      <div class="winner-info">
+        <div class="winner-who">D. T. just won</div>
+        <div class="winner-amount">£1,544,625</div>
+        <div class="winner-game">in Age of the Dogs™</div>
+      </div>
+    </div>
+    <div class="winner-card">
+      <img class="winner-thumb" src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/AgeOfTheDogsicon_428x268_1764232915323.jpg" alt="Age of the Dogs">
+      <div class="winner-info">
+        <div class="winner-who">M. P. just won</div>
+        <div class="winner-amount">£123,225</div>
+        <div class="winner-game">in Age of the Dogs™</div>
+      </div>
+    </div>
+    <div class="winner-card">
+      <img class="winner-thumb" src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/CollectOrbsWildWestWildsicon_428x268_1782312398947.jpg" alt="CollectOrbs">
+      <div class="winner-info">
+        <div class="winner-who">R. F. just won</div>
+        <div class="winner-amount">£70,056</div>
+        <div class="winner-game">in CollectOrbs: Wild West Wilds™</div>
+      </div>
+    </div>
+    <div class="winner-card">
+      <img class="winner-thumb" src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/gpas_bbmwayspa_popicon_428x268_1747055342871.jpg" alt="Buffalo Blitz Megaways">
+      <div class="winner-info">
+        <div class="winner-who">S. K. just won</div>
+        <div class="winner-amount">£36,446</div>
+        <div class="winner-game">in Buffalo Blitz™ Megaways™</div>
+      </div>
+    </div>
+    <div class="winner-card">
+      <img class="winner-thumb" src="https://www.playtechone.com/library/all_game_images/other_images/eape2_portal_poster_428x268.webp" alt="Epic Ape 2">
+      <div class="winner-info">
+        <div class="winner-who">J. B. just won</div>
+        <div class="winner-amount">£31,771</div>
+        <div class="winner-game">in Epic Ape 2™</div>
+      </div>
+    </div>
+    <div class="winner-card">
+      <img class="winner-thumb" src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/MegaFireBlazeBreakingBadicon_256x256_1726141799443.jpg" alt="Mega Fire Blaze Breaking Bad">
+      <div class="winner-info">
+        <div class="winner-who">A. T. just won</div>
+        <div class="winner-amount">£18,902</div>
+        <div class="winner-game">in Mega Fire Blaze: Breaking Bad™</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Search + Filters ── -->
+  <div class="lobby-controls">
+    <div class="lobby-search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" placeholder="Search games&hellip;" onclick="return false;">
+    </div>
+    <button class="lobby-filter" type="button">
+      Game Category
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <button class="lobby-filter" type="button">
+      Game Label
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="lobby-sort">
+      Sort by:
+      <select onclick="return false;">
+        <option>Default</option>
+        <option>A–Z</option>
+        <option>Jackpot</option>
+        <option>New</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ── Category tabs ── -->
   <div class="cat-tabs">
-    <button class="cat-tab active" type="button">&#127381; All games</button>
+    <button class="cat-tab active" type="button">&#127381; All Games</button>
     <button class="cat-tab" type="button">&#127352; Slots</button>
-    <button class="cat-tab" type="button">&#127183; Live tables</button>
-    <button class="cat-tab" type="button">&#127470;&#127462; Game shows</button>
+    <button class="cat-tab" type="button">&#127183; Live Tables</button>
+    <button class="cat-tab" type="button">&#127470;&#127462; Game Shows</button>
     <button class="cat-tab" type="button">&#128142; Jackpots</button>
     <button class="cat-tab" type="button">&#9814; Blackjack</button>
     <button class="cat-tab" type="button">&#127922; Roulette</button>
     <button class="cat-tab" type="button">&#127183; Baccarat</button>
   </div>
 
-  <!-- Jackpot ticker -->
+  <!-- ── Jackpot ticker ── -->
   <div class="jackpot-ticker">
     <div class="jt-label">&#127881; Current jackpot</div>
     <div>
@@ -424,167 +672,315 @@
     <button class="btn-gold" type="button" style="flex-shrink:0">Play now</button>
   </div>
 
-  <!-- ── Slots ── -->
+  <!-- ── Featured ── -->
   <section>
     <div class="section-head">
-      <h2 class="section-title">&#127352; Featured Slots</h2>
-      <a href="#">View all 400+ &rarr;</a>
+      <h2 class="section-title">&#127352; Featured</h2>
+      <div class="section-head-right">
+        <button class="view-more-btn" type="button">View More (241)</button>
+        <button class="arrow-btn" type="button">&#8249;</button>
+        <button class="arrow-btn" type="button">&#8250;</button>
+      </div>
     </div>
-    <div class="slots-grid">
+    <div class="game-grid game-grid-4">
 
-      <div class="slot-card" onclick="demoPlay(this,'Starburst')">
-        <div class="slot-thumb" style="background:linear-gradient(160deg,#1a0a40,#3a1070)">
-          &#127774;
-          <span class="hot-badge">&#128293; Hot</span>
-          <div class="slot-overlay"><button class="slot-play-btn">Play</button></div>
+      <div class="game-card" onclick="demoAlert('Age of the Dogs™')">
+        <div class="game-thumb">
+          <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/AgeOfTheDogsicon_428x268_1764232915323.jpg" alt="Age of the Dogs™">
+          <span class="badge badge-hot">&#128293; Hot</span>
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
         </div>
-        <div class="slot-info">
-          <div class="slot-name">Starburst</div>
-          <div class="slot-provider">NetEnt</div>
-          <div class="slot-meta">
-            <span class="slot-rtp">RTP 96.09%</span>
-            <span class="slot-vol">Med</span>
-          </div>
+        <div class="game-info">
+          <div class="game-name">Age of the Dogs™</div>
+          <div class="game-label">Origins Studio</div>
+          <div class="game-meta"><span class="game-rtp">RTP 95.70%</span><span class="game-vol">High</span></div>
         </div>
       </div>
 
-      <div class="slot-card" onclick="demoPlay(this,'Book of Ra')">
-        <div class="slot-thumb" style="background:linear-gradient(160deg,#200800,#402000)">
-          &#129470;
-          <div class="slot-overlay"><button class="slot-play-btn">Play</button></div>
+      <div class="game-card" onclick="demoAlert('CollectOrbs: Wild West Wilds™')">
+        <div class="game-thumb">
+          <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/CollectOrbsWildWestWildsicon_428x268_1782312398947.jpg" alt="CollectOrbs: Wild West Wilds™">
+          <span class="badge badge-new">New</span>
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
         </div>
-        <div class="slot-info">
-          <div class="slot-name">Book of Ra</div>
-          <div class="slot-provider">Novomatic</div>
-          <div class="slot-meta">
-            <span class="slot-rtp">RTP 95.10%</span>
-            <span class="slot-vol">Med-Hi</span>
-          </div>
+        <div class="game-info">
+          <div class="game-name">CollectOrbs: Wild West Wilds™</div>
+          <div class="game-label">Origins Studio</div>
+          <div class="game-meta"><span class="game-rtp">RTP 96.20%</span><span class="game-vol">Med</span></div>
         </div>
       </div>
 
-      <div class="slot-card" onclick="demoPlay(this,'Gonzo\'s Quest')">
-        <div class="slot-thumb" style="background:linear-gradient(160deg,#001a0a,#003018)">
-          &#129473;
-          <span class="hot-badge">&#128293; Hot</span>
-          <div class="slot-overlay"><button class="slot-play-btn">Play</button></div>
+      <div class="game-card" onclick="demoAlert('Epic Ape 2™')">
+        <div class="game-thumb">
+          <img src="https://www.playtechone.com/library/all_game_images/other_images/eape2_portal_poster_428x268.webp" alt="Epic Ape 2™">
+          <span class="badge badge-hot">&#128293; Hot</span>
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
         </div>
-        <div class="slot-info">
-          <div class="slot-name">Gonzo's Quest</div>
-          <div class="slot-provider">NetEnt</div>
-          <div class="slot-meta">
-            <span class="slot-rtp">RTP 96.00%</span>
-            <span class="slot-vol">High</span>
-          </div>
+        <div class="game-info">
+          <div class="game-name">Epic Ape 2™</div>
+          <div class="game-label">Origins Studio</div>
+          <div class="game-meta"><span class="game-rtp">RTP 96.01%</span><span class="game-vol">High</span></div>
         </div>
       </div>
 
-      <div class="slot-card" onclick="demoPlay(this,'Mega Moolah')">
-        <div class="slot-thumb" style="background:linear-gradient(160deg,#0a1a00,#183000)">
-          &#129422;
-          <span class="jp-badge">&#128142; Jackpot</span>
-          <div class="slot-overlay"><button class="slot-play-btn">Play</button></div>
+      <div class="game-card" onclick="demoAlert('Buffalo Blitz™ Megaways™')">
+        <div class="game-thumb">
+          <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/gpas_bbmwayspa_popicon_428x268_1747055342871.jpg" alt="Buffalo Blitz™ Megaways™">
+          <span class="badge badge-jackpot">&#128142; Jackpot</span>
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
         </div>
-        <div class="slot-info">
-          <div class="slot-name">Mega Moolah</div>
-          <div class="slot-provider">Microgaming</div>
-          <div class="slot-meta">
-            <span class="slot-rtp">RTP 88.12%</span>
-            <span class="slot-vol">V.High</span>
-          </div>
+        <div class="game-info">
+          <div class="game-name">Buffalo Blitz™ Megaways™</div>
+          <div class="game-label">Origins Studio</div>
+          <div class="game-meta"><span class="game-rtp">RTP 95.10%</span><span class="game-vol">V.High</span></div>
         </div>
       </div>
 
-      <div class="slot-card" onclick="demoPlay(this,'Sweet Bonanza')">
-        <div class="slot-thumb" style="background:linear-gradient(160deg,#1a001a,#300040)">
-          &#127808;
-          <span class="hot-badge">&#128293; Hot</span>
-          <div class="slot-overlay"><button class="slot-play-btn">Play</button></div>
+      <div class="game-card" onclick="demoAlert('King Blitz™')">
+        <div class="game-thumb">
+          <img src="https://www.playtechone.com/library/all_game_images/other_images/gpas_bproglo_popicon_428x268_1644940708022.webp" alt="King Blitz™">
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
         </div>
-        <div class="slot-info">
-          <div class="slot-name">Sweet Bonanza</div>
-          <div class="slot-provider">Pragmatic Play</div>
-          <div class="slot-meta">
-            <span class="slot-rtp">RTP 96.51%</span>
-            <span class="slot-vol">High</span>
-          </div>
+        <div class="game-info">
+          <div class="game-name">King Blitz™</div>
+          <div class="game-label">Origins Studio</div>
+          <div class="game-meta"><span class="game-rtp">RTP 96.45%</span><span class="game-vol">Med-Hi</span></div>
         </div>
       </div>
 
-      <div class="slot-card" onclick="demoPlay(this,'Legacy of Dead')">
-        <div class="slot-thumb" style="background:linear-gradient(160deg,#1a1000,#302000)">
-          &#129345;
-          <div class="slot-overlay"><button class="slot-play-btn">Play</button></div>
+      <div class="game-card" onclick="demoAlert('Mega Fire Blaze: 3 Wizards™')">
+        <div class="game-thumb">
+          <img src="https://www.playtechone.com/library/all_game_images/other_images/MegaFireBlaze3Wizardsicon_428x268_1694758956013.webp" alt="Mega Fire Blaze: 3 Wizards™">
+          <span class="badge badge-hot">&#128293; Hot</span>
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
         </div>
-        <div class="slot-info">
-          <div class="slot-name">Legacy of Dead</div>
-          <div class="slot-provider">Play'n GO</div>
-          <div class="slot-meta">
-            <span class="slot-rtp">RTP 96.25%</span>
-            <span class="slot-vol">Med-Hi</span>
-          </div>
+        <div class="game-info">
+          <div class="game-name">Mega Fire Blaze: 3 Wizards™</div>
+          <div class="game-label">Fire Blaze Series</div>
+          <div class="game-meta"><span class="game-rtp">RTP 95.54%</span><span class="game-vol">High</span></div>
         </div>
       </div>
 
-      <div class="slot-card" onclick="demoPlay(this,'Reactoonz')">
-        <div class="slot-thumb" style="background:linear-gradient(160deg,#001020,#002040)">
-          &#128125;
-          <span class="new-badge">New</span>
-          <div class="slot-overlay"><button class="slot-play-btn">Play</button></div>
+      <div class="game-card" onclick="demoAlert('Mega Fire Blaze: Piggies and the Bank™')">
+        <div class="game-thumb">
+          <img src="https://www.playtechone.com/library/all_game_images/other_images/MegaFireBlazePiggiesAndTheBankicon_428x268_1686662294436.webp" alt="Mega Fire Blaze: Piggies and the Bank™">
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
         </div>
-        <div class="slot-info">
-          <div class="slot-name">Reactoonz</div>
-          <div class="slot-provider">Play'n GO</div>
-          <div class="slot-meta">
-            <span class="slot-rtp">RTP 96.20%</span>
-            <span class="slot-vol">Med-Hi</span>
-          </div>
+        <div class="game-info">
+          <div class="game-name">Mega Fire Blaze: Piggies &amp; the Bank™</div>
+          <div class="game-label">Fire Blaze Series</div>
+          <div class="game-meta"><span class="game-rtp">RTP 95.34%</span><span class="game-vol">High</span></div>
         </div>
       </div>
 
-      <div class="slot-card" onclick="demoPlay(this,'Twin Spin Deluxe')">
-        <div class="slot-thumb" style="background:linear-gradient(160deg,#0a0a30,#1a1a50)">
-          &#127381;
-          <div class="slot-overlay"><button class="slot-play-btn">Play</button></div>
+      <div class="game-card" onclick="demoAlert('Mega Fire Blaze: Breaking Bad™')">
+        <div class="game-thumb">
+          <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/MegaFireBlazeBreakingBadicon_256x256_1726141799443.jpg" alt="Mega Fire Blaze: Breaking Bad™">
+          <span class="badge badge-new">New</span>
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
         </div>
-        <div class="slot-info">
-          <div class="slot-name">Twin Spin Deluxe</div>
-          <div class="slot-provider">NetEnt</div>
-          <div class="slot-meta">
-            <span class="slot-rtp">RTP 96.85%</span>
-            <span class="slot-vol">Low</span>
-          </div>
+        <div class="game-info">
+          <div class="game-name">Mega Fire Blaze: Breaking Bad™</div>
+          <div class="game-label">Fire Blaze Series</div>
+          <div class="game-meta"><span class="game-rtp">RTP 95.80%</span><span class="game-vol">High</span></div>
         </div>
       </div>
 
-      <div class="slot-card" onclick="demoPlay(this,'Hot as Hades')">
-        <div class="slot-thumb" style="background:linear-gradient(160deg,#200010,#400020)">
-          &#128293;
-          <div class="slot-overlay"><button class="slot-play-btn">Play</button></div>
+    </div>
+  </section>
+
+  <!-- ── Age of the Gods ── -->
+  <section>
+    <div class="section-head">
+      <h2 class="section-title">&#9883; Age of the Gods</h2>
+      <div class="section-head-right">
+        <button class="view-more-btn" type="button">View More (36)</button>
+        <button class="arrow-btn" type="button">&#8249;</button>
+        <button class="arrow-btn" type="button">&#8250;</button>
+      </div>
+    </div>
+    <div class="game-grid game-grid-4">
+
+      <div class="game-card" onclick="demoAlert('Age of the Gods™')">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#1a0a40 0%,#4a1870 50%,#2a0a60 100%)">
+          <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/AgeOfTheDogsicon_428x268_1764232915323.jpg" alt="Age of the Gods™" onerror="this.style.display='none'">
+          <span class="badge badge-jackpot">&#128142; Jackpot</span>
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
         </div>
-        <div class="slot-info">
-          <div class="slot-name">Hot as Hades</div>
-          <div class="slot-provider">Playtech</div>
-          <div class="slot-meta">
-            <span class="slot-rtp">RTP 95.02%</span>
-            <span class="slot-vol">High</span>
-          </div>
+        <div class="game-info">
+          <div class="game-name">Age of the Gods™</div>
+          <div class="game-label">Origins Studio · Progressive</div>
+          <div class="game-meta"><span class="game-rtp">RTP 95.03%</span><span class="game-vol">Med</span></div>
         </div>
       </div>
 
-      <div class="slot-card" onclick="demoPlay(this,'Barbar Bandit')">
-        <div class="slot-thumb" style="background:linear-gradient(160deg,#1a1000,#382800)">
-          &#129338;
-          <span class="new-badge">New</span>
-          <div class="slot-overlay"><button class="slot-play-btn">Play</button></div>
+      <div class="game-card" onclick="demoAlert('Age of the Gods: King of Olympus™')">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#0a2040 0%,#1a4070 50%,#0a3060 100%)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px">⚡</div>
+          <span class="badge badge-jackpot">&#128142; Jackpot</span>
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
         </div>
-        <div class="slot-info">
-          <div class="slot-name">Barbar Bandit</div>
-          <div class="slot-provider">Microgaming</div>
-          <div class="slot-meta">
-            <span class="slot-rtp">RTP 96.47%</span>
-            <span class="slot-vol">Med</span>
-          </div>
+        <div class="game-info">
+          <div class="game-name">Age of the Gods: King of Olympus™</div>
+          <div class="game-label">Origins Studio · Progressive</div>
+          <div class="game-meta"><span class="game-rtp">RTP 95.03%</span><span class="game-vol">High</span></div>
+        </div>
+      </div>
+
+      <div class="game-card" onclick="demoAlert('Age of the Gods: Furious Four™')">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#200a0a 0%,#601020 50%,#400a10 100%)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px">🔱</div>
+          <span class="badge badge-hot">&#128293; Hot</span>
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
+        </div>
+        <div class="game-info">
+          <div class="game-name">Age of the Gods: Furious Four™</div>
+          <div class="game-label">Origins Studio · Progressive</div>
+          <div class="game-meta"><span class="game-rtp">RTP 95.03%</span><span class="game-vol">High</span></div>
+        </div>
+      </div>
+
+      <div class="game-card" onclick="demoAlert('Age of the Gods: Ruler of the Skies™')">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#0a1820 0%,#103050 50%,#0a2040 100%)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px">🦅</div>
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
+        </div>
+        <div class="game-info">
+          <div class="game-name">Age of the Gods: Ruler of the Skies™</div>
+          <div class="game-label">Origins Studio · Progressive</div>
+          <div class="game-meta"><span class="game-rtp">RTP 95.03%</span><span class="game-vol">Med-Hi</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Fire Blaze Jackpots ── -->
+  <section>
+    <div class="section-head">
+      <h2 class="section-title">&#128293; Fire Blaze Jackpots</h2>
+      <div class="section-head-right">
+        <button class="view-more-btn" type="button">View More (37)</button>
+        <button class="arrow-btn" type="button">&#8249;</button>
+        <button class="arrow-btn" type="button">&#8250;</button>
+      </div>
+    </div>
+    <div class="game-grid game-grid-4">
+
+      <div class="game-card" onclick="demoAlert('Mega Fire Blaze: 3 Wizards™')">
+        <div class="game-thumb">
+          <img src="https://www.playtechone.com/library/all_game_images/other_images/MegaFireBlaze3Wizardsicon_428x268_1694758956013.webp" alt="Mega Fire Blaze: 3 Wizards™">
+          <span class="badge badge-jackpot">Grand £10,000</span>
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
+        </div>
+        <div class="game-info">
+          <div class="game-name">Mega Fire Blaze: 3 Wizards™</div>
+          <div class="game-label">Fire Blaze Series</div>
+          <div class="game-meta"><span class="game-rtp">RTP 95.54%</span><span class="game-vol">High</span></div>
+        </div>
+      </div>
+
+      <div class="game-card" onclick="demoAlert('Mega Fire Blaze: Breaking Bad™')">
+        <div class="game-thumb">
+          <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/MegaFireBlazeBreakingBadicon_256x256_1726141799443.jpg" alt="Mega Fire Blaze: Breaking Bad™">
+          <span class="badge badge-new">New</span>
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
+        </div>
+        <div class="game-info">
+          <div class="game-name">Mega Fire Blaze: Breaking Bad™</div>
+          <div class="game-label">Fire Blaze Series</div>
+          <div class="game-meta"><span class="game-rtp">RTP 95.80%</span><span class="game-vol">High</span></div>
+        </div>
+      </div>
+
+      <div class="game-card" onclick="demoAlert('Mega Fire Blaze: Piggies and the Bank™')">
+        <div class="game-thumb">
+          <img src="https://www.playtechone.com/library/all_game_images/other_images/MegaFireBlazePiggiesAndTheBankicon_428x268_1686662294436.webp" alt="Mega Fire Blaze: Piggies and the Bank™">
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
+        </div>
+        <div class="game-info">
+          <div class="game-name">Mega Fire Blaze: Piggies &amp; the Bank™</div>
+          <div class="game-label">Fire Blaze Series</div>
+          <div class="game-meta"><span class="game-rtp">RTP 95.34%</span><span class="game-vol">High</span></div>
+        </div>
+      </div>
+
+      <div class="game-card" onclick="demoAlert('Adventure Trail: Fire Blaze Jackpots™')">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#0a200a 0%,#204010 50%,#103010 100%)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px">🗺️</div>
+          <span class="badge badge-hot">&#128293; Hot</span>
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
+        </div>
+        <div class="game-info">
+          <div class="game-name">Adventure Trail: Fire Blaze™</div>
+          <div class="game-label">Fire Blaze Series</div>
+          <div class="game-meta"><span class="game-rtp">RTP 95.21%</span><span class="game-vol">High</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Cash Collect ── -->
+  <section>
+    <div class="section-head">
+      <h2 class="section-title">&#128176; Cash Collect</h2>
+      <div class="section-head-right">
+        <button class="view-more-btn" type="button">View More (42)</button>
+        <button class="arrow-btn" type="button">&#8249;</button>
+        <button class="arrow-btn" type="button">&#8250;</button>
+      </div>
+    </div>
+    <div class="game-grid game-grid-4">
+
+      <div class="game-card" onclick="demoAlert('CollectOrbs: Wild West Wilds™')">
+        <div class="game-thumb">
+          <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/CollectOrbsWildWestWildsicon_428x268_1782312398947.jpg" alt="CollectOrbs: Wild West Wilds™">
+          <span class="badge badge-new">New</span>
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
+        </div>
+        <div class="game-info">
+          <div class="game-name">CollectOrbs: Wild West Wilds™</div>
+          <div class="game-label">Cash Collect Series</div>
+          <div class="game-meta"><span class="game-rtp">RTP 96.20%</span><span class="game-vol">Med</span></div>
+        </div>
+      </div>
+
+      <div class="game-card" onclick="demoAlert('Sahara Riches: Cash Collect™')">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#201000 0%,#503010 50%,#302000 100%)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px">🌙</div>
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
+        </div>
+        <div class="game-info">
+          <div class="game-name">Sahara Riches: Cash Collect™</div>
+          <div class="game-label">Cash Collect Series</div>
+          <div class="game-meta"><span class="game-rtp">RTP 95.80%</span><span class="game-vol">Med-Hi</span></div>
+        </div>
+      </div>
+
+      <div class="game-card" onclick="demoAlert('Goal Goal Goal!: Cash Collect™')">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#001a08 0%,#004020 50%,#002010 100%)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px">⚽</div>
+          <span class="badge badge-hot">&#128293; Hot</span>
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
+        </div>
+        <div class="game-info">
+          <div class="game-name">Goal Goal Goal!: Cash Collect™</div>
+          <div class="game-label">Cash Collect Series</div>
+          <div class="game-meta"><span class="game-rtp">RTP 95.90%</span><span class="game-vol">Med</span></div>
+        </div>
+      </div>
+
+      <div class="game-card" onclick="demoAlert('Breaking Bad™: Cash Collect &amp; Link™')">
+        <div class="game-thumb" style="background:linear-gradient(135deg,#100010 0%,#300040 50%,#200030 100%)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px">⚗️</div>
+          <span class="badge badge-new">New</span>
+          <div class="game-overlay"><button class="game-play-btn">Play</button></div>
+        </div>
+        <div class="game-info">
+          <div class="game-name">Breaking Bad™: Cash Collect &amp; Link™</div>
+          <div class="game-label">Cash Collect Series</div>
+          <div class="game-meta"><span class="game-rtp">RTP 96.00%</span><span class="game-vol">High</span></div>
         </div>
       </div>
 
@@ -592,146 +988,126 @@
   </section>
 
   <!-- ── Live Tables ── -->
-  <section class="tables-section">
+  <section>
     <div class="section-head">
       <h2 class="section-title">&#127922; Live Tables</h2>
-      <a href="#">All tables &rarr;</a>
+      <div class="section-head-right">
+        <button class="view-more-btn" type="button">View More (53)</button>
+        <button class="arrow-btn" type="button">&#8249;</button>
+        <button class="arrow-btn" type="button">&#8250;</button>
+      </div>
     </div>
-    <div class="tables-grid">
+    <div class="game-grid game-grid-4">
 
-      <div class="table-card" onclick="demoPlay(this,'Lightning Roulette')">
-        <div class="table-thumb" style="background:linear-gradient(160deg,#1a0a00,#3a1800)">
-          &#127922;
+      <div class="game-card" onclick="demoAlert('Lightning Roulette')">
+        <div class="game-thumb-emoji" style="background:linear-gradient(135deg,#1a0a00,#3a1800)">
+          ⚡
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 1,247 playing</div>
-          <div class="slot-overlay"><button class="slot-play-btn">Join table</button></div>
+          <div class="game-overlay"><button class="game-play-btn">Join table</button></div>
         </div>
-        <div class="table-info">
-          <div class="table-name">Lightning Roulette</div>
-          <div class="table-provider">Evolution Gaming</div>
-          <div class="table-limits">
-            <span class="limits-label">Bet range</span>
-            <span class="limits-val">&pound;0.20 &ndash; &pound;5,000</span>
-          </div>
+        <div class="game-info">
+          <div class="game-name">Lightning Roulette</div>
+          <div class="game-label">Evolution Gaming</div>
+          <div class="table-limits"><span class="limits-label">Bet range</span><span class="limits-val">&pound;0.20 – &pound;5,000</span></div>
         </div>
       </div>
 
-      <div class="table-card" onclick="demoPlay(this,'Immersive Roulette')">
-        <div class="table-thumb" style="background:linear-gradient(160deg,#001a00,#003000)">
-          &#127922;
+      <div class="game-card" onclick="demoAlert('Immersive Roulette')">
+        <div class="game-thumb-emoji" style="background:linear-gradient(135deg,#001a00,#003000)">
+          🎡
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 634 playing</div>
-          <div class="slot-overlay"><button class="slot-play-btn">Join table</button></div>
+          <div class="game-overlay"><button class="game-play-btn">Join table</button></div>
         </div>
-        <div class="table-info">
-          <div class="table-name">Immersive Roulette</div>
-          <div class="table-provider">Evolution Gaming</div>
-          <div class="table-limits">
-            <span class="limits-label">Bet range</span>
-            <span class="limits-val">&pound;0.50 &ndash; &pound;250</span>
-          </div>
+        <div class="game-info">
+          <div class="game-name">Immersive Roulette</div>
+          <div class="game-label">Evolution Gaming</div>
+          <div class="table-limits"><span class="limits-label">Bet range</span><span class="limits-val">&pound;0.50 – &pound;250</span></div>
         </div>
       </div>
 
-      <div class="table-card" onclick="demoPlay(this,'Infinite Blackjack')">
-        <div class="table-thumb" style="background:linear-gradient(160deg,#0a0a20,#1a1a40)">
-          &#9814;
+      <div class="game-card" onclick="demoAlert('Infinite Blackjack')">
+        <div class="game-thumb-emoji" style="background:linear-gradient(135deg,#0a0a20,#1a1a40)">
+          ♟
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 889 playing</div>
-          <div class="slot-overlay"><button class="slot-play-btn">Join table</button></div>
+          <div class="game-overlay"><button class="game-play-btn">Join table</button></div>
         </div>
-        <div class="table-info">
-          <div class="table-name">Infinite Blackjack</div>
-          <div class="table-provider">Evolution Gaming</div>
-          <div class="table-limits">
-            <span class="limits-label">Bet range</span>
-            <span class="limits-val">&pound;1 &ndash; &pound;1,000</span>
-          </div>
+        <div class="game-info">
+          <div class="game-name">Infinite Blackjack</div>
+          <div class="game-label">Evolution Gaming</div>
+          <div class="table-limits"><span class="limits-label">Bet range</span><span class="limits-val">&pound;1 – &pound;1,000</span></div>
         </div>
       </div>
 
-      <div class="table-card" onclick="demoPlay(this,'Blackjack VIP')">
-        <div class="table-thumb" style="background:linear-gradient(160deg,#1a0820,#2a1038)">
-          &#9814;
-          <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
-          <div class="players-count">&#128100; 12 playing</div>
-          <div class="slot-overlay"><button class="slot-play-btn">Join table</button></div>
-        </div>
-        <div class="table-info">
-          <div class="table-name">Blackjack VIP</div>
-          <div class="table-provider">Evolution Gaming</div>
-          <div class="table-limits">
-            <span class="limits-label">Bet range</span>
-            <span class="limits-val">&pound;20 &ndash; &pound;5,000</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="table-card" onclick="demoPlay(this,'Baccarat Squeeze')">
-        <div class="table-thumb" style="background:linear-gradient(160deg,#001818,#002a2a)">
-          &#127183;
+      <div class="game-card" onclick="demoAlert('Baccarat Squeeze')">
+        <div class="game-thumb-emoji" style="background:linear-gradient(135deg,#001818,#002a2a)">
+          🃏
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 421 playing</div>
-          <div class="slot-overlay"><button class="slot-play-btn">Join table</button></div>
+          <div class="game-overlay"><button class="game-play-btn">Join table</button></div>
         </div>
-        <div class="table-info">
-          <div class="table-name">Baccarat Squeeze</div>
-          <div class="table-provider">Evolution Gaming</div>
-          <div class="table-limits">
-            <span class="limits-label">Bet range</span>
-            <span class="limits-val">&pound;1 &ndash; &pound;500</span>
-          </div>
+        <div class="game-info">
+          <div class="game-name">Baccarat Squeeze</div>
+          <div class="game-label">Evolution Gaming</div>
+          <div class="table-limits"><span class="limits-label">Bet range</span><span class="limits-val">&pound;1 – &pound;500</span></div>
         </div>
       </div>
 
-      <div class="table-card" onclick="demoPlay(this,'Speed Baccarat')">
-        <div class="table-thumb" style="background:linear-gradient(160deg,#100018,#220030)">
-          &#127183;
+      <div class="game-card" onclick="demoAlert('Speed Baccarat')">
+        <div class="game-thumb-emoji" style="background:linear-gradient(135deg,#100018,#220030)">
+          🃏
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 203 playing</div>
-          <div class="slot-overlay"><button class="slot-play-btn">Join table</button></div>
+          <div class="game-overlay"><button class="game-play-btn">Join table</button></div>
         </div>
-        <div class="table-info">
-          <div class="table-name">Speed Baccarat</div>
-          <div class="table-provider">Evolution Gaming</div>
-          <div class="table-limits">
-            <span class="limits-label">Bet range</span>
-            <span class="limits-val">&pound;0.20 &ndash; &pound;250</span>
-          </div>
+        <div class="game-info">
+          <div class="game-name">Speed Baccarat</div>
+          <div class="game-label">Evolution Gaming</div>
+          <div class="table-limits"><span class="limits-label">Bet range</span><span class="limits-val">&pound;0.20 – &pound;250</span></div>
         </div>
       </div>
 
-      <div class="table-card" onclick="demoPlay(this,'American Roulette')">
-        <div class="table-thumb" style="background:linear-gradient(160deg,#1a0000,#320000)">
-          &#127922;
+      <div class="game-card" onclick="demoAlert('Blackjack VIP')">
+        <div class="game-thumb-emoji" style="background:linear-gradient(135deg,#1a0820,#2a1038)">
+          ♠
+          <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
+          <div class="players-count">&#128100; 12 playing</div>
+          <div class="game-overlay"><button class="game-play-btn">Join table</button></div>
+        </div>
+        <div class="game-info">
+          <div class="game-name">Blackjack VIP</div>
+          <div class="game-label">Evolution Gaming · VIP</div>
+          <div class="table-limits"><span class="limits-label">Bet range</span><span class="limits-val">&pound;20 – &pound;5,000</span></div>
+        </div>
+      </div>
+
+      <div class="game-card" onclick="demoAlert('American Roulette')">
+        <div class="game-thumb-emoji" style="background:linear-gradient(135deg,#1a0000,#320000)">
+          🎰
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 178 playing</div>
-          <div class="slot-overlay"><button class="slot-play-btn">Join table</button></div>
+          <div class="game-overlay"><button class="game-play-btn">Join table</button></div>
         </div>
-        <div class="table-info">
-          <div class="table-name">American Roulette</div>
-          <div class="table-provider">Evolution Gaming</div>
-          <div class="table-limits">
-            <span class="limits-label">Bet range</span>
-            <span class="limits-val">&pound;1 &ndash; &pound;500</span>
-          </div>
+        <div class="game-info">
+          <div class="game-name">American Roulette</div>
+          <div class="game-label">Evolution Gaming</div>
+          <div class="table-limits"><span class="limits-label">Bet range</span><span class="limits-val">&pound;1 – &pound;500</span></div>
         </div>
       </div>
 
-      <div class="table-card" onclick="demoPlay(this,'Speed Blackjack')">
-        <div class="table-thumb" style="background:linear-gradient(160deg,#0a1a00,#1a3000)">
-          &#9814;
+      <div class="game-card" onclick="demoAlert('Speed Blackjack')">
+        <div class="game-thumb-emoji" style="background:linear-gradient(135deg,#0a1a00,#1a3000)">
+          ♠
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 556 playing</div>
-          <div class="slot-overlay"><button class="slot-play-btn">Join table</button></div>
+          <div class="game-overlay"><button class="game-play-btn">Join table</button></div>
         </div>
-        <div class="table-info">
-          <div class="table-name">Speed Blackjack</div>
-          <div class="table-provider">Evolution Gaming</div>
-          <div class="table-limits">
-            <span class="limits-label">Bet range</span>
-            <span class="limits-val">&pound;0.50 &ndash; &pound;200</span>
-          </div>
+        <div class="game-info">
+          <div class="game-name">Speed Blackjack</div>
+          <div class="game-label">Evolution Gaming</div>
+          <div class="table-limits"><span class="limits-label">Bet range</span><span class="limits-val">&pound;0.50 – &pound;200</span></div>
         </div>
       </div>
 
@@ -739,63 +1115,68 @@
   </section>
 
   <!-- ── Game Shows ── -->
-  <section class="shows-section">
+  <section>
     <div class="section-head">
       <h2 class="section-title">&#127470;&#127462; Game Shows</h2>
-      <a href="#">All shows &rarr;</a>
+      <div class="section-head-right">
+        <button class="view-more-btn" type="button">View More (12)</button>
+        <button class="arrow-btn" type="button">&#8249;</button>
+        <button class="arrow-btn" type="button">&#8250;</button>
+      </div>
     </div>
     <div class="shows-grid">
 
-      <div class="show-card" onclick="demoPlay(this,'Crazy Time')">
-        <div class="show-thumb" style="background:linear-gradient(160deg,#1a0820,#3a0840)">
-          &#127881;
+      <div class="show-card" onclick="demoAlert('Crazy Time')">
+        <div class="show-thumb-emoji" style="background:linear-gradient(160deg,#1a0820,#3a0840)">
+          🎉
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 3,841 playing</div>
-          <div class="slot-overlay"><button class="slot-play-btn">Join now</button></div>
+          <div class="game-overlay"><button class="game-play-btn">Join now</button></div>
         </div>
         <div class="show-info">
           <div class="show-name">Crazy Time</div>
           <div class="show-provider">Evolution Gaming</div>
           <div class="show-desc">The biggest game show in live casino. Spin the mega wheel to land on Coin Flip, Cash Hunt, Pachinko or Crazy Time bonus rounds. Multipliers up to 40x.</div>
-          <div class="show-bet-range">Bet range: &pound;0.10 &ndash; &pound;1,000</div>
+          <div class="show-bet-range">Bet range: &pound;0.10 – &pound;1,000</div>
           <button class="show-play" type="button">Play Crazy Time</button>
         </div>
       </div>
 
-      <div class="show-card" onclick="demoPlay(this,'Monopoly Live')">
-        <div class="show-thumb" style="background:linear-gradient(160deg,#001a08,#003018)">
-          &#127968;
+      <div class="show-card" onclick="demoAlert('Monopoly Live')">
+        <div class="show-thumb-emoji" style="background:linear-gradient(160deg,#001a08,#003018)">
+          🏘
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 1,203 playing</div>
-          <div class="slot-overlay"><button class="slot-play-btn">Join now</button></div>
+          <div class="game-overlay"><button class="game-play-btn">Join now</button></div>
         </div>
         <div class="show-info">
           <div class="show-name">Monopoly Live</div>
           <div class="show-provider">Evolution Gaming</div>
           <div class="show-desc">The classic board game meets live casino. Spin the money wheel, then enter the 3D Monopoly bonus round for multiplied winnings. Chance and Community Chest included.</div>
-          <div class="show-bet-range">Bet range: &pound;0.10 &ndash; &pound;500</div>
+          <div class="show-bet-range">Bet range: &pound;0.10 – &pound;500</div>
           <button class="show-play" type="button">Play Monopoly Live</button>
         </div>
       </div>
 
-      <div class="show-card" onclick="demoPlay(this,'Dream Catcher')">
-        <div class="show-thumb" style="background:linear-gradient(160deg,#1a1000,#301800)">
-          &#127384;
+      <div class="show-card" onclick="demoAlert('Dream Catcher')">
+        <div class="show-thumb-emoji" style="background:linear-gradient(160deg,#1a1000,#301800)">
+          🎡
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 742 playing</div>
-          <div class="slot-overlay"><button class="slot-play-btn">Join now</button></div>
+          <div class="game-overlay"><button class="game-play-btn">Join now</button></div>
         </div>
         <div class="show-info">
           <div class="show-name">Dream Catcher</div>
           <div class="show-provider">Evolution Gaming</div>
           <div class="show-desc">Bet on where the wheel stops — from 1x to 40x multipliers. The simplest game show in live casino, hosted by a charismatic live presenter around the clock.</div>
-          <div class="show-bet-range">Bet range: &pound;0.10 &ndash; &pound;500</div>
+          <div class="show-bet-range">Bet range: &pound;0.10 – &pound;500</div>
           <button class="show-play" type="button">Play Dream Catcher</button>
         </div>
       </div>
 
     </div>
   </section>
+
 </main>
 
 <footer class="site-footer">
@@ -846,7 +1227,7 @@
 </footer>
 
 <script>
-/* Jackpot ticker animation */
+/* Jackpot ticker */
 (function () {
   var base = 1427643;
   var el = document.getElementById("jackpot-amount");
@@ -856,20 +1237,37 @@
   }, 800);
 })();
 
-/* Demo play alert */
-function demoPlay(el, name) {
-  if (event.target.closest("button") || event.target.tagName === "BUTTON") {
-    alert("Demo only — " + name + " would open here.\n\n18+ | BeGambleAware.org");
+/* Hero carousel */
+(function () {
+  var slides = document.getElementById("heroSlides");
+  var dots = document.querySelectorAll(".hero-dot");
+  var total = dots.length;
+  var cur = 0;
+  function go(n) {
+    cur = (n + total) % total;
+    slides.style.transform = "translateX(-" + (cur * 100) + "%)";
+    dots.forEach(function(d,i){ d.classList.toggle("active", i === cur); });
   }
-}
+  document.getElementById("heroPrev").onclick = function(){ go(cur - 1); };
+  document.getElementById("heroNext").onclick = function(){ go(cur + 1); };
+  dots.forEach(function(d,i){ d.onclick = function(){ go(i); }; });
+  setInterval(function(){ go(cur + 1); }, 4500);
+})();
 
-/* Category tab filter (visual only) */
+/* Category tabs */
 document.querySelectorAll(".cat-tab").forEach(function (tab) {
   tab.addEventListener("click", function () {
     document.querySelectorAll(".cat-tab").forEach(function (t) { t.classList.remove("active"); });
     tab.classList.add("active");
   });
 });
+
+/* Demo play */
+function demoAlert(name) {
+  if (event.target.closest("button")) {
+    alert("Demo only — " + name + " would open here.\n\n18+ | BeGambleAware.org");
+  }
+}
 </script>
 
 <!-- Ada embed -->
@@ -877,9 +1275,7 @@ document.querySelectorAll(".cat-tab").forEach(function (tab) {
   window.adaSettings = {
     handle: "rkirk-gaming-demo",
     hideMask: false,
-    metaFields: {
-      demo_client: "Casino"
-    }
+    metaFields: { demo_client: "Casino" }
   };
 </script>
 <script src="https://static.ada.support/embed2.js" async></script>

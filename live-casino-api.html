@@ -167,20 +167,26 @@
 .slot-card:hover .slot-overlay { opacity: 1; }
 .slot-thumb {
   width: 100%;
-  aspect-ratio: 3/2;
+  aspect-ratio: 428 / 268;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 38px;
   position: relative;
   border-bottom: 1px solid var(--ag-gold-border);
+  overflow: hidden;
+  background: #1a1050;
 }
-.slot-thumb::before {
-  content: '';
+.slot-thumb img {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 30%, rgba(212,168,67,0.09), transparent 65%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 300ms;
 }
+.slot-card:hover .slot-thumb img { transform: scale(1.04); }
 .hot-badge {
   position: absolute; top: 7px; left: 7px;
   font-size: 8px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
@@ -678,129 +684,117 @@
       </div>
       <div class="slots-grid">
 
-        <div class="slot-card" onclick="selectGame(this,'Starburst')">
-          <div class="slot-thumb" style="background:linear-gradient(160deg,#1a0a40,#3a1070)">
-            &#127774;
+        <div class="slot-card" onclick="selectGame(this,'Age of the Dogs™')">
+          <div class="slot-thumb">
+            <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/AgeOfTheDogsicon_428x268_1764232915323.jpg" alt="Age of the Dogs™">
             <span class="hot-badge">&#128293; Hot</span>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Starburst')">Play</button></div>
+            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Age of the Dogs™')">Play</button></div>
           </div>
           <div class="slot-info">
-            <div class="slot-name">Starburst</div>
-            <div class="slot-provider">NetEnt</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 96.09%</span><span class="slot-vol">Med</span></div>
+            <div class="slot-name">Age of the Dogs™</div>
+            <div class="slot-provider">Origins Studio</div>
+            <div class="slot-meta"><span class="slot-rtp">RTP 95.70%</span><span class="slot-vol">High</span></div>
           </div>
         </div>
 
-        <div class="slot-card" onclick="selectGame(this,'Book of Ra')">
-          <div class="slot-thumb" style="background:linear-gradient(160deg,#200800,#402000)">
-            &#129470;
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Book of Ra')">Play</button></div>
+        <div class="slot-card" onclick="selectGame(this,'CollectOrbs: Wild West Wilds™')">
+          <div class="slot-thumb">
+            <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/CollectOrbsWildWestWildsicon_428x268_1782312398947.jpg" alt="CollectOrbs: Wild West Wilds™">
+            <span class="new-badge">New</span>
+            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('CollectOrbs: Wild West Wilds™')">Play</button></div>
           </div>
           <div class="slot-info">
-            <div class="slot-name">Book of Ra</div>
-            <div class="slot-provider">Novomatic</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 95.10%</span><span class="slot-vol">Med-Hi</span></div>
+            <div class="slot-name">CollectOrbs: Wild West Wilds™</div>
+            <div class="slot-provider">Origins Studio</div>
+            <div class="slot-meta"><span class="slot-rtp">RTP 96.20%</span><span class="slot-vol">Med</span></div>
           </div>
         </div>
 
-        <div class="slot-card" onclick="selectGame(this,&quot;Gonzo's Quest&quot;)">
-          <div class="slot-thumb" style="background:linear-gradient(160deg,#001a0a,#003018)">
-            &#129473;
+        <div class="slot-card" onclick="selectGame(this,'Epic Ape 2™')">
+          <div class="slot-thumb">
+            <img src="https://www.playtechone.com/library/all_game_images/other_images/eape2_portal_poster_428x268.webp" alt="Epic Ape 2™">
             <span class="hot-badge">&#128293; Hot</span>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert(&quot;Gonzo's Quest&quot;)">Play</button></div>
+            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Epic Ape 2™')">Play</button></div>
           </div>
           <div class="slot-info">
-            <div class="slot-name">Gonzo's Quest</div>
-            <div class="slot-provider">NetEnt</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 96.00%</span><span class="slot-vol">High</span></div>
+            <div class="slot-name">Epic Ape 2™</div>
+            <div class="slot-provider">Origins Studio</div>
+            <div class="slot-meta"><span class="slot-rtp">RTP 96.01%</span><span class="slot-vol">High</span></div>
           </div>
         </div>
 
-        <div class="slot-card" onclick="selectGame(this,'Mega Moolah')">
-          <div class="slot-thumb" style="background:linear-gradient(160deg,#0a1a00,#183000)">
-            &#129422;
+        <div class="slot-card" onclick="selectGame(this,'Buffalo Blitz™ Megaways™')">
+          <div class="slot-thumb">
+            <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/gpas_bbmwayspa_popicon_428x268_1747055342871.jpg" alt="Buffalo Blitz™ Megaways™">
             <span class="jp-badge">&#128142; Jackpot</span>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Mega Moolah')">Play</button></div>
+            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Buffalo Blitz™ Megaways™')">Play</button></div>
           </div>
           <div class="slot-info">
-            <div class="slot-name">Mega Moolah</div>
-            <div class="slot-provider">Microgaming</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 88.12%</span><span class="slot-vol">V.High</span></div>
+            <div class="slot-name">Buffalo Blitz™ Megaways™</div>
+            <div class="slot-provider">Origins Studio</div>
+            <div class="slot-meta"><span class="slot-rtp">RTP 95.10%</span><span class="slot-vol">V.High</span></div>
           </div>
         </div>
 
-        <div class="slot-card" onclick="selectGame(this,'Sweet Bonanza')">
-          <div class="slot-thumb" style="background:linear-gradient(160deg,#1a001a,#300040)">
-            &#127808;
+        <div class="slot-card" onclick="selectGame(this,'King Blitz™')">
+          <div class="slot-thumb">
+            <img src="https://www.playtechone.com/library/all_game_images/other_images/gpas_bproglo_popicon_428x268_1644940708022.webp" alt="King Blitz™">
+            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('King Blitz™')">Play</button></div>
+          </div>
+          <div class="slot-info">
+            <div class="slot-name">King Blitz™</div>
+            <div class="slot-provider">Origins Studio</div>
+            <div class="slot-meta"><span class="slot-rtp">RTP 96.45%</span><span class="slot-vol">Med-Hi</span></div>
+          </div>
+        </div>
+
+        <div class="slot-card" onclick="selectGame(this,'Mega Fire Blaze: 3 Wizards™')">
+          <div class="slot-thumb">
+            <img src="https://www.playtechone.com/library/all_game_images/other_images/MegaFireBlaze3Wizardsicon_428x268_1694758956013.webp" alt="Mega Fire Blaze: 3 Wizards™">
             <span class="hot-badge">&#128293; Hot</span>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Sweet Bonanza')">Play</button></div>
+            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Mega Fire Blaze: 3 Wizards™')">Play</button></div>
           </div>
           <div class="slot-info">
-            <div class="slot-name">Sweet Bonanza</div>
-            <div class="slot-provider">Pragmatic Play</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 96.51%</span><span class="slot-vol">High</span></div>
+            <div class="slot-name">Mega Fire Blaze: 3 Wizards™</div>
+            <div class="slot-provider">Fire Blaze Series</div>
+            <div class="slot-meta"><span class="slot-rtp">RTP 95.54%</span><span class="slot-vol">High</span></div>
           </div>
         </div>
 
-        <div class="slot-card" onclick="selectGame(this,'Legacy of Dead')">
-          <div class="slot-thumb" style="background:linear-gradient(160deg,#1a1000,#302000)">
-            &#129345;
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Legacy of Dead')">Play</button></div>
+        <div class="slot-card" onclick="selectGame(this,'Mega Fire Blaze: Piggies and the Bank™')">
+          <div class="slot-thumb">
+            <img src="https://www.playtechone.com/library/all_game_images/other_images/MegaFireBlazePiggiesAndTheBankicon_428x268_1686662294436.webp" alt="Mega Fire Blaze: Piggies and the Bank™">
+            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Mega Fire Blaze: Piggies and the Bank™')">Play</button></div>
           </div>
           <div class="slot-info">
-            <div class="slot-name">Legacy of Dead</div>
-            <div class="slot-provider">Play'n GO</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 96.25%</span><span class="slot-vol">Med-Hi</span></div>
+            <div class="slot-name">Mega Fire Blaze: Piggies &amp; the Bank™</div>
+            <div class="slot-provider">Fire Blaze Series</div>
+            <div class="slot-meta"><span class="slot-rtp">RTP 95.34%</span><span class="slot-vol">High</span></div>
           </div>
         </div>
 
-        <div class="slot-card" onclick="selectGame(this,'Reactoonz')">
-          <div class="slot-thumb" style="background:linear-gradient(160deg,#001020,#002040)">
-            &#128125;
+        <div class="slot-card" onclick="selectGame(this,'Mega Fire Blaze: Breaking Bad™')">
+          <div class="slot-thumb">
+            <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/MegaFireBlazeBreakingBadicon_256x256_1726141799443.jpg" alt="Mega Fire Blaze: Breaking Bad™">
             <span class="new-badge">New</span>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Reactoonz')">Play</button></div>
+            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Mega Fire Blaze: Breaking Bad™')">Play</button></div>
           </div>
           <div class="slot-info">
-            <div class="slot-name">Reactoonz</div>
-            <div class="slot-provider">Play'n GO</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 96.20%</span><span class="slot-vol">Med-Hi</span></div>
+            <div class="slot-name">Mega Fire Blaze: Breaking Bad™</div>
+            <div class="slot-provider">Fire Blaze Series</div>
+            <div class="slot-meta"><span class="slot-rtp">RTP 95.80%</span><span class="slot-vol">High</span></div>
           </div>
         </div>
 
-        <div class="slot-card" onclick="selectGame(this,'Twin Spin Deluxe')">
-          <div class="slot-thumb" style="background:linear-gradient(160deg,#0a0a30,#1a1a50)">
-            &#127381;
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Twin Spin Deluxe')">Play</button></div>
+        <div class="slot-card" onclick="selectGame(this,'CollectOrbs: Wild West Wilds™')">
+          <div class="slot-thumb">
+            <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/CollectOrbsWildWestWildsicon_428x268_1782312398947.jpg" alt="CollectOrbs: Wild West Wilds™">
+            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('CollectOrbs: Wild West Wilds™')">Play</button></div>
           </div>
           <div class="slot-info">
-            <div class="slot-name">Twin Spin Deluxe</div>
-            <div class="slot-provider">NetEnt</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 96.85%</span><span class="slot-vol">Low</span></div>
-          </div>
-        </div>
-
-        <div class="slot-card" onclick="selectGame(this,'Hot as Hades')">
-          <div class="slot-thumb" style="background:linear-gradient(160deg,#200010,#400020)">
-            &#128293;
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Hot as Hades')">Play</button></div>
-          </div>
-          <div class="slot-info">
-            <div class="slot-name">Hot as Hades</div>
-            <div class="slot-provider">Playtech</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 95.02%</span><span class="slot-vol">High</span></div>
-          </div>
-        </div>
-
-        <div class="slot-card" onclick="selectGame(this,'Barbar Bandit')">
-          <div class="slot-thumb" style="background:linear-gradient(160deg,#1a1000,#382800)">
-            &#129338;
-            <span class="new-badge">New</span>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Barbar Bandit')">Play</button></div>
-          </div>
-          <div class="slot-info">
-            <div class="slot-name">Barbar Bandit</div>
-            <div class="slot-provider">Microgaming</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 96.47%</span><span class="slot-vol">Med</span></div>
+            <div class="slot-name">CollectOrbs: Wild West Wilds™</div>
+            <div class="slot-provider">Cash Collect Series</div>
+            <div class="slot-meta"><span class="slot-rtp">RTP 96.20%</span><span class="slot-vol">Med</span></div>
           </div>
         </div>
 
@@ -1089,16 +1083,15 @@
 <script>
 /* ─── Game data ────────────────────────────────────────────── */
 var GAMES = {
-  'Starburst':          { icon:'🌟', type:'Slot',      provider:'NetEnt',         rtp:'96.09%', vol:'Medium',  min:'£0.10', max:'£100',   bonus:true,  chips:['Does my bonus apply?','What are the paylines?','How do re-spins work?'] },
-  'Book of Ra':         { icon:'📖', type:'Slot',      provider:'Novomatic',      rtp:'95.10%', vol:'Med-Hi',  min:'£0.10', max:'£100',   bonus:true,  chips:['Is it in my bonus?','How many free spins?','What triggers the feature?'] },
-  "Gonzo's Quest":      { icon:'🗿', type:'Slot',      provider:'NetEnt',         rtp:'96.00%', vol:'High',    min:'£0.20', max:'£50',    bonus:false, chips:['Wagering requirements?','What are avalanche wins?','Max win potential?'] },
-  'Mega Moolah':        { icon:'🦁', type:'Jackpot',   provider:'Microgaming',    rtp:'88.12%', vol:'V.High',  min:'£0.25', max:'£6.25',  bonus:true,  chips:['Current jackpot size?','How to trigger the jackpot?','Can I use my bonus?'] },
-  'Sweet Bonanza':      { icon:'🍭', type:'Slot',      provider:'Pragmatic Play', rtp:'96.51%', vol:'High',    min:'£0.20', max:'£125',   bonus:true,  chips:['Does my bonus apply?','How do multipliers work?','What is the max win?'] },
-  'Legacy of Dead':     { icon:'💀', type:'Slot',      provider:"Play'n GO",      rtp:'96.25%', vol:'Med-Hi',  min:'£0.10', max:'£100',   bonus:true,  chips:['Bonus eligibility?','How many free spins?','Max multiplier?'] },
-  'Reactoonz':          { icon:'👾', type:'Slot',      provider:"Play'n GO",      rtp:'96.20%', vol:'Med-Hi',  min:'£0.20', max:'£100',   bonus:false, chips:['Is it in my bonus?','How does the charge meter work?','Cascade wins explained?'] },
-  'Twin Spin Deluxe':   { icon:'🌀', type:'Slot',      provider:'NetEnt',         rtp:'96.85%', vol:'Low',     min:'£0.10', max:'£200',   bonus:true,  chips:['Good for low variance?','How many paylines?','Bonus wagering rules?'] },
-  'Hot as Hades':       { icon:'🔥', type:'Slot',      provider:'Playtech',       rtp:'95.02%', vol:'High',    min:'£0.10', max:'£50',    bonus:true,  chips:['Part of my bonus?','What are the bonus features?','Ways to win?'] },
-  'Barbar Bandit':      { icon:'🪃', type:'Slot',      provider:'Microgaming',    rtp:'96.47%', vol:'Medium',  min:'£0.20', max:'£50',    bonus:true,  chips:['New release details?','Bonus eligible?','Max win potential?'] },
+  'Age of the Dogs™':                        { icon:'🐕', type:'Slot',      provider:'Origins Studio',    rtp:'95.70%', vol:'High',    min:'£0.10', max:'£100',  bonus:true,  chips:['Does my bonus apply?','How do win lines work?','What are the wild features?'] },
+  'CollectOrbs: Wild West Wilds™':           { icon:'🔮', type:'Slot',      provider:'Origins Studio',    rtp:'96.20%', vol:'Medium',  min:'£0.20', max:'£100',  bonus:true,  chips:['Is this in my bonus?','How do orbs collect?','Max win potential?'] },
+  'Epic Ape 2™':                             { icon:'🦍', type:'Slot',      provider:'Origins Studio',    rtp:'96.01%', vol:'High',    min:'£0.10', max:'£250',  bonus:true,  chips:['Bonus eligible?','How do free spins trigger?','What are expanding wilds?'] },
+  'Buffalo Blitz™ Megaways™':               { icon:'🦬', type:'Jackpot',   provider:'Origins Studio',    rtp:'95.10%', vol:'V.High',  min:'£0.25', max:'£500',  bonus:true,  chips:['Current jackpot amount?','How to trigger Blitz?','Can I use my bonus?'] },
+  'King Blitz™':                             { icon:'👑', type:'Slot',      provider:'Origins Studio',    rtp:'96.45%', vol:'Med-Hi',  min:'£0.10', max:'£100',  bonus:true,  chips:['Part of my bonus?','How many paylines?','What triggers the Blitz feature?'] },
+  'Mega Fire Blaze: 3 Wizards™':            { icon:'🧙', type:'Slot',      provider:'Fire Blaze Series', rtp:'95.54%', vol:'High',    min:'£0.10', max:'£200',  bonus:true,  chips:['Bonus eligibility?','How does Fire Blaze work?','How many free spins?'] },
+  'Mega Fire Blaze: Piggies and the Bank™': { icon:'🐷', type:'Slot',      provider:'Fire Blaze Series', rtp:'95.34%', vol:'High',    min:'£0.10', max:'£150',  bonus:true,  chips:['In my bonus?','What triggers the Bank feature?','Max win?'] },
+  'Mega Fire Blaze: Breaking Bad™':         { icon:'⚗️', type:'Slot',      provider:'Fire Blaze Series', rtp:'95.80%', vol:'High',    min:'£0.20', max:'£200',  bonus:true,  chips:['Bonus eligible?','How does the Breaking Bad feature trigger?','Max multiplier?'] },
+  'CollectOrbs: Wild West Wilds™ (Cash)':   { icon:'💰', type:'Slot',      provider:'Cash Collect Series',rtp:'96.20%', vol:'Medium',  min:'£0.20', max:'£100',  bonus:true,  chips:['Cash Collect rules?','How does the orb mechanic work?','Wagering requirements?'] },
   'Lightning Roulette': { icon:'⚡', type:'Live Table', provider:'Evolution Gaming',rtp:'97.30%', vol:null,      min:'£0.20', max:'£5,000', bonus:false, chips:['How do lucky numbers work?','Max multiplier possible?','Is my bonus valid here?'] },
   'Immersive Roulette': { icon:'🎡', type:'Live Table', provider:'Evolution Gaming',rtp:'97.30%', vol:null,      min:'£0.50', max:'£250',  bonus:false, chips:['What makes it immersive?','Bet options?','Can I use my bonus?'] },
   'Infinite Blackjack': { icon:'♞',  type:'Live Table', provider:'Evolution Gaming',rtp:'99.50%', vol:null,      min:'£1',    max:'£1,000', bonus:false, chips:['Can I use my bonus?','Basic strategy tips?','What are the side bets?'] },
