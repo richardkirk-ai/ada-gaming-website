@@ -104,14 +104,16 @@
 #chat-backdrop.open { opacity: 1; pointer-events: all; }
 
 #cp {
-  position: fixed; top: var(--cp-top, 0px); right: 0; bottom: var(--cp-bottom, 0px);
+  position: fixed; top: calc(var(--cp-top, 0px) - 3px); right: 4px; bottom: calc(var(--cp-bottom, 0px) - 3px);
   width: 420px; max-width: 100vw;
   z-index: 300;
   display: flex; flex-direction: column;
   background: #1A1050;
-  border-left: 1.5px solid rgba(212,168,67,0.38);
-  box-shadow: -8px 0 40px rgba(0,0,0,0.6);
-  transform: translateX(100%);
+  border: 1.5px solid rgba(212,168,67,0.6);
+  border-radius: 14px;
+  box-shadow: -4px 0 32px rgba(0,0,0,0.55), 0 0 0 1px rgba(212,168,67,0.12);
+  overflow: hidden;
+  transform: translateX(calc(100% + 8px));
   transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
 }
 #cp.open { transform: translateX(0); }
