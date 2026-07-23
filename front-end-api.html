@@ -466,6 +466,383 @@
   </div><!-- /slots-grid-4 -->
 </div><!-- /wrap api-page -->
 
+<!-- ── Design Alternatives Showcase ───────────────────────── -->
+<div class="wrap" style="padding-top:64px; padding-bottom:80px;">
+
+  <div style="margin-bottom:40px;">
+    <p class="eyebrow" style="margin-bottom:8px;">Powered by Ada's Front-end API</p>
+    <h2 class="section-title" style="font-size:clamp(22px,2.8vw,36px); margin-bottom:10px;">8 Ways to Reimagine the Chat Experience</h2>
+    <p style="font-size:13px; color:var(--ag-text-3); max-width:640px; line-height:1.6;">Ada's Conversations API and Front-end API give product teams full design freedom — chat surfaces built to match your exact brand, game context, and player journey. These are illustrative concepts.</p>
+  </div>
+
+  <!-- ROW 1 — 4 portrait iPhones: general chat UIs -->
+  <p style="font-size:10px;font-weight:800;letter-spacing:0.22em;text-transform:uppercase;color:var(--ag-gold-1);margin-bottom:18px;">General chat interfaces — portrait</p>
+  <div class="alt-row portrait-row" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:52px;">
+
+    <!-- 1: Floating bubble + full chat -->
+    <div class="alt-card">
+      <div class="iphone-frame portrait">
+        <div class="iphone-screen" style="background:linear-gradient(160deg,#0e0928,#1e1450);">
+          <div style="padding:10px 8px;flex:1;display:flex;flex-direction:column;gap:6px;overflow:hidden;">
+            <div style="background:rgba(255,255,255,0.06);border-radius:6px;height:40px;display:flex;align-items:center;padding:0 8px;gap:6px;">
+              <div style="width:8px;height:8px;border-radius:50%;background:#d4a843;opacity:.5;"></div>
+              <div style="width:60%;height:6px;background:rgba(255,255,255,0.12);border-radius:3px;"></div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border-radius:6px;flex:1;"></div>
+          </div>
+          <!-- Chat overlay -->
+          <div style="position:absolute;bottom:0;left:0;right:0;height:68%;background:linear-gradient(180deg,rgba(14,9,40,0.0),#1a1050 12%);border-radius:10px 10px 0 0;display:flex;flex-direction:column;border-top:1px solid rgba(212,168,67,0.35);">
+            <div style="padding:7px 8px 5px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:6px;">
+              <div style="width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#d4a843,#a87820);display:flex;align-items:center;justify-content:center;font-size:9px;">⚡</div>
+              <span style="font-size:8px;font-weight:800;letter-spacing:.1em;color:#d4a843;">ADA CONCIERGE</span>
+              <div style="margin-left:auto;width:6px;height:6px;border-radius:50%;background:#2ecc71;"></div>
+            </div>
+            <div style="flex:1;padding:6px 8px;display:flex;flex-direction:column;gap:5px;overflow:hidden;">
+              <div style="background:rgba(212,168,67,0.1);border:1px solid rgba(212,168,67,0.2);border-radius:0 6px 6px 6px;padding:4px 6px;font-size:7px;color:rgba(255,255,255,0.8);max-width:80%;">Hi Richard! I see you're a Diamond VIP. How can I help?</div>
+              <div style="background:rgba(255,255,255,0.08);border-radius:6px 0 6px 6px;padding:4px 6px;font-size:7px;color:rgba(255,255,255,0.7);max-width:75%;align-self:flex-end;">Does my bonus apply to Epic Ape 2?</div>
+              <div style="background:rgba(212,168,67,0.1);border:1px solid rgba(212,168,67,0.2);border-radius:0 6px 6px 6px;padding:4px 6px;font-size:7px;color:rgba(255,255,255,0.8);max-width:80%;">Yes — your 50 free spins are valid on Epic Ape 2! ✓</div>
+            </div>
+            <div style="padding:5px 6px;border-top:1px solid rgba(255,255,255,0.07);display:flex;gap:4px;">
+              <div style="flex:1;background:rgba(255,255,255,0.07);border-radius:10px;height:18px;padding:0 7px;font-size:6.5px;color:rgba(255,255,255,0.3);display:flex;align-items:center;">Ask about bonuses, limits…</div>
+              <div style="width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#d4a843,#a87820);display:flex;align-items:center;justify-content:center;font-size:8px;color:#1a0e00;">↑</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="alt-label">Bottom sheet chat</div>
+      <div class="alt-desc">Slides up over the lobby — full context, always accessible</div>
+    </div>
+
+    <!-- 2: Sidebar panel -->
+    <div class="alt-card">
+      <div class="iphone-frame portrait">
+        <div class="iphone-screen" style="background:linear-gradient(160deg,#0e0928,#1e1450);display:flex;flex-direction:row;padding:0;">
+          <!-- Main content -->
+          <div style="flex:1;padding:8px 6px;display:flex;flex-direction:column;gap:5px;">
+            <div style="height:8px;width:50%;background:linear-gradient(90deg,#d4a843,#a87820);border-radius:3px;opacity:.7;"></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;flex:1;">
+              <div style="background:rgba(255,255,255,0.06);border-radius:5px;"></div>
+              <div style="background:rgba(255,255,255,0.06);border-radius:5px;"></div>
+              <div style="background:rgba(255,255,255,0.06);border-radius:5px;"></div>
+              <div style="background:rgba(255,255,255,0.06);border-radius:5px;"></div>
+            </div>
+          </div>
+          <!-- Side panel -->
+          <div style="width:52%;background:#1a1050;border-left:1px solid rgba(212,168,67,0.4);display:flex;flex-direction:column;">
+            <div style="padding:5px 6px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:4px;">
+              <div style="width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,#d4a843,#a87820);display:flex;align-items:center;justify-content:center;font-size:6px;">⚡</div>
+              <span style="font-size:6px;font-weight:800;letter-spacing:.08em;color:#d4a843;">CONCIERGE</span>
+            </div>
+            <div style="flex:1;padding:4px 5px;display:flex;flex-direction:column;gap:4px;overflow:hidden;">
+              <div style="background:rgba(212,168,67,0.1);border-radius:0 4px 4px 4px;padding:3px 4px;font-size:5.5px;color:rgba(255,255,255,0.8);">Welcome back, Richard!</div>
+              <div style="background:rgba(255,255,255,0.08);border-radius:4px 0 4px 4px;padding:3px 4px;font-size:5.5px;color:rgba(255,255,255,0.7);align-self:flex-end;">My withdrawal?</div>
+              <div style="background:rgba(212,168,67,0.1);border-radius:0 4px 4px 4px;padding:3px 4px;font-size:5.5px;color:rgba(255,255,255,0.8);">Processing — 1–3 days.</div>
+            </div>
+            <div style="padding:3px 4px;border-top:1px solid rgba(255,255,255,0.07);">
+              <div style="background:rgba(255,255,255,0.07);border-radius:6px;height:14px;font-size:5px;color:rgba(255,255,255,0.3);display:flex;align-items:center;padding:0 5px;">Message…</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="alt-label">Side panel</div>
+      <div class="alt-desc">Persistent split-view — chat alongside the lobby at all times</div>
+    </div>
+
+    <!-- 3: Floating VIP card -->
+    <div class="alt-card">
+      <div class="iphone-frame portrait">
+        <div class="iphone-screen" style="background:linear-gradient(160deg,#0e0928,#160d3a);">
+          <!-- Lobby bg -->
+          <div style="padding:8px;display:flex;flex-direction:column;gap:5px;flex:1;">
+            <div style="height:6px;width:40%;background:rgba(212,168,67,0.3);border-radius:3px;"></div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;flex:1;">
+              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
+              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
+              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
+              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
+              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
+              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
+            </div>
+          </div>
+          <!-- VIP card -->
+          <div style="position:absolute;bottom:22px;left:8px;right:8px;background:linear-gradient(135deg,#251a60,#1a1050);border:1px solid rgba(212,168,67,0.5);border-radius:10px;padding:8px 10px;box-shadow:0 8px 24px rgba(0,0,0,0.6);">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+              <div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#d4a843,#a87820);display:flex;align-items:center;justify-content:center;font-size:10px;">💎</div>
+              <div>
+                <div style="font-size:7px;font-weight:800;color:#d4a843;letter-spacing:.1em;">DIAMOND VIP</div>
+                <div style="font-size:6px;color:rgba(255,255,255,0.5);">Richard · Gold Member</div>
+              </div>
+              <div style="margin-left:auto;font-size:6px;color:#2ecc71;font-weight:700;">● Live</div>
+            </div>
+            <div style="display:flex;gap:4px;margin-bottom:7px;">
+              <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:5px;padding:4px 5px;text-align:center;">
+                <div style="font-size:5px;color:rgba(255,255,255,0.4);">Balance</div>
+                <div style="font-size:8px;font-weight:700;color:#fff;">£1,240</div>
+              </div>
+              <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:5px;padding:4px 5px;text-align:center;">
+                <div style="font-size:5px;color:rgba(255,255,255,0.4);">Free Spins</div>
+                <div style="font-size:8px;font-weight:700;color:#d4a843;">50</div>
+              </div>
+              <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:5px;padding:4px 5px;text-align:center;">
+                <div style="font-size:5px;color:rgba(255,255,255,0.4);">Limit</div>
+                <div style="font-size:8px;font-weight:700;color:#2ecc71;">£32</div>
+              </div>
+            </div>
+            <div style="background:linear-gradient(135deg,#d4a843,#a87820);border-radius:6px;padding:5px;text-align:center;font-size:7px;font-weight:800;color:#1a0e00;letter-spacing:.1em;">ASK YOUR VIP CONCIERGE</div>
+          </div>
+        </div>
+      </div>
+      <div class="alt-label">VIP card + CTA</div>
+      <div class="alt-desc">Contextual card surfacing balance, bonuses, and a direct chat entry</div>
+    </div>
+
+    <!-- 4: Proactive nudge banner -->
+    <div class="alt-card">
+      <div class="iphone-frame portrait">
+        <div class="iphone-screen" style="background:linear-gradient(160deg,#0e0928,#1e1450);">
+          <div style="padding:8px;display:flex;flex-direction:column;gap:5px;flex:1;">
+            <!-- Proactive banner at top -->
+            <div style="background:linear-gradient(135deg,rgba(46,204,113,0.15),rgba(46,204,113,0.05));border:1px solid rgba(46,204,113,0.4);border-radius:8px;padding:7px 8px;display:flex;align-items:flex-start;gap:6px;">
+              <div style="width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#2ecc71,#1a9e55);display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0;">💬</div>
+              <div style="flex:1;">
+                <div style="font-size:6.5px;font-weight:800;color:#2ecc71;letter-spacing:.08em;margin-bottom:2px;">ADA NOTICED</div>
+                <div style="font-size:6px;color:rgba(255,255,255,0.75);line-height:1.4;">Your £200 deposit hasn't triggered a bonus yet. Tap to find out why — I can fix it.</div>
+              </div>
+              <div style="font-size:8px;color:rgba(255,255,255,0.3);cursor:pointer;">✕</div>
+            </div>
+            <!-- Game grid below -->
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;flex:1;">
+              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
+              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
+              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
+              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
+              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
+              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
+            </div>
+          </div>
+          <!-- Floating chat button -->
+          <div style="position:absolute;bottom:18px;right:10px;width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#d4a843,#a87820);display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 4px 14px rgba(212,168,67,0.5);">💬</div>
+        </div>
+      </div>
+      <div class="alt-label">Proactive nudge</div>
+      <div class="alt-desc">Ada detects an issue and surfaces a contextual alert — one tap to resolve</div>
+    </div>
+
+  </div><!-- /portrait-row -->
+
+  <!-- ROW 2 & 3 — 4 landscape iPhones: in-game experiences -->
+  <p style="font-size:10px;font-weight:800;letter-spacing:0.22em;text-transform:uppercase;color:var(--ag-gold-1);margin-bottom:18px;">In-game chat — landscape (how players actually hold their phones)</p>
+  <div class="alt-row landscape-row" style="display:grid;grid-template-columns:repeat(2,1fr);gap:28px;">
+
+    <!-- 5: Help button in-game corner -->
+    <div class="alt-card">
+      <div class="iphone-frame landscape">
+        <div class="iphone-screen landscape-screen" style="background:linear-gradient(135deg,#1a0a3a 0%,#2d1060 40%,#1a0a3a 100%);position:relative;overflow:hidden;">
+          <!-- Game reels BG -->
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;padding:5px 8px;gap:3px;">
+            <!-- Top bar -->
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div style="font-size:6px;font-weight:800;color:#d4a843;letter-spacing:.1em;">EPIC APE 2™</div>
+              <div style="display:flex;gap:4px;align-items:center;">
+                <div style="background:rgba(212,168,67,0.15);border:1px solid rgba(212,168,67,0.4);border-radius:4px;padding:2px 5px;font-size:5.5px;color:#d4a843;font-weight:700;">BAL £1,240</div>
+                <div style="background:rgba(46,204,113,0.15);border:1px solid rgba(46,204,113,0.4);border-radius:4px;padding:2px 5px;font-size:5.5px;color:#2ecc71;font-weight:700;">WIN £0</div>
+              </div>
+            </div>
+            <!-- Reel area -->
+            <div style="flex:1;display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin:2px 0;">
+              <div style="background:rgba(255,255,255,0.08);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:11px;">🦍</div>
+              <div style="background:rgba(255,255,255,0.08);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:11px;">💎</div>
+              <div style="background:rgba(212,168,67,0.2);border:1px solid #d4a843;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:11px;">7️⃣</div>
+              <div style="background:rgba(255,255,255,0.08);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:11px;">🍒</div>
+              <div style="background:rgba(255,255,255,0.08);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:11px;">🦍</div>
+            </div>
+            <!-- Bottom controls -->
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div style="font-size:5.5px;color:rgba(255,255,255,0.4);">BET £0.25</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#e74c3c,#c0392b);display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:800;color:#fff;box-shadow:0 0 10px rgba(231,76,60,0.6);">SPIN</div>
+              <div style="font-size:5.5px;color:rgba(255,255,255,0.4);">MAX BET</div>
+            </div>
+          </div>
+          <!-- Ada help button -->
+          <div style="position:absolute;top:6px;right:6px;background:linear-gradient(135deg,#d4a843,#a87820);border-radius:6px;padding:3px 6px;display:flex;align-items:center;gap:3px;box-shadow:0 2px 8px rgba(212,168,67,0.5);">
+            <span style="font-size:7px;">⚡</span>
+            <span style="font-size:5.5px;font-weight:800;color:#1a0e00;letter-spacing:.06em;">HELP</span>
+          </div>
+        </div>
+      </div>
+      <div class="alt-label">In-game help button</div>
+      <div class="alt-desc">Non-intrusive Ada entry point within the game UI — one tap opens the concierge</div>
+    </div>
+
+    <!-- 6: Chat open over game (50/50 split) -->
+    <div class="alt-card">
+      <div class="iphone-frame landscape">
+        <div class="iphone-screen landscape-screen" style="background:#0e0928;display:flex;flex-direction:row;padding:0;overflow:hidden;">
+          <!-- Game side (left 55%) -->
+          <div style="width:55%;background:linear-gradient(135deg,#1a0a3a,#2d1060);display:flex;flex-direction:column;padding:5px 6px;gap:3px;position:relative;">
+            <div style="font-size:5.5px;font-weight:800;color:#d4a843;letter-spacing:.08em;">BUFFALO BLITZ™</div>
+            <div style="flex:1;display:grid;grid-template-columns:repeat(5,1fr);gap:2px;">
+              <div style="background:rgba(255,255,255,0.08);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:9px;">🦬</div>
+              <div style="background:rgba(255,255,255,0.08);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:9px;">🌿</div>
+              <div style="background:rgba(212,168,67,0.2);border:1px solid #d4a843;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:9px;">🦬</div>
+              <div style="background:rgba(255,255,255,0.08);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:9px;">⭐</div>
+              <div style="background:rgba(255,255,255,0.08);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:9px;">🦬</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;">
+              <span style="font-size:5px;color:rgba(255,255,255,0.4);">BET £0.50</span>
+              <div style="background:linear-gradient(135deg,#e74c3c,#c0392b);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:5px;font-weight:800;color:#fff;">SPIN</div>
+            </div>
+            <!-- dim overlay to show chat is active -->
+            <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);border-right:1px solid rgba(212,168,67,0.3);"></div>
+          </div>
+          <!-- Chat side (right 45%) -->
+          <div style="width:45%;background:#1a1050;display:flex;flex-direction:column;">
+            <div style="padding:4px 5px;border-bottom:1px solid rgba(212,168,67,0.2);display:flex;align-items:center;gap:3px;">
+              <div style="width:13px;height:13px;border-radius:50%;background:linear-gradient(135deg,#d4a843,#a87820);display:flex;align-items:center;justify-content:center;font-size:6px;">⚡</div>
+              <span style="font-size:5.5px;font-weight:800;color:#d4a843;">CONCIERGE</span>
+              <div style="margin-left:auto;width:5px;height:5px;border-radius:50%;background:#2ecc71;"></div>
+            </div>
+            <div style="flex:1;padding:4px 5px;display:flex;flex-direction:column;gap:3px;overflow:hidden;">
+              <div style="background:rgba(212,168,67,0.1);border-radius:0 3px 3px 3px;padding:3px 4px;font-size:5px;color:rgba(255,255,255,0.8);">Can I use my bonus on this game?</div>
+              <div style="background:rgba(212,168,67,0.1);border-radius:0 3px 3px 3px;padding:3px 4px;font-size:5px;color:rgba(255,255,255,0.8);margin-top:1px;">Yes! Your 50 free spins apply to Buffalo Blitz™. Trigger now? ✓</div>
+              <div style="background:rgba(255,255,255,0.08);border-radius:3px 0 3px 3px;padding:3px 4px;font-size:5px;color:rgba(255,255,255,0.7);align-self:flex-end;">Yes, trigger them!</div>
+            </div>
+            <div style="padding:3px 4px;border-top:1px solid rgba(255,255,255,0.07);">
+              <div style="background:rgba(255,255,255,0.07);border-radius:5px;height:12px;font-size:4.5px;color:rgba(255,255,255,0.3);display:flex;align-items:center;padding:0 4px;">Reply…</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="alt-label">Split-screen in-game chat</div>
+      <div class="alt-desc">Chat lives alongside the active game — ask about bonuses without leaving the reel</div>
+    </div>
+
+    <!-- 7: Win celebration + Ada upsell -->
+    <div class="alt-card">
+      <div class="iphone-frame landscape">
+        <div class="iphone-screen landscape-screen" style="background:linear-gradient(135deg,#1a0a3a,#2d1060);overflow:hidden;position:relative;">
+          <!-- Game background -->
+          <div style="position:absolute;inset:0;padding:5px 8px;display:flex;flex-direction:column;gap:3px;filter:brightness(0.5);">
+            <div style="flex:1;display:grid;grid-template-columns:repeat(5,1fr);gap:2px;">
+              <div style="background:rgba(212,168,67,0.4);border-radius:2px;"></div>
+              <div style="background:rgba(212,168,67,0.4);border-radius:2px;"></div>
+              <div style="background:rgba(212,168,67,0.4);border-radius:2px;"></div>
+              <div style="background:rgba(212,168,67,0.4);border-radius:2px;"></div>
+              <div style="background:rgba(212,168,67,0.4);border-radius:2px;"></div>
+            </div>
+          </div>
+          <!-- Win overlay -->
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;">
+            <div style="font-size:7px;font-weight:900;color:#d4a843;letter-spacing:.15em;text-shadow:0 0 12px rgba(212,168,67,0.8);">EPIC WIN!</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;color:#fff;text-shadow:0 0 20px rgba(255,255,255,0.6);line-height:1;">£729.75</div>
+            <!-- Ada card -->
+            <div style="background:rgba(14,9,40,0.9);border:1px solid rgba(212,168,67,0.5);border-radius:7px;padding:5px 10px;display:flex;align-items:center;gap:6px;margin-top:4px;backdrop-filter:blur(4px);">
+              <span style="font-size:9px;">⚡</span>
+              <div>
+                <div style="font-size:6px;font-weight:800;color:#d4a843;">GREAT WIN, RICHARD!</div>
+                <div style="font-size:5.5px;color:rgba(255,255,255,0.7);">You have 50 free spins unused — want to keep playing?</div>
+              </div>
+              <div style="background:linear-gradient(135deg,#d4a843,#a87820);border-radius:4px;padding:3px 7px;font-size:5.5px;font-weight:800;color:#1a0e00;white-space:nowrap;">USE NOW</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="alt-label">Win moment + Ada nudge</div>
+      <div class="alt-desc">Ada appears at the peak engagement moment — personalised, proactive, non-disruptive</div>
+    </div>
+
+    <!-- 8: Responsible gambling in-game overlay -->
+    <div class="alt-card">
+      <div class="iphone-frame landscape">
+        <div class="iphone-screen landscape-screen" style="background:linear-gradient(135deg,#1a0a3a,#2d1060);overflow:hidden;position:relative;">
+          <!-- Dimmed game BG -->
+          <div style="position:absolute;inset:0;padding:5px 8px;display:flex;flex-direction:column;gap:3px;filter:brightness(0.3);">
+            <div style="flex:1;display:grid;grid-template-columns:repeat(5,1fr);gap:2px;">
+              <div style="background:rgba(255,255,255,0.1);border-radius:2px;"></div>
+              <div style="background:rgba(255,255,255,0.1);border-radius:2px;"></div>
+              <div style="background:rgba(255,255,255,0.1);border-radius:2px;"></div>
+              <div style="background:rgba(255,255,255,0.1);border-radius:2px;"></div>
+              <div style="background:rgba(255,255,255,0.1);border-radius:2px;"></div>
+            </div>
+          </div>
+          <!-- RG overlay card -->
+          <div style="position:absolute;inset:8px;background:rgba(14,9,40,0.96);border:1px solid rgba(231,76,60,0.4);border-radius:10px;display:flex;flex-direction:column;padding:8px 10px;backdrop-filter:blur(8px);">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+              <div style="width:18px;height:18px;border-radius:50%;background:rgba(231,76,60,0.2);border:1px solid rgba(231,76,60,0.5);display:flex;align-items:center;justify-content:center;font-size:9px;">⚠️</div>
+              <div>
+                <div style="font-size:6.5px;font-weight:800;color:#e74c3c;letter-spacing:.08em;">SPENDING LIMIT REACHED</div>
+                <div style="font-size:5.5px;color:rgba(255,255,255,0.5);">Your £32 daily limit has been reached</div>
+              </div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border-radius:6px;padding:5px 7px;margin-bottom:6px;font-size:5.5px;color:rgba(255,255,255,0.7);line-height:1.5;">Hi Richard — I noticed you've hit your daily limit. Would you like to review your limits, take a break, or talk to someone about responsible gambling?</div>
+            <div style="display:flex;gap:4px;margin-top:auto;">
+              <div style="flex:1;background:rgba(46,204,113,0.15);border:1px solid rgba(46,204,113,0.4);border-radius:5px;padding:4px;text-align:center;font-size:5.5px;font-weight:700;color:#2ecc71;">Review Limits</div>
+              <div style="flex:1;background:rgba(212,168,67,0.12);border:1px solid rgba(212,168,67,0.35);border-radius:5px;padding:4px;text-align:center;font-size:5.5px;font-weight:700;color:#d4a843;">Chat with Ada</div>
+              <div style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:5px;padding:4px;text-align:center;font-size:5.5px;color:rgba(255,255,255,0.4);">Continue</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="alt-label">Responsible gaming gate</div>
+      <div class="alt-desc">Ada intercepts at the limit threshold — compliant, empathetic, fully automated</div>
+    </div>
+
+  </div><!-- /landscape-row -->
+</div><!-- /wrap showcase -->
+
+<style>
+/* ── Showcase section ─────────────────────────────────────── */
+.alt-card { display:flex; flex-direction:column; align-items:center; gap:12px; }
+.alt-label { font-size:11px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--ag-text); text-align:center; }
+.alt-desc  { font-size:11px; color:var(--ag-text-3); text-align:center; line-height:1.5; max-width:220px; }
+
+/* Portrait iPhone frame */
+.iphone-frame.portrait {
+  width: 100%;
+  max-width: 160px;
+  aspect-ratio: 9/19.5;
+  background: #111;
+  border-radius: 22px;
+  border: 3px solid #333;
+  box-shadow: 0 0 0 1px #222, inset 0 0 0 1px #444, 0 16px 40px rgba(0,0,0,0.7);
+  padding: 10px 6px 10px;
+  position: relative;
+  display:flex; flex-direction:column;
+}
+.iphone-frame.portrait::before {
+  content:'';
+  position:absolute; top:7px; left:50%; transform:translateX(-50%);
+  width:40px; height:5px; background:#222; border-radius:3px;
+}
+
+/* Landscape iPhone frame */
+.iphone-frame.landscape {
+  width: 100%;
+  aspect-ratio: 19.5/9;
+  background: #111;
+  border-radius: 18px;
+  border: 3px solid #333;
+  box-shadow: 0 0 0 1px #222, inset 0 0 0 1px #444, 0 16px 40px rgba(0,0,0,0.7);
+  padding: 6px 12px 6px;
+  position: relative;
+  display:flex; flex-direction:column;
+}
+.iphone-frame.landscape::before {
+  content:'';
+  position:absolute; top:50%; left:7px; transform:translateY(-50%);
+  width:5px; height:40px; background:#222; border-radius:3px;
+}
+
+.iphone-screen {
+  flex:1; border-radius:14px; overflow:hidden;
+  display:flex; flex-direction:column; position:relative;
+  background:#0e0928;
+}
+.landscape-screen {
+  border-radius:10px;
+}
+</style>
+
 <!-- Backdrop -->
 <div id="chat-backdrop" onclick="closeChat()"></div>
 
