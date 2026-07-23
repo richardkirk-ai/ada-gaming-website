@@ -4,342 +4,125 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ada Gaming — Front-end API Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="ada-gaming.css">
 <style>
-/* ── Page mode tabs ───────────────────────────────────────── */
-.page-mode-bar {
-  display: flex;
-  gap: 0;
-  border-bottom: 1px solid var(--ag-gold-border);
-}
-.page-mode-tab {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 24px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--ag-text-3);
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-  transition: color 140ms, border-color 140ms;
-}
-.page-mode-tab:hover { color: var(--ag-gold-1); }
-.page-mode-tab.active {
-  color: var(--ag-gold-1);
-  border-bottom-color: var(--ag-gold-1);
-}
-.api-badge {
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 2px 7px;
-  border-radius: 999px;
-  background: rgba(212,168,67,0.15);
-  color: var(--ag-gold-1);
-  border: 1px solid var(--ag-gold-border);
-}
+/* ── Game grid ─────────────────────────────────────────────── */
+.api-page { padding: 28px 0 80px; }
 
-/* ── Two-column layout ─────────────────────────────────────── */
-.casino-api-outer {
-  padding-top: 32px;
-  padding-bottom: 60px;
+.api-page-head {
+  padding: 0 0 20px;
+  display: flex; align-items: flex-end; justify-content: space-between;
+}
+.api-page-head h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 800; margin: 0; letter-spacing: 1px;
+  background: var(--ag-gold-text-grad, linear-gradient(135deg, #D4A843, #A87820));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.api-page-head p { margin: 4px 0 0; font-size: 13px; color: var(--ag-text-3, rgba(255,255,255,0.45)); }
+
+.slots-grid-4 {
   display: grid;
-  grid-template-columns: 1fr 368px;
-  gap: 28px;
-  align-items: start;
-}
-.casino-content { min-width: 0; }
-
-/* ── Page head ────────────────────────────────────────────── */
-.page-head {
-  padding: 0 0 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.page-head .display-gold { font-size: clamp(36px, 4vw, 56px); }
-.page-head p { font-size: 15px; color: var(--ag-text-2); margin: 0; max-width: 52ch; }
-
-/* ── API callout ──────────────────────────────────────────── */
-.api-callout {
-  margin-bottom: 20px;
-  padding: 12px 16px;
-  border-radius: 12px;
-  background: rgba(212,168,67,0.05);
-  border: 1px solid rgba(212,168,67,0.25);
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-}
-.api-callout-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-.api-callout-text { font-size: 11px; color: var(--ag-text-3); line-height: 1.55; }
-.api-callout-text strong { color: var(--ag-gold-1); font-weight: 700; }
-.api-callout-text code {
-  font-family: monospace;
-  font-size: 10px;
-  background: rgba(212,168,67,0.1);
-  padding: 1px 5px;
-  border-radius: 3px;
-  color: var(--ag-gold-2);
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
 }
 
-/* ── Category tabs ────────────────────────────────────────── */
-.cat-tabs {
-  display: flex;
-  gap: 8px;
-  padding-bottom: 22px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.cat-tabs::-webkit-scrollbar { display: none; }
-.cat-tab {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 9px 16px;
-  border-radius: 999px;
-  border: 1.5px solid var(--ag-gold-border);
-  background: transparent;
-  color: var(--ag-text-2);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: background 120ms, color 120ms, border-color 120ms;
-}
-.cat-tab:hover { background: rgba(212,168,67,0.1); color: var(--ag-gold-1); }
-.cat-tab.active {
-  background: var(--ag-gold-grad);
-  color: var(--ag-ink-on-gold);
-  border-color: transparent;
-}
-
-/* ── Section head ─────────────────────────────────────────── */
-.section-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 14px;
-}
-.section-head a {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ag-gold-1);
-  text-decoration: none;
-}
-
-/* ── Slots grid ───────────────────────────────────────────── */
-.slots-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-bottom: 36px;
-}
+/* ── Slot card ─────────────────────────────────────────────── */
 .slot-card {
-  display: flex;
-  flex-direction: column;
-  border-radius: 12px;
-  overflow: hidden;
-  background: linear-gradient(160deg, var(--ag-panel) 0%, var(--ag-bg-2) 100%);
-  border: 1.5px solid var(--ag-gold-border);
+  display: flex; flex-direction: column;
+  border-radius: 12px; overflow: hidden;
+  background: linear-gradient(160deg, #1a1050 0%, #0e0928 100%);
+  border: 1.5px solid rgba(212,168,67,0.18);
   transition: border-color 160ms, transform 180ms, box-shadow 180ms;
-  cursor: pointer;
-  position: relative;
+  cursor: pointer; position: relative;
 }
 .slot-card:hover {
-  border-color: var(--ag-gold-border-strong);
+  border-color: rgba(212,168,67,0.5);
   transform: translateY(-3px);
   box-shadow: 0 12px 32px rgba(0,0,0,0.55);
 }
 .slot-card.selected {
-  border-color: var(--ag-gold-1) !important;
+  border-color: #D4A843 !important;
   box-shadow: 0 0 0 2px rgba(212,168,67,0.22), 0 12px 32px rgba(0,0,0,0.4) !important;
 }
-.slot-card:hover .slot-overlay { opacity: 1; }
 .slot-thumb {
-  width: 100%;
-  aspect-ratio: 428 / 268;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 38px;
-  position: relative;
-  border-bottom: 1px solid var(--ag-gold-border);
-  overflow: hidden;
+  width: 100%; aspect-ratio: 428 / 268;
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid rgba(212,168,67,0.12);
   background: #1a1050;
 }
 .slot-thumb img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 300ms;
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block; transition: transform 300ms;
 }
 .slot-card:hover .slot-thumb img { transform: scale(1.04); }
-.hot-badge {
-  position: absolute; top: 7px; left: 7px;
-  font-size: 8px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 2px 7px; border-radius: 999px;
-  background: var(--ag-red); color: #fff;
-}
-.new-badge {
-  position: absolute; top: 7px; left: 7px;
-  font-size: 8px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 2px 7px; border-radius: 999px;
-  background: var(--ag-green); color: #fff;
-}
-.jp-badge {
-  position: absolute; top: 7px; left: 7px;
-  font-size: 8px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 2px 7px; border-radius: 999px;
-  background: var(--ag-gold-grad); color: var(--ag-ink-on-gold);
-}
+.slot-card:hover .slot-overlay { opacity: 1; }
+
 .slot-overlay {
   position: absolute; inset: 0;
-  background: rgba(14,9,40,0.78);
+  background: rgba(14,9,40,0.72);
   display: flex; align-items: center; justify-content: center;
   opacity: 0; transition: opacity 160ms;
 }
 .slot-play-btn {
-  padding: 9px 20px;
-  border-radius: 999px; border: none;
-  background: var(--ag-gold-grad); color: var(--ag-ink-on-gold);
-  font-size: 11px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 8px 18px; border-radius: 999px; border: none;
+  background: linear-gradient(135deg, #D4A843, #A87820);
+  color: #1A0E00; font-size: 11px; font-weight: 900;
+  letter-spacing: 0.1em; text-transform: uppercase;
   cursor: pointer; box-shadow: 0 4px 14px rgba(212,168,67,0.4);
 }
+
+.hot-badge, .new-badge, .jp-badge {
+  position: absolute; top: 7px; left: 7px;
+  font-size: 8px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 999px;
+}
+.hot-badge { background: #e74c3c; color: #fff; }
+.new-badge { background: #2ecc71; color: #fff; }
+.jp-badge  { background: linear-gradient(135deg,#D4A843,#A87820); color: #1A0E00; }
+
 .slot-info { padding: 9px 11px 11px; }
 .slot-name {
   font-size: 11px; font-weight: 800; letter-spacing: 0.06em;
-  text-transform: uppercase; color: var(--ag-text); margin-bottom: 2px;
+  text-transform: uppercase; color: #fff; margin-bottom: 2px;
 }
-.slot-provider { font-size: 10px; color: var(--ag-text-3); letter-spacing: 0.04em; }
+.slot-provider { font-size: 10px; color: rgba(255,255,255,0.45); }
 .slot-meta { display: flex; justify-content: space-between; margin-top: 5px; font-size: 10px; }
-.slot-rtp { color: var(--ag-green); font-weight: 700; }
-.slot-vol { color: var(--ag-text-muted); }
+.slot-rtp { color: #2ecc71; font-weight: 700; }
+.slot-vol { color: rgba(255,255,255,0.35); }
 
-/* ── Live tables grid ─────────────────────────────────────── */
-.tables-section { margin-bottom: 36px; }
-.tables-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+/* ── Slide-in chat panel ───────────────────────────────────── */
+#chat-backdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+  z-index: 200; opacity: 0; pointer-events: none;
+  transition: opacity 0.35s ease;
 }
-.table-card {
-  border-radius: 12px; overflow: hidden;
-  background: linear-gradient(160deg, var(--ag-panel) 0%, var(--ag-bg-2) 100%);
-  border: 1.5px solid var(--ag-gold-border);
-  transition: border-color 160ms, transform 180ms;
-  cursor: pointer; position: relative;
-}
-.table-card:hover { border-color: var(--ag-gold-border-strong); transform: translateY(-3px); }
-.table-card.selected {
-  border-color: var(--ag-gold-1) !important;
-  box-shadow: 0 0 0 2px rgba(212,168,67,0.22) !important;
-}
-.table-card:hover .slot-overlay { opacity: 1; }
-.table-thumb {
-  width: 100%; aspect-ratio: 16/9;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 40px; position: relative;
-  border-bottom: 1px solid var(--ag-gold-border);
-}
-.live-dot {
-  position: absolute; top: 8px; right: 8px;
-  display: flex; align-items: center; gap: 4px;
-  background: rgba(14,9,40,0.72); padding: 3px 8px;
-  border-radius: 999px; border: 1px solid rgba(231,76,60,0.35);
-}
-.live-dot-circle {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: var(--ag-red); animation: pulse-red 2s ease-in-out infinite;
-}
-@keyframes pulse-red { 0%,100%{opacity:1} 50%{opacity:0.35} }
-.live-dot-label { font-size: 8px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ag-red); }
-.players-count {
-  position: absolute; bottom: 7px; left: 7px;
-  font-size: 9px; font-weight: 700; color: var(--ag-text-2);
-  background: rgba(14,9,40,0.72); padding: 2px 7px; border-radius: 999px;
-}
-.table-info { padding: 11px 13px 13px; }
-.table-name {
-  font-size: 12px; font-weight: 800; letter-spacing: 0.06em;
-  text-transform: uppercase; color: var(--ag-text); margin-bottom: 2px;
-}
-.table-provider { font-size: 10px; color: var(--ag-text-3); margin-bottom: 7px; }
-.table-limits { display: flex; justify-content: space-between; font-size: 10px; }
-.limits-label { color: var(--ag-text-3); }
-.limits-val { font-weight: 700; color: var(--ag-gold-1); }
+#chat-backdrop.open { opacity: 1; pointer-events: all; }
 
-/* ── Game shows ───────────────────────────────────────────── */
-.shows-section { margin-bottom: 36px; }
-.shows-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-.show-card {
-  border-radius: 12px; overflow: hidden;
-  background: linear-gradient(160deg, var(--ag-panel) 0%, var(--ag-bg-2) 100%);
-  border: 1.5px solid var(--ag-gold-border);
-  transition: border-color 160ms, transform 180ms;
-  cursor: pointer; display: flex; flex-direction: column; position: relative;
-}
-.show-card:hover { border-color: var(--ag-gold-border-strong); transform: translateY(-3px); }
-.show-card.selected {
-  border-color: var(--ag-gold-1) !important;
-  box-shadow: 0 0 0 2px rgba(212,168,67,0.22) !important;
-}
-.show-card:hover .slot-overlay { opacity: 1; }
-.show-thumb {
-  width: 100%; aspect-ratio: 16/9;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 48px; position: relative;
-  border-bottom: 1px solid var(--ag-gold-border);
-}
-.show-info { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 3px; }
-.show-name {
-  font-size: 13px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase;
-  background: var(--ag-gold-text-grad); -webkit-background-clip: text;
-  background-clip: text; color: transparent;
-}
-.show-provider { font-size: 10px; color: var(--ag-text-3); }
-.show-bet-range { font-size: 10px; color: var(--ag-text-muted); margin-top: 2px; }
-
-/* ── Concierge panel ──────────────────────────────────────── */
-.concierge-panel {
-  position: sticky;
-  top: 20px;
-  height: 50vh;
-  min-height: 480px;
-  display: flex;
-  flex-direction: column;
+#cp {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: 420px; max-width: 100vw;
+  z-index: 300;
+  display: flex; flex-direction: column;
   background: #1A1050;
-  border-radius: 20px;
-  border: 1.5px solid rgba(212,168,67,0.38);
-  overflow: hidden;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.04);
+  border-left: 1.5px solid rgba(212,168,67,0.38);
+  box-shadow: -8px 0 40px rgba(0,0,0,0.6);
+  transform: translateX(100%);
+  transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
 }
+#cp.open { transform: translateX(0); }
 
 /* Panel header */
 .cp-header {
-  padding: 13px 15px 11px;
+  padding: 13px 14px 11px;
   border-bottom: 1px solid rgba(212,168,67,0.18);
-  display: flex;
-  align-items: center;
-  gap: 9px;
+  display: flex; align-items: center; gap: 9px;
   flex-shrink: 0;
-  background: rgba(10,6,32,0.4);
+  background: rgba(10,6,32,0.5);
 }
 .cp-avatar {
   width: 32px; height: 32px; border-radius: 50%;
@@ -351,37 +134,45 @@
 .cp-title-wrap { flex: 1; min-width: 0; }
 .cp-title {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 13px; font-weight: 900;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: #D4A843;
-  line-height: 1.1;
+  font-size: 14px; font-weight: 900;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: #D4A843; line-height: 1.1;
 }
-.cp-subtitle { font-size: 10px; color: #6A5E98; margin-top: 1px; letter-spacing: 0.04em; }
+.cp-subtitle { font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 1px; }
 .cp-status {
   display: flex; align-items: center; gap: 5px;
-  padding: 3px 9px; border-radius: 999px;
+  padding: 3px 8px; border-radius: 999px;
   border: 1px solid rgba(212,168,67,0.22);
   background: rgba(212,168,67,0.05);
-  flex-shrink: 0;
 }
 .cp-dot {
   width: 6px; height: 6px; border-radius: 50%;
-  background: #3D3260;
-  transition: background 400ms;
+  background: #3D3260; transition: background 400ms;
 }
 .cp-dot.live { background: #2ECC71; animation: blink-green 2.4s ease-in-out infinite; }
 .cp-dot.connecting { background: #D4A843; animation: blink-gold 1s ease-in-out infinite; }
-@keyframes blink-green { 0%,100%{opacity:1} 55%{opacity:0.35} }
-@keyframes blink-gold  { 0%,100%{opacity:1} 50%{opacity:0.4} }
-.cp-status-lbl { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #6A5E98; }
+@keyframes blink-green { 0%,100%{opacity:1}55%{opacity:0.35} }
+@keyframes blink-gold  { 0%,100%{opacity:1}50%{opacity:0.4} }
+.cp-status-lbl { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+
+/* Close button */
+.cp-close {
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 1px solid rgba(212,168,67,0.25);
+  background: rgba(212,168,67,0.06);
+  color: rgba(255,255,255,0.5);
+  font-size: 16px; line-height: 1;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.cp-close:hover { background: rgba(212,168,67,0.15); color: #D4A843; }
 
 /* Player bar */
 .cp-player-bar {
   padding: 7px 14px;
   border-bottom: 1px solid rgba(212,168,67,0.12);
-  display: flex;
-  align-items: center;
-  gap: 7px;
+  display: flex; align-items: center; gap: 7px;
   flex-shrink: 0;
 }
 .cp-player-icon {
@@ -397,205 +188,128 @@
   padding: 2px 7px; border-radius: 999px;
   font-size: 9px; font-weight: 700; letter-spacing: 0.04em;
 }
-.cp-pill.green {
-  background: rgba(46,204,113,0.1);
-  border: 1px solid rgba(46,204,113,0.22);
-  color: #2ECC71;
-}
-.cp-pill.gold {
-  background: rgba(212,168,67,0.1);
-  border: 1px solid rgba(212,168,67,0.28);
-  color: #D4A843;
-}
+.cp-pill.green { background: rgba(46,204,113,0.1); border: 1px solid rgba(46,204,113,0.22); color: #2ECC71; }
+.cp-pill.gold  { background: rgba(212,168,67,0.1);  border: 1px solid rgba(212,168,67,0.28);  color: #D4A843; }
 
-/* Game context */
+/* Game context strip */
 .cp-game-ctx {
   padding: 10px 14px;
   border-bottom: 1px solid rgba(212,168,67,0.12);
-  flex-shrink: 0;
-  min-height: 62px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-shrink: 0; min-height: 60px;
+  display: flex; align-items: center; gap: 10px;
 }
 .cp-game-ctx.empty { justify-content: center; }
 .cp-game-icon {
   width: 38px; height: 38px; border-radius: 9px;
-  background: rgba(212,168,67,0.07);
-  border: 1px solid rgba(212,168,67,0.2);
+  background: rgba(212,168,67,0.07); border: 1px solid rgba(212,168,67,0.2);
   display: flex; align-items: center; justify-content: center;
   font-size: 20px; flex-shrink: 0;
 }
 .cp-game-info { flex: 1; min-width: 0; }
 .cp-game-name {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 14px; font-weight: 900;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: #F5F1FF;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-size: 14px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #F5F1FF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.cp-game-meta { font-size: 9px; color: #6A5E98; margin-top: 2px; line-height: 1.4; }
-.cp-game-hint { font-size: 11px; color: #3D3260; text-align: center; line-height: 1.5; }
+.cp-game-meta { font-size: 9px; color: rgba(255,255,255,0.3); margin-top: 2px; line-height: 1.4; }
+.cp-game-hint { font-size: 11px; color: rgba(255,255,255,0.2); text-align: center; }
 .cp-bonus-badge {
   font-size: 8px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
   padding: 3px 7px; border-radius: 999px; flex-shrink: 0;
 }
-.cp-bonus-badge.yes {
-  background: rgba(46,204,113,0.1);
-  border: 1px solid rgba(46,204,113,0.28);
-  color: #2ECC71;
+.cp-bonus-badge.yes { background: rgba(46,204,113,0.1); border: 1px solid rgba(46,204,113,0.28); color: #2ECC71; }
+.cp-bonus-badge.no  { background: rgba(231,76,60,0.08); border: 1px solid rgba(231,76,60,0.25); color: #E74C3C; }
+
+/* Empty state */
+.cp-empty-state {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 10px; padding: 20px;
 }
-.cp-bonus-badge.no {
-  background: rgba(231,76,60,0.08);
-  border: 1px solid rgba(231,76,60,0.25);
-  color: #E74C3C;
+.cp-empty-icon { font-size: 32px; opacity: 0.3; }
+.cp-empty-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 900;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.2); text-align: center;
 }
+.cp-empty-sub { font-size: 10px; color: rgba(255,255,255,0.15); text-align: center; line-height: 1.55; max-width: 22ch; }
 
 /* Messages */
 .cp-messages {
-  flex: 1;
-  overflow-y: auto;
+  flex: 1; overflow-y: auto;
   padding: 12px 13px;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(212,168,67,0.18) transparent;
+  display: flex; flex-direction: column; gap: 9px;
+  scrollbar-width: thin; scrollbar-color: rgba(212,168,67,0.18) transparent;
 }
 .cp-messages::-webkit-scrollbar { width: 3px; }
 .cp-messages::-webkit-scrollbar-thumb { background: rgba(212,168,67,0.18); border-radius: 3px; }
 
-.cp-empty-state {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 20px;
-}
-.cp-empty-icon { font-size: 32px; opacity: 0.35; }
-.cp-empty-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 13px; font-weight: 900;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: #4A3E78; text-align: center;
-}
-.cp-empty-sub { font-size: 10px; color: #2D2455; text-align: center; line-height: 1.55; max-width: 22ch; }
-
 .cp-msg { display: flex; flex-direction: column; max-width: 93%; }
-.cp-msg.bot { align-self: flex-start; }
+.cp-msg.bot  { align-self: flex-start; }
 .cp-msg.user { align-self: flex-end; }
-.cp-msg-bubble {
-  padding: 8px 11px;
-  font-size: 12px;
-  line-height: 1.5;
-  border-radius: 12px;
-}
-.cp-msg.bot .cp-msg-bubble {
-  background: #231960;
-  border: 1px solid rgba(212,168,67,0.13);
-  color: #C0B4E8;
-  border-radius: 3px 12px 12px 12px;
-}
-.cp-msg.user .cp-msg-bubble {
-  background: linear-gradient(135deg, rgba(212,168,67,0.17), rgba(212,168,67,0.07));
-  border: 1px solid rgba(212,168,67,0.28);
-  color: #F5F1FF;
-  border-radius: 12px 3px 12px 12px;
-}
+.cp-msg-bubble { padding: 8px 11px; font-size: 12px; line-height: 1.5; border-radius: 12px; }
+.cp-msg.bot  .cp-msg-bubble { background: #231960; border: 1px solid rgba(212,168,67,0.13); color: #C0B4E8; border-radius: 3px 12px 12px 12px; }
+.cp-msg.user .cp-msg-bubble { background: linear-gradient(135deg, rgba(212,168,67,0.17), rgba(212,168,67,0.07)); border: 1px solid rgba(212,168,67,0.28); color: #F5F1FF; border-radius: 12px 3px 12px 12px; }
 .cp-msg.bot .cp-msg-bubble strong { color: #D4A843; }
 .cp-msg.bot .cp-msg-bubble a { color: #D4A843; }
-.cp-msg.bot .cp-msg-bubble code {
-  font-family: monospace; font-size: 11px;
-  background: rgba(212,168,67,0.1); padding: 1px 4px; border-radius: 3px; color: #D4A843;
-}
+.cp-msg.bot .cp-msg-bubble code { font-family: monospace; font-size: 11px; background: rgba(212,168,67,0.1); padding: 1px 4px; border-radius: 3px; color: #D4A843; }
 
 /* Typing dots */
 .cp-typing {
-  display: none;
-  align-items: center;
-  gap: 4px;
-  padding: 9px 12px;
-  background: #231960;
+  display: none; align-items: center; gap: 4px;
+  padding: 9px 12px; background: #231960;
   border: 1px solid rgba(212,168,67,0.13);
   border-radius: 3px 12px 12px 12px;
-  align-self: flex-start;
-  width: fit-content;
+  align-self: flex-start; width: fit-content;
 }
 .cp-typing.show { display: flex; }
-.cp-typing span {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: #6A5E98;
-  animation: tdot 1.2s ease-in-out infinite;
-}
+.cp-typing span { width: 5px; height: 5px; border-radius: 50%; background: #6A5E98; animation: tdot 1.2s ease-in-out infinite; }
 .cp-typing span:nth-child(2) { animation-delay: .18s; }
 .cp-typing span:nth-child(3) { animation-delay: .36s; }
 @keyframes tdot { 0%,60%,100%{transform:translateY(0);opacity:.35} 30%{transform:translateY(-4px);opacity:1} }
 
 /* Quick chips */
 .cp-chips {
-  padding: 7px 13px;
-  border-top: 1px solid rgba(212,168,67,0.12);
-  display: flex;
-  gap: 5px;
-  flex-wrap: wrap;
-  flex-shrink: 0;
-  min-height: 38px;
+  padding: 7px 13px; border-top: 1px solid rgba(212,168,67,0.12);
+  display: flex; gap: 5px; flex-wrap: wrap;
+  flex-shrink: 0; min-height: 38px;
 }
 .cp-chip {
-  padding: 4px 10px;
-  border-radius: 999px;
+  padding: 4px 10px; border-radius: 999px;
   border: 1px solid rgba(212,168,67,0.28);
   background: rgba(212,168,67,0.05);
-  color: #D4A843;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  transition: background 120ms, border-color 120ms;
-  white-space: nowrap;
+  color: #D4A843; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.04em; cursor: pointer;
+  transition: background 120ms, border-color 120ms; white-space: nowrap;
 }
 .cp-chip:hover { background: rgba(212,168,67,0.13); border-color: rgba(212,168,67,0.5); }
 
 /* Input row */
 .cp-input-row {
-  padding: 9px 13px 13px;
+  padding: 9px 13px 14px;
   border-top: 1px solid rgba(212,168,67,0.18);
-  display: flex;
-  gap: 7px;
-  align-items: flex-end;
-  flex-shrink: 0;
-  background: rgba(10,6,32,0.3);
+  display: flex; gap: 7px; align-items: flex-end;
+  flex-shrink: 0; background: rgba(10,6,32,0.3);
 }
 .cp-input {
-  flex: 1;
-  background: #0E0928;
+  flex: 1; background: #0E0928;
   border: 1.5px solid rgba(212,168,67,0.22);
-  border-radius: 11px;
-  padding: 9px 12px;
-  color: #F5F1FF;
-  font-size: 12px;
+  border-radius: 11px; padding: 9px 12px;
+  color: #F5F1FF; font-size: 12px;
   font-family: 'Inter', sans-serif;
-  resize: none;
-  outline: none;
-  min-height: 40px;
-  max-height: 90px;
-  line-height: 1.4;
-  transition: border-color 160ms;
+  resize: none; outline: none;
+  min-height: 40px; max-height: 90px;
+  line-height: 1.4; transition: border-color 160ms;
 }
 .cp-input::placeholder { color: #3D3260; }
 .cp-input:focus { border-color: rgba(212,168,67,0.5); }
 .cp-send {
-  width: 40px; height: 40px; border-radius: 11px;
-  border: none;
+  width: 40px; height: 40px; border-radius: 11px; border: none;
   background: linear-gradient(135deg, #D4A843, #A87820);
-  color: #1A0E00;
-  font-size: 16px;
-  cursor: pointer;
+  color: #1A0E00; font-size: 16px; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  box-shadow: 0 2px 10px rgba(212,168,67,0.3);
+  flex-shrink: 0; box-shadow: 0 2px 10px rgba(212,168,67,0.3);
   transition: filter 140ms, transform 120ms;
 }
 .cp-send:hover { filter: brightness(1.1); transform: scale(1.04); }
@@ -604,526 +318,226 @@
 </head>
 <body>
 
-<div class="rg-bar">18+ | Play Responsibly | <a href="#">BeGambleAware.org</a> | T&amp;Cs apply. Demo site only.</div>
-
-<div class="wrap">
-  <header class="site-header">
-    <a class="brand" href="index.html">
-      <img src="logo.png" alt="Ada Gaming" width="52" height="52" style="border-radius:50%;display:block;filter:drop-shadow(0 4px 14px rgba(212,168,67,0.4));">
-      <span class="brand-name">
-        <span class="brand-title">Ada Gaming</span>
-        <span class="brand-tag">Betting &middot; Casino &middot; Live</span>
-      </span>
+<!-- Standard nav (matches all other pages) -->
+<header class="ag-header">
+  <div class="ag-header-inner">
+    <a href="index.html" class="ag-logo">
+      <span class="ag-logo-icon">🎰</span>
+      <span class="ag-logo-text">Ada <span class="ag-logo-accent">Gaming</span></span>
     </a>
-    <nav class="site-nav">
+    <nav class="ag-nav">
       <a href="sports-betting.html">Sports</a>
       <a href="live-casino.html">Casino</a>
       <a href="playtech.html">Playtech</a>
       <a href="voice.html">Voice</a>
       <a href="live-casino-api.html" class="active">Front-end API</a>
     </nav>
-    <div class="header-actions">
-      <span class="age-pill">18+</span>
-      <div class="user-pill">
-        <span class="user-avatar">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="8" r="4" fill="#2A1870"/>
-            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#2A1870" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </span>
-        <span class="user-name">Kirky_123</span>
+    <div class="ag-header-right">
+      <div class="ag-user-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+        Kirky_123
       </div>
-    </div>
-  </header>
-</div>
-
-<hr class="gold-rule">
-
-<!-- Page mode tabs -->
-<div class="wrap">
-  <nav class="page-mode-bar" aria-label="View mode">
-    <a href="live-casino.html" class="page-mode-tab">&#127922; Standard</a>
-    <a href="live-casino-api.html" class="page-mode-tab active">&#9889; Front-end API <span class="api-badge">Headless</span></a>
-  </nav>
-</div>
-
-<!-- Main two-column layout -->
-<div class="wrap casino-api-outer">
-
-  <!-- ── Left: game content ── -->
-  <div class="casino-content">
-
-    <div class="page-head">
-      <p class="eyebrow">Live casino &amp; slots</p>
-      <h1 class="display-gold">Casino</h1>
-      <p>Click any game to open the Game Concierge — Ada answers questions about the game, your bonus eligibility, and limits in real time.</p>
-    </div>
-
-    <div class="api-callout">
-      <span class="api-callout-icon">&#9889;</span>
-      <span class="api-callout-text">
-        <strong>Ada Front-end API</strong> &mdash; This page uses <code>headless: true</code> with <code>adaEmbed.sendMessage()</code> and <code>adaEmbed.subscribeEvent("ada:message:received")</code>. Selecting a game calls <code>adaEmbed.setMetaFields()</code> to pass context before each message.
-      </span>
-    </div>
-
-    <!-- Category tabs -->
-    <div class="cat-tabs">
-      <button class="cat-tab active" type="button">&#127381; All games</button>
-      <button class="cat-tab" type="button">&#127352; Slots</button>
-      <button class="cat-tab" type="button">&#127183; Live tables</button>
-      <button class="cat-tab" type="button">&#127470;&#127462; Game shows</button>
-      <button class="cat-tab" type="button">&#128142; Jackpots</button>
-      <button class="cat-tab" type="button">&#9814; Blackjack</button>
-      <button class="cat-tab" type="button">&#127922; Roulette</button>
-    </div>
-
-    <!-- Slots -->
-    <section>
-      <div class="section-head">
-        <h2 class="section-title">&#127352; Featured Slots</h2>
-        <a href="#">View all 400+ &rarr;</a>
-      </div>
-      <div class="slots-grid">
-
-        <div class="slot-card" onclick="selectGame(this,'Age of the Dogs™')">
-          <div class="slot-thumb">
-            <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/AgeOfTheDogsicon_428x268_1764232915323.jpg" alt="Age of the Dogs™">
-            <span class="hot-badge">&#128293; Hot</span>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Age of the Dogs™')">Play</button></div>
-          </div>
-          <div class="slot-info">
-            <div class="slot-name">Age of the Dogs™</div>
-            <div class="slot-provider">Origins Studio</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 95.70%</span><span class="slot-vol">High</span></div>
-          </div>
-        </div>
-
-        <div class="slot-card" onclick="selectGame(this,'CollectOrbs: Wild West Wilds™')">
-          <div class="slot-thumb">
-            <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/CollectOrbsWildWestWildsicon_428x268_1782312398947.jpg" alt="CollectOrbs: Wild West Wilds™">
-            <span class="new-badge">New</span>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('CollectOrbs: Wild West Wilds™')">Play</button></div>
-          </div>
-          <div class="slot-info">
-            <div class="slot-name">CollectOrbs: Wild West Wilds™</div>
-            <div class="slot-provider">Origins Studio</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 96.20%</span><span class="slot-vol">Med</span></div>
-          </div>
-        </div>
-
-        <div class="slot-card" onclick="selectGame(this,'Epic Ape 2™')">
-          <div class="slot-thumb">
-            <img src="https://www.playtechone.com/library/all_game_images/other_images/eape2_portal_poster_428x268.webp" alt="Epic Ape 2™">
-            <span class="hot-badge">&#128293; Hot</span>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Epic Ape 2™')">Play</button></div>
-          </div>
-          <div class="slot-info">
-            <div class="slot-name">Epic Ape 2™</div>
-            <div class="slot-provider">Origins Studio</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 96.01%</span><span class="slot-vol">High</span></div>
-          </div>
-        </div>
-
-        <div class="slot-card" onclick="selectGame(this,'Buffalo Blitz™ Megaways™')">
-          <div class="slot-thumb">
-            <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/gpas_bbmwayspa_popicon_428x268_1747055342871.jpg" alt="Buffalo Blitz™ Megaways™">
-            <span class="jp-badge">&#128142; Jackpot</span>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Buffalo Blitz™ Megaways™')">Play</button></div>
-          </div>
-          <div class="slot-info">
-            <div class="slot-name">Buffalo Blitz™ Megaways™</div>
-            <div class="slot-provider">Origins Studio</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 95.10%</span><span class="slot-vol">V.High</span></div>
-          </div>
-        </div>
-
-        <div class="slot-card" onclick="selectGame(this,'King Blitz™')">
-          <div class="slot-thumb">
-            <img src="https://www.playtechone.com/library/all_game_images/other_images/gpas_bproglo_popicon_428x268_1644940708022.webp" alt="King Blitz™">
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('King Blitz™')">Play</button></div>
-          </div>
-          <div class="slot-info">
-            <div class="slot-name">King Blitz™</div>
-            <div class="slot-provider">Origins Studio</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 96.45%</span><span class="slot-vol">Med-Hi</span></div>
-          </div>
-        </div>
-
-        <div class="slot-card" onclick="selectGame(this,'Mega Fire Blaze: 3 Wizards™')">
-          <div class="slot-thumb">
-            <img src="https://www.playtechone.com/library/all_game_images/other_images/MegaFireBlaze3Wizardsicon_428x268_1694758956013.webp" alt="Mega Fire Blaze: 3 Wizards™">
-            <span class="hot-badge">&#128293; Hot</span>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Mega Fire Blaze: 3 Wizards™')">Play</button></div>
-          </div>
-          <div class="slot-info">
-            <div class="slot-name">Mega Fire Blaze: 3 Wizards™</div>
-            <div class="slot-provider">Fire Blaze Series</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 95.54%</span><span class="slot-vol">High</span></div>
-          </div>
-        </div>
-
-        <div class="slot-card" onclick="selectGame(this,'Mega Fire Blaze: Piggies and the Bank™')">
-          <div class="slot-thumb">
-            <img src="https://www.playtechone.com/library/all_game_images/other_images/MegaFireBlazePiggiesAndTheBankicon_428x268_1686662294436.webp" alt="Mega Fire Blaze: Piggies and the Bank™">
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Mega Fire Blaze: Piggies and the Bank™')">Play</button></div>
-          </div>
-          <div class="slot-info">
-            <div class="slot-name">Mega Fire Blaze: Piggies &amp; the Bank™</div>
-            <div class="slot-provider">Fire Blaze Series</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 95.34%</span><span class="slot-vol">High</span></div>
-          </div>
-        </div>
-
-        <div class="slot-card" onclick="selectGame(this,'Mega Fire Blaze: Breaking Bad™')">
-          <div class="slot-thumb">
-            <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/MegaFireBlazeBreakingBadicon_256x256_1726141799443.jpg" alt="Mega Fire Blaze: Breaking Bad™">
-            <span class="new-badge">New</span>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Mega Fire Blaze: Breaking Bad™')">Play</button></div>
-          </div>
-          <div class="slot-info">
-            <div class="slot-name">Mega Fire Blaze: Breaking Bad™</div>
-            <div class="slot-provider">Fire Blaze Series</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 95.80%</span><span class="slot-vol">High</span></div>
-          </div>
-        </div>
-
-        <div class="slot-card" onclick="selectGame(this,'CollectOrbs: Wild West Wilds™')">
-          <div class="slot-thumb">
-            <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/CollectOrbsWildWestWildsicon_428x268_1782312398947.jpg" alt="CollectOrbs: Wild West Wilds™">
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('CollectOrbs: Wild West Wilds™')">Play</button></div>
-          </div>
-          <div class="slot-info">
-            <div class="slot-name">CollectOrbs: Wild West Wilds™</div>
-            <div class="slot-provider">Cash Collect Series</div>
-            <div class="slot-meta"><span class="slot-rtp">RTP 96.20%</span><span class="slot-vol">Med</span></div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Live Tables -->
-    <section class="tables-section">
-      <div class="section-head">
-        <h2 class="section-title">&#127922; Live Tables</h2>
-        <a href="#">All tables &rarr;</a>
-      </div>
-      <div class="tables-grid">
-
-        <div class="table-card" onclick="selectGame(this,'Lightning Roulette')">
-          <div class="table-thumb" style="background:linear-gradient(160deg,#1a0a00,#3a1800)">
-            &#127922;
-            <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
-            <div class="players-count">&#128100; 1,247 playing</div>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Lightning Roulette')">Join table</button></div>
-          </div>
-          <div class="table-info">
-            <div class="table-name">Lightning Roulette</div>
-            <div class="table-provider">Evolution Gaming</div>
-            <div class="table-limits"><span class="limits-label">Bet range</span><span class="limits-val">&pound;0.20 &ndash; &pound;5,000</span></div>
-          </div>
-        </div>
-
-        <div class="table-card" onclick="selectGame(this,'Immersive Roulette')">
-          <div class="table-thumb" style="background:linear-gradient(160deg,#001a00,#003000)">
-            &#127922;
-            <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
-            <div class="players-count">&#128100; 634 playing</div>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Immersive Roulette')">Join table</button></div>
-          </div>
-          <div class="table-info">
-            <div class="table-name">Immersive Roulette</div>
-            <div class="table-provider">Evolution Gaming</div>
-            <div class="table-limits"><span class="limits-label">Bet range</span><span class="limits-val">&pound;0.50 &ndash; &pound;250</span></div>
-          </div>
-        </div>
-
-        <div class="table-card" onclick="selectGame(this,'Infinite Blackjack')">
-          <div class="table-thumb" style="background:linear-gradient(160deg,#0a0a20,#1a1a40)">
-            &#9814;
-            <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
-            <div class="players-count">&#128100; 889 playing</div>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Infinite Blackjack')">Join table</button></div>
-          </div>
-          <div class="table-info">
-            <div class="table-name">Infinite Blackjack</div>
-            <div class="table-provider">Evolution Gaming</div>
-            <div class="table-limits"><span class="limits-label">Bet range</span><span class="limits-val">&pound;1 &ndash; &pound;1,000</span></div>
-          </div>
-        </div>
-
-        <div class="table-card" onclick="selectGame(this,'Blackjack VIP')">
-          <div class="table-thumb" style="background:linear-gradient(160deg,#1a0820,#2a1038)">
-            &#9814;
-            <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
-            <div class="players-count">&#128100; 12 playing</div>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Blackjack VIP')">Join table</button></div>
-          </div>
-          <div class="table-info">
-            <div class="table-name">Blackjack VIP</div>
-            <div class="table-provider">Evolution Gaming</div>
-            <div class="table-limits"><span class="limits-label">Bet range</span><span class="limits-val">&pound;20 &ndash; &pound;5,000</span></div>
-          </div>
-        </div>
-
-        <div class="table-card" onclick="selectGame(this,'Baccarat Squeeze')">
-          <div class="table-thumb" style="background:linear-gradient(160deg,#001818,#002a2a)">
-            &#127183;
-            <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
-            <div class="players-count">&#128100; 421 playing</div>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Baccarat Squeeze')">Join table</button></div>
-          </div>
-          <div class="table-info">
-            <div class="table-name">Baccarat Squeeze</div>
-            <div class="table-provider">Evolution Gaming</div>
-            <div class="table-limits"><span class="limits-label">Bet range</span><span class="limits-val">&pound;1 &ndash; &pound;500</span></div>
-          </div>
-        </div>
-
-        <div class="table-card" onclick="selectGame(this,'Speed Baccarat')">
-          <div class="table-thumb" style="background:linear-gradient(160deg,#100018,#220030)">
-            &#127183;
-            <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
-            <div class="players-count">&#128100; 203 playing</div>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Speed Baccarat')">Join table</button></div>
-          </div>
-          <div class="table-info">
-            <div class="table-name">Speed Baccarat</div>
-            <div class="table-provider">Evolution Gaming</div>
-            <div class="table-limits"><span class="limits-label">Bet range</span><span class="limits-val">&pound;0.20 &ndash; &pound;250</span></div>
-          </div>
-        </div>
-
-        <div class="table-card" onclick="selectGame(this,'American Roulette')">
-          <div class="table-thumb" style="background:linear-gradient(160deg,#1a0000,#320000)">
-            &#127922;
-            <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
-            <div class="players-count">&#128100; 178 playing</div>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('American Roulette')">Join table</button></div>
-          </div>
-          <div class="table-info">
-            <div class="table-name">American Roulette</div>
-            <div class="table-provider">Evolution Gaming</div>
-            <div class="table-limits"><span class="limits-label">Bet range</span><span class="limits-val">&pound;1 &ndash; &pound;500</span></div>
-          </div>
-        </div>
-
-        <div class="table-card" onclick="selectGame(this,'Speed Blackjack')">
-          <div class="table-thumb" style="background:linear-gradient(160deg,#0a1a00,#1a3000)">
-            &#9814;
-            <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
-            <div class="players-count">&#128100; 556 playing</div>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Speed Blackjack')">Join table</button></div>
-          </div>
-          <div class="table-info">
-            <div class="table-name">Speed Blackjack</div>
-            <div class="table-provider">Evolution Gaming</div>
-            <div class="table-limits"><span class="limits-label">Bet range</span><span class="limits-val">&pound;0.50 &ndash; &pound;200</span></div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Game Shows -->
-    <section class="shows-section">
-      <div class="section-head">
-        <h2 class="section-title">&#127470;&#127462; Game Shows</h2>
-        <a href="#">All shows &rarr;</a>
-      </div>
-      <div class="shows-grid">
-
-        <div class="show-card" onclick="selectGame(this,'Crazy Time')">
-          <div class="show-thumb" style="background:linear-gradient(160deg,#1a0820,#3a0840)">
-            &#127881;
-            <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
-            <div class="players-count">&#128100; 3,841 playing</div>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Crazy Time')">Join now</button></div>
-          </div>
-          <div class="show-info">
-            <div class="show-name">Crazy Time</div>
-            <div class="show-provider">Evolution Gaming</div>
-            <div class="show-bet-range">Bet range: &pound;0.10 &ndash; &pound;1,000</div>
-          </div>
-        </div>
-
-        <div class="show-card" onclick="selectGame(this,'Monopoly Live')">
-          <div class="show-thumb" style="background:linear-gradient(160deg,#001a08,#003018)">
-            &#127968;
-            <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
-            <div class="players-count">&#128100; 1,203 playing</div>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Monopoly Live')">Join now</button></div>
-          </div>
-          <div class="show-info">
-            <div class="show-name">Monopoly Live</div>
-            <div class="show-provider">Evolution Gaming</div>
-            <div class="show-bet-range">Bet range: &pound;0.10 &ndash; &pound;500</div>
-          </div>
-        </div>
-
-        <div class="show-card" onclick="selectGame(this,'Dream Catcher')">
-          <div class="show-thumb" style="background:linear-gradient(160deg,#1a1000,#301800)">
-            &#127384;
-            <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
-            <div class="players-count">&#128100; 742 playing</div>
-            <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation();demoAlert('Dream Catcher')">Join now</button></div>
-          </div>
-          <div class="show-info">
-            <div class="show-name">Dream Catcher</div>
-            <div class="show-provider">Evolution Gaming</div>
-            <div class="show-bet-range">Bet range: &pound;0.10 &ndash; &pound;500</div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-  </div><!-- /casino-content -->
-
-  <!-- ── Right: Ada Concierge Panel ── -->
-  <aside class="concierge-panel" id="cp" aria-label="Game Concierge">
-
-    <div class="cp-header">
-      <div class="cp-avatar">&#9889;</div>
-      <div class="cp-title-wrap">
-        <div class="cp-title">Game Concierge</div>
-        <div class="cp-subtitle">Powered by Ada Front-end API</div>
-      </div>
-      <div class="cp-status">
-        <div class="cp-dot connecting" id="cp-dot"></div>
-        <span class="cp-status-lbl" id="cp-status-lbl">Connecting</span>
-      </div>
-    </div>
-
-    <div class="cp-player-bar">
-      <div class="cp-player-icon">&#128100;</div>
-      <span class="cp-player-name">Kirky_123</span>
-      <div class="cp-player-chips">
-        <span class="cp-pill gold">&#9733; 50 free spins</span>
-        <span class="cp-pill green">&#128178; £32 limit left</span>
-      </div>
-    </div>
-
-    <div class="cp-game-ctx empty" id="cp-game-ctx">
-      <span class="cp-game-hint">Select a game to see details</span>
-    </div>
-
-    <!-- Empty state (shown before any game selected) -->
-    <div class="cp-empty-state" id="cp-empty">
-      <div class="cp-empty-icon">&#127922;</div>
-      <div class="cp-empty-title">Your concierge is ready</div>
-      <div class="cp-empty-sub">Click any game card to ask Ada about it — bonus eligibility, RTP, rules, limits and more.</div>
-    </div>
-
-    <!-- Messages (hidden until first interaction) -->
-    <div class="cp-messages" id="cp-messages" style="display:none;">
-      <div class="cp-typing" id="cp-typing">
-        <span></span><span></span><span></span>
-      </div>
-    </div>
-
-    <!-- Quick-reply chips -->
-    <div class="cp-chips" id="cp-chips"></div>
-
-    <!-- Input -->
-    <div class="cp-input-row">
-      <textarea class="cp-input" id="cp-input" rows="1" placeholder="Ask about any game…" aria-label="Message Ada"></textarea>
-      <button class="cp-send" id="cp-send" aria-label="Send">&#8593;</button>
-    </div>
-
-  </aside>
-
-</div><!-- /casino-api-outer -->
-
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="footer-inner">
-      <div class="footer-col">
-        <span class="footer-head">Sports</span>
-        <a href="sports-betting.html">Premier League</a>
-        <a href="sports-betting.html">Champions League</a>
-        <a href="sports-betting.html">In-play betting</a>
-        <a href="sports-betting.html">Accumulators</a>
-      </div>
-      <div class="footer-col">
-        <span class="footer-head">Casino</span>
-        <a href="live-casino.html">Slots</a>
-        <a href="live-casino.html">Live Roulette</a>
-        <a href="live-casino.html">Live Blackjack</a>
-        <a href="live-casino.html">Game Shows</a>
-      </div>
-      <div class="footer-col">
-        <span class="footer-head">Front-end API</span>
-        <a href="live-casino-api.html">Game Concierge</a>
-        <a href="playtech.html">Playtech IMS</a>
-        <a href="live-casino-api.html">Headless Demo</a>
-      </div>
-      <div class="footer-col">
-        <span class="footer-head">Help</span>
-        <a href="index.html">Responsible gambling</a>
-        <a href="index.html">Self-exclusion</a>
-        <a href="index.html">Deposit limits</a>
-        <a href="index.html">Contact us</a>
-      </div>
-    </div>
-    <hr class="gold-rule">
-    <div class="rg-logos">
-      <span class="rg-badge">18+</span>
-      <span class="rg-badge">UKGC Licensed</span>
-      <span class="rg-badge">BeGambleAware</span>
-      <span class="rg-badge">GamStop</span>
-      <span class="rg-badge">GamCare</span>
-    </div>
-    <div class="footer-legal">
-      <span>Ada Gaming is a demo experience. No real money wagering. Gambling can be addictive &mdash; please play responsibly.</span>
-      <span>&copy; 2026 Ada Gaming</span>
     </div>
   </div>
-</footer>
+</header>
+
+<!-- Main content -->
+<div class="ag-container api-page">
+
+  <div class="api-page-head">
+    <div>
+      <p class="ag-eyebrow" style="margin:0 0 4px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(212,168,67,0.7)">Featured Slots</p>
+      <h1>Casino</h1>
+    </div>
+    <p>Click any game to ask Ada — bonus eligibility, RTP, rules, limits and more.</p>
+  </div>
+
+  <!-- 4-column game grid (2 rows × 4 = 8 games) -->
+  <div class="slots-grid-4">
+
+    <div class="slot-card" onclick="openChat(this,'Age of the Dogs™')">
+      <div class="slot-thumb">
+        <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/AgeOfTheDogsicon_428x268_1764232915323.jpg" alt="Age of the Dogs™" loading="lazy">
+        <span class="hot-badge">🔥 Hot</span>
+        <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation()">Play</button></div>
+      </div>
+      <div class="slot-info">
+        <div class="slot-name">Age of the Dogs™</div>
+        <div class="slot-provider">Origins Studio</div>
+        <div class="slot-meta"><span class="slot-rtp">RTP 95.70%</span><span class="slot-vol">High</span></div>
+      </div>
+    </div>
+
+    <div class="slot-card" onclick="openChat(this,'CollectOrbs: Wild West Wilds™')">
+      <div class="slot-thumb">
+        <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/CollectOrbsWildWestWildsicon_428x268_1782312398947.jpg" alt="CollectOrbs: Wild West Wilds™" loading="lazy">
+        <span class="new-badge">New</span>
+        <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation()">Play</button></div>
+      </div>
+      <div class="slot-info">
+        <div class="slot-name">CollectOrbs: Wild West Wilds™</div>
+        <div class="slot-provider">Origins Studio</div>
+        <div class="slot-meta"><span class="slot-rtp">RTP 96.20%</span><span class="slot-vol">Med</span></div>
+      </div>
+    </div>
+
+    <div class="slot-card" onclick="openChat(this,'Epic Ape 2™')">
+      <div class="slot-thumb">
+        <img src="https://www.playtechone.com/library/all_game_images/other_images/eape2_portal_poster_428x268.webp" alt="Epic Ape 2™" loading="lazy">
+        <span class="hot-badge">🔥 Hot</span>
+        <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation()">Play</button></div>
+      </div>
+      <div class="slot-info">
+        <div class="slot-name">Epic Ape 2™</div>
+        <div class="slot-provider">Origins Studio</div>
+        <div class="slot-meta"><span class="slot-rtp">RTP 96.01%</span><span class="slot-vol">High</span></div>
+      </div>
+    </div>
+
+    <div class="slot-card" onclick="openChat(this,'Buffalo Blitz™ Megaways™')">
+      <div class="slot-thumb">
+        <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/gpas_bbmwayspa_popicon_428x268_1747055342871.jpg" alt="Buffalo Blitz™ Megaways™" loading="lazy">
+        <span class="jp-badge">💎 Jackpot</span>
+        <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation()">Play</button></div>
+      </div>
+      <div class="slot-info">
+        <div class="slot-name">Buffalo Blitz™ Megaways™</div>
+        <div class="slot-provider">Origins Studio</div>
+        <div class="slot-meta"><span class="slot-rtp">RTP 95.10%</span><span class="slot-vol">V.High</span></div>
+      </div>
+    </div>
+
+    <div class="slot-card" onclick="openChat(this,'King Blitz™')">
+      <div class="slot-thumb">
+        <img src="https://www.playtechone.com/library/all_game_images/other_images/gpas_bproglo_popicon_428x268_1644940708022.webp" alt="King Blitz™" loading="lazy">
+        <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation()">Play</button></div>
+      </div>
+      <div class="slot-info">
+        <div class="slot-name">King Blitz™</div>
+        <div class="slot-provider">Origins Studio</div>
+        <div class="slot-meta"><span class="slot-rtp">RTP 96.45%</span><span class="slot-vol">Med-Hi</span></div>
+      </div>
+    </div>
+
+    <div class="slot-card" onclick="openChat(this,'Mega Fire Blaze: 3 Wizards™')">
+      <div class="slot-thumb">
+        <img src="https://www.playtechone.com/library/all_game_images/other_images/MegaFireBlaze3Wizardsicon_428x268_1694758956013.webp" alt="Mega Fire Blaze: 3 Wizards™" loading="lazy">
+        <span class="hot-badge">🔥 Hot</span>
+        <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation()">Play</button></div>
+      </div>
+      <div class="slot-info">
+        <div class="slot-name">Mega Fire Blaze: 3 Wizards™</div>
+        <div class="slot-provider">Fire Blaze Series</div>
+        <div class="slot-meta"><span class="slot-rtp">RTP 95.54%</span><span class="slot-vol">High</span></div>
+      </div>
+    </div>
+
+    <div class="slot-card" onclick="openChat(this,'Mega Fire Blaze: Piggies and the Bank™')">
+      <div class="slot-thumb">
+        <img src="https://www.playtechone.com/library/all_game_images/other_images/MegaFireBlazePiggiesAndTheBankicon_428x268_1686662294436.webp" alt="Mega Fire Blaze: Piggies and the Bank™" loading="lazy">
+        <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation()">Play</button></div>
+      </div>
+      <div class="slot-info">
+        <div class="slot-name">Mega Fire Blaze: Piggies &amp; the Bank™</div>
+        <div class="slot-provider">Fire Blaze Series</div>
+        <div class="slot-meta"><span class="slot-rtp">RTP 95.34%</span><span class="slot-vol">High</span></div>
+      </div>
+    </div>
+
+    <div class="slot-card" onclick="openChat(this,'Mega Fire Blaze: Breaking Bad™')">
+      <div class="slot-thumb">
+        <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/MegaFireBlazeBreakingBadicon_256x256_1726141799443.jpg" alt="Mega Fire Blaze: Breaking Bad™" loading="lazy">
+        <span class="new-badge">New</span>
+        <div class="slot-overlay"><button class="slot-play-btn" onclick="event.stopPropagation()">Play</button></div>
+      </div>
+      <div class="slot-info">
+        <div class="slot-name">Mega Fire Blaze: Breaking Bad™</div>
+        <div class="slot-provider">Fire Blaze Series</div>
+        <div class="slot-meta"><span class="slot-rtp">RTP 95.80%</span><span class="slot-vol">High</span></div>
+      </div>
+    </div>
+
+  </div><!-- /slots-grid-4 -->
+</div><!-- /api-page -->
+
+<!-- Backdrop -->
+<div id="chat-backdrop" onclick="closeChat()"></div>
+
+<!-- Slide-in chat panel -->
+<aside id="cp" aria-label="Game Concierge">
+
+  <div class="cp-header">
+    <div class="cp-avatar">⚡</div>
+    <div class="cp-title-wrap">
+      <div class="cp-title">Game Concierge</div>
+      <div class="cp-subtitle">Powered by Ada Front-end API</div>
+    </div>
+    <div class="cp-status">
+      <div class="cp-dot connecting" id="cp-dot"></div>
+      <span class="cp-status-lbl" id="cp-status-lbl">Connecting</span>
+    </div>
+    <button class="cp-close" onclick="closeChat()" aria-label="Close">✕</button>
+  </div>
+
+  <div class="cp-player-bar">
+    <div class="cp-player-icon">👤</div>
+    <span class="cp-player-name">Kirky_123</span>
+    <div class="cp-player-chips">
+      <span class="cp-pill gold">★ 50 free spins</span>
+      <span class="cp-pill green">£ £32 limit left</span>
+    </div>
+  </div>
+
+  <div class="cp-game-ctx empty" id="cp-game-ctx">
+    <span class="cp-game-hint">Select a game to see details</span>
+  </div>
+
+  <div class="cp-empty-state" id="cp-empty">
+    <div class="cp-empty-icon">🎰</div>
+    <div class="cp-empty-title">Your concierge is ready</div>
+    <div class="cp-empty-sub">Click a game card to ask Ada about bonus eligibility, RTP, rules and limits.</div>
+  </div>
+
+  <div class="cp-messages" id="cp-messages" style="display:none;">
+    <div class="cp-typing" id="cp-typing"><span></span><span></span><span></span></div>
+  </div>
+
+  <div class="cp-chips" id="cp-chips"></div>
+
+  <div class="cp-input-row">
+    <textarea class="cp-input" id="cp-input" rows="1" placeholder="Ask about this game…" aria-label="Message Ada"></textarea>
+    <button class="cp-send" id="cp-send" aria-label="Send">↑</button>
+  </div>
+
+</aside>
 
 <script>
-/* ─── Game data ────────────────────────────────────────────── */
 var GAMES = {
-  'Age of the Dogs™':                        { icon:'🐕', type:'Slot',      provider:'Origins Studio',    rtp:'95.70%', vol:'High',    min:'£0.10', max:'£100',  bonus:true,  chips:['Does my bonus apply?','How do win lines work?','What are the wild features?'] },
-  'CollectOrbs: Wild West Wilds™':           { icon:'🔮', type:'Slot',      provider:'Origins Studio',    rtp:'96.20%', vol:'Medium',  min:'£0.20', max:'£100',  bonus:true,  chips:['Is this in my bonus?','How do orbs collect?','Max win potential?'] },
-  'Epic Ape 2™':                             { icon:'🦍', type:'Slot',      provider:'Origins Studio',    rtp:'96.01%', vol:'High',    min:'£0.10', max:'£250',  bonus:true,  chips:['Bonus eligible?','How do free spins trigger?','What are expanding wilds?'] },
-  'Buffalo Blitz™ Megaways™':               { icon:'🦬', type:'Jackpot',   provider:'Origins Studio',    rtp:'95.10%', vol:'V.High',  min:'£0.25', max:'£500',  bonus:true,  chips:['Current jackpot amount?','How to trigger Blitz?','Can I use my bonus?'] },
-  'King Blitz™':                             { icon:'👑', type:'Slot',      provider:'Origins Studio',    rtp:'96.45%', vol:'Med-Hi',  min:'£0.10', max:'£100',  bonus:true,  chips:['Part of my bonus?','How many paylines?','What triggers the Blitz feature?'] },
-  'Mega Fire Blaze: 3 Wizards™':            { icon:'🧙', type:'Slot',      provider:'Fire Blaze Series', rtp:'95.54%', vol:'High',    min:'£0.10', max:'£200',  bonus:true,  chips:['Bonus eligibility?','How does Fire Blaze work?','How many free spins?'] },
-  'Mega Fire Blaze: Piggies and the Bank™': { icon:'🐷', type:'Slot',      provider:'Fire Blaze Series', rtp:'95.34%', vol:'High',    min:'£0.10', max:'£150',  bonus:true,  chips:['In my bonus?','What triggers the Bank feature?','Max win?'] },
-  'Mega Fire Blaze: Breaking Bad™':         { icon:'⚗️', type:'Slot',      provider:'Fire Blaze Series', rtp:'95.80%', vol:'High',    min:'£0.20', max:'£200',  bonus:true,  chips:['Bonus eligible?','How does the Breaking Bad feature trigger?','Max multiplier?'] },
-  'CollectOrbs: Wild West Wilds™ (Cash)':   { icon:'💰', type:'Slot',      provider:'Cash Collect Series',rtp:'96.20%', vol:'Medium',  min:'£0.20', max:'£100',  bonus:true,  chips:['Cash Collect rules?','How does the orb mechanic work?','Wagering requirements?'] },
-  'Lightning Roulette': { icon:'⚡', type:'Live Table', provider:'Evolution Gaming',rtp:'97.30%', vol:null,      min:'£0.20', max:'£5,000', bonus:false, chips:['How do lucky numbers work?','Max multiplier possible?','Is my bonus valid here?'] },
-  'Immersive Roulette': { icon:'🎡', type:'Live Table', provider:'Evolution Gaming',rtp:'97.30%', vol:null,      min:'£0.50', max:'£250',  bonus:false, chips:['What makes it immersive?','Bet options?','Can I use my bonus?'] },
-  'Infinite Blackjack': { icon:'♞',  type:'Live Table', provider:'Evolution Gaming',rtp:'99.50%', vol:null,      min:'£1',    max:'£1,000', bonus:false, chips:['Can I use my bonus?','Basic strategy tips?','What are the side bets?'] },
-  'Blackjack VIP':      { icon:'♔',  type:'Live Table', provider:'Evolution Gaming',rtp:'99.50%', vol:null,      min:'£20',   max:'£5,000', bonus:false, chips:['VIP requirements?','Minimum deposit?','Bonus eligible?'] },
-  'Baccarat Squeeze':   { icon:'🎴', type:'Live Table', provider:'Evolution Gaming',rtp:'98.94%', vol:null,      min:'£1',    max:'£500',  bonus:false, chips:['How to play baccarat?','Squeeze mechanic?','Tie bet odds?'] },
-  'Speed Baccarat':     { icon:'⚡', type:'Live Table', provider:'Evolution Gaming',rtp:'98.76%', vol:null,      min:'£0.20', max:'£250',  bonus:true,  chips:['How fast are rounds?','Bonus eligible?','Tie bet available?'] },
-  'American Roulette':  { icon:'🎯', type:'Live Table', provider:'Evolution Gaming',rtp:'94.74%', vol:null,      min:'£1',    max:'£500',  bonus:false, chips:['Double zero explained?','Is my bonus valid?','House edge vs European?'] },
-  'Speed Blackjack':    { icon:'⚡', type:'Live Table', provider:'Evolution Gaming',rtp:'99.50%', vol:null,      min:'£0.50', max:'£200',  bonus:true,  chips:['Speed format explained?','Side bets available?','Bonus eligible?'] },
-  'Crazy Time':         { icon:'🎉', type:'Game Show',  provider:'Evolution Gaming',rtp:'96.08%', vol:null,      min:'£0.10', max:'£1,000', bonus:false, chips:['How many bonus rounds?','Best bet strategy?','Max multiplier possible?'] },
-  'Monopoly Live':      { icon:'🏠', type:'Game Show',  provider:'Evolution Gaming',rtp:'96.23%', vol:null,      min:'£0.10', max:'£500',  bonus:false, chips:['How does the 3D board work?','When does bonus trigger?','Is my bonus valid?'] },
-  'Dream Catcher':      { icon:'🎡', type:'Game Show',  provider:'Evolution Gaming',rtp:'96.58%', vol:null,      min:'£0.10', max:'£500',  bonus:false, chips:['Good for beginners?','Odds for each segment?','Can I use my bonus?'] }
+  'Age of the Dogs™':                        { icon:'🐕', type:'Slot',    provider:'Origins Studio',    rtp:'95.70%', vol:'High',   min:'£0.10', max:'£100',  bonus:true,  chips:['Does my bonus apply?','How do win lines work?','What are the wild features?'] },
+  'CollectOrbs: Wild West Wilds™':           { icon:'🔮', type:'Slot',    provider:'Origins Studio',    rtp:'96.20%', vol:'Medium', min:'£0.20', max:'£100',  bonus:true,  chips:['Is this in my bonus?','How do orbs collect?','Max win potential?'] },
+  'Epic Ape 2™':                             { icon:'🦍', type:'Slot',    provider:'Origins Studio',    rtp:'96.01%', vol:'High',   min:'£0.10', max:'£250',  bonus:true,  chips:['Bonus eligible?','How do free spins trigger?','What are expanding wilds?'] },
+  'Buffalo Blitz™ Megaways™':               { icon:'🦬', type:'Jackpot', provider:'Origins Studio',    rtp:'95.10%', vol:'V.High', min:'£0.25', max:'£500',  bonus:true,  chips:['Current jackpot amount?','How to trigger Blitz?','Can I use my bonus?'] },
+  'King Blitz™':                             { icon:'👑', type:'Slot',    provider:'Origins Studio',    rtp:'96.45%', vol:'Med-Hi', min:'£0.10', max:'£100',  bonus:true,  chips:['Part of my bonus?','How many paylines?','What triggers the Blitz feature?'] },
+  'Mega Fire Blaze: 3 Wizards™':            { icon:'🧙', type:'Slot',    provider:'Fire Blaze Series', rtp:'95.54%', vol:'High',   min:'£0.10', max:'£200',  bonus:true,  chips:['Bonus eligibility?','How does Fire Blaze work?','How many free spins?'] },
+  'Mega Fire Blaze: Piggies and the Bank™': { icon:'🐷', type:'Slot',    provider:'Fire Blaze Series', rtp:'95.34%', vol:'High',   min:'£0.10', max:'£150',  bonus:true,  chips:['In my bonus?','What triggers the Bank feature?','Max win?'] },
+  'Mega Fire Blaze: Breaking Bad™':         { icon:'⚗️', type:'Slot',    provider:'Fire Blaze Series', rtp:'95.80%', vol:'High',   min:'£0.20', max:'£200',  bonus:true,  chips:['Bonus eligible?','How does the feature trigger?','Max multiplier?'] },
 };
 
-/* ─── State ────────────────────────────────────────────────── */
-var adaReady = false;
-var msgQueue = [];
-var seenIds  = {};
-var hasShownMsgs = false;
+var adaReady = false, msgQueue = [], seenIds = {}, hasShownMsgs = false;
 
-/* ─── DOM refs ─────────────────────────────────────────────── */
-var elDot      = document.getElementById('cp-dot');
-var elStatusLbl= document.getElementById('cp-status-lbl');
-var elGameCtx  = document.getElementById('cp-game-ctx');
-var elEmpty    = document.getElementById('cp-empty');
-var elMessages = document.getElementById('cp-messages');
-var elTyping   = document.getElementById('cp-typing');
-var elChips    = document.getElementById('cp-chips');
-var elInput    = document.getElementById('cp-input');
-var elSend     = document.getElementById('cp-send');
+var elDot       = document.getElementById('cp-dot');
+var elStatusLbl = document.getElementById('cp-status-lbl');
+var elGameCtx   = document.getElementById('cp-game-ctx');
+var elEmpty     = document.getElementById('cp-empty');
+var elMessages  = document.getElementById('cp-messages');
+var elTyping    = document.getElementById('cp-typing');
+var elChips     = document.getElementById('cp-chips');
+var elInput     = document.getElementById('cp-input');
+var elSend      = document.getElementById('cp-send');
+var elPanel     = document.getElementById('cp');
+var elBackdrop  = document.getElementById('chat-backdrop');
 
-/* ─── Ada headless init ────────────────────────────────────── */
+// Ada headless
 window.adaSettings = {
   handle: 'rkirk-gaming-demo',
   headless: true,
@@ -1132,13 +546,9 @@ window.adaSettings = {
 };
 
 function waitForAda() {
-  if (window.adaEmbed && typeof adaEmbed.subscribeEvent === 'function') {
-    wireAda();
-  } else {
-    setTimeout(waitForAda, 250);
-  }
+  if (window.adaEmbed && typeof adaEmbed.subscribeEvent === 'function') { wireAda(); }
+  else { setTimeout(waitForAda, 250); }
 }
-
 function wireAda() {
   adaEmbed.subscribeEvent('ada:ready', function () {
     adaReady = true;
@@ -1147,7 +557,6 @@ function wireAda() {
     msgQueue.forEach(function (m) { adaEmbed.sendMessage(m.text); });
     msgQueue = [];
   });
-
   adaEmbed.subscribeEvent('ada:message:received', function (e) {
     var msg = e && e.message;
     if (!msg || !msg.id || seenIds[msg.id]) return;
@@ -1157,93 +566,74 @@ function wireAda() {
     showMessages();
     appendMsg('bot', msg.body || '');
   });
-
-  adaEmbed.subscribeEvent('ada:typing:start', function () {
-    showTyping();
-  });
+  adaEmbed.subscribeEvent('ada:typing:start', function () { showTyping(); });
 }
-
 waitForAda();
 
-/* ─── Game selection ───────────────────────────────────────── */
-function selectGame(cardEl, name) {
+// Open chat panel when a game tile is clicked
+function openChat(cardEl, name) {
   var g = GAMES[name];
   if (!g) return;
 
-  /* Highlight selected card */
-  var allCards = document.querySelectorAll('.slot-card,.table-card,.show-card');
-  for (var i = 0; i < allCards.length; i++) { allCards[i].classList.remove('selected'); }
+  // Highlight selected card
+  document.querySelectorAll('.slot-card').forEach(function(c) { c.classList.remove('selected'); });
   cardEl.classList.add('selected');
 
-  /* Update game context bar */
-  var metaStr = g.type + ' &middot; ' + g.provider + ' &middot; RTP ' + g.rtp;
-  if (g.vol) { metaStr += ' &middot; ' + g.vol + ' vol.'; }
-  metaStr += '<br>Bets: ' + g.min + ' &ndash; ' + g.max;
-
+  // Update game context
+  var metaStr = g.type + ' · ' + g.provider + ' · RTP ' + g.rtp;
+  if (g.vol) metaStr += ' · ' + g.vol + ' vol.';
+  metaStr += '<br>Bets: ' + g.min + ' – ' + g.max;
   elGameCtx.className = 'cp-game-ctx';
   elGameCtx.innerHTML =
     '<div class="cp-game-icon">' + g.icon + '</div>' +
-    '<div class="cp-game-info">' +
-      '<div class="cp-game-name">' + name + '</div>' +
-      '<div class="cp-game-meta">' + metaStr + '</div>' +
-    '</div>' +
-    '<span class="cp-bonus-badge ' + (g.bonus ? 'yes' : 'no') + '">' +
-      (g.bonus ? '&#10003; Bonus' : '&#10007; No bonus') +
-    '</span>';
+    '<div class="cp-game-info"><div class="cp-game-name">' + esc(name) + '</div><div class="cp-game-meta">' + metaStr + '</div></div>' +
+    '<span class="cp-bonus-badge ' + (g.bonus ? 'yes' : 'no') + '">' + (g.bonus ? '✓ Bonus' : '✗ No bonus') + '</span>';
 
-  /* Update quick chips — "Tell me about X" first, then game-specific chips */
+  // Update chips
   var allChips = ['Tell me about ' + name].concat(g.chips);
-  elChips.innerHTML = allChips.map(function (c) {
-    return '<button class="cp-chip" onclick="sendChip(this, \'' + name + '\')">' + esc(c) + '</button>';
+  elChips.innerHTML = allChips.map(function(c) {
+    return '<button class="cp-chip" onclick="sendChip(this,\'' + esc(name) + '\')">' + esc(c) + '</button>';
   }).join('');
+
+  // Slide in
+  elPanel.classList.add('open');
+  elBackdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 
-/* ─── Chip send ────────────────────────────────────────────── */
+function closeChat() {
+  elPanel.classList.remove('open');
+  elBackdrop.classList.remove('open');
+  document.body.style.overflow = '';
+  document.querySelectorAll('.slot-card').forEach(function(c) { c.classList.remove('selected'); });
+}
+
+// Close on Escape
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeChat(); });
+
 function sendChip(btn, gameName) {
   var t = btn.textContent || btn.innerText;
   doSend(t.trim(), gameName || null);
 }
 
-/* ─── Input handlers ───────────────────────────────────────── */
-elInput.addEventListener('keydown', function (e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    doSend(elInput.value.trim());
-  }
+elInput.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); doSend(elInput.value.trim()); }
 });
-elSend.addEventListener('click', function () {
-  doSend(elInput.value.trim());
-});
+elSend.addEventListener('click', function() { doSend(elInput.value.trim()); });
 
 function doSend(text, gameName) {
   if (!text) return;
   showMessages();
   appendMsg('user', text);
   elInput.value = '';
-  dispatchToAda(text, gameName || null);
+  if (gameName && adaReady) adaEmbed.setMetaFields({ demo_client: 'Casino', selected_game: gameName });
+  if (adaReady) adaEmbed.sendMessage(text);
+  else msgQueue.push({ text: text });
 }
 
-/* ─── Dispatch to Ada ──────────────────────────────────────── */
-function dispatchToAda(text, gameName) {
-  if (gameName && adaReady) {
-    adaEmbed.setMetaFields({ demo_client: 'Casino', selected_game: gameName });
-  }
-  if (adaReady) {
-    adaEmbed.sendMessage(text);
-  } else {
-    msgQueue.push({ text: text });
-  }
-}
-
-/* ─── Message rendering ────────────────────────────────────── */
 function showMessages() {
-  if (!hasShownMsgs) {
-    elEmpty.style.display = 'none';
-    elMessages.style.display = 'flex';
-    hasShownMsgs = true;
-  }
+  if (!hasShownMsgs) { elEmpty.style.display = 'none'; elMessages.style.display = 'flex'; hasShownMsgs = true; }
 }
-
 function appendMsg(role, body) {
   var wrap = document.createElement('div');
   wrap.className = 'cp-msg ' + role;
@@ -1254,44 +644,23 @@ function appendMsg(role, body) {
   elMessages.insertBefore(wrap, elTyping);
   elMessages.scrollTop = elMessages.scrollHeight;
 }
-
 function showTyping()  { elTyping.classList.add('show');    elMessages.scrollTop = elMessages.scrollHeight; }
 function hideTyping()  { elTyping.classList.remove('show'); }
 
-/* ─── Simple markdown renderer ─────────────────────────────── */
 function renderMd(s) {
   return esc(s)
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.*?)\*/g,     '<em>$1</em>')
     .replace(/`(.*?)`/g,       '<code>$1</code>')
     .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
-    .replace(/^[-•]\s+(.+)$/gm,'&bull; $1')
+    .replace(/^[-•]\s+(.+)$/gm, '&bull; $1')
     .replace(/\n/g, '<br>');
 }
-
 function esc(s) {
-  return String(s)
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;');
-}
-
-/* ─── Category tabs (visual only) ─────────────────────────── */
-document.querySelectorAll('.cat-tab').forEach(function (tab) {
-  tab.addEventListener('click', function () {
-    document.querySelectorAll('.cat-tab').forEach(function (t) { t.classList.remove('active'); });
-    tab.classList.add('active');
-  });
-});
-
-/* ─── Demo alert for Play buttons ──────────────────────────── */
-function demoAlert(name) {
-  alert('Demo only — ' + name + ' would launch here.\n\n18+ | BeGambleAware.org');
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 </script>
 
-<!-- Ada headless embed — must load AFTER adaSettings is defined -->
 <script>
   window.adaSettings = window.adaSettings || {};
   window.adaSettings.handle = 'rkirk-gaming-demo';
