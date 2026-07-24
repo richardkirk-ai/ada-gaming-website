@@ -108,10 +108,12 @@
   width: 420px; max-width: 100vw;
   z-index: 300;
   display: flex; flex-direction: column;
-  background: #1A1050;
+  background: rgba(14,9,40,0.35);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
   border: 1.5px solid rgba(212,168,67,0.6);
   border-radius: 14px;
-  box-shadow: -4px 0 32px rgba(0,0,0,0.55), 0 0 0 1px rgba(212,168,67,0.12);
+  box-shadow: -4px 0 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,168,67,0.12);
   overflow: hidden;
   transform: translateX(calc(100% + 8px));
   transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
@@ -124,7 +126,7 @@
   border-bottom: 1px solid rgba(212,168,67,0.18);
   display: flex; align-items: center; gap: 9px;
   flex-shrink: 0;
-  background: rgba(10,6,32,0.5);
+  background: rgba(10,6,32,0.25);
 }
 .cp-avatar {
   width: 32px; height: 32px; border-radius: 50%;
@@ -251,8 +253,8 @@
 .cp-msg.bot  { align-self: flex-start; }
 .cp-msg.user { align-self: flex-end; }
 .cp-msg-bubble { padding: 8px 11px; font-size: 12px; line-height: 1.5; border-radius: 12px; }
-.cp-msg.bot  .cp-msg-bubble { background: #231960; border: 1px solid rgba(212,168,67,0.13); color: #C0B4E8; border-radius: 3px 12px 12px 12px; }
-.cp-msg.user .cp-msg-bubble { background: linear-gradient(135deg, rgba(212,168,67,0.17), rgba(212,168,67,0.07)); border: 1px solid rgba(212,168,67,0.28); color: #F5F1FF; border-radius: 12px 3px 12px 12px; }
+.cp-msg.bot  .cp-msg-bubble { background: rgba(35,25,96,0.55); border: 1px solid rgba(212,168,67,0.13); color: #C0B4E8; border-radius: 3px 12px 12px 12px; }
+.cp-msg.user .cp-msg-bubble { background: linear-gradient(135deg, rgba(212,168,67,0.2), rgba(212,168,67,0.09)); border: 1px solid rgba(212,168,67,0.28); color: #F5F1FF; border-radius: 12px 3px 12px 12px; }
 .cp-msg.bot .cp-msg-bubble strong { color: #D4A843; }
 .cp-msg.bot .cp-msg-bubble a { color: #D4A843; }
 .cp-msg.bot .cp-msg-bubble code { font-family: monospace; font-size: 11px; background: rgba(212,168,67,0.1); padding: 1px 4px; border-radius: 3px; color: #D4A843; }
@@ -260,7 +262,7 @@
 /* Typing dots */
 .cp-typing {
   display: none; align-items: center; gap: 4px;
-  padding: 9px 12px; background: #231960;
+  padding: 9px 12px; background: rgba(35,25,96,0.55);
   border: 1px solid rgba(212,168,67,0.13);
   border-radius: 3px 12px 12px 12px;
   align-self: flex-start; width: fit-content;
@@ -292,10 +294,10 @@
   padding: 9px 13px 14px;
   border-top: 1px solid rgba(212,168,67,0.18);
   display: flex; gap: 7px; align-items: flex-end;
-  flex-shrink: 0; background: rgba(10,6,32,0.3);
+  flex-shrink: 0; background: rgba(10,6,32,0.15);
 }
 .cp-input {
-  flex: 1; background: #0E0928;
+  flex: 1; background: rgba(14,9,40,0.5);
   border: 1.5px solid rgba(212,168,67,0.22);
   border-radius: 11px; padding: 9px 12px;
   color: #F5F1FF; font-size: 12px;
