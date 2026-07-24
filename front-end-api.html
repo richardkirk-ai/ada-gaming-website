@@ -479,30 +479,40 @@
   <p style="font-size:10px;font-weight:800;letter-spacing:0.22em;text-transform:uppercase;color:var(--ag-gold-1);margin-bottom:18px;">General chat interfaces — portrait</p>
   <div class="alt-row portrait-row" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:52px;">
 
-    <!-- 1: Floating bubble + full chat -->
+    <!-- 1: Queens of Luck — magenta/pink theme — bottom sheet chat -->
     <div class="alt-card">
       <div class="iphone-frame portrait">
-        <div class="iphone-screen" style="background:linear-gradient(160deg,#0e0928,#1e1450);">
-          <div style="padding:10px 8px;flex:1;display:flex;flex-direction:column;gap:6px;overflow:hidden;">
-            <div style="background:rgba(255,255,255,0.06);border-radius:6px;height:40px;display:flex;align-items:center;padding:0 8px;gap:6px;">
-              <div style="width:8px;height:8px;border-radius:50%;background:#d4a843;opacity:.5;"></div>
-              <div style="width:60%;height:6px;background:rgba(255,255,255,0.12);border-radius:3px;"></div>
+        <div class="iphone-screen" style="background:linear-gradient(160deg,#2D0045,#7A0060,#1A0030);position:relative;overflow:hidden;">
+          <!-- Game grid visible in top portion -->
+          <div style="position:absolute;top:0;left:0;right:0;bottom:62%;padding:5px 5px 2px;display:flex;flex-direction:column;gap:2px;">
+            <div style="font-size:6.5px;font-weight:900;color:#FF69B4;letter-spacing:.1em;text-shadow:0 0 8px rgba(255,105,180,0.7);">QUEENS OF LUCK™</div>
+            <div style="flex:1;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:2px;">
+              <div style="background:linear-gradient(145deg,#8B0057,#4A002E);border:1px solid #FF1493;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#FFD700;">Q</span></div>
+              <div style="background:linear-gradient(145deg,#8B0057,#4A002E);border:1.5px solid #FFD700;border-radius:3px;box-shadow:0 0 6px rgba(255,215,0,0.5);display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#FFD700;text-shadow:0 0 4px #FFD700;">Q</span></div>
+              <div style="background:linear-gradient(145deg,#8B0057,#4A002E);border:1.5px solid #FFD700;border-radius:3px;box-shadow:0 0 6px rgba(255,215,0,0.5);display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#FFD700;text-shadow:0 0 4px #FFD700;">Q</span></div>
+              <div style="background:linear-gradient(145deg,#5C0040,#300020);border:1px solid #CC0077;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#FF69B4;">♥</span></div>
+              <div style="background:linear-gradient(145deg,#3D0060,#1E0035);border:1px solid #9B00CC;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#E080FF;">★</span></div>
+              <div style="background:linear-gradient(145deg,#5C0040,#300020);border:1px solid #CC0077;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#FF69B4;">♥</span></div>
+              <div style="background:linear-gradient(145deg,#3D0060,#1E0035);border:1px solid #9B00CC;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#E080FF;">★</span></div>
+              <div style="background:linear-gradient(145deg,#8B0057,#4A002E);border:1px solid #FF1493;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#FFD700;">Q</span></div>
+              <div style="background:linear-gradient(145deg,#5C0040,#300020);border:1px solid #CC0077;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#FF69B4;">♥</span></div>
             </div>
-            <div style="background:rgba(255,255,255,0.04);border-radius:6px;flex:1;"></div>
           </div>
-          <!-- Chat overlay -->
-          <div style="position:absolute;bottom:0;left:0;right:0;height:68%;background:linear-gradient(180deg,rgba(14,9,40,0.0),#1a1050 12%);border-radius:10px 10px 0 0;display:flex;flex-direction:column;border-top:1px solid rgba(212,168,67,0.35);">
-            <div style="padding:7px 8px 5px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:6px;">
+          <!-- Fade gradient into chat -->
+          <div style="position:absolute;bottom:62%;left:0;right:0;height:40px;background:linear-gradient(0deg,rgba(45,0,68,0.95),transparent);"></div>
+          <!-- Chat overlay bottom sheet -->
+          <div style="position:absolute;bottom:0;left:0;right:0;height:64%;display:flex;flex-direction:column;border-top:1px solid rgba(255,105,180,0.4);">
+            <div style="padding:7px 8px 5px;background:rgba(28,0,42,0.97);border-bottom:1px solid rgba(255,105,180,0.15);display:flex;align-items:center;gap:6px;">
               <div style="width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#d4a843,#a87820);display:flex;align-items:center;justify-content:center;font-size:9px;">⚡</div>
-              <span style="font-size:8px;font-weight:800;letter-spacing:.1em;color:#d4a843;">ADA CONCIERGE</span>
+              <span style="font-size:7.5px;font-weight:900;letter-spacing:.1em;color:#d4a843;">ADA CONCIERGE</span>
               <div style="margin-left:auto;width:6px;height:6px;border-radius:50%;background:#2ecc71;"></div>
             </div>
-            <div style="flex:1;padding:6px 8px;display:flex;flex-direction:column;gap:5px;overflow:hidden;">
-              <div style="background:rgba(212,168,67,0.1);border:1px solid rgba(212,168,67,0.2);border-radius:0 6px 6px 6px;padding:4px 6px;font-size:7px;color:rgba(255,255,255,0.8);max-width:80%;">Hi Richard! I see you're a Diamond VIP. How can I help?</div>
-              <div style="background:rgba(255,255,255,0.08);border-radius:6px 0 6px 6px;padding:4px 6px;font-size:7px;color:rgba(255,255,255,0.7);max-width:75%;align-self:flex-end;">Does my bonus apply to Epic Ape 2?</div>
-              <div style="background:rgba(212,168,67,0.1);border:1px solid rgba(212,168,67,0.2);border-radius:0 6px 6px 6px;padding:4px 6px;font-size:7px;color:rgba(255,255,255,0.8);max-width:80%;">Yes — your 50 free spins are valid on Epic Ape 2! ✓</div>
+            <div style="flex:1;padding:6px 8px;display:flex;flex-direction:column;gap:5px;overflow:hidden;background:rgba(28,0,42,0.97);">
+              <div style="background:rgba(255,105,180,0.1);border:1px solid rgba(255,105,180,0.25);border-radius:0 6px 6px 6px;padding:4px 6px;font-size:7px;color:rgba(255,255,255,0.88);max-width:82%;">Hi Richard! Your Queens of Luck free spins are ready 👑</div>
+              <div style="background:rgba(255,255,255,0.08);border-radius:6px 0 6px 6px;padding:4px 6px;font-size:7px;color:rgba(255,255,255,0.7);max-width:72%;align-self:flex-end;">How many spins do I get?</div>
+              <div style="background:rgba(255,105,180,0.1);border:1px solid rgba(255,105,180,0.25);border-radius:0 6px 6px 6px;padding:4px 6px;font-size:7px;color:rgba(255,255,255,0.88);max-width:82%;">50 spins at £0.20 each — trigger them now? ✨</div>
             </div>
-            <div style="padding:5px 6px;border-top:1px solid rgba(255,255,255,0.07);display:flex;gap:4px;">
+            <div style="padding:5px 6px;border-top:1px solid rgba(255,105,180,0.12);display:flex;gap:4px;background:rgba(28,0,42,0.97);">
               <div style="flex:1;background:rgba(255,255,255,0.07);border-radius:10px;height:18px;padding:0 7px;font-size:6.5px;color:rgba(255,255,255,0.3);display:flex;align-items:center;">Ask about bonuses, limits…</div>
               <div style="width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#d4a843,#a87820);display:flex;align-items:center;justify-content:center;font-size:8px;color:#1a0e00;">↑</div>
             </div>
@@ -510,69 +520,81 @@
         </div>
       </div>
       <div class="alt-label">Bottom sheet chat</div>
-      <div class="alt-desc">Slides up over the lobby — full context, always accessible</div>
+      <div class="alt-desc">Slides up over the live game — full context, always accessible</div>
     </div>
 
-    <!-- 2: Sidebar panel -->
+    <!-- 2: Neptune's Realm — teal/ocean theme — side panel -->
     <div class="alt-card">
       <div class="iphone-frame portrait">
-        <div class="iphone-screen" style="background:linear-gradient(160deg,#0e0928,#1e1450);display:flex;flex-direction:row;padding:0;">
-          <!-- Main content -->
-          <div style="flex:1;padding:8px 6px;display:flex;flex-direction:column;gap:5px;">
-            <div style="height:8px;width:50%;background:linear-gradient(90deg,#d4a843,#a87820);border-radius:3px;opacity:.7;"></div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;flex:1;">
-              <div style="background:rgba(255,255,255,0.06);border-radius:5px;"></div>
-              <div style="background:rgba(255,255,255,0.06);border-radius:5px;"></div>
-              <div style="background:rgba(255,255,255,0.06);border-radius:5px;"></div>
-              <div style="background:rgba(255,255,255,0.06);border-radius:5px;"></div>
+        <div class="iphone-screen" style="background:linear-gradient(160deg,#001A30,#003A60,#001020);display:flex;flex-direction:row;padding:0;overflow:hidden;">
+          <!-- Game side left -->
+          <div style="flex:1;display:flex;flex-direction:column;padding:6px 5px;gap:3px;position:relative;">
+            <div style="font-size:5.5px;font-weight:900;color:#00D4FF;letter-spacing:.1em;text-shadow:0 0 8px rgba(0,212,255,0.6);flex-shrink:0;">NEPTUNE'S REALM™</div>
+            <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(4,1fr);gap:2px;">
+              <div style="background:linear-gradient(145deg,#003A5C,#001A30);border:1px solid #0099CC;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#00D4FF;">A</span></div>
+              <div style="background:linear-gradient(145deg,#004A40,#001E18);border:1px solid #00AA88;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:8px;font-weight:900;color:#00FFCC;">W</span></div>
+              <div style="background:linear-gradient(145deg,#003A5C,#001A30);border:1px solid #0099CC;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#7EC8FF;">K</span></div>
+              <div style="background:linear-gradient(145deg,#004A40,#001E18);border:1px solid #00AA88;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:8px;font-weight:900;color:#00FFCC;">W</span></div>
+              <div style="background:linear-gradient(145deg,#001E40,#000A20);border:1px solid #0055CC;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#6699FF;">Q</span></div>
+              <div style="background:linear-gradient(145deg,#003A5C,#001A30);border:1px solid #0099CC;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#00D4FF;">A</span></div>
+              <div style="background:linear-gradient(145deg,#004A40,#001E18);border:1px solid #00AA88;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:8px;font-weight:900;color:#00FFCC;">W</span></div>
+              <div style="background:linear-gradient(145deg,#001E40,#000A20);border:1px solid #0055CC;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#6699FF;">J</span></div>
             </div>
+            <div style="position:absolute;inset:0;background:rgba(0,26,48,0.3);border-right:1px solid rgba(0,212,255,0.2);"></div>
           </div>
-          <!-- Side panel -->
-          <div style="width:52%;background:#1a1050;border-left:1px solid rgba(212,168,67,0.4);display:flex;flex-direction:column;">
-            <div style="padding:5px 6px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:4px;">
+          <!-- Chat panel right -->
+          <div style="width:54%;background:rgba(0,10,24,0.98);border-left:1px solid rgba(0,212,255,0.3);display:flex;flex-direction:column;">
+            <div style="padding:5px 6px;border-bottom:1px solid rgba(0,212,255,0.15);display:flex;align-items:center;gap:4px;">
               <div style="width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,#d4a843,#a87820);display:flex;align-items:center;justify-content:center;font-size:6px;">⚡</div>
-              <span style="font-size:6px;font-weight:800;letter-spacing:.08em;color:#d4a843;">CONCIERGE</span>
+              <span style="font-size:6px;font-weight:900;letter-spacing:.08em;color:#00D4FF;">CONCIERGE</span>
+              <div style="margin-left:auto;width:5px;height:5px;border-radius:50%;background:#00FFCC;"></div>
             </div>
             <div style="flex:1;padding:4px 5px;display:flex;flex-direction:column;gap:4px;overflow:hidden;">
-              <div style="background:rgba(212,168,67,0.1);border-radius:0 4px 4px 4px;padding:3px 4px;font-size:5.5px;color:rgba(255,255,255,0.8);">Welcome back, Richard!</div>
-              <div style="background:rgba(255,255,255,0.08);border-radius:4px 0 4px 4px;padding:3px 4px;font-size:5.5px;color:rgba(255,255,255,0.7);align-self:flex-end;">My withdrawal?</div>
-              <div style="background:rgba(212,168,67,0.1);border-radius:0 4px 4px 4px;padding:3px 4px;font-size:5.5px;color:rgba(255,255,255,0.8);">Processing — 1–3 days.</div>
+              <div style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:0 4px 4px 4px;padding:3px 4px;font-size:5.5px;color:rgba(255,255,255,0.88);">Welcome back, Richard!</div>
+              <div style="background:rgba(255,255,255,0.08);border-radius:4px 0 4px 4px;padding:3px 4px;font-size:5.5px;color:rgba(255,255,255,0.7);align-self:flex-end;">My withdrawal status?</div>
+              <div style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:0 4px 4px 4px;padding:3px 4px;font-size:5.5px;color:rgba(255,255,255,0.88);">Processing — arrives 1–3 days. ✓</div>
+              <div style="background:rgba(255,255,255,0.08);border-radius:4px 0 4px 4px;padding:3px 4px;font-size:5.5px;color:rgba(255,255,255,0.7);align-self:flex-end;">Great, thanks!</div>
             </div>
-            <div style="padding:3px 4px;border-top:1px solid rgba(255,255,255,0.07);">
-              <div style="background:rgba(255,255,255,0.07);border-radius:6px;height:14px;font-size:5px;color:rgba(255,255,255,0.3);display:flex;align-items:center;padding:0 5px;">Message…</div>
+            <div style="padding:3px 4px;border-top:1px solid rgba(0,212,255,0.1);">
+              <div style="background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.15);border-radius:6px;height:14px;font-size:5px;color:rgba(255,255,255,0.3);display:flex;align-items:center;padding:0 5px;">Message…</div>
             </div>
           </div>
         </div>
       </div>
       <div class="alt-label">Side panel</div>
-      <div class="alt-desc">Persistent split-view — chat alongside the lobby at all times</div>
+      <div class="alt-desc">Persistent split-view — chat alongside the live game at all times</div>
     </div>
 
-    <!-- 3: Floating VIP card -->
+    <!-- 3: Aztec Blaze — amber/fire theme — VIP card -->
     <div class="alt-card">
       <div class="iphone-frame portrait">
-        <div class="iphone-screen" style="background:linear-gradient(160deg,#0e0928,#160d3a);">
-          <!-- Lobby bg -->
-          <div style="padding:8px;display:flex;flex-direction:column;gap:5px;flex:1;">
-            <div style="height:6px;width:40%;background:rgba(212,168,67,0.3);border-radius:3px;"></div>
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;flex:1;">
-              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
-              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
-              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
-              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
-              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
-              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
+        <div class="iphone-screen" style="background:linear-gradient(160deg,#1C0500,#4A1000,#1C0400);position:relative;overflow:hidden;">
+          <!-- Lobby game grid -->
+          <div style="position:absolute;top:0;left:0;right:0;bottom:44%;padding:5px 5px 2px;">
+            <div style="font-size:6px;font-weight:900;color:#FF8C00;letter-spacing:.12em;text-shadow:0 0 8px rgba(255,140,0,0.7);margin-bottom:3px;">AZTEC BLAZE™</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:2px;height:calc(100% - 18px);">
+              <div style="background:linear-gradient(145deg,#7A1500,#400A00);border:1px solid #CC2200;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#FF4400;">7</span></div>
+              <div style="background:linear-gradient(145deg,#6B3000,#351800);border:1.5px solid #FFD700;border-radius:3px;box-shadow:0 0 6px rgba(255,215,0,0.5);display:flex;align-items:center;justify-content:center;"><span style="font-size:8px;font-weight:900;color:#FFD700;">BAR</span></div>
+              <div style="background:linear-gradient(145deg,#6B3000,#351800);border:1.5px solid #FFD700;border-radius:3px;box-shadow:0 0 6px rgba(255,215,0,0.5);display:flex;align-items:center;justify-content:center;"><span style="font-size:8px;font-weight:900;color:#FFD700;">BAR</span></div>
+              <div style="background:linear-gradient(145deg,#6B3000,#351800);border:1.5px solid #FFD700;border-radius:3px;box-shadow:0 0 6px rgba(255,215,0,0.5);display:flex;align-items:center;justify-content:center;"><span style="font-size:8px;font-weight:900;color:#FFD700;">BAR</span></div>
+              <div style="background:linear-gradient(145deg,#7A1500,#400A00);border:1px solid #CC2200;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#FF6600;">A</span></div>
+              <div style="background:linear-gradient(145deg,#4A0020,#280010);border:1px solid #880044;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#FF6699;">K</span></div>
+              <div style="background:linear-gradient(145deg,#7A1500,#400A00);border:1px solid #CC2200;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#FF4400;">7</span></div>
+              <div style="background:linear-gradient(145deg,#4A0020,#280010);border:1px solid #880044;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#FF6699;">Q</span></div>
+              <div style="background:linear-gradient(145deg,#7A1500,#400A00);border:1px solid #CC2200;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#FF4400;">7</span></div>
             </div>
           </div>
+          <!-- Fade -->
+          <div style="position:absolute;bottom:44%;left:0;right:0;height:32px;background:linear-gradient(0deg,rgba(28,5,0,0.98),transparent);"></div>
           <!-- VIP card -->
-          <div style="position:absolute;bottom:22px;left:8px;right:8px;background:linear-gradient(135deg,#251a60,#1a1050);border:1px solid rgba(212,168,67,0.5);border-radius:10px;padding:8px 10px;box-shadow:0 8px 24px rgba(0,0,0,0.6);">
+          <div style="position:absolute;bottom:18px;left:8px;right:8px;background:linear-gradient(135deg,#2A0E00,#4A1C00);border:1px solid rgba(255,140,0,0.55);border-radius:10px;padding:8px 10px;box-shadow:0 8px 24px rgba(0,0,0,0.7);">
             <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
-              <div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#d4a843,#a87820);display:flex;align-items:center;justify-content:center;font-size:10px;">💎</div>
+              <div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#FF8C00,#CC5500);display:flex;align-items:center;justify-content:center;font-size:11px;">🔥</div>
               <div>
-                <div style="font-size:7px;font-weight:800;color:#d4a843;letter-spacing:.1em;">DIAMOND VIP</div>
-                <div style="font-size:6px;color:rgba(255,255,255,0.5);">Richard · Gold Member</div>
+                <div style="font-size:7px;font-weight:900;color:#FF8C00;letter-spacing:.1em;">BLAZE VIP</div>
+                <div style="font-size:6px;color:rgba(255,255,255,0.5);">Richard · Platinum</div>
               </div>
-              <div style="margin-left:auto;font-size:6px;color:#2ecc71;font-weight:700;">● Live</div>
+              <div style="margin-left:auto;font-size:6px;color:#FF8C00;font-weight:700;">● Hot</div>
             </div>
             <div style="display:flex;gap:4px;margin-bottom:7px;">
               <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:5px;padding:4px 5px;text-align:center;">
@@ -581,14 +603,14 @@
               </div>
               <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:5px;padding:4px 5px;text-align:center;">
                 <div style="font-size:5px;color:rgba(255,255,255,0.4);">Free Spins</div>
-                <div style="font-size:8px;font-weight:700;color:#d4a843;">50</div>
+                <div style="font-size:8px;font-weight:700;color:#FF8C00;">50</div>
               </div>
               <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:5px;padding:4px 5px;text-align:center;">
                 <div style="font-size:5px;color:rgba(255,255,255,0.4);">Limit</div>
                 <div style="font-size:8px;font-weight:700;color:#2ecc71;">£32</div>
               </div>
             </div>
-            <div style="background:linear-gradient(135deg,#d4a843,#a87820);border-radius:6px;padding:5px;text-align:center;font-size:7px;font-weight:800;color:#1a0e00;letter-spacing:.1em;">ASK YOUR VIP CONCIERGE</div>
+            <div style="background:linear-gradient(135deg,#FF8C00,#CC5500);border-radius:6px;padding:5px;text-align:center;font-size:7px;font-weight:900;color:#fff;letter-spacing:.1em;">ASK YOUR VIP CONCIERGE</div>
           </div>
         </div>
       </div>
@@ -596,32 +618,38 @@
       <div class="alt-desc">Contextual card surfacing balance, bonuses, and a direct chat entry</div>
     </div>
 
-    <!-- 4: Proactive nudge banner -->
+    <!-- 4: Cosmic Spins — electric purple/neon theme — proactive nudge -->
     <div class="alt-card">
       <div class="iphone-frame portrait">
-        <div class="iphone-screen" style="background:linear-gradient(160deg,#0e0928,#1e1450);">
+        <div class="iphone-screen" style="background:linear-gradient(160deg,#080020,#1A0055,#080020);position:relative;overflow:hidden;">
           <div style="padding:8px;display:flex;flex-direction:column;gap:5px;flex:1;">
-            <!-- Proactive banner at top -->
-            <div style="background:linear-gradient(135deg,rgba(46,204,113,0.15),rgba(46,204,113,0.05));border:1px solid rgba(46,204,113,0.4);border-radius:8px;padding:7px 8px;display:flex;align-items:flex-start;gap:6px;">
-              <div style="width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#2ecc71,#1a9e55);display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0;">💬</div>
+            <!-- Proactive banner -->
+            <div style="background:linear-gradient(135deg,rgba(0,255,136,0.12),rgba(0,255,136,0.04));border:1px solid rgba(0,255,136,0.45);border-radius:8px;padding:7px 8px;display:flex;align-items:flex-start;gap:6px;">
+              <div style="width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#00FF88,#00AA55);display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0;">💬</div>
               <div style="flex:1;">
-                <div style="font-size:6.5px;font-weight:800;color:#2ecc71;letter-spacing:.08em;margin-bottom:2px;">ADA NOTICED</div>
-                <div style="font-size:6px;color:rgba(255,255,255,0.75);line-height:1.4;">Your £200 deposit hasn't triggered a bonus yet. Tap to find out why — I can fix it.</div>
+                <div style="font-size:6.5px;font-weight:900;color:#00FF88;letter-spacing:.08em;margin-bottom:2px;text-shadow:0 0 6px rgba(0,255,136,0.5);">ADA NOTICED</div>
+                <div style="font-size:6px;color:rgba(255,255,255,0.8);line-height:1.4;">Your £200 deposit hasn't triggered a bonus yet — I can fix this right now.</div>
               </div>
-              <div style="font-size:8px;color:rgba(255,255,255,0.3);cursor:pointer;">✕</div>
+              <div style="font-size:8px;color:rgba(255,255,255,0.3);">✕</div>
             </div>
-            <!-- Game grid below -->
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;flex:1;">
-              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
-              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
-              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
-              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
-              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
-              <div style="background:rgba(255,255,255,0.05);border-radius:4px;"></div>
+            <!-- Neon game grid -->
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,1fr);gap:2px;flex:1;">
+              <div style="background:linear-gradient(145deg,#1A0060,#0A0030);border:1px solid #5500CC;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#AA44FF;">A</span></div>
+              <div style="background:linear-gradient(145deg,#003A60,#001830);border:1px solid #0077CC;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#00AAFF;">K</span></div>
+              <div style="background:linear-gradient(145deg,#1A0060,#0A0030);border:1px solid #5500CC;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#AA44FF;">Q</span></div>
+              <div style="background:linear-gradient(145deg,#003A60,#001830);border:1px solid #0077CC;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#00AAFF;">K</span></div>
+              <div style="background:linear-gradient(145deg,#004A00,#001E00);border:1px solid #00AA00;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:8px;font-weight:900;color:#00FF44;">W</span></div>
+              <div style="background:linear-gradient(145deg,#3A0050,#1A0025);border:1px solid #990099;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#FF44FF;">J</span></div>
+              <div style="background:linear-gradient(145deg,#3A0050,#1A0025);border:1px solid #990099;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#FF44FF;">J</span></div>
+              <div style="background:linear-gradient(145deg,#1A0060,#0A0030);border:1px solid #5500CC;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#AA44FF;">A</span></div>
+              <div style="background:linear-gradient(145deg,#003A60,#001830);border:1px solid #0077CC;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#00AAFF;">K</span></div>
+              <div style="background:linear-gradient(145deg,#004A00,#001E00);border:1px solid #00AA00;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:8px;font-weight:900;color:#00FF44;">W</span></div>
+              <div style="background:linear-gradient(145deg,#3A0050,#1A0025);border:1px solid #990099;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#FF44FF;">J</span></div>
+              <div style="background:linear-gradient(145deg,#1A0060,#0A0030);border:1px solid #5500CC;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#AA44FF;">Q</span></div>
             </div>
           </div>
-          <!-- Floating chat button -->
-          <div style="position:absolute;bottom:18px;right:10px;width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#d4a843,#a87820);display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 4px 14px rgba(212,168,67,0.5);">💬</div>
+          <!-- Floating chat fab -->
+          <div style="position:absolute;bottom:14px;right:10px;width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#7700FF,#4400AA);display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 4px 16px rgba(119,0,255,0.6);">💬</div>
         </div>
       </div>
       <div class="alt-label">Proactive nudge</div>
@@ -631,42 +659,46 @@
   </div><!-- /portrait-row -->
 
   <!-- ROW 2 & 3 — 4 landscape iPhones: in-game experiences -->
-  <p style="font-size:10px;font-weight:800;letter-spacing:0.22em;text-transform:uppercase;color:var(--ag-gold-1);margin-bottom:18px;">In-game chat — landscape (how players actually hold their phones)</p>
+  <p style="font-size:10px;font-weight:800;letter-spacing:0.22em;text-transform:uppercase;color:var(--ag-gold-1);margin-bottom:18px;">In-game chat — landscape</p>
   <div class="alt-row landscape-row" style="display:grid;grid-template-columns:repeat(2,1fr);gap:28px;">
 
-    <!-- 5: Help button in-game corner -->
+    <!-- 5: Gold Fever 5 — classic red/gold — help button -->
     <div class="alt-card">
       <div class="iphone-frame landscape">
-        <div class="iphone-screen landscape-screen" style="background:linear-gradient(135deg,#1a0a3a 0%,#2d1060 40%,#1a0a3a 100%);position:relative;overflow:hidden;">
-          <!-- Game reels BG -->
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;padding:5px 8px;gap:3px;">
-            <!-- Top bar -->
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <div style="font-size:6px;font-weight:800;color:#d4a843;letter-spacing:.1em;">EPIC APE 2™</div>
-              <div style="display:flex;gap:4px;align-items:center;">
-                <div style="background:rgba(212,168,67,0.15);border:1px solid rgba(212,168,67,0.4);border-radius:4px;padding:2px 5px;font-size:5.5px;color:#d4a843;font-weight:700;">BAL £1,240</div>
-                <div style="background:rgba(46,204,113,0.15);border:1px solid rgba(46,204,113,0.4);border-radius:4px;padding:2px 5px;font-size:5.5px;color:#2ecc71;font-weight:700;">WIN £0</div>
+        <div class="iphone-screen landscape-screen" style="background:linear-gradient(135deg,#1C0500,#4A1000,#1C0500);position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;padding:4px 6px 3px;gap:2px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
+              <div style="font-size:7px;font-weight:900;color:#FFD700;letter-spacing:.12em;text-shadow:0 0 8px rgba(255,215,0,0.7);">GOLD FEVER 5™</div>
+              <div style="display:flex;gap:3px;">
+                <div style="background:rgba(255,50,50,0.2);border:1px solid rgba(255,80,80,0.5);border-radius:3px;padding:1px 5px;font-size:5px;color:#FF7777;font-weight:700;">£847</div>
+                <div style="background:rgba(255,215,0,0.15);border:1px solid rgba(255,215,0,0.4);border-radius:3px;padding:1px 5px;font-size:5px;color:#FFD700;font-weight:700;">WIN £0</div>
               </div>
             </div>
-            <!-- Reel area -->
-            <div style="flex:1;display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin:2px 0;">
-              <div style="background:rgba(255,255,255,0.08);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:11px;">🦍</div>
-              <div style="background:rgba(255,255,255,0.08);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:11px;">💎</div>
-              <div style="background:rgba(212,168,67,0.2);border:1px solid #d4a843;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:11px;">7️⃣</div>
-              <div style="background:rgba(255,255,255,0.08);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:11px;">🍒</div>
-              <div style="background:rgba(255,255,255,0.08);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:11px;">🦍</div>
+            <div style="flex:1;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(3,1fr);gap:2px;margin:1px 0;">
+              <div style="background:linear-gradient(145deg,#5C0000,#320000);border:1px solid #8B0000;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FF4444;">7</span></div>
+              <div style="background:linear-gradient(145deg,#4A2800,#2A1400);border:1px solid #7A4800;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:8px;font-weight:900;color:#FFD700;">BAR</span></div>
+              <div style="background:linear-gradient(145deg,#003520,#001810);border:1px solid #006040;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#4CAF50;">A</span></div>
+              <div style="background:linear-gradient(145deg,#001A40,#000D20);border:1px solid #003080;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#4FC3F7;">K</span></div>
+              <div style="background:linear-gradient(145deg,#5C0000,#320000);border:1px solid #8B0000;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FF4444;">7</span></div>
+              <div style="background:linear-gradient(145deg,#5C2A00,#FFD70018);border:1.5px solid #FFD700;border-radius:3px;box-shadow:0 0 8px rgba(255,215,0,0.6),inset 0 0 4px rgba(255,215,0,0.1);display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FFD700;text-shadow:0 0 6px #FFD700;">7</span></div>
+              <div style="background:linear-gradient(145deg,#5C2A00,#FFD70018);border:1.5px solid #FFD700;border-radius:3px;box-shadow:0 0 8px rgba(255,215,0,0.6),inset 0 0 4px rgba(255,215,0,0.1);display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FFD700;text-shadow:0 0 6px #FFD700;">7</span></div>
+              <div style="background:linear-gradient(145deg,#5C2A00,#FFD70018);border:1.5px solid #FFD700;border-radius:3px;box-shadow:0 0 8px rgba(255,215,0,0.6),inset 0 0 4px rgba(255,215,0,0.1);display:flex;align-items:center;justify-content:center;"><span style="font-size:8px;font-weight:900;color:#FFD700;text-shadow:0 0 6px #FFD700;">BAR</span></div>
+              <div style="background:linear-gradient(145deg,#5C2A00,#FFD70018);border:1.5px solid #FFD700;border-radius:3px;box-shadow:0 0 8px rgba(255,215,0,0.6),inset 0 0 4px rgba(255,215,0,0.1);display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FFD700;text-shadow:0 0 6px #FFD700;">7</span></div>
+              <div style="background:linear-gradient(145deg,#5C2A00,#FFD70018);border:1.5px solid #FFD700;border-radius:3px;box-shadow:0 0 8px rgba(255,215,0,0.6),inset 0 0 4px rgba(255,215,0,0.1);display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FFD700;text-shadow:0 0 6px #FFD700;">7</span></div>
+              <div style="background:linear-gradient(145deg,#001A40,#000D20);border:1px solid #003080;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#4FC3F7;">K</span></div>
+              <div style="background:linear-gradient(145deg,#5C0000,#320000);border:1px solid #8B0000;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FF4444;">7</span></div>
+              <div style="background:linear-gradient(145deg,#3D0060,#1E0030);border:1px solid #7B1FA2;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#CE93D8;">Q</span></div>
+              <div style="background:linear-gradient(145deg,#4A2800,#2A1400);border:1px solid #7A4800;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:8px;font-weight:900;color:#FFD700;">BAR</span></div>
+              <div style="background:linear-gradient(145deg,#003520,#001810);border:1px solid #006040;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#4CAF50;">A</span></div>
             </div>
-            <!-- Bottom controls -->
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <div style="font-size:5.5px;color:rgba(255,255,255,0.4);">BET £0.25</div>
-              <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#e74c3c,#c0392b);display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:800;color:#fff;box-shadow:0 0 10px rgba(231,76,60,0.6);">SPIN</div>
-              <div style="font-size:5.5px;color:rgba(255,255,255,0.4);">MAX BET</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
+              <div style="font-size:5px;color:rgba(255,215,0,0.5);font-weight:700;">BET £0.50</div>
+              <div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#CC2200,#880000);display:flex;align-items:center;justify-content:center;font-size:5.5px;font-weight:900;color:#FFD700;box-shadow:0 0 10px rgba(204,34,0,0.7);">SPIN</div>
+              <div style="font-size:5px;color:rgba(255,215,0,0.5);font-weight:700;">MAX BET</div>
             </div>
           </div>
-          <!-- Ada help button -->
-          <div style="position:absolute;top:6px;right:6px;background:linear-gradient(135deg,#d4a843,#a87820);border-radius:6px;padding:3px 6px;display:flex;align-items:center;gap:3px;box-shadow:0 2px 8px rgba(212,168,67,0.5);">
-            <span style="font-size:7px;">⚡</span>
-            <span style="font-size:5.5px;font-weight:800;color:#1a0e00;letter-spacing:.06em;">HELP</span>
+          <div style="position:absolute;top:5px;right:5px;background:linear-gradient(135deg,#d4a843,#a87820);border-radius:5px;padding:2px 6px;display:flex;align-items:center;gap:2px;box-shadow:0 2px 8px rgba(212,168,67,0.6);">
+            <span style="font-size:6px;color:#1a0e00;">⚡</span><span style="font-size:5px;font-weight:900;color:#1a0e00;letter-spacing:.07em;">HELP</span>
           </div>
         </div>
       </div>
@@ -674,41 +706,48 @@
       <div class="alt-desc">Non-intrusive Ada entry point within the game UI — one tap opens the concierge</div>
     </div>
 
-    <!-- 6: Chat open over game (50/50 split) -->
+    <!-- 6: Neon Nights — cyan/electric — split-screen chat -->
     <div class="alt-card">
       <div class="iphone-frame landscape">
-        <div class="iphone-screen landscape-screen" style="background:#0e0928;display:flex;flex-direction:row;padding:0;overflow:hidden;">
-          <!-- Game side (left 55%) -->
-          <div style="width:55%;background:linear-gradient(135deg,#1a0a3a,#2d1060);display:flex;flex-direction:column;padding:5px 6px;gap:3px;position:relative;">
-            <div style="font-size:5.5px;font-weight:800;color:#d4a843;letter-spacing:.08em;">BUFFALO BLITZ™</div>
-            <div style="flex:1;display:grid;grid-template-columns:repeat(5,1fr);gap:2px;">
-              <div style="background:rgba(255,255,255,0.08);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:9px;">🦬</div>
-              <div style="background:rgba(255,255,255,0.08);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:9px;">🌿</div>
-              <div style="background:rgba(212,168,67,0.2);border:1px solid #d4a843;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:9px;">🦬</div>
-              <div style="background:rgba(255,255,255,0.08);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:9px;">⭐</div>
-              <div style="background:rgba(255,255,255,0.08);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:9px;">🦬</div>
+        <div class="iphone-screen landscape-screen" style="background:#03030F;display:flex;flex-direction:row;padding:0;overflow:hidden;">
+          <div style="width:55%;background:linear-gradient(160deg,#040428,#0A0A50,#040428);display:flex;flex-direction:column;padding:4px 5px;gap:2px;position:relative;">
+            <div style="font-size:6px;font-weight:900;color:#00E5FF;letter-spacing:.14em;text-shadow:0 0 10px rgba(0,229,255,0.8);flex-shrink:0;">NEON NIGHTS™</div>
+            <div style="flex:1;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(3,1fr);gap:2px;">
+              <div style="background:linear-gradient(145deg,#001840,#000D22);border:1px solid #0066BB;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#00CCFF;text-shadow:0 0 4px #00CCFF;">A</span></div>
+              <div style="background:linear-gradient(145deg,#1A0040,#0D0022);border:1px solid #7700CC;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#CC44FF;text-shadow:0 0 4px #CC44FF;">Q</span></div>
+              <div style="background:linear-gradient(145deg,#001840,#000D22);border:1px solid #0066BB;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#00CCFF;">K</span></div>
+              <div style="background:linear-gradient(145deg,#1A0040,#0D0022);border:1px solid #7700CC;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#CC44FF;">Q</span></div>
+              <div style="background:linear-gradient(145deg,#001840,#000D22);border:1px solid #0066BB;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#00CCFF;">A</span></div>
+              <div style="background:linear-gradient(145deg,#001840,#000D22);border:1px solid #0066BB;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#00CCFF;">K</span></div>
+              <div style="background:linear-gradient(145deg,#003500,#001500);border:1px solid #00AA44;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#00FF88;text-shadow:0 0 5px #00FF88;">W</span></div>
+              <div style="background:linear-gradient(145deg,#3A0000,#1E0000);border:1px solid #CC0033;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#FF4477;text-shadow:0 0 4px #FF4477;">7</span></div>
+              <div style="background:linear-gradient(145deg,#003500,#001500);border:1px solid #00AA44;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#00FF88;text-shadow:0 0 5px #00FF88;">W</span></div>
+              <div style="background:linear-gradient(145deg,#001840,#000D22);border:1px solid #0066BB;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#00CCFF;">A</span></div>
+              <div style="background:linear-gradient(145deg,#1A0040,#0D0022);border:1px solid #7700CC;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#CC44FF;">J</span></div>
+              <div style="background:linear-gradient(145deg,#001840,#000D22);border:1px solid #0066BB;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#00CCFF;">A</span></div>
+              <div style="background:linear-gradient(145deg,#3A0000,#1E0000);border:1px solid #CC0033;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#FF4477;">7</span></div>
+              <div style="background:linear-gradient(145deg,#1A0040,#0D0022);border:1px solid #7700CC;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#CC44FF;">J</span></div>
+              <div style="background:linear-gradient(145deg,#001840,#000D22);border:1px solid #0066BB;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;font-weight:900;color:#00CCFF;">K</span></div>
             </div>
-            <div style="display:flex;justify-content:space-between;">
-              <span style="font-size:5px;color:rgba(255,255,255,0.4);">BET £0.50</span>
-              <div style="background:linear-gradient(135deg,#e74c3c,#c0392b);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:5px;font-weight:800;color:#fff;">SPIN</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
+              <span style="font-size:4.5px;color:rgba(0,229,255,0.45);font-weight:700;">BET £1.00</span>
+              <div style="background:linear-gradient(135deg,#0055EE,#003399);border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:4.5px;font-weight:900;color:#00E5FF;box-shadow:0 0 10px rgba(0,85,238,0.8);">SPIN</div>
             </div>
-            <!-- dim overlay to show chat is active -->
-            <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);border-right:1px solid rgba(212,168,67,0.3);"></div>
+            <div style="position:absolute;inset:0;background:rgba(0,0,20,0.38);border-right:1px solid rgba(0,229,255,0.25);"></div>
           </div>
-          <!-- Chat side (right 45%) -->
-          <div style="width:45%;background:#1a1050;display:flex;flex-direction:column;">
-            <div style="padding:4px 5px;border-bottom:1px solid rgba(212,168,67,0.2);display:flex;align-items:center;gap:3px;">
+          <div style="width:45%;background:#050520;display:flex;flex-direction:column;">
+            <div style="padding:4px 5px;border-bottom:1px solid rgba(0,229,255,0.22);display:flex;align-items:center;gap:3px;">
               <div style="width:13px;height:13px;border-radius:50%;background:linear-gradient(135deg,#d4a843,#a87820);display:flex;align-items:center;justify-content:center;font-size:6px;">⚡</div>
-              <span style="font-size:5.5px;font-weight:800;color:#d4a843;">CONCIERGE</span>
-              <div style="margin-left:auto;width:5px;height:5px;border-radius:50%;background:#2ecc71;"></div>
+              <span style="font-size:5px;font-weight:900;color:#00E5FF;letter-spacing:.1em;">CONCIERGE</span>
+              <div style="margin-left:auto;width:5px;height:5px;border-radius:50%;background:#00FF88;"></div>
             </div>
             <div style="flex:1;padding:4px 5px;display:flex;flex-direction:column;gap:3px;overflow:hidden;">
-              <div style="background:rgba(212,168,67,0.1);border-radius:0 3px 3px 3px;padding:3px 4px;font-size:5px;color:rgba(255,255,255,0.8);">Can I use my bonus on this game?</div>
-              <div style="background:rgba(212,168,67,0.1);border-radius:0 3px 3px 3px;padding:3px 4px;font-size:5px;color:rgba(255,255,255,0.8);margin-top:1px;">Yes! Your 50 free spins apply to Buffalo Blitz™. Trigger now? ✓</div>
-              <div style="background:rgba(255,255,255,0.08);border-radius:3px 0 3px 3px;padding:3px 4px;font-size:5px;color:rgba(255,255,255,0.7);align-self:flex-end;">Yes, trigger them!</div>
+              <div style="background:rgba(0,229,255,0.07);border:1px solid rgba(0,229,255,0.2);border-radius:0 3px 3px 3px;padding:3px 4px;font-size:5px;color:rgba(255,255,255,0.9);">Can I use my bonus here?</div>
+              <div style="background:rgba(0,255,136,0.07);border:1px solid rgba(0,255,136,0.2);border-radius:0 3px 3px 3px;padding:3px 4px;font-size:5px;color:rgba(255,255,255,0.9);">Yes! 50 free spins on Neon Nights™. Trigger? ✓</div>
+              <div style="background:rgba(255,255,255,0.07);border-radius:3px 0 3px 3px;padding:3px 4px;font-size:5px;color:rgba(255,255,255,0.7);align-self:flex-end;">Let's go!</div>
             </div>
-            <div style="padding:3px 4px;border-top:1px solid rgba(255,255,255,0.07);">
-              <div style="background:rgba(255,255,255,0.07);border-radius:5px;height:12px;font-size:4.5px;color:rgba(255,255,255,0.3);display:flex;align-items:center;padding:0 4px;">Reply…</div>
+            <div style="padding:3px 4px;border-top:1px solid rgba(0,229,255,0.1);">
+              <div style="background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);border-radius:5px;height:12px;font-size:4.5px;color:rgba(255,255,255,0.3);display:flex;align-items:center;padding:0 4px;">Reply…</div>
             </div>
           </div>
         </div>
@@ -717,32 +756,37 @@
       <div class="alt-desc">Chat lives alongside the active game — ask about bonuses without leaving the reel</div>
     </div>
 
-    <!-- 7: Win celebration + Ada upsell -->
+    <!-- 7: Royal Fortune — blue/gold — win moment -->
     <div class="alt-card">
       <div class="iphone-frame landscape">
-        <div class="iphone-screen landscape-screen" style="background:linear-gradient(135deg,#1a0a3a,#2d1060);overflow:hidden;position:relative;">
-          <!-- Game background -->
-          <div style="position:absolute;inset:0;padding:5px 8px;display:flex;flex-direction:column;gap:3px;filter:brightness(0.5);">
-            <div style="flex:1;display:grid;grid-template-columns:repeat(5,1fr);gap:2px;">
-              <div style="background:rgba(212,168,67,0.4);border-radius:2px;"></div>
-              <div style="background:rgba(212,168,67,0.4);border-radius:2px;"></div>
-              <div style="background:rgba(212,168,67,0.4);border-radius:2px;"></div>
-              <div style="background:rgba(212,168,67,0.4);border-radius:2px;"></div>
-              <div style="background:rgba(212,168,67,0.4);border-radius:2px;"></div>
+        <div class="iphone-screen landscape-screen" style="background:linear-gradient(135deg,#000C28,#002060,#000C28);overflow:hidden;position:relative;">
+          <div style="position:absolute;inset:0;padding:4px 6px 24px;display:flex;flex-direction:column;gap:2px;">
+            <div style="font-size:6px;font-weight:900;color:#d4a843;letter-spacing:.12em;text-shadow:0 0 10px rgba(212,168,67,0.6);flex-shrink:0;">ROYAL FORTUNE™</div>
+            <div style="flex:1;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(3,1fr);gap:2px;filter:brightness(0.4);">
+              <div style="background:linear-gradient(145deg,#0A2468,#04103A);border:1px solid #1A4AA0;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#6BA4E0;">A</span></div>
+              <div style="background:linear-gradient(145deg,#5C3400,#301B00);border:1px solid #AA6600;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#FFD700;">BAR</span></div>
+              <div style="background:linear-gradient(145deg,#0A2468,#04103A);border:1px solid #FFD700;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FFD700;">A</span></div>
+              <div style="background:linear-gradient(145deg,#0A2468,#04103A);border:1px solid #FFD700;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FFD700;">A</span></div>
+              <div style="background:linear-gradient(145deg,#30006A,#160035);border:1px solid #7700CC;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#BB66FF;">Q</span></div>
+              <div style="background:linear-gradient(145deg,#0A2468,#04103A);border:1px solid #FFD700;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FFD700;">A</span></div>
+              <div style="background:linear-gradient(145deg,#0A2468,#04103A);border:1px solid #FFD700;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FFD700;">A</span></div>
+              <div style="background:linear-gradient(145deg,#0A2468,#04103A);border:1px solid #FFD700;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FFD700;">A</span></div>
+              <div style="background:linear-gradient(145deg,#0A2468,#04103A);border:1px solid #FFD700;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FFD700;">A</span></div>
+              <div style="background:linear-gradient(145deg,#0A2468,#04103A);border:1px solid #FFD700;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FFD700;">A</span></div>
+              <div style="background:linear-gradient(145deg,#0A2468,#04103A);border:1px solid #1A4AA0;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#6BA4E0;">K</span></div>
+              <div style="background:linear-gradient(145deg,#30006A,#160035);border:1px solid #7700CC;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#BB66FF;">Q</span></div>
+              <div style="background:linear-gradient(145deg,#5C3400,#301B00);border:1px solid #AA6600;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#FFD700;">BAR</span></div>
+              <div style="background:linear-gradient(145deg,#0A2468,#04103A);border:1px solid #1A4AA0;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#6BA4E0;">A</span></div>
+              <div style="background:linear-gradient(145deg,#30006A,#160035);border:1px solid #7700CC;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#BB66FF;">J</span></div>
             </div>
           </div>
-          <!-- Win overlay -->
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;">
-            <div style="font-size:7px;font-weight:900;color:#d4a843;letter-spacing:.15em;text-shadow:0 0 12px rgba(212,168,67,0.8);">EPIC WIN!</div>
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;color:#fff;text-shadow:0 0 20px rgba(255,255,255,0.6);line-height:1;">£729.75</div>
-            <!-- Ada card -->
-            <div style="background:rgba(14,9,40,0.9);border:1px solid rgba(212,168,67,0.5);border-radius:7px;padding:5px 10px;display:flex;align-items:center;gap:6px;margin-top:4px;backdrop-filter:blur(4px);">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;">
+            <div style="font-size:6.5px;font-weight:900;color:#FFD700;letter-spacing:.2em;text-shadow:0 0 16px rgba(255,215,0,0.95);">ROYAL WIN!</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:900;color:#fff;text-shadow:0 0 24px rgba(255,255,255,0.8),0 0 48px rgba(212,168,67,0.5);line-height:1;">£1,247.50</div>
+            <div style="background:rgba(0,12,40,0.93);border:1px solid rgba(212,168,67,0.6);border-radius:7px;padding:4px 10px;display:flex;align-items:center;gap:5px;backdrop-filter:blur(8px);">
               <span style="font-size:9px;">⚡</span>
-              <div>
-                <div style="font-size:6px;font-weight:800;color:#d4a843;">GREAT WIN, RICHARD!</div>
-                <div style="font-size:5.5px;color:rgba(255,255,255,0.7);">You have 50 free spins unused — want to keep playing?</div>
-              </div>
-              <div style="background:linear-gradient(135deg,#d4a843,#a87820);border-radius:4px;padding:3px 7px;font-size:5.5px;font-weight:800;color:#1a0e00;white-space:nowrap;">USE NOW</div>
+              <div><div style="font-size:5.5px;font-weight:900;color:#FFD700;letter-spacing:.08em;">AMAZING WIN, RICHARD!</div><div style="font-size:5px;color:rgba(255,255,255,0.75);">50 free spins unused — keep the streak going?</div></div>
+              <div style="background:linear-gradient(135deg,#d4a843,#a87820);border-radius:4px;padding:3px 7px;font-size:5px;font-weight:900;color:#1a0e00;white-space:nowrap;">USE NOW</div>
             </div>
           </div>
         </div>
@@ -751,34 +795,43 @@
       <div class="alt-desc">Ada appears at the peak engagement moment — personalised, proactive, non-disruptive</div>
     </div>
 
-    <!-- 8: Responsible gambling in-game overlay -->
+    <!-- 8: Dragon's Vault — red/orange — RG gate -->
     <div class="alt-card">
       <div class="iphone-frame landscape">
-        <div class="iphone-screen landscape-screen" style="background:linear-gradient(135deg,#1a0a3a,#2d1060);overflow:hidden;position:relative;">
-          <!-- Dimmed game BG -->
-          <div style="position:absolute;inset:0;padding:5px 8px;display:flex;flex-direction:column;gap:3px;filter:brightness(0.3);">
-            <div style="flex:1;display:grid;grid-template-columns:repeat(5,1fr);gap:2px;">
-              <div style="background:rgba(255,255,255,0.1);border-radius:2px;"></div>
-              <div style="background:rgba(255,255,255,0.1);border-radius:2px;"></div>
-              <div style="background:rgba(255,255,255,0.1);border-radius:2px;"></div>
-              <div style="background:rgba(255,255,255,0.1);border-radius:2px;"></div>
-              <div style="background:rgba(255,255,255,0.1);border-radius:2px;"></div>
+        <div class="iphone-screen landscape-screen" style="background:linear-gradient(135deg,#180200,#3D0800,#180200);overflow:hidden;position:relative;">
+          <div style="position:absolute;inset:0;padding:4px 6px 24px;display:flex;flex-direction:column;gap:2px;filter:brightness(0.22);">
+            <div style="font-size:6px;font-weight:900;color:#FF5500;letter-spacing:.12em;flex-shrink:0;">DRAGON'S VAULT™</div>
+            <div style="flex:1;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(3,1fr);gap:2px;">
+              <div style="background:linear-gradient(145deg,#5C0000,#320000);border:1px solid #880000;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FF4400;">7</span></div>
+              <div style="background:linear-gradient(145deg,#4A1000,#280600);border:1px solid #882200;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#FF8800;">BAR</span></div>
+              <div style="background:linear-gradient(145deg,#5C0000,#320000);border:1px solid #880000;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FF4400;">7</span></div>
+              <div style="background:linear-gradient(145deg,#4A1000,#280600);border:1px solid #882200;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FF6600;">A</span></div>
+              <div style="background:linear-gradient(145deg,#5C0000,#320000);border:1px solid #880000;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FF4400;">7</span></div>
+              <div style="background:linear-gradient(145deg,#4A1000,#280600);border:1px solid #882200;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FF8800;">K</span></div>
+              <div style="background:linear-gradient(145deg,#5C0000,#320000);border:1px solid #880000;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FF4400;">7</span></div>
+              <div style="background:linear-gradient(145deg,#4A1000,#280600);border:1px solid #882200;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#FF8800;">BAR</span></div>
+              <div style="background:linear-gradient(145deg,#5C0000,#320000);border:1px solid #880000;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FF4400;">7</span></div>
+              <div style="background:linear-gradient(145deg,#4A1000,#280600);border:1px solid #882200;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FF6600;">A</span></div>
+              <div style="background:linear-gradient(145deg,#5C0000,#320000);border:1px solid #880000;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FF4400;">7</span></div>
+              <div style="background:linear-gradient(145deg,#4A1000,#280600);border:1px solid #882200;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FF8800;">K</span></div>
+              <div style="background:linear-gradient(145deg,#5C0000,#320000);border:1px solid #880000;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;font-weight:900;color:#FF6600;">BAR</span></div>
+              <div style="background:linear-gradient(145deg,#4A1000,#280600);border:1px solid #882200;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FF6600;">A</span></div>
+              <div style="background:linear-gradient(145deg,#5C0000,#320000);border:1px solid #880000;border-radius:3px;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;font-weight:900;color:#FF4400;">7</span></div>
             </div>
           </div>
-          <!-- RG overlay card -->
-          <div style="position:absolute;inset:8px;background:rgba(14,9,40,0.96);border:1px solid rgba(231,76,60,0.4);border-radius:10px;display:flex;flex-direction:column;padding:8px 10px;backdrop-filter:blur(8px);">
-            <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
-              <div style="width:18px;height:18px;border-radius:50%;background:rgba(231,76,60,0.2);border:1px solid rgba(231,76,60,0.5);display:flex;align-items:center;justify-content:center;font-size:9px;">⚠️</div>
+          <div style="position:absolute;inset:8px;background:rgba(10,2,0,0.95);border:1.5px solid rgba(231,76,60,0.55);border-radius:10px;display:flex;flex-direction:column;padding:7px 10px;backdrop-filter:blur(8px);">
+            <div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
+              <div style="width:18px;height:18px;border-radius:50%;background:rgba(231,76,60,0.2);border:1px solid rgba(231,76,60,0.6);display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0;">⚠️</div>
               <div>
-                <div style="font-size:6.5px;font-weight:800;color:#e74c3c;letter-spacing:.08em;">SPENDING LIMIT REACHED</div>
-                <div style="font-size:5.5px;color:rgba(255,255,255,0.5);">Your £32 daily limit has been reached</div>
+                <div style="font-size:6px;font-weight:900;color:#e74c3c;letter-spacing:.1em;">SPENDING LIMIT REACHED</div>
+                <div style="font-size:5px;color:rgba(255,255,255,0.5);">Your £32 daily limit has been reached</div>
               </div>
             </div>
-            <div style="background:rgba(255,255,255,0.04);border-radius:6px;padding:5px 7px;margin-bottom:6px;font-size:5.5px;color:rgba(255,255,255,0.7);line-height:1.5;">Hi Richard — I noticed you've hit your daily limit. Would you like to review your limits, take a break, or talk to someone about responsible gambling?</div>
+            <div style="background:rgba(255,255,255,0.04);border-radius:5px;padding:5px 7px;margin-bottom:6px;font-size:5.5px;color:rgba(255,255,255,0.78);line-height:1.5;">Hi Richard — I noticed you've hit your daily limit. Would you like to review your limits, take a break, or speak to someone about responsible gambling?</div>
             <div style="display:flex;gap:4px;margin-top:auto;">
               <div style="flex:1;background:rgba(46,204,113,0.15);border:1px solid rgba(46,204,113,0.4);border-radius:5px;padding:4px;text-align:center;font-size:5.5px;font-weight:700;color:#2ecc71;">Review Limits</div>
               <div style="flex:1;background:rgba(212,168,67,0.12);border:1px solid rgba(212,168,67,0.35);border-radius:5px;padding:4px;text-align:center;font-size:5.5px;font-weight:700;color:#d4a843;">Chat with Ada</div>
-              <div style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:5px;padding:4px;text-align:center;font-size:5.5px;color:rgba(255,255,255,0.4);">Continue</div>
+              <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:5px;padding:4px;text-align:center;font-size:5.5px;color:rgba(255,255,255,0.3);">Continue</div>
             </div>
           </div>
         </div>
