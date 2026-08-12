@@ -11,7 +11,7 @@
 
 /* ── Left rail ── */
 .ch-rail {
-  width: 240px;
+  width: 248px;
   flex-shrink: 0;
   background: var(--ag-bg-2);
   border-right: 1px solid var(--ag-gold-border);
@@ -31,8 +31,8 @@
 .ch-item {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 15px 20px;
+  gap: 13px;
+  padding: 13px 18px;
   cursor: pointer;
   border-left: 3px solid transparent;
   transition: all 0.15s;
@@ -47,7 +47,25 @@
   color: var(--ag-gold-1);
   font-weight: 700;
 }
-.ch-icon { font-size: 22px; width: 26px; text-align: center; flex-shrink: 0; }
+/* Brand channel icon */
+.ch-ico {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.ch-ico svg { display: block; }
+.ch-ico-email  { background: #4A3FAF; }
+.ch-ico-search { background: linear-gradient(135deg,#D4A843,#A87820); }
+.ch-ico-form   { background: #2E6DB4; }
+.ch-ico-chat   { background: var(--ag-surface); }
+.ch-ico-sms    { background: #2ECC71; }
+.ch-ico-wa     { background: #25D366; }
+.ch-ico-msgr   { background: linear-gradient(135deg,#0668E1,#0099FF); }
+.ch-ico-ig     { background: linear-gradient(135deg,#833AB4,#FD1D1D,#FCB045); }
+.ch-ico-voice  { background: #5B8DEF; }
+.ch-ico-app    { background: linear-gradient(135deg,#2E2270,#0E0928); border: 1px solid rgba(212,168,67,0.35); }
+
 .ch-badge {
   margin-left: auto;
   font-size: 9px;
@@ -104,8 +122,6 @@
   flex-direction: column;
   gap: 0;
 }
-
-/* Email subject header */
 .email-subject-hdr {
   text-align: center;
   margin-bottom: 32px;
@@ -126,7 +142,6 @@
 }
 .email-subject-hdr .meta span { display: flex; align-items: center; gap: 4px; }
 
-/* Individual email bubble */
 .em {
   display: flex;
   flex-direction: column;
@@ -137,52 +152,21 @@
   transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1);
 }
 .em.visible { opacity: 1; transform: none; }
+.em.from-customer { align-self: flex-start; margin-left: 0; margin-right: auto; }
+.em.from-ada      { align-self: flex-end; margin-right: 0; margin-left: auto; }
 
-/* Customer = left-aligned */
-.em.from-customer {
-  align-self: flex-start;
-  margin-left: 0;
-  margin-right: auto;
-}
-/* Ada = right-aligned, slightly indented */
-.em.from-ada {
-  align-self: flex-end;
-  margin-right: 0;
-  margin-left: auto;
-}
+.em-card { border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.35); }
+.em.from-customer .em-card { background: var(--ag-bg-2); border: 1px solid rgba(255,255,255,0.09); }
+.em.from-ada .em-card { background: rgba(30,20,80,0.85); border: 1px solid rgba(212,168,67,0.25); }
 
-/* Email card */
-.em-card {
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.35);
-}
-.em.from-customer .em-card {
-  background: var(--ag-bg-2);
-  border: 1px solid rgba(255,255,255,0.09);
-}
-.em.from-ada .em-card {
-  background: rgba(30,20,80,0.85);
-  border: 1px solid rgba(212,168,67,0.25);
-}
-
-/* Email header row */
 .em-hdr {
   padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  display: flex; align-items: center; gap: 10px;
   background: rgba(255,255,255,0.03);
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 .em.from-ada .em-hdr { background: rgba(212,168,67,0.05); }
-.em-av {
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 14px; font-weight: 800;
-  flex-shrink: 0;
-}
+.em-av { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0; }
 .em-av.user { background: linear-gradient(135deg,#4A3FAF,#2E2270); color:#fff; }
 .em-av.ada  { background: var(--ag-gold-grad); color:#1A0E00; }
 .em-sender { flex: 1; }
@@ -190,312 +174,157 @@
 .em-from-addr { font-size: 10px; color: var(--ag-text-3); }
 .em-ts { font-size: 10px; color: var(--ag-text-muted); white-space: nowrap; }
 
-/* Ada Gaming email header image (CSS art) */
 .ag-email-header {
   background: linear-gradient(135deg, #1A0E45 0%, #2E1060 40%, #1A0E45 100%);
   padding: 20px 24px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  display: flex; align-items: center; gap: 16px;
   border-bottom: 2px solid var(--ag-gold-1);
-  position: relative;
-  overflow: hidden;
+  position: relative; overflow: hidden;
 }
-.ag-email-header::before {
-  content: '';
-  position: absolute;
-  top: -30px; right: -30px;
-  width: 120px; height: 120px;
-  border-radius: 50%;
-  border: 2px solid rgba(212,168,67,0.15);
-}
-.ag-email-header::after {
-  content: '';
-  position: absolute;
-  bottom: -20px; left: 40px;
-  width: 80px; height: 80px;
-  border-radius: 50%;
-  border: 1px solid rgba(212,168,67,0.1);
-}
-.ag-logo-circle {
-  width: 52px; height: 52px;
-  border-radius: 50%;
-  border: 2px solid var(--ag-gold-1);
-  background: linear-gradient(135deg,#2A1870,#160D3A);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  box-shadow: 0 0 16px rgba(212,168,67,0.35);
-  z-index: 1;
-}
-.ag-logo-text {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 18px;
-  font-weight: 900;
-  background: var(--ag-gold-text-grad);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  line-height: 1;
-}
-.ag-header-wordmark { z-index: 1; }
-.ag-header-brand {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 20px;
-  font-weight: 900;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  background: var(--ag-gold-text-grad);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  line-height: 1.1;
-}
-.ag-header-sub {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(212,168,67,0.6);
-  margin-top: 2px;
-}
-.ag-header-support {
-  margin-left: auto;
-  font-size: 10px;
-  color: rgba(212,168,67,0.5);
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-align: right;
-  z-index: 1;
-}
+.ag-email-header::before { content:''; position:absolute; top:-30px; right:-30px; width:120px; height:120px; border-radius:50%; border:2px solid rgba(212,168,67,0.15); }
+.ag-email-header::after  { content:''; position:absolute; bottom:-20px; left:40px; width:80px; height:80px; border-radius:50%; border:1px solid rgba(212,168,67,0.1); }
+.ag-logo-circle { width:52px; height:52px; border-radius:50%; border:2px solid var(--ag-gold-1); background:linear-gradient(135deg,#2A1870,#160D3A); display:flex; align-items:center; justify-content:center; flex-shrink:0; box-shadow:0 0 16px rgba(212,168,67,0.35); z-index:1; }
+.ag-logo-text { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:900; background:var(--ag-gold-text-grad); -webkit-background-clip:text; background-clip:text; color:transparent; line-height:1; }
+.ag-header-wordmark { z-index:1; }
+.ag-header-brand { font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:900; letter-spacing:0.15em; text-transform:uppercase; background:var(--ag-gold-text-grad); -webkit-background-clip:text; background-clip:text; color:transparent; line-height:1.1; }
+.ag-header-sub { font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:rgba(212,168,67,0.6); margin-top:2px; }
+.ag-header-support { margin-left:auto; font-size:10px; color:rgba(212,168,67,0.5); font-weight:600; letter-spacing:0.05em; text-align:right; z-index:1; }
 
-/* Email body */
-.em-body {
-  padding: 16px 20px;
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--ag-text-2);
-}
+.em-body { padding: 16px 20px; font-size: 13px; line-height: 1.7; color: var(--ag-text-2); }
 .em-body p { margin-bottom: 10px; }
 .em-body p:last-child { margin-bottom: 0; }
 .em-body strong { color: var(--ag-text); font-weight: 600; }
 
-/* CTA button in email */
-.em-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 10px 20px;
-  background: var(--ag-gold-grad);
-  color: #1A0E00;
-  font-size: 12px;
-  font-weight: 800;
-  border-radius: 8px;
-  margin: 6px 0;
-  letter-spacing: 0.3px;
-}
+.em-cta { display:inline-flex; align-items:center; gap:7px; padding:10px 20px; background:var(--ag-gold-grad); color:#1A0E00; font-size:12px; font-weight:800; border-radius:8px; margin:6px 0; letter-spacing:0.3px; }
 
-/* Tags */
 .em-tags { padding: 0 20px 14px; display: flex; flex-wrap: wrap; gap: 6px; }
-.em-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 9px;
-  border-radius: 20px;
-  font-size: 10px;
-  font-weight: 700;
-}
-.em-tag.intent  { background: rgba(52,152,219,0.18); color:#5dade2; border:1px solid rgba(52,152,219,0.3); }
-.em-tag.resolved{ background: rgba(46,204,113,0.15); color:#2ecc71; border:1px solid rgba(46,204,113,0.3); }
-.em-tag.kb      { background: rgba(212,168,67,0.12); color:var(--ag-gold-1); border:1px solid rgba(212,168,67,0.25); }
+.em-tag { display:inline-flex; align-items:center; gap:4px; padding:3px 9px; border-radius:20px; font-size:10px; font-weight:700; }
+.em-tag.intent  { background:rgba(52,152,219,0.18); color:#5dade2; border:1px solid rgba(52,152,219,0.3); }
+.em-tag.resolved{ background:rgba(46,204,113,0.15); color:#2ecc71; border:1px solid rgba(46,204,113,0.3); }
+.em-tag.kb      { background:rgba(212,168,67,0.12); color:var(--ag-gold-1); border:1px solid rgba(212,168,67,0.25); }
 
-/* Sender label below the card */
-.em-label {
-  font-size: 10px;
-  color: var(--ag-text-muted);
-  margin-top: 6px;
-  padding: 0 4px;
-}
-.em.from-customer .em-label { text-align: left; }
-.em.from-ada      .em-label { text-align: right; }
+.em-label { font-size:10px; color:var(--ag-text-muted); margin-top:6px; padding:0 4px; }
+.em.from-customer .em-label { text-align:left; }
+.em.from-ada      .em-label { text-align:right; }
 
-/* Typing indicator bubble */
 .typing-bubble {
-  display: none;
-  align-self: flex-end;
-  margin-right: 0;
-  margin-left: auto;
-  margin-bottom: 16px;
-  padding: 12px 20px;
-  background: rgba(30,20,80,0.6);
-  border: 1px solid rgba(212,168,67,0.2);
-  border-radius: 12px;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  color: var(--ag-text-3);
-  opacity: 0;
-  transition: opacity 0.3s;
+  display:none; align-self:flex-end; margin-right:0; margin-left:auto; margin-bottom:16px;
+  padding:12px 20px;
+  background:rgba(30,20,80,0.6); border:1px solid rgba(212,168,67,0.2); border-radius:12px;
+  align-items:center; gap:8px; font-size:11px; color:var(--ag-text-3);
+  opacity:0; transition:opacity 0.3s;
 }
-.typing-bubble.show { display: flex; opacity: 1; }
+.typing-bubble.show { display:flex; opacity:1; }
 @keyframes typeDot { 0%,60%,100% { transform:translateY(0); } 30% { transform:translateY(-4px); } }
-.typing-bubble span {
-  display: inline-block;
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--ag-gold-1);
-  animation: typeDot 1.2s infinite;
-}
-.typing-bubble span:nth-child(2) { animation-delay: 0.2s; }
-.typing-bubble span:nth-child(3) { animation-delay: 0.4s; }
+.typing-bubble span { display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--ag-gold-1); animation:typeDot 1.2s infinite; }
+.typing-bubble span:nth-child(2) { animation-delay:0.2s; }
+.typing-bubble span:nth-child(3) { animation-delay:0.4s; }
 
-/* Replay button */
-.replay-btn {
-  align-self: center;
-  margin-top: 8px;
-  padding: 9px 22px;
-  background: transparent;
-  border: 1px solid var(--ag-gold-border);
-  border-radius: 20px;
-  color: var(--ag-gold-1);
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.15s;
-  display: none;
-}
-.replay-btn:hover { background: rgba(212,168,67,0.08); }
-.replay-btn.show { display: block; }
+.replay-btn { align-self:center; margin-top:8px; padding:9px 22px; background:transparent; border:1px solid var(--ag-gold-border); border-radius:20px; color:var(--ag-gold-1); font-size:12px; font-weight:700; cursor:pointer; transition:all 0.15s; display:none; }
+.replay-btn:hover { background:rgba(212,168,67,0.08); }
+.replay-btn.show { display:block; }
 
 /* ══════════════════════════════════════════
    WEB SEARCH PANEL
 ══════════════════════════════════════════ */
 .web-search-panel {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 32px 40px;
-  gap: 20px;
-  overflow-y: auto;
+  flex:1; display:flex; flex-direction:column;
+  padding:32px 40px; gap:16px; overflow-y:auto;
 }
+.ws-header { margin-bottom:4px; }
 .ws-title { font-family:'Barlow Condensed',sans-serif; font-size:22px; font-weight:800; margin-bottom:4px; }
-.ws-sub { font-size:13px; color:var(--ag-text-3); margin-bottom:20px; }
-.ws-search-box {
-  display:flex; align-items:center; gap:12px;
+.ws-sub { font-size:13px; color:var(--ag-text-3); }
+
+.ws-search-wrap {
   background: var(--ag-bg-2);
   border: 1px solid var(--ag-gold-border);
-  border-radius: 10px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.ws-search-top {
+  background: linear-gradient(90deg,#1A0E45,#2E1060);
   padding: 12px 18px;
-  font-size: 14px;
-  color: var(--ag-text-2);
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid rgba(212,168,67,0.2);
 }
-.ws-results { display:flex; flex-direction:column; gap:14px; }
-.ws-result {
-  background: var(--ag-bg-2);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
-  padding: 16px 18px;
+.ws-search-top .ws-logo { font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:900; background:var(--ag-gold-text-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.ws-ai-badge { font-size:10px; font-weight:700; background:rgba(212,168,67,0.15); border:1px solid rgba(212,168,67,0.35); color:var(--ag-gold-3); padding:3px 9px; border-radius:999px; margin-left:auto; }
+
+.ws-search-inner { padding:18px 20px; }
+.ws-bar {
+  display:flex; align-items:center; gap:10px;
+  border:2px solid var(--ag-gold-border-strong);
+  border-radius:10px; padding:4px 4px 4px 14px;
 }
-.ws-result-title { font-size:14px; font-weight:700; color:var(--ag-gold-1); margin-bottom:4px; }
-.ws-result-url { font-size:10px; color:var(--ag-text-muted); margin-bottom:6px; }
-.ws-result-snippet { font-size:12px; color:var(--ag-text-2); line-height:1.55; }
-.ws-ada-answer {
-  background: rgba(30,20,80,0.7);
-  border: 1px solid rgba(212,168,67,0.25);
-  border-radius: 12px;
-  padding: 16px 18px;
-  margin-bottom: 4px;
+.ws-bar input {
+  flex:1; border:0; outline:none; font-size:14px; color:var(--ag-text); background:transparent;
+  padding:8px 0; font-family:inherit;
 }
-.ws-ada-label { font-size:10px; font-weight:700; color:var(--ag-gold-1); letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; display:flex; align-items:center; gap:6px; }
-.ws-ada-text { font-size:13px; color:var(--ag-text-2); line-height:1.6; }
+.ws-bar input::placeholder { color:var(--ag-text-muted); }
+.ws-bar button {
+  background:var(--ag-gold-grad); color:#1A0E00; border:0; border-radius:7px;
+  padding:9px 18px; font-size:13px; font-weight:800; cursor:pointer; white-space:nowrap;
+}
+.ws-bar button:hover { filter:brightness(1.08); }
+
+.ws-suggest { margin-top:12px; display:flex; flex-wrap:wrap; gap:7px; align-items:center; font-size:12px; color:var(--ag-text-muted); }
+.ws-suggest button { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:var(--ag-text-2); border-radius:999px; padding:5px 12px; font-size:12px; cursor:pointer; font-family:inherit; }
+.ws-suggest button:hover { background:rgba(212,168,67,0.1); border-color:var(--ag-gold-border-strong); color:var(--ag-gold-1); }
+
+.ws-result { margin-top:14px; display:none; }
+.ws-result.show { display:block; animation:wsfade 0.3s ease; }
+@keyframes wsfade { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+
+.ws-ans-card {
+  background:rgba(30,20,80,0.7); border:1px solid rgba(212,168,67,0.25); border-radius:12px; padding:16px 18px; margin-bottom:12px;
+}
+.ws-ans-head { font-size:10px; font-weight:700; color:var(--ag-gold-1); letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+.ws-ans-live { font-size:10px; color:var(--ag-green); font-weight:600; letter-spacing:0.3px; text-transform:none; }
+.ws-ans-body { font-size:13px; color:var(--ag-text-2); line-height:1.6; }
+.ws-ans-body b { color:var(--ag-text); }
+
+.ws-rel { margin-top:4px; }
+.ws-rel-h { font-size:10px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; color:var(--ag-text-muted); margin-bottom:8px; }
+.ws-rel-item {
+  display:flex; align-items:center; gap:12px;
+  padding:11px 14px;
+  background:var(--ag-bg-2); border:1px solid rgba(255,255,255,0.07); border-radius:10px; margin-bottom:6px;
+  text-decoration:none; color:inherit; transition:border-color 0.15s;
+}
+.ws-rel-item:hover { border-color:var(--ag-gold-border); }
+.ws-rel-item .ri-ic { font-size:16px; flex-shrink:0; }
+.ws-rel-item .ri-t { flex:1; }
+.ws-rel-item .ri-title { font-size:12px; font-weight:600; color:var(--ag-text-2); }
+.ws-rel-item .ri-cat { font-size:10px; color:var(--ag-text-muted); margin-top:1px; }
+.ws-rel-item .ri-chev { color:var(--ag-text-muted); font-size:16px; flex-shrink:0; }
 
 /* ══════════════════════════════════════════
    CONTACT FORM PANEL
 ══════════════════════════════════════════ */
-.contact-form-panel {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 32px 40px;
-  overflow-y: auto;
-}
+.contact-form-panel { flex:1; display:flex; flex-direction:column; padding:32px 40px; overflow-y:auto; }
 .cf-split { display:flex; gap:40px; align-items:flex-start; }
 .cf-form { flex:1; max-width:520px; }
 .cf-title { font-family:'Barlow Condensed',sans-serif; font-size:22px; font-weight:800; margin-bottom:6px; }
 .cf-sub { font-size:13px; color:var(--ag-text-3); margin-bottom:24px; }
 .cf-field { margin-bottom:16px; }
 .cf-label { font-size:11px; font-weight:700; color:var(--ag-text-2); margin-bottom:6px; display:block; }
-.cf-input {
-  width:100%; padding:10px 14px;
-  background: var(--ag-bg-2);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 8px;
-  font-size: 13px;
-  color: var(--ag-text);
-  font-family: inherit;
-}
-.cf-input:focus { outline: none; border-color: var(--ag-gold-border-strong); }
+.cf-input { width:100%; padding:10px 14px; background:var(--ag-bg-2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; font-size:13px; color:var(--ag-text); font-family:inherit; }
+.cf-input:focus { outline:none; border-color:var(--ag-gold-border-strong); }
 .cf-textarea { min-height:100px; resize:vertical; }
 .cf-select { appearance:none; }
-.cf-submit {
-  width:100%;
-  padding: 12px;
-  background: var(--ag-gold-grad);
-  color: #1A0E00;
-  font-size: 13px;
-  font-weight: 800;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 4px;
-}
-.cf-side { flex: 1; max-width: 300px; }
-.cf-side-card {
-  background: rgba(30,20,80,0.5);
-  border: 1px solid rgba(212,168,67,0.2);
-  border-radius: 12px;
-  padding: 18px 20px;
-  margin-bottom: 14px;
-}
+.cf-submit { width:100%; padding:12px; background:var(--ag-gold-grad); color:#1A0E00; font-size:13px; font-weight:800; border:none; border-radius:8px; cursor:pointer; margin-top:4px; font-family:inherit; }
+.cf-side { flex:1; max-width:300px; }
+.cf-side-card { background:rgba(30,20,80,0.5); border:1px solid rgba(212,168,67,0.2); border-radius:12px; padding:18px 20px; margin-bottom:14px; }
 .cf-side-title { font-size:12px; font-weight:700; color:var(--ag-gold-1); margin-bottom:8px; }
 .cf-side-text { font-size:12px; color:var(--ag-text-2); line-height:1.6; }
 
 /* ══════════════════════════════════════════
    GENERIC CHAT PANELS
 ══════════════════════════════════════════ */
-.generic-panel {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-.chat-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  max-width: 560px;
-  margin: 0 auto;
-  width: 100%;
-  padding: 20px 20px 0;
-  overflow: hidden;
-}
-.chat-device {
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 18px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  background: var(--ag-panel);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-}
-.chat-topbar {
-  padding: 12px 16px;
-  display: flex; align-items: center; gap: 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  background: var(--ag-panel-2);
-  flex-shrink: 0;
-}
+.generic-panel { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+.chat-container { flex:1; display:flex; flex-direction:column; max-width:560px; margin:0 auto; width:100%; padding:20px 20px 0; overflow:hidden; }
+.chat-device { border:1px solid rgba(255,255,255,0.1); border-radius:18px; overflow:hidden; display:flex; flex-direction:column; flex:1; background:var(--ag-panel); box-shadow:0 20px 60px rgba(0,0,0,0.5); }
+.chat-topbar { padding:12px 16px; display:flex; align-items:center; gap:10px; border-bottom:1px solid rgba(255,255,255,0.08); background:var(--ag-panel-2); flex-shrink:0; }
 .chat-topbar-name { font-size:13px; font-weight:700; }
 .chat-topbar-status { font-size:10px; color:var(--ag-green); }
 .chat-messages { flex:1; overflow-y:auto; padding:14px 12px; display:flex; flex-direction:column; gap:10px; }
@@ -512,6 +341,128 @@
 .chat-send-btn { width:32px; height:32px; border-radius:50%; background:var(--ag-gold-grad); display:flex; align-items:center; justify-content:center; font-size:14px; color:#1A0E00; flex-shrink:0; }
 .chat-chips { display:flex; flex-wrap:wrap; gap:6px; padding:0 2px 4px; }
 .chat-chip { padding:5px 11px; border-radius:20px; font-size:11px; font-weight:600; border:1px solid var(--ag-gold-border); color:var(--ag-gold-1); background:rgba(212,168,67,0.06); cursor:pointer; }
+
+/* ══════════════════════════════════════════
+   WEB APP PANEL
+══════════════════════════════════════════ */
+.webapp-panel {
+  flex:1; display:flex; align-items:center; justify-content:center;
+  padding:20px; overflow:hidden;
+  background: radial-gradient(900px 700px at 50% -5%, rgba(46,34,112,0.4) 0%, transparent 70%);
+}
+.phone-wrap {
+  position:relative;
+  width:360px;
+  height:min(760px, calc(100vh - 180px));
+  background:#0a0818;
+  border-radius:50px;
+  padding:12px;
+  box-shadow: 0 0 0 2px #1E1450, 0 0 0 5px #0E0928, 0 30px 70px rgba(0,0,0,0.7), 0 8px 24px rgba(46,34,112,0.4);
+  flex-shrink:0;
+}
+.phone-screen {
+  position:relative; width:100%; height:100%;
+  background:var(--ag-bg); border-radius:40px; overflow:hidden;
+  display:flex; flex-direction:column;
+}
+.phone-island { position:absolute; top:10px; left:50%; transform:translateX(-50%); width:110px; height:30px; background:#000; border-radius:18px; z-index:60; }
+.phone-status { display:flex; align-items:center; justify-content:space-between; padding:14px 24px 6px; font-size:13px; font-weight:600; flex:0 0 auto; color:var(--ag-text); }
+.phone-status .ps-r { display:flex; align-items:center; gap:6px; font-size:11px; }
+
+.app-scroll { flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+.app-scroll::-webkit-scrollbar { display:none; }
+
+/* App header */
+.app-header { padding:4px 18px 10px; display:flex; align-items:center; justify-content:space-between; }
+.app-header .app-title { font-family:'Barlow Condensed',sans-serif; font-size:24px; font-weight:900; background:var(--ag-gold-text-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.app-header .app-icons { display:flex; gap:16px; }
+.app-header .app-icons svg { width:22px; height:22px; color:var(--ag-gold-1); }
+
+/* Balance card */
+.balance-card {
+  margin:4px 16px 14px;
+  border-radius:20px; padding:18px 20px;
+  background:linear-gradient(135deg,#2E2270 0%,#4A3FAF 50%,#2E1060 100%);
+  border:1px solid var(--ag-gold-border-strong);
+  position:relative; overflow:hidden;
+  box-shadow:0 14px 30px rgba(46,34,112,0.6);
+}
+.balance-card::after { content:''; position:absolute; right:-20px; top:-20px; width:120px; height:120px; border-radius:50%; border:2px solid rgba(212,168,67,0.12); }
+.balance-card .bc-lab { font-size:11px; color:rgba(240,204,106,0.75); font-weight:600; letter-spacing:0.05em; }
+.balance-card .bc-amt { font-size:28px; font-weight:800; color:var(--ag-gold-1); margin:5px 0 2px; letter-spacing:-0.3px; }
+.balance-card .bc-row { display:flex; gap:8px; margin-top:12px; }
+.balance-card .bc-pill { flex:1; background:rgba(255,255,255,0.12); border-radius:10px; padding:9px; text-align:center; font-size:11.5px; font-weight:700; color:rgba(255,255,255,0.9); }
+
+.app-sec-label { font-size:11px; font-weight:700; color:var(--ag-text-muted); text-transform:uppercase; letter-spacing:0.5px; padding:2px 18px 6px; }
+
+/* Match rows */
+.match-row { display:flex; align-items:center; gap:12px; padding:10px 16px; border-bottom:1px solid rgba(255,255,255,0.05); }
+.match-teams { flex:1; }
+.match-teams .teams { font-size:13px; font-weight:600; color:var(--ag-text); }
+.match-teams .league { font-size:10px; color:var(--ag-text-muted); margin-top:1px; }
+.match-odds { display:flex; gap:6px; }
+.odd-pill { background:rgba(46,34,112,0.7); border:1px solid rgba(212,168,67,0.2); border-radius:8px; padding:6px 10px; text-align:center; min-width:44px; }
+.odd-pill .odd-label { font-size:9px; color:var(--ag-text-muted); }
+.odd-pill .odd-val { font-size:12px; font-weight:800; color:var(--ag-gold-1); }
+
+.app-footnote { text-align:center; color:var(--ag-text-muted); font-size:10px; padding:14px 0 18px; }
+
+/* Proactive chip */
+.app-proactive {
+  position:absolute; left:12px; right:12px; bottom:80px; z-index:75;
+  background:var(--ag-panel); border:1px solid var(--ag-gold-border-strong); border-radius:16px;
+  padding:12px 14px; display:flex; gap:10px; align-items:flex-start;
+  box-shadow:0 14px 34px rgba(0,0,0,0.5);
+  transform:translateY(20px); opacity:0; pointer-events:none;
+  transition:transform 0.35s cubic-bezier(0.34,1.3,0.5,1), opacity 0.3s;
+}
+.app-proactive.show { transform:translateY(0); opacity:1; pointer-events:auto; }
+.app-proactive .pp-ico { width:34px; height:34px; border-radius:10px; background:var(--ag-gold-grad); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.app-proactive .pp-ico svg { width:18px; height:18px; }
+.app-proactive .pp-t { flex:1; }
+.app-proactive .pp-n { font-size:11px; font-weight:800; color:var(--ag-gold-1); }
+.app-proactive .pp-m { font-size:12px; line-height:1.4; margin-top:2px; color:var(--ag-text-2); }
+.app-proactive .pp-cta { margin-top:8px; background:var(--ag-gold-grad); color:#1A0E00; border:0; border-radius:8px; padding:7px 12px; font-size:11.5px; font-weight:800; cursor:pointer; font-family:inherit; }
+.app-proactive .pp-x { position:absolute; top:8px; right:10px; color:var(--ag-text-muted); cursor:pointer; font-size:16px; line-height:1; background:none; border:0; }
+
+/* Bottom tab bar */
+.phone-tabbar { flex:0 0 auto; display:flex; justify-content:space-around; align-items:flex-start; padding:8px 8px 20px; border-top:1px solid rgba(255,255,255,0.08); background:var(--ag-bg-2); position:relative; z-index:50; }
+.phone-tab { display:flex; flex-direction:column; align-items:center; gap:3px; font-size:10px; color:var(--ag-text-muted); cursor:pointer; position:relative; flex:1; }
+.phone-tab.on { color:var(--ag-gold-1); }
+.phone-tab svg { width:22px; height:22px; }
+.phone-tab .tab-dot { position:absolute; top:-2px; right:calc(50% - 18px); width:8px; height:8px; border-radius:50%; background:#E74C3C; border:2px solid var(--ag-bg-2); }
+
+/* Live chat sheet */
+.chat-scrim2 { position:absolute; inset:0; z-index:70; background:rgba(0,0,0,0.55); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); opacity:0; pointer-events:none; transition:opacity 0.3s; border-radius:40px; }
+.chat-scrim2.open { opacity:1; pointer-events:auto; }
+.chat-sheet2 { position:absolute; left:0; right:0; bottom:0; height:84%; z-index:72; display:flex; flex-direction:column; background:var(--ag-panel); border-radius:24px 24px 0 0; box-shadow:0 -18px 55px rgba(0,0,0,0.5); transform:translateY(106%); transition:transform 0.4s cubic-bezier(0.32,1.02,0.4,1); }
+.chat-sheet2.open { transform:translateY(0); }
+.grabber2 { width:36px; height:5px; border-radius:3px; background:rgba(255,255,255,0.15); margin:9px auto 2px; flex:0 0 auto; }
+.cs2-head { display:flex; align-items:center; gap:10px; padding:6px 14px 12px; flex:0 0 auto; border-bottom:1px solid rgba(255,255,255,0.08); }
+.cs2-logo { width:38px; height:38px; border-radius:10px; background:var(--ag-gold-grad); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:900; color:#1A0E00; }
+.cs2-t { flex:1; }
+.cs2-name { font-size:15px; font-weight:700; color:var(--ag-text); }
+.cs2-status { font-size:11px; color:var(--ag-text-muted); display:flex; align-items:center; gap:5px; margin-top:1px; }
+.cs2-status-dot { width:7px; height:7px; border-radius:50%; background:#888; display:inline-block; }
+.cs2-status-dot.live { background:var(--ag-green); }
+.cs2-close { background:rgba(255,255,255,0.08); border:0; color:var(--ag-text-2); width:28px; height:28px; border-radius:50%; font-size:17px; cursor:pointer; line-height:1; flex:0 0 auto; }
+.cs2-body { flex:1; overflow-y:auto; padding:12px 14px 4px; display:flex; flex-direction:column; gap:8px; }
+.cs2-body::-webkit-scrollbar { display:none; }
+.cs2-msg { max-width:88%; padding:9px 13px; border-radius:16px; font-size:13px; line-height:1.45; word-wrap:break-word; }
+.cs2-bot  { align-self:flex-start; background:rgba(255,255,255,0.07); color:var(--ag-text); border-bottom-left-radius:4px; }
+.cs2-user { align-self:flex-end; background:var(--ag-surface); color:var(--ag-text); border-bottom-right-radius:4px; }
+.cs2-bot a { color:var(--ag-gold-1); font-weight:600; }
+.cs2-typing { align-self:flex-start; background:rgba(255,255,255,0.07); border-radius:16px; padding:12px 14px; display:flex; gap:4px; }
+.cs2-typing span { width:7px; height:7px; border-radius:50%; background:var(--ag-gold-2); animation:cs2blink 1.2s infinite; }
+.cs2-typing span:nth-child(2){animation-delay:.2s}.cs2-typing span:nth-child(3){animation-delay:.4s}
+@keyframes cs2blink{0%,60%,100%{opacity:.3}30%{opacity:1}}
+.cs2-chips { display:flex; flex-wrap:wrap; gap:7px; padding:8px 14px 2px; flex:0 0 auto; }
+.cs2-chip { background:rgba(212,168,67,0.08); border:1px solid var(--ag-gold-border); color:var(--ag-gold-1); border-radius:999px; padding:7px 12px; font-size:11.5px; cursor:pointer; font-family:inherit; }
+.cs2-chip:active { background:rgba(212,168,67,0.18); }
+.cs2-input { display:flex; align-items:center; gap:8px; padding:10px 12px 18px; flex:0 0 auto; border-top:1px solid rgba(255,255,255,0.08); }
+.cs2-input input { flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:999px; padding:10px 15px; font-size:13px; color:var(--ag-text); outline:none; font-family:inherit; }
+.cs2-input input::placeholder { color:var(--ag-text-muted); }
+.cs2-send { background:var(--ag-gold-grad); border:0; color:#1A0E00; border-radius:50%; width:40px; height:40px; cursor:pointer; flex:0 0 auto; display:flex; align-items:center; justify-content:center; }
 </style>
 </head>
 <body>
@@ -560,33 +511,69 @@
     <div class="ch-rail-hdr">Support channels</div>
 
     <div class="ch-item active" data-panel="email" onclick="switchChannel('email',this)">
-      <span class="ch-icon">✉️</span> Email
+      <span class="ch-ico ch-ico-email">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+      </span>
+      Email
       <span class="ch-badge">NEW</span>
     </div>
     <div class="ch-item" data-panel="websearch" onclick="switchChannel('websearch',this)">
-      <span class="ch-icon">🔍</span> Web Search
+      <span class="ch-ico ch-ico-search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m21 21-5-5"/></svg>
+      </span>
+      Web Search
     </div>
     <div class="ch-item" data-panel="webform" onclick="switchChannel('webform',this)">
-      <span class="ch-icon">📋</span> Web Contact Form
+      <span class="ch-ico ch-ico-form">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6"/></svg>
+      </span>
+      Web Contact Form
+    </div>
+    <div class="ch-item" data-panel="webapp" onclick="switchChannel('webapp',this)">
+      <span class="ch-ico ch-ico-app">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h.01" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </span>
+      Web App
     </div>
     <div class="ch-divider"></div>
     <div class="ch-item" data-panel="webchat" onclick="switchChannel('webchat',this)">
-      <span class="ch-icon">💬</span> Web Chat
+      <span class="ch-ico ch-ico-chat">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-11.3 7.6L3 21l1.9-6.7A8.4 8.4 0 1 1 21 11.5z"/></svg>
+      </span>
+      Web Chat
     </div>
     <div class="ch-item" data-panel="sms" onclick="switchChannel('sms',this)">
-      <span class="ch-icon">📱</span> SMS
+      <span class="ch-ico ch-ico-sms">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-11.3 7.6L3 21l1.9-6.7A8.4 8.4 0 1 1 21 11.5z"/></svg>
+      </span>
+      SMS
     </div>
     <div class="ch-item" data-panel="whatsapp" onclick="switchChannel('whatsapp',this)">
-      <span class="ch-icon">🟢</span> WhatsApp
+      <span class="ch-ico ch-ico-wa">
+        <!-- WhatsApp logo -->
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm5.6 14.2c-.2.6-1.2 1.2-1.7 1.2-.4 0-1 .1-3.3-.8-2.7-1.1-4.4-3.9-4.5-4.1-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6c-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1 2 1.3 2.3 1.5.2.1.4.1.6-.1l.9-1c.2-.2.4-.2.6-.1l1.9.9c.3.2.5.3.6.4.1.3.1.9-.1 1.6z"/></svg>
+      </span>
+      WhatsApp
     </div>
     <div class="ch-item" data-panel="messenger" onclick="switchChannel('messenger',this)">
-      <span class="ch-icon">🔵</span> Facebook Messenger
+      <span class="ch-ico ch-ico-msgr">
+        <!-- Facebook Messenger logo -->
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.3 2 2 6.2 2 11.7c0 3 1.4 5.6 3.7 7.4V23l3.4-1.9c.9.3 1.9.4 2.9.4 5.7 0 10-4.2 10-9.8S17.7 2 12 2zm1 12.1-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.5 5.8z"/></svg>
+      </span>
+      Facebook Messenger
     </div>
     <div class="ch-item" data-panel="instagram" onclick="switchChannel('instagram',this)">
-      <span class="ch-icon">🟣</span> Instagram
+      <span class="ch-ico ch-ico-ig">
+        <!-- Instagram logo -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg>
+      </span>
+      Instagram
     </div>
     <div class="ch-item" data-panel="voice" onclick="switchChannel('voice',this)">
-      <span class="ch-icon">📞</span> Voice
+      <span class="ch-ico ch-ico-voice">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </span>
+      Voice
     </div>
 
     <div style="flex:1;"></div>
@@ -641,11 +628,8 @@
         <!-- 2. Ada: password reset response -->
         <div class="em from-ada" id="em2">
           <div class="em-card">
-            <!-- Ada Gaming branded email header -->
             <div class="ag-email-header">
-              <div class="ag-logo-circle">
-                <span class="ag-logo-text">AG</span>
-              </div>
+              <div class="ag-logo-circle"><span class="ag-logo-text">AG</span></div>
               <div class="ag-header-wordmark">
                 <div class="ag-header-brand">Ada Gaming</div>
                 <div class="ag-header-sub">Customer Support</div>
@@ -704,9 +688,7 @@
         <div class="em from-ada" id="em4">
           <div class="em-card">
             <div class="ag-email-header">
-              <div class="ag-logo-circle">
-                <span class="ag-logo-text">AG</span>
-              </div>
+              <div class="ag-logo-circle"><span class="ag-logo-text">AG</span></div>
               <div class="ag-header-wordmark">
                 <div class="ag-header-brand">Ada Gaming</div>
                 <div class="ag-header-sub">Customer Support</div>
@@ -730,7 +712,7 @@
               </p>
               <p>Head to <strong>My Bonuses</strong> in the app to claim, or tap below:</p>
               <p><span class="em-cta">🎁 View My Bonuses →</span></p>
-              <p style="font-size:11px;color:var(--ag-text-3);">T&Cs apply. 18+. Please gamble responsibly. <a href="#" style="color:var(--ag-gold-1);">BeGambleAware.org</a></p>
+              <p style="font-size:11px;color:var(--ag-text-3);">T&amp;Cs apply. 18+. Please gamble responsibly. <a href="#" style="color:var(--ag-gold-1);">BeGambleAware.org</a></p>
             </div>
             <div class="em-tags">
               <span class="em-tag intent">🎯 bonus_enquiry</span>
@@ -742,38 +724,39 @@
           <div class="em-label">Ada Gaming Support · 14:06 · instant response</div>
         </div>
 
-        <!-- Replay button -->
         <button class="replay-btn" id="replayBtn" onclick="startAnimation()">↺ Replay animation</button>
 
-      </div><!-- /email-thread-wrap -->
-    </div><!-- /#panel-email -->
+      </div>
+    </div>
 
     <!-- ════════════════════════════════════ -->
-    <!-- WEB SEARCH PANEL                     -->
+    <!-- WEB SEARCH PANEL (INTERACTIVE)       -->
     <!-- ════════════════════════════════════ -->
     <div class="ch-panel" id="panel-websearch">
       <div class="web-search-panel">
-        <div>
-          <div class="ws-title">🔍 Web Search — AI-powered answers</div>
-          <div class="ws-sub">Ada surfaces an instant AI answer above search results, so players get help without leaving the site.</div>
+        <div class="ws-header">
+          <div class="ws-title">Web Search — AI-powered answers</div>
+          <div class="ws-sub">Ada surfaces an instant AI answer above search results, so players get help without leaving the site. Try a search below.</div>
         </div>
-        <div class="ws-search-box">
-          🔍 &nbsp;<span style="color:var(--ag-text);">how do I withdraw my winnings?</span>
-        </div>
-        <div class="ws-ada-answer">
-          <div class="ws-ada-label">🧠 Ada Gaming · AI Answer</div>
-          <div class="ws-ada-text">You can withdraw winnings via your <strong>My Account → Withdraw</strong> page. Standard bank transfer takes 1–3 working days; e-wallets (PayPal, Skrill) usually arrive within 4 hours. Minimum withdrawal is <strong>£10</strong>. If your account isn't verified yet, complete identity verification first — we'll guide you through it in the chat below.</div>
-        </div>
-        <div class="ws-results">
-          <div class="ws-result">
-            <div class="ws-result-title">How to Withdraw — Ada Gaming Help Centre</div>
-            <div class="ws-result-url">adagaming.com/help/withdrawals</div>
-            <div class="ws-result-snippet">Step-by-step guide to withdrawing winnings from your Ada Gaming account. Covers bank transfer, e-wallets, processing times, and verification requirements.</div>
+        <div class="ws-search-wrap">
+          <div class="ws-search-top">
+            <span class="ws-logo">Ada Gaming · Help Centre</span>
+            <span class="ws-ai-badge">✨ AI-powered</span>
           </div>
-          <div class="ws-result">
-            <div class="ws-result-title">Withdrawal Limits & Processing Times</div>
-            <div class="ws-result-url">adagaming.com/help/withdrawal-limits</div>
-            <div class="ws-result-snippet">Minimum £10, maximum £50,000 per transaction. Processing times vary by payment method. See our full schedule below.</div>
+          <div class="ws-search-inner">
+            <div class="ws-bar">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--ag-text-muted);flex-shrink:0;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <input id="wsInput" type="text" placeholder="Search for help…" autocomplete="off" onkeydown="if(event.key==='Enter')wsSearch()">
+              <button onclick="wsSearch()">Search</button>
+            </div>
+            <div class="ws-suggest">
+              Try:
+              <button onclick="wsAsk('how do I withdraw my winnings?')">How to withdraw</button>
+              <button onclick="wsAsk('my bonus hasn\'t appeared')">Missing bonus</button>
+              <button onclick="wsAsk('I need to reset my password')">Password reset</button>
+              <button onclick="wsAsk('what is the wagering requirement?')">Wagering requirements</button>
+            </div>
+            <div class="ws-result" id="wsResult"></div>
           </div>
         </div>
       </div>
@@ -824,6 +807,137 @@
             <div class="cf-side-card">
               <div class="cf-side-title">🔄 Smart routing</div>
               <div class="cf-side-text">If Ada can't resolve it, the form routes to the right human team with full context already attached — no re-explaining needed.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════ -->
+    <!-- WEB APP PANEL                        -->
+    <!-- ════════════════════════════════════ -->
+    <div class="ch-panel" id="panel-webapp">
+      <div class="webapp-panel">
+        <div class="phone-wrap">
+          <div class="phone-island"></div>
+          <div class="phone-screen">
+            <div class="phone-status">
+              <span>9:41</span>
+              <span class="ps-r">●●● &nbsp; 📶 &nbsp;🔋</span>
+            </div>
+
+            <div class="app-scroll">
+              <div class="app-header">
+                <div class="app-title">Ada Gaming</div>
+                <div class="app-icons">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                </div>
+              </div>
+
+              <div class="balance-card">
+                <div class="bc-lab">💰 My Balance</div>
+                <div class="bc-amt">£142.50</div>
+                <div class="bc-row">
+                  <div class="bc-pill">⬆ Deposit</div>
+                  <div class="bc-pill">⬇ Withdraw</div>
+                  <div class="bc-pill">🎁 Bonuses</div>
+                </div>
+              </div>
+
+              <div class="app-sec-label">Live matches</div>
+
+              <div class="match-row">
+                <div class="match-teams">
+                  <div class="teams">Arsenal vs Chelsea</div>
+                  <div class="league">🔴 LIVE 67' · Premier League</div>
+                </div>
+                <div class="match-odds">
+                  <div class="odd-pill"><div class="odd-label">1</div><div class="odd-val">2.10</div></div>
+                  <div class="odd-pill"><div class="odd-label">X</div><div class="odd-val">3.40</div></div>
+                  <div class="odd-pill"><div class="odd-label">2</div><div class="odd-val">3.20</div></div>
+                </div>
+              </div>
+              <div class="match-row">
+                <div class="match-teams">
+                  <div class="teams">Man City vs Liverpool</div>
+                  <div class="league">🕐 Starts 20:45</div>
+                </div>
+                <div class="match-odds">
+                  <div class="odd-pill"><div class="odd-label">1</div><div class="odd-val">1.85</div></div>
+                  <div class="odd-pill"><div class="odd-label">X</div><div class="odd-val">3.60</div></div>
+                  <div class="odd-pill"><div class="odd-label">2</div><div class="odd-val">4.00</div></div>
+                </div>
+              </div>
+              <div class="match-row">
+                <div class="match-teams">
+                  <div class="teams">Real Madrid vs Barcelona</div>
+                  <div class="league">🕐 Tomorrow 20:00 · La Liga</div>
+                </div>
+                <div class="match-odds">
+                  <div class="odd-pill"><div class="odd-label">1</div><div class="odd-val">2.25</div></div>
+                  <div class="odd-pill"><div class="odd-label">X</div><div class="odd-val">3.30</div></div>
+                  <div class="odd-pill"><div class="odd-label">2</div><div class="odd-val">2.90</div></div>
+                </div>
+              </div>
+
+              <div class="app-footnote">Ada Gaming · Demo · Powered by Ada AI</div>
+            </div>
+
+            <!-- Proactive nudge -->
+            <div class="app-proactive" id="appProactive">
+              <button class="pp-x" onclick="dismissProactive()">&times;</button>
+              <div class="pp-ico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#1A0E00" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-11.3 7.6L3 21l1.9-6.7A8.4 8.4 0 1 1 21 11.5z"/></svg>
+              </div>
+              <div class="pp-t">
+                <div class="pp-n">Ada Gaming Support</div>
+                <div class="pp-m">Need help with a withdrawal or bonus? I can check your account right now.</div>
+                <button class="pp-cta" onclick="openAppChat()">Ask a question</button>
+              </div>
+            </div>
+
+            <!-- Bottom tab bar -->
+            <div class="phone-tabbar">
+              <div class="phone-tab on">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                Home
+              </div>
+              <div class="phone-tab">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                Sports
+              </div>
+              <div class="phone-tab">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+                Casino
+              </div>
+              <div class="phone-tab" id="appSupportTab" onclick="openAppChat()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M18 4a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-1v3l-4-3H6a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3z"/><circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="13" cy="10" r="1" fill="currentColor" stroke="none"/></svg>
+                Support
+                <span class="tab-dot" id="appSupportDot" style="display:none"></span>
+              </div>
+            </div>
+
+            <!-- Chat scrim + sheet -->
+            <div class="chat-scrim2" id="chatScrim2" onclick="closeAppChat()"></div>
+            <div class="chat-sheet2" id="chatSheet2">
+              <div class="grabber2"></div>
+              <div class="cs2-head">
+                <div class="cs2-logo">AG</div>
+                <div class="cs2-t">
+                  <div class="cs2-name">Ada Gaming Support</div>
+                  <div class="cs2-status"><span class="cs2-status-dot" id="cs2Dot"></span> <span id="cs2Txt">connecting…</span></div>
+                </div>
+                <button class="cs2-close" onclick="closeAppChat()">&times;</button>
+              </div>
+              <div class="cs2-body" id="cs2Body"></div>
+              <div class="cs2-chips" id="cs2Chips"></div>
+              <div class="cs2-input">
+                <input id="cs2Text" placeholder="Message" autocomplete="off" onkeydown="if(event.key==='Enter')appSend()">
+                <button class="cs2-send" onclick="appSend()" aria-label="Send">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -1000,8 +1114,29 @@
   </div><!-- /ch-stage -->
 </div><!-- /ch-page -->
 
+<!-- ═══════════════════════════════════════
+     Ada headless SDK (for Web App panel)
+═══════════════════════════════════════ -->
 <script>
-/* ── Channel switcher ── */
+window.adaSettings = {
+  handle: "rkirk-gaming-demo",
+  headless: true,
+  enableProgrammaticControl: true,
+  onAdaEmbedLoaded: function(){ if (window.__agWire) window.__agWire(); }
+};
+(function(){
+  if (document.getElementById("__ada")) return;
+  var s = document.createElement("script");
+  s.id = "__ada"; s.async = true; s.src = "https://static.ada.support/embed2.js";
+  s.setAttribute("data-handle", "rkirk-gaming-demo");
+  (document.head || document.documentElement).appendChild(s);
+})();
+</script>
+
+<script>
+/* ══════════════════════════════════════════
+   CHANNEL SWITCHER
+══════════════════════════════════════════ */
 function switchChannel(id, el) {
   document.querySelectorAll('.ch-item').forEach(i => i.classList.remove('active'));
   document.querySelectorAll('.ch-panel').forEach(p => { p.classList.remove('active'); p.style.display = 'none'; });
@@ -1011,10 +1146,11 @@ function switchChannel(id, el) {
   if (id === 'email') { resetAnimation(); setTimeout(startAnimation, 300); }
 }
 
-/* ── Email animation ── */
+/* ══════════════════════════════════════════
+   EMAIL ANIMATION
+══════════════════════════════════════════ */
 const EMAILS = ['em1','em2','em3','em4'];
 const TYPING = ['typingAda1', 'typingAda2'];
-// Timing: em1 → 0s, typingAda1 → 2s, em2 → 3.5s, em3 → 5.5s, typingAda2 → 7.5s, em4 → 9s
 const SCHEDULE = [
   { action:'show', id:'em1',        delay: 400  },
   { action:'show', id:'typingAda1', delay: 2400 },
@@ -1031,35 +1167,22 @@ let timers = [];
 function resetAnimation() {
   timers.forEach(t => clearTimeout(t));
   timers = [];
-  EMAILS.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) { el.classList.remove('visible'); }
-  });
-  TYPING.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) { el.classList.remove('show'); }
-  });
+  EMAILS.forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('visible'); });
+  TYPING.forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('show'); });
   const rb = document.getElementById('replayBtn');
   if (rb) rb.classList.remove('show');
 }
 
 function startAnimation() {
   resetAnimation();
-  const thread = document.getElementById('emailThread');
   SCHEDULE.forEach(step => {
     const t = setTimeout(() => {
       const el = document.getElementById(step.id);
       if (!el) return;
       if (step.action === 'show') {
-        if (el.classList.contains('em')) {
-          el.classList.add('visible');
-          el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        } else if (el.classList.contains('typing-bubble')) {
-          el.classList.add('show');
-          el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        } else if (el.classList.contains('replay-btn')) {
-          el.classList.add('show');
-        }
+        if (el.classList.contains('em')) { el.classList.add('visible'); el.scrollIntoView({ behavior:'smooth', block:'nearest' }); }
+        else if (el.classList.contains('typing-bubble')) { el.classList.add('show'); el.scrollIntoView({ behavior:'smooth', block:'nearest' }); }
+        else if (el.classList.contains('replay-btn')) { el.classList.add('show'); }
       } else if (step.action === 'hide') {
         el.classList.remove('show');
       }
@@ -1068,8 +1191,235 @@ function startAnimation() {
   });
 }
 
-/* Auto-start on load */
 window.addEventListener('load', () => setTimeout(startAnimation, 600));
+
+/* ══════════════════════════════════════════
+   WEB SEARCH — Ada Gaming KB
+══════════════════════════════════════════ */
+var WS_DEFAULT = {
+  answer: "I can help with withdrawals, bonuses, account access, responsible gaming, and how Ada Gaming works. Try one of the suggested searches, or type your question — I'll give you a direct answer and link you to the right help article.",
+  articles: [
+    { t: "Getting started with Ada Gaming — account setup guide", c: "Account" },
+    { t: "How to contact Ada Gaming support", c: "Support" }
+  ]
+};
+
+var WS = [
+  { rx: /withdraw|cash.?out|payout|get.*money.?out|funds.*out/i,
+    answer: "You can withdraw winnings via <b>My Account → Withdraw</b>. Bank transfer takes <b>1–3 working days</b>; e-wallets (PayPal, Skrill) usually arrive within <b>4 hours</b>. Minimum withdrawal is <b>£10</b>. If your account isn't verified yet, complete identity verification first — we'll guide you through it.",
+    articles: [
+      { t: "How to withdraw your winnings — step-by-step guide", c: "Payments" },
+      { t: "Withdrawal processing times and payment methods", c: "Payments" }
+    ]
+  },
+  { rx: /bonus.*(not|hasn|didn|missing|appear|show)|missing.*bonus|where.*bonus/i,
+    answer: "If a bonus hasn't appeared, it's usually still processing — bonuses can take up to <b>15 minutes</b> after qualifying. Check <b>My Account → Bonuses</b> to see pending rewards. If it's been over an hour and you met the qualifying criteria, contact support and we'll investigate right away.",
+    articles: [
+      { t: "My bonus hasn't credited — what should I do?", c: "Bonuses" },
+      { t: "How long does a deposit bonus take to appear?", c: "Bonuses" }
+    ]
+  },
+  { rx: /wager|wagering|playthrough|rollover|requirement/i,
+    answer: "Wagering requirements are a multiplier on your bonus amount — for example, a <b>5x wagering requirement</b> on a £25 bonus means you need to place £125 in bets before it converts to withdrawable cash. Progress is shown in <b>My Account → Bonuses</b>. Sports bets count 100%; some casino games count at a reduced rate — check the specific bonus T&Cs.",
+    articles: [
+      { t: "What are wagering requirements and how do they work?", c: "Bonuses" },
+      { t: "Which games count towards wagering requirements?", c: "Bonuses" }
+    ]
+  },
+  { rx: /password|reset.*pass|forgot.*pass|can.?t.*log.?in|login|locked.?out/i,
+    answer: "To reset your password, click <b>Forgot Password</b> on the login screen and enter your email or username. You'll receive a reset link within a few minutes — check your spam folder if it doesn't arrive. The link expires after <b>15 minutes</b>. If your account is locked after too many attempts, wait 30 minutes or contact support.",
+    articles: [
+      { t: "How to reset your Ada Gaming password", c: "Account" },
+      { t: "My account is locked — what should I do?", c: "Account" }
+    ]
+  },
+  { rx: /deposit|add.*money|top.?up|fund.*account/i,
+    answer: "To deposit, go to <b>My Account → Deposit</b> and choose your payment method — we accept Visa, Mastercard, PayPal, Skrill, and bank transfer. Minimum deposit is <b>£10</b>. Most deposits are instant; bank transfers can take 1–3 working days. A deposit bonus may be automatically applied if one is active on your account.",
+    articles: [
+      { t: "How to make a deposit at Ada Gaming", c: "Payments" },
+      { t: "Supported payment methods and deposit limits", c: "Payments" }
+    ]
+  },
+  { rx: /responsible|self.?exclud|time.?out|limit|gamble.*safe|problem.*gambl/i,
+    answer: "Ada Gaming takes responsible gambling seriously. You can set <b>deposit limits, loss limits, session time limits</b>, or take a <b>time-out or self-exclusion</b> at any time via <b>My Account → Responsible Gaming</b>. Self-exclusion takes effect immediately and can last from 6 months to 5 years. You can also contact <a href='#' style='color:var(--ag-gold-1);'>BeGambleAware</a> for independent support.",
+    articles: [
+      { t: "Setting deposit and loss limits on your account", c: "Responsible Gaming" },
+      { t: "How to self-exclude or take a time-out", c: "Responsible Gaming" }
+    ]
+  },
+  { rx: /free.*bet|free.?spin|promo|promotion|offer/i,
+    answer: "Current promotions available to your account include: <b>Free Bet Friday</b> (£5 free bet on Premier League), <b>Re-Activation Bonus</b> (50% deposit match up to £100), and <b>Casino Welcome Back</b> (20 free spins on Gold Fever 5™). Go to <b>My Account → Bonuses</b> or tap <b>Promotions</b> in the app to see all your available offers.",
+    articles: [
+      { t: "Current promotions and how to claim them", c: "Bonuses" },
+      { t: "Free Bet Friday — terms and conditions", c: "Bonuses" }
+    ]
+  },
+  { rx: /verify|verification|identity|kyc|id.*check|document/i,
+    answer: "Identity verification (KYC) is required before your first withdrawal. You'll need to upload a <b>photo ID</b> (passport or driving licence) and <b>proof of address</b> (utility bill or bank statement, dated within 3 months). Verification usually completes within <b>2 hours</b> but can take up to 24 hours during busy periods.",
+    articles: [
+      { t: "How to verify your identity (KYC guide)", c: "Account" },
+      { t: "What documents are accepted for verification?", c: "Account" }
+    ]
+  }
+];
+
+function wsMatch(q) { for (var i = 0; i < WS.length; i++) { if (WS[i].rx.test(q)) return WS[i]; } return WS_DEFAULT; }
+function wsAsk(q) { document.getElementById('wsInput').value = q; wsSearch(); }
+var wsTypingInterval = null;
+
+function wsSearch() {
+  var q = document.getElementById('wsInput').value.trim();
+  if (!q) return;
+  var m = wsMatch(q);
+  var articles = m.articles.map(function(a) {
+    return '<a class="ws-rel-item" href="#"><span class="ri-ic">📄</span><span class="ri-t"><div class="ri-title">' + a.t + '</div><div class="ri-cat">' + a.c + ' · Ada Gaming Help Centre</div></span><span class="ri-chev">›</span></a>';
+  }).join('');
+
+  var r = document.getElementById('wsResult');
+  r.innerHTML = '<div class="ws-ans-card"><div class="ws-ans-head">🧠 Ada Gaming · AI Answer <span class="ws-ans-live">● answered instantly</span></div><div class="ws-ans-body" id="wsAnsBody"></div></div><div class="ws-rel"><div class="ws-rel-h">Related help articles</div>' + articles + '</div>';
+  r.classList.add('show');
+
+  if (wsTypingInterval) clearInterval(wsTypingInterval);
+  var el = document.getElementById('wsAnsBody');
+  var html = m.answer;
+  var plain = html.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&');
+  var i = 0, step = Math.max(1, Math.ceil(plain.length / 55));
+  wsTypingInterval = setInterval(function() {
+    i += step;
+    el.textContent = plain.slice(0, i);
+    if (i >= plain.length) { clearInterval(wsTypingInterval); el.innerHTML = html; }
+  }, 12);
+}
+
+/* ══════════════════════════════════════════
+   WEB APP PANEL — live Ada chat
+══════════════════════════════════════════ */
+var AG_GREETING = "Hey Kirky_123 👋 Welcome to Ada Gaming Support! I can help with your balance, withdrawals, bonuses, or anything else. What can I help you with today?";
+var AG_GREETING_RX = /^\s*Hi there\b|^\s*Hello\b/i;
+
+var appStarted = false, appAdaReady = false, appTypingEl = null, appRenderedIds = {}, appAwaitingReply = false, appWatchdog = null;
+
+function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+function mdToHtml(md) {
+  var t = esc(md);
+  t = t.replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/(^|[^*])\*([^*]+)\*/g, '$1<i>$2</i>');
+  t = t.replace(/`([^`]+)`/g, '<code>$1</code>');
+  t = t.replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  t = t.replace(/(?:^|\n)[-•]\s+(.*)/g, function(_, i) { return '\n<li>' + i + '</li>'; });
+  t = t.replace(/(<li>[\s\S]*?<\/li>)/g, function(m) { return '<ul>' + m.replace(/\n/g, '') + '</ul>'; });
+  t = t.replace(/\n{2,}/g, '<br><br>').replace(/\n/g, '<br>');
+  return t;
+}
+function mdStrip(md) { return md.replace(/[*_`#>]/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1'); }
+
+function cs2Scroll() { var b = document.getElementById('cs2Body'); if (b) b.scrollTop = b.scrollHeight; }
+function cs2AddUser(t) { var d = document.createElement('div'); d.className = 'cs2-msg cs2-user'; d.textContent = t; document.getElementById('cs2Body').appendChild(d); cs2Scroll(); }
+function cs2ShowTyping() {
+  cs2HideTyping();
+  appTypingEl = document.createElement('div'); appTypingEl.className = 'cs2-typing';
+  appTypingEl.innerHTML = '<span></span><span></span><span></span>';
+  document.getElementById('cs2Body').appendChild(appTypingEl); cs2Scroll();
+}
+function cs2HideTyping() { if (appTypingEl) { appTypingEl.remove(); appTypingEl = null; } }
+function cs2AddBot(md) {
+  cs2HideTyping();
+  var d = document.createElement('div'); d.className = 'cs2-msg cs2-bot';
+  document.getElementById('cs2Body').appendChild(d);
+  var plain = mdStrip(md), i = 0, step = Math.max(1, Math.ceil(plain.length / 45));
+  var iv = setInterval(function() { i += step; d.textContent = plain.slice(0, i); cs2Scroll();
+    if (i >= plain.length) { clearInterval(iv); d.innerHTML = mdToHtml(md); cs2Scroll(); }
+  }, 12);
+}
+function cs2SetStatus(live) {
+  appAdaReady = live;
+  document.getElementById('cs2Dot').className = 'cs2-status-dot' + (live ? ' live' : '');
+  document.getElementById('cs2Txt').textContent = live ? 'online · secure' : 'connecting…';
+}
+
+var agWired = false;
+function agWire() {
+  if (agWired || !(window.adaEmbed && window.adaEmbed.subscribeEvent)) return;
+  agWired = true;
+  try {
+    window.adaEmbed.subscribeEvent('ada:message:received', function(p) { var m = p && p.message; if (m) agOnBot(m); });
+    window.adaEmbed.subscribeEvent('ada:typing:start', function() { if (appStarted) cs2ShowTyping(); });
+    window.adaEmbed.subscribeEvent('ada:ready', function() { cs2SetStatus(true); });
+  } catch(e) {}
+  if (window.adaEmbed.sendMessage) cs2SetStatus(true);
+}
+window.__agWire = agWire;
+var agPoll = setInterval(function() { agWire(); if (agWired && window.adaEmbed && window.adaEmbed.sendMessage) { cs2SetStatus(true); clearInterval(agPoll); } }, 150);
+setTimeout(function() { clearInterval(agPoll); }, 20000);
+
+function agOnBot(m) {
+  if (!m || m.role === 'user') return;
+  if (m.id) { if (appRenderedIds[m.id]) return; appRenderedIds[m.id] = 1; }
+  var b = (m.body || '').trim();
+  if (!b) return;
+  if (AG_GREETING_RX.test(b)) return;
+  appAwaitingReply = false; clearTimeout(appWatchdog);
+  cs2AddBot(b);
+}
+
+function cs2SetChips(list) {
+  var chips = document.getElementById('cs2Chips'); chips.innerHTML = '';
+  list.forEach(function(txt) {
+    var b = document.createElement('button'); b.className = 'cs2-chip'; b.textContent = txt;
+    b.onclick = function() { appSendMsg(txt); }; chips.appendChild(b);
+  });
+}
+
+function openAppChat() {
+  dismissProactive();
+  document.getElementById('appSupportDot').style.display = 'none';
+  document.getElementById('chatScrim2').classList.add('open');
+  document.getElementById('chatSheet2').classList.add('open');
+  if (!appStarted) {
+    appStarted = true;
+    setTimeout(function() {
+      cs2AddBot(AG_GREETING);
+      cs2SetChips(['My withdrawal status', 'What bonuses do I have?', 'I need to reset my password']);
+    }, 300);
+  }
+  setTimeout(function() { document.getElementById('cs2Text').focus(); }, 420);
+}
+
+function closeAppChat() {
+  document.getElementById('chatScrim2').classList.remove('open');
+  document.getElementById('chatSheet2').classList.remove('open');
+}
+
+function appSend() { var t = document.getElementById('cs2Text').value.trim(); if (t) appSendMsg(t); }
+
+function appSendMsg(text) {
+  document.getElementById('cs2Text').value = '';
+  document.getElementById('cs2Chips').innerHTML = '';
+  cs2AddUser(text);
+  cs2ShowTyping();
+  appAwaitingReply = true;
+  clearTimeout(appWatchdog);
+  appWatchdog = setTimeout(function() {
+    if (!appAwaitingReply) return;
+    appAwaitingReply = false; cs2HideTyping();
+    cs2AddBot("I'm having a little trouble connecting right now — please try again in a moment. 🙏");
+  }, 24000);
+  if (window.adaEmbed && window.adaEmbed.sendMessage) {
+    window.adaEmbed.sendMessage(text).catch(function() {
+      appAwaitingReply = false; clearTimeout(appWatchdog); cs2HideTyping();
+      cs2AddBot("I had trouble sending that — please try again in a moment.");
+    });
+  }
+}
+
+var proTimer = setTimeout(function() {
+  document.getElementById('appProactive').classList.add('show');
+  document.getElementById('appSupportDot').style.display = 'block';
+}, 6000);
+
+function dismissProactive() {
+  document.getElementById('appProactive').classList.remove('show');
+  clearTimeout(proTimer);
+}
 </script>
 </body>
 </html>
