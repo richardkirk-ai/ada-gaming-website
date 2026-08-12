@@ -1,0 +1,193 @@
+/* ─────────────────────────────────────────────────────────────
+   betsson brand overrides — loaded after ada-gaming.css.
+   Palette: dark charcoal bg, orange accent (#F9A134), teal (#00B9BD)
+   ───────────────────────────────────────────────────────────── */
+
+/* ── Design tokens ─────────────────────────────────────────── */
+:root {
+  --ag-bg:          #0F0F12;
+  --ag-bg-2:        #16161A;
+  --ag-panel:       #1E1E24;
+  --ag-panel-2:     #252530;
+  --ag-surface:     #363436;
+
+  /* Primary accent — betsson orange */
+  --ag-gold-1:      #F9A134;
+  --ag-gold-2:      #D4820A;
+  --ag-gold-3:      #FFBC5C;
+  --ag-gold-grad:   linear-gradient(135deg, #FFBC5C 0%, #F9A134 50%, #D4820A 100%);
+  --ag-gold-text-grad: linear-gradient(90deg, #FFBC5C 0%, #F9A134 60%, #D4820A 100%);
+  --ag-gold-border:        rgba(249, 161, 52, 0.22);
+  --ag-gold-border-strong: rgba(249, 161, 52, 0.45);
+  --ag-ink-on-gold: #1A0E00;
+
+  /* Teal secondary */
+  --bss-teal:       #00B9BD;
+  --bss-teal-dim:   rgba(0, 185, 189, 0.15);
+
+  /* Text */
+  --ag-text:        #F4F8F9;
+  --ag-text-2:      #C8C4C8;
+  --ag-text-3:      #857E85;
+  --ag-text-muted:  #504850;
+}
+
+/* ── Body ───────────────────────────────────────────────────── */
+body {
+  background: var(--ag-bg) !important;
+}
+
+/* ── betsson wordmark ───────────────────────────────────────── */
+.bss-mark {
+  font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #F9A134;
+  letter-spacing: -0.5px;
+  line-height: 1;
+  text-decoration: none;
+  user-select: none;
+}
+
+/* ── RG bar ─────────────────────────────────────────────────── */
+.rg-bar {
+  background: rgba(10, 10, 12, 0.95) !important;
+  border-bottom-color: rgba(249, 161, 52, 0.15) !important;
+}
+.rg-bar a { color: var(--ag-gold-2) !important; }
+
+/* ── User pill ──────────────────────────────────────────────── */
+.user-pill {
+  background: rgba(249, 161, 52, 0.10) !important;
+}
+.user-name { color: var(--ag-gold-1) !important; }
+
+/* ── User avatar ────────────────────────────────────────────── */
+.user-avatar circle,
+.user-avatar path {
+  fill: #2A2020 !important;
+  stroke: #2A2020 !important;
+}
+
+/* ── Buttons ────────────────────────────────────────────────── */
+.btn-gold {
+  box-shadow: 0 4px 22px rgba(249, 161, 52, 0.28) !important;
+}
+
+/* ── Odds / market buttons ──────────────────────────────────── */
+.odd-btn:hover, .mkt-btn:hover, .gs-btn:hover {
+  background: rgba(249, 161, 52, 0.10) !important;
+  border-color: var(--ag-gold-border-strong) !important;
+}
+
+/* ── Game thumb overlay ─────────────────────────────────────── */
+.game-thumb::before {
+  background: radial-gradient(circle at 50% 30%, rgba(249,161,52,0.06), transparent 60%) !important;
+}
+
+/* ── Promo banner ───────────────────────────────────────────── */
+.promo-banner {
+  background: linear-gradient(120deg, #1A1218 0%, #2E2016 50%, #1A1218 100%) !important;
+  box-shadow: 0 0 60px rgba(249, 161, 52, 0.08) !important;
+}
+.promo-banner::before {
+  background: radial-gradient(ellipse at 80% 50%, rgba(249,161,52,0.06) 0%, transparent 60%) !important;
+}
+
+/* ── Hero cat icon ──────────────────────────────────────────── */
+.hero-cat-icon {
+  background: radial-gradient(circle at 40% 35%, var(--ag-panel-2), var(--ag-surface)) !important;
+}
+
+/* ── Slots strip label ──────────────────────────────────────── */
+.slots-strip-label { color: var(--ag-gold-1) !important; }
+
+/* ── League/day tabs ────────────────────────────────────────── */
+.league-tab:hover {
+  background: rgba(249, 161, 52, 0.08) !important;
+  color: var(--ag-gold-1) !important;
+}
+.league-tab.active {
+  background: var(--ag-gold-grad) !important;
+  color: var(--ag-ink-on-gold) !important;
+}
+.day-tab:hover { background: rgba(249, 161, 52, 0.06) !important; }
+
+/* ── Bet count badge ────────────────────────────────────────── */
+.bet-count {
+  background: var(--ag-ink-on-gold) !important;
+  color: var(--ag-gold-1) !important;
+}
+
+/* ── Channels page ──────────────────────────────────────────── */
+.ws-btn { border-color: var(--ag-gold-border-strong) !important; }
+
+/* ── MCP hub label ──────────────────────────────────────────── */
+.ada-hub .ada-hub-label {
+  background: var(--ag-gold-text-grad) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* ── Footer — 3-col (Sports column removed) ─────────────────── */
+.footer-inner {
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   VOICE PAGE — override purple/blue --vd-* palette to charcoal
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --vd-card:   #1A1A20;
+  --vd-card2:  #222228;
+  --vd-border: rgba(249, 161, 52, 0.18);
+  --vd-gold:   #F9A134;
+}
+
+.vd-hero {
+  background: linear-gradient(135deg, #0F0F12 0%, #1E1E28 60%, #0F0F12 100%) !important;
+}
+.vd-hero-icon {
+  background: linear-gradient(135deg, #F9A134, #C87010) !important;
+}
+.bc {
+  background: #18181E !important;
+}
+#cal-box {
+  background: #1A1A20 !important;
+}
+
+/* KB / API reason */
+.kb-result {
+  background: rgba(249, 161, 52, 0.06) !important;
+  border-color: rgba(249, 161, 52, 0.20) !important;
+}
+.kb-match { color: var(--ag-gold-1) !important; }
+.kb-step.active { background: rgba(249,161,52,0.08) !important; color: var(--ag-gold-1) !important; border-color: rgba(249,161,52,0.2) !important; }
+.api-reason { border-left-color: rgba(249, 161, 52, 0.4) !important; }
+.api-reason strong { color: var(--ag-gold-1) !important; }
+
+/* bc-badge */
+.bc-badge.search, .bc-badge.kb {
+  background: rgba(249,161,52,0.08) !important;
+  color: var(--ag-gold-1) !important;
+  border-color: rgba(249,161,52,0.2) !important;
+}
+
+/* Keyword pills */
+.kw.ask  { background: rgba(249,161,52,0.15) !important; color: var(--ag-gold-1) !important; }
+.kw.run  { background: rgba(0,185,189,0.12) !important;  color: #00B9BD !important; }
+.kw.send { background: rgba(249,161,52,0.15) !important; color: var(--ag-gold-1) !important; }
+
+/* VD tab active */
+.vd-tab.active { background: rgba(249,161,52,0.12) !important; border-color: rgba(249,161,52,0.30) !important; color: var(--ag-gold-1) !important; }
+.vd-tab:hover  { color: var(--ag-gold-1) !important; background: rgba(249,161,52,0.06) !important; }
+
+.kb-query-text em { color: var(--ag-gold-1) !important; }
+.caller-avatar { color: #1A1018 !important; }
+
+/* ── Channels page colour overrides ─────────────────────────── */
+.ch-ico-email  { background: #F9A134 !important; }
+.ch-ico-voice  { background: var(--bss-teal) !important; }
+.ch-ico-app    { background: linear-gradient(135deg,#363436,#1A1A1E) !important; border-color: rgba(249,161,52,0.25) !important; }
