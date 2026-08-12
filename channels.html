@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ada Gaming — Channels</title>
+<link rel="stylesheet" href="ada-gaming.css">
+<style>
+/* ── Page layout ── */
+.ch-page { display: flex; height: calc(100vh - 115px); overflow: hidden; }
+
+/* ── Left rail ── */
+.ch-rail {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--ag-bg-2);
+  border-right: 1px solid var(--ag-gold-border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.ch-rail-hdr {
+  padding: 16px 18px 10px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--ag-text-muted);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.ch-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 18px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ag-text-2);
+}
+.ch-item:hover { background: rgba(212,168,67,0.06); color: var(--ag-text); }
+.ch-item.active {
+  background: rgba(212,168,67,0.1);
+  border-left-color: var(--ag-gold-1);
+  color: var(--ag-gold-1);
+  font-weight: 700;
+}
+.ch-icon { font-size: 18px; width: 22px; text-align: center; flex-shrink: 0; }
+.ch-badge {
+  margin-left: auto;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 8px;
+  background: rgba(212,168,67,0.15);
+  color: var(--ag-gold-1);
+  border: 1px solid rgba(212,168,67,0.25);
+}
+
+/* ── Stage area ── */
+.ch-stage {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--ag-bg);
+}
+
+/* ── Panel ── */
+.ch-panel { display: none; flex: 1; }
+.ch-panel.active { display: flex; flex: 1; }
+
+/* ── ONE-BRAIN banner ── */
+.one-brain {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  background: linear-gradient(90deg, rgba(212,168,67,0.12) 0%, rgba(212,168,67,0.04) 100%);
+  border-bottom: 1px solid rgba(212,168,67,0.18);
+  font-size: 11px;
+  color: var(--ag-gold-3);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.one-brain-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ag-green); flex-shrink: 0; box-shadow: 0 0 6px rgba(46,204,113,0.6); }
+
+/* ── Email panel ── */
+.email-panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+}
+.email-split {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Inbox sidebar */
+.inbox-side {
+  width: 300px;
+  flex-shrink: 0;
+  background: var(--ag-bg-2);
+  border-right: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.inbox-hdr {
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.inbox-hdr-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ag-text);
+  flex: 1;
+}
+.inbox-hdr-count {
+  font-size: 11px;
+  background: var(--ag-gold-1);
+  color: #1A0E00;
+  font-weight: 800;
+  padding: 1px 7px;
+  border-radius: 10px;
+}
+.inbox-search {
+  margin: 10px 12px;
+  padding: 7px 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--ag-text-3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.inbox-thread-list { overflow-y: auto; flex: 1; }
+.inbox-thread {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  cursor: pointer;
+  transition: background 0.12s;
+  position: relative;
+}
+.inbox-thread:hover { background: rgba(255,255,255,0.04); }
+.inbox-thread.active { background: rgba(212,168,67,0.08); border-left: 3px solid var(--ag-gold-1); }
+.inbox-thread.unread .it-subject { font-weight: 700; color: var(--ag-text); }
+.it-from { font-size: 12px; font-weight: 600; color: var(--ag-text); margin-bottom: 2px; display: flex; justify-content: space-between; }
+.it-time { font-size: 10px; color: var(--ag-text-muted); font-weight: 400; }
+.it-subject { font-size: 11px; color: var(--ag-text-2); margin-bottom: 3px; }
+.it-preview { font-size: 10px; color: var(--ag-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.unread-dot {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ag-gold-1);
+}
+
+/* Email detail */
+.email-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.ed-toolbar {
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--ag-bg-2);
+  flex-shrink: 0;
+}
+.ed-toolbar-btn {
+  padding: 5px 12px;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  color: var(--ag-text-2);
+  cursor: pointer;
+}
+.ed-subject-bar {
+  padding: 14px 20px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  flex-shrink: 0;
+}
+.ed-subject { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+.ed-meta { font-size: 11px; color: var(--ag-text-3); display: flex; gap: 16px; flex-wrap: wrap; }
+.ed-meta span { display: flex; align-items: center; gap: 4px; }
+.ed-messages { flex: 1; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 16px; }
+
+/* Individual email messages in thread */
+.email-msg {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--ag-bg-2);
+}
+.email-msg.ada-reply { background: rgba(46,34,112,0.5); border-color: rgba(212,168,67,0.18); }
+.em-hdr {
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.em-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.em-avatar.user { background: linear-gradient(135deg, #4A3FAF, #2E2270); color: #fff; }
+.em-avatar.ada { background: var(--ag-gold-grad); color: #1A0E00; }
+.em-from { font-size: 12px; font-weight: 600; }
+.em-addr { font-size: 10px; color: var(--ag-text-3); }
+.em-time { margin-left: auto; font-size: 10px; color: var(--ag-text-muted); }
+.em-body { padding: 14px 16px; font-size: 13px; line-height: 1.65; color: var(--ag-text-2); }
+.em-body p { margin-bottom: 10px; }
+.em-body p:last-child { margin-bottom: 0; }
+.em-body strong { color: var(--ag-text); font-weight: 600; }
+.em-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  margin-right: 6px;
+  margin-bottom: 4px;
+}
+.em-tag.intent { background: rgba(52,152,219,0.18); color: #5dade2; border: 1px solid rgba(52,152,219,0.3); }
+.em-tag.resolved { background: rgba(46,204,113,0.15); color: #2ecc71; border: 1px solid rgba(46,204,113,0.3); }
+.em-tag.kb { background: rgba(212,168,67,0.12); color: var(--ag-gold-1); border: 1px solid rgba(212,168,67,0.25); }
+.em-tags { padding: 0 16px 12px; display: flex; flex-wrap: wrap; }
+.em-security-banner {
+  margin: 0 16px 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(46,204,113,0.08);
+  border: 1px solid rgba(46,204,113,0.2);
+  font-size: 11px;
+  color: #2ecc71;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.em-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--ag-gold-grad);
+  color: #1A0E00;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 8px;
+  margin: 4px 0;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+}
+
+/* Brain panel */
+.brain-panel {
+  width: 280px;
+  flex-shrink: 0;
+  background: var(--ag-bg-2);
+  border-left: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.bp-hdr {
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.bp-hdr-title { font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--ag-gold-1); }
+.bp-section { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.bp-section-title { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--ag-text-muted); margin-bottom: 8px; }
+.bp-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  font-size: 11px;
+}
+.bp-card:last-child { margin-bottom: 0; }
+.bp-card-label { font-size: 9px; color: var(--ag-text-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+.bp-card-value { font-size: 12px; font-weight: 600; color: var(--ag-text); }
+.bp-card-sub { font-size: 10px; color: var(--ag-text-3); margin-top: 2px; }
+.bp-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 11px;
+}
+.bp-step:last-child { border-bottom: none; }
+.bp-step-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+.bp-step-text { color: var(--ag-text-2); line-height: 1.4; }
+.bp-step-text strong { color: var(--ag-gold-1); }
+.bp-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+}
+.bp-pill.green { background: rgba(46,204,113,0.15); color: #2ecc71; }
+.bp-pill.gold { background: rgba(212,168,67,0.15); color: var(--ag-gold-1); }
+.bp-pill.blue { background: rgba(52,152,219,0.15); color: #5dade2; }
+.bp-channel-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(212,168,67,0.2);
+  background: rgba(212,168,67,0.06);
+  margin-bottom: 8px;
+  font-size: 11px;
+}
+.bp-channel-badge .icon { font-size: 18px; }
+.bp-channel-badge .name { font-weight: 600; color: var(--ag-text); }
+.bp-channel-badge .sub { font-size: 10px; color: var(--ag-text-3); }
+
+/* Animated typing indicator */
+@keyframes typeDot { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-4px); } }
+.typing-dots span {
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--ag-gold-1);
+  margin: 0 2px;
+  animation: typeDot 1.2s infinite;
+}
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+/* ── Chat / SMS / other panels ── */
+.generic-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 560px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 20px 20px 0;
+  overflow: hidden;
+}
+.chat-device {
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: var(--ag-panel);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.chat-topbar {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: var(--ag-panel-2);
+  flex-shrink: 0;
+}
+.chat-topbar-icon { font-size: 22px; }
+.chat-topbar-info { flex: 1; }
+.chat-topbar-name { font-size: 13px; font-weight: 700; }
+.chat-topbar-status { font-size: 10px; color: var(--ag-green); }
+.chat-messages { flex: 1; overflow-y: auto; padding: 14px 12px; display: flex; flex-direction: column; gap: 10px; }
+.chat-msg { display: flex; flex-direction: column; max-width: 80%; }
+.chat-msg.user { align-self: flex-end; align-items: flex-end; }
+.chat-msg.bot { align-self: flex-start; align-items: flex-start; }
+.chat-bubble {
+  padding: 9px 13px;
+  border-radius: 14px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ag-text);
+}
+.chat-msg.user .chat-bubble { background: var(--ag-surface); border-bottom-right-radius: 4px; }
+.chat-msg.bot .chat-bubble { background: rgba(255,255,255,0.07); border-bottom-left-radius: 4px; }
+.chat-time { font-size: 9px; color: var(--ag-text-muted); margin-top: 3px; padding: 0 4px; }
+.chat-system {
+  align-self: center;
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px;
+  font-size: 10px;
+  color: var(--ag-text-3);
+  padding: 4px 12px;
+}
+.chat-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  background: var(--ag-panel-2);
+  flex-shrink: 0;
+}
+.chat-input {
+  flex: 1;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-size: 12px;
+  color: var(--ag-text-2);
+}
+.chat-send-btn {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--ag-gold-grad);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  color: #1A0E00;
+  flex-shrink: 0;
+}
+.chat-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 2px 4px; }
+.chat-chip {
+  padding: 5px 11px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid var(--ag-gold-border);
+  color: var(--ag-gold-1);
+  background: rgba(212,168,67,0.06);
+  cursor: pointer;
+}
+
+/* ── View switcher (bottom pill nav) ── */
+.viewswitch {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0 14px;
+  gap: 4px;
+  flex-shrink: 0;
+  background: var(--ag-bg-2);
+  border-top: 1px solid var(--ag-gold-border);
+}
+.vs-btn {
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--ag-text-3);
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.vs-btn:hover { color: var(--ag-text); background: rgba(255,255,255,0.05); }
+.vs-btn.active { background: var(--ag-gold-grad); color: #1A0E00; }
+
+/* Scroll animation helpers */
+.fade-in { animation: fadeIn 0.4s var(--ag-ease) both; }
+@keyframes fadeIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: none; } }
+.delay-1 { animation-delay: 0.15s; }
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.5s; }
+.delay-4 { animation-delay: 0.7s; }
+.delay-5 { animation-delay: 0.95s; }
+.delay-6 { animation-delay: 1.2s; }
+</style>
+</head>
+<body>
+
+<!-- ── Site header ── -->
+<div class="wrap">
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <img src="logo.png" alt="Ada Gaming" width="52" height="52" style="border-radius:50%;display:block;filter:drop-shadow(0 4px 14px rgba(212,168,67,0.4));">
+      <span class="brand-name">
+        <span class="brand-title">Ada Gaming</span>
+        <span class="brand-tag">Betting &middot; Casino &middot; Live</span>
+      </span>
+    </a>
+    <nav class="site-nav">
+      <a href="sports-betting.html">Sports</a>
+      <a href="live-casino.html">Casino</a>
+      <a href="playtech.html">Playtech</a>
+      <a href="voice.html">Voice</a>
+      <a href="front-end-api.html">Front-end API</a>
+      <a href="channels.html" class="active">Channels</a>
+      <a href="mcp-demo.html">MCP</a>
+    </nav>
+    <div class="header-actions">
+      <div class="user-pill">
+        <span class="user-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#2A1870"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#2A1870" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <span class="user-name">Kirky_123</span>
+      </div>
+    </div>
+  </header>
+</div>
+<hr class="gold-rule">
+
+<!-- ── One-brain banner ── -->
+<div class="one-brain">
+  <span class="one-brain-dot"></span>
+  One agent · one configuration · every channel — build once, deploy everywhere
+  &nbsp;&bull;&nbsp; Same playbooks · same knowledge · same AI brain
+</div>
+
+<!-- ── Main layout ── -->
+<div class="ch-page">
+
+  <!-- Left rail -->
+  <aside class="ch-rail">
+    <div class="ch-rail-hdr">Support channels</div>
+    <div class="ch-item active" data-panel="email" onclick="switchChannel('email',this)">
+      <span class="ch-icon">✉️</span> Email
+      <span class="ch-badge">NEW</span>
+    </div>
+    <div class="ch-item" data-panel="webchat" onclick="switchChannel('webchat',this)">
+      <span class="ch-icon">💬</span> Web Chat
+    </div>
+    <div class="ch-item" data-panel="sms" onclick="switchChannel('sms',this)">
+      <span class="ch-icon">📱</span> SMS
+    </div>
+    <div class="ch-item" data-panel="whatsapp" onclick="switchChannel('whatsapp',this)">
+      <span class="ch-icon">🟢</span> WhatsApp
+    </div>
+    <div class="ch-item" data-panel="messenger" onclick="switchChannel('messenger',this)">
+      <span class="ch-icon">🔵</span> Facebook Messenger
+    </div>
+    <div class="ch-item" data-panel="instagram" onclick="switchChannel('instagram',this)">
+      <span class="ch-icon">🟣</span> Instagram
+    </div>
+    <div class="ch-item" data-panel="voice" onclick="switchChannel('voice',this)">
+      <span class="ch-icon">📞</span> Voice
+    </div>
+    <div class="ch-rail-hdr" style="margin-top:8px;">Powered by</div>
+    <div style="padding:12px 16px;font-size:11px;color:var(--ag-text-3);line-height:1.6;">
+      Ada's AI engine — a single brain shared across all channels. Same configuration, same knowledge, same playbooks. No rebuilding required.
+    </div>
+  </aside>
+
+  <!-- Stage -->
+  <div class="ch-stage">
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- EMAIL PANEL                                  -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="ch-panel active" id="panel-email">
+      <div class="email-panel">
+        <div class="email-split">
+
+          <!-- Inbox sidebar -->
+          <div class="inbox-side">
+            <div class="inbox-hdr">
+              <span style="font-size:18px;">📥</span>
+              <span class="inbox-hdr-title">Inbox</span>
+              <span class="inbox-hdr-count">3</span>
+            </div>
+            <div class="inbox-search">🔍 <span>Search mail…</span></div>
+            <div class="inbox-thread-list">
+
+              <div class="inbox-thread unread active" onclick="selectThread(this)">
+                <div class="it-from">Kirky_123 <span class="it-time">14:02</span></div>
+                <div class="it-subject">Password reset + bonus question</div>
+                <div class="it-preview">Hi, I can't log in — forgot password...</div>
+                <div class="unread-dot"></div>
+              </div>
+
+              <div class="inbox-thread" onclick="selectThread(this)">
+                <div class="it-from">Jamie_Bets99 <span class="it-time">Yesterday</span></div>
+                <div class="it-subject">Withdrawal taking too long</div>
+                <div class="it-preview">My £50 withdrawal has been pending...</div>
+              </div>
+
+              <div class="inbox-thread" onclick="selectThread(this)">
+                <div class="it-from">Promo-Mailer <span class="it-time">Mon</span></div>
+                <div class="it-subject">Your Summer Bonus is ready 🎰</div>
+                <div class="it-preview">Claim your 100% deposit match...</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Email detail view -->
+          <div class="email-detail">
+            <div class="ed-toolbar">
+              <button class="ed-toolbar-btn">← Back</button>
+              <button class="ed-toolbar-btn">↩ Reply</button>
+              <button class="ed-toolbar-btn">⟳ Forward</button>
+              <button class="ed-toolbar-btn" style="margin-left:auto;">🗑 Archive</button>
+            </div>
+            <div class="ed-subject-bar">
+              <div class="ed-subject">Password reset + bonus query</div>
+              <div class="ed-meta">
+                <span>📧 kirky_123@email.com → support@adagaming.com</span>
+                <span>🕑 Today, 14:02</span>
+                <span style="color:var(--ag-green);">⚡ 2 intents · fully resolved</span>
+              </div>
+            </div>
+
+            <div class="ed-messages">
+
+              <!-- Message 1: Customer - forgot password -->
+              <div class="email-msg fade-in">
+                <div class="em-hdr">
+                  <div class="em-avatar user">K</div>
+                  <div>
+                    <div class="em-from">Kirky_123</div>
+                    <div class="em-addr">kirky_123@email.com</div>
+                  </div>
+                  <div class="em-time">14:02</div>
+                </div>
+                <div class="em-body">
+                  <p>Hi Ada Gaming support,</p>
+                  <p>I can't log in to my account — I've forgotten my password and the app just keeps saying "invalid credentials". Can you send me a password reset link? My username is <strong>Kirky_123</strong>.</p>
+                  <p>Thanks</p>
+                </div>
+              </div>
+
+              <!-- Message 2: Ada reply - password reset -->
+              <div class="email-msg ada-reply fade-in delay-1">
+                <div class="em-hdr">
+                  <div class="em-avatar ada">A</div>
+                  <div>
+                    <div class="em-from">Ada · Ada Gaming Support</div>
+                    <div class="em-addr">support@adagaming.com · AI Agent</div>
+                  </div>
+                  <div class="em-time">14:02 &nbsp;⚡ instant</div>
+                </div>
+                <div class="em-security-banner">
+                  🔐 Identity verified · account found · no suspicious activity
+                </div>
+                <div class="em-body">
+                  <p>Hi Kirky_123,</p>
+                  <p>No problem — I've sent a secure password reset link to the email address registered on your account. It will expire in <strong>15 minutes</strong> for your security.</p>
+                  <p>Please check your inbox (and spam folder, just in case) and follow the link to set a new password. Once done, you'll be able to log straight back into the app.</p>
+                  <p>
+                    <span class="em-cta">🔑 Reset Password →</span>
+                  </p>
+                  <p style="margin-top:6px;font-size:11px;color:var(--ag-text-3);">If you didn't request this, please ignore this email — your account is safe.</p>
+                </div>
+                <div class="em-tags">
+                  <span class="em-tag intent">🎯 Intent: password_reset</span>
+                  <span class="em-tag resolved">✅ Resolved</span>
+                  <span class="em-tag kb">📚 KB: account-access-001</span>
+                </div>
+              </div>
+
+              <!-- Message 3: Customer - bonus question -->
+              <div class="email-msg fade-in delay-2">
+                <div class="em-hdr">
+                  <div class="em-avatar user">K</div>
+                  <div>
+                    <div class="em-from">Kirky_123</div>
+                    <div class="em-addr">kirky_123@email.com</div>
+                  </div>
+                  <div class="em-time">14:06</div>
+                </div>
+                <div class="em-body">
+                  <p>Thanks, that worked! One more thing while I'm here — what bonuses are available to me right now? I haven't deposited in a while.</p>
+                </div>
+              </div>
+
+              <!-- Message 4: Ada reply - bonuses -->
+              <div class="email-msg ada-reply fade-in delay-3">
+                <div class="em-hdr">
+                  <div class="em-avatar ada">A</div>
+                  <div>
+                    <div class="em-from">Ada · Ada Gaming Support</div>
+                    <div class="em-addr">support@adagaming.com · AI Agent</div>
+                  </div>
+                  <div class="em-time">14:06 &nbsp;⚡ instant</div>
+                </div>
+                <div class="em-body">
+                  <p>Great to hear you're back in! Here are the bonuses currently available to your account:</p>
+                  <p>
+                    🎰 <strong>Re-Activation Bonus</strong> — 50% deposit match up to £100, valid 7 days. Minimum deposit £10.<br>
+                    ⚽ <strong>Free Bet Friday</strong> — £5 free bet on any Premier League match this weekend. Auto-credited on your next login.<br>
+                    🃏 <strong>Casino Welcome Back</strong> — 20 free spins on Gold Fever 5™, credited within 24 hours of next deposit.
+                  </p>
+                  <p>To claim any of these, simply log in and head to <strong>My Bonuses</strong> in the app, or tap the button below:</p>
+                  <p><span class="em-cta">🎁 View My Bonuses →</span></p>
+                  <p style="font-size:11px;color:var(--ag-text-3);">Bonus terms apply. 18+. Please gamble responsibly. <a href="#" style="color:var(--ag-gold-1);">BeGambleAware</a></p>
+                </div>
+                <div class="em-tags">
+                  <span class="em-tag intent">🎯 Intent: bonus_enquiry</span>
+                  <span class="em-tag resolved">✅ Resolved</span>
+                  <span class="em-tag kb">📚 KB: bonuses-reactivation-2026</span>
+                  <span class="em-tag kb">📚 Playbook: bonus_query</span>
+                </div>
+              </div>
+
+            </div><!-- /ed-messages -->
+          </div><!-- /email-detail -->
+
+          <!-- Brain panel -->
+          <div class="brain-panel">
+            <div class="bp-hdr">
+              <span>🧠</span>
+              <span class="bp-hdr-title">Ada's Brain</span>
+            </div>
+
+            <div class="bp-section">
+              <div class="bp-section-title">Channel</div>
+              <div class="bp-channel-badge">
+                <span class="icon">✉️</span>
+                <div>
+                  <div class="name">Email</div>
+                  <div class="sub">support@adagaming.com</div>
+                </div>
+              </div>
+              <div style="font-size:10px;color:var(--ag-text-muted);line-height:1.5;">Same AI brain as Chat, Voice &amp; SMS. No separate configuration needed.</div>
+            </div>
+
+            <div class="bp-section">
+              <div class="bp-section-title">Session</div>
+              <div class="bp-card">
+                <div class="bp-card-label">Customer</div>
+                <div class="bp-card-value">Kirky_123</div>
+                <div class="bp-card-sub">CUST-12345 · Verified ✓</div>
+              </div>
+              <div class="bp-card">
+                <div class="bp-card-label">Last login</div>
+                <div class="bp-card-value">43 days ago</div>
+                <div class="bp-card-sub">No open issues</div>
+              </div>
+            </div>
+
+            <div class="bp-section">
+              <div class="bp-section-title">Intents detected</div>
+              <div class="bp-step">
+                <span class="bp-step-icon">🎯</span>
+                <div class="bp-step-text"><strong>password_reset</strong><br><span class="bp-pill green">✅ Resolved</span></div>
+              </div>
+              <div class="bp-step">
+                <span class="bp-step-icon">🎯</span>
+                <div class="bp-step-text"><strong>bonus_enquiry</strong><br><span class="bp-pill green">✅ Resolved</span></div>
+              </div>
+            </div>
+
+            <div class="bp-section">
+              <div class="bp-section-title">Knowledge used</div>
+              <div class="bp-step">
+                <span class="bp-step-icon">📚</span>
+                <div class="bp-step-text">KB: <strong>account-access-001</strong></div>
+              </div>
+              <div class="bp-step">
+                <span class="bp-step-icon">⚡</span>
+                <div class="bp-step-text">Playbook: <strong>bonus_query</strong></div>
+              </div>
+              <div class="bp-step">
+                <span class="bp-step-icon">📚</span>
+                <div class="bp-step-text">KB: <strong>bonuses-reactivation-2026</strong></div>
+              </div>
+            </div>
+
+            <div class="bp-section">
+              <div class="bp-section-title">Same config powers</div>
+              <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:2px;">
+                <span class="bp-pill blue">💬 Web Chat</span>
+                <span class="bp-pill blue">📱 SMS</span>
+                <span class="bp-pill blue">🟢 WhatsApp</span>
+                <span class="bp-pill blue">📞 Voice</span>
+                <span class="bp-pill blue">🎮 In-Game</span>
+              </div>
+              <div style="font-size:10px;color:var(--ag-text-muted);margin-top:8px;line-height:1.5;">Build once. The same playbooks and knowledge answer this question on every channel — no duplication required.</div>
+            </div>
+
+          </div><!-- /brain-panel -->
+
+        </div><!-- /email-split -->
+      </div><!-- /email-panel -->
+    </div><!-- /#panel-email -->
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- WEB CHAT PANEL                              -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="ch-panel" id="panel-webchat">
+      <div class="generic-panel">
+        <div class="chat-container" style="padding-top:24px;">
+          <div class="chat-device">
+            <div class="chat-topbar">
+              <div class="chat-topbar-icon">🎮</div>
+              <div class="chat-topbar-info">
+                <div class="chat-topbar-name">Ada Gaming Support</div>
+                <div class="chat-topbar-status">● online · replies instantly</div>
+              </div>
+            </div>
+            <div class="chat-messages">
+              <div class="chat-system">Today</div>
+              <div class="chat-msg bot">
+                <div class="chat-bubble">Hey Kirky_123 👋 Welcome back! How can I help you today?</div>
+                <div class="chat-chips">
+                  <span class="chat-chip">My balance</span>
+                  <span class="chat-chip">Withdraw funds</span>
+                  <span class="chat-chip">Bonus offers</span>
+                  <span class="chat-chip">Live bets</span>
+                </div>
+                <div class="chat-time">14:00</div>
+              </div>
+              <div class="chat-msg user">
+                <div class="chat-bubble">What's my current bonus balance?</div>
+                <div class="chat-time">14:01</div>
+              </div>
+              <div class="chat-msg bot">
+                <div class="chat-bubble">You have <strong style="color:var(--ag-gold-1);">£25.00</strong> in bonus funds — a 50% match from your last deposit 🎰<br><br>These are valid until <strong>19 Aug 2026</strong>. Minimum 5x wagering requirement applies before withdrawal.</div>
+                <div class="chat-time">14:01</div>
+              </div>
+              <div class="chat-msg user">
+                <div class="chat-bubble">Can I use them on the casino slots?</div>
+                <div class="chat-time">14:02</div>
+              </div>
+              <div class="chat-msg bot">
+                <div class="chat-bubble">Absolutely! Your bonus funds can be used on all slots including Gold Fever 5™, Dragon's Vault™, and Cosmic Spins™ 🎰<br><br>Sports betting is excluded from bonus funds but your cash balance is available for all markets.</div>
+                <div class="chat-time">14:02</div>
+              </div>
+            </div>
+            <div class="chat-input-row">
+              <div class="chat-input">Type a message…</div>
+              <div class="chat-send-btn">➤</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SMS PANEL                                   -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="ch-panel" id="panel-sms">
+      <div class="generic-panel">
+        <div class="chat-container" style="padding-top:24px;">
+          <div class="chat-device" style="border-radius:32px;max-width:360px;margin:0 auto;flex:none;height:580px;">
+            <div class="chat-topbar" style="background:#1a1a2e;">
+              <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#D4A843,#8B6914);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#1A0E00;">AG</div>
+              <div class="chat-topbar-info">
+                <div class="chat-topbar-name">Ada Gaming</div>
+                <div class="chat-topbar-status" style="color:var(--ag-text-3);">SMS · +44 7700 900888</div>
+              </div>
+            </div>
+            <div class="chat-messages" style="background:#0a0820;">
+              <div class="chat-system" style="font-size:9px;">SMS</div>
+              <div class="chat-msg bot">
+                <div class="chat-bubble" style="background:#1e1450;border-radius:14px 14px 14px 4px;">🎰 Hi Kirky_123! Your Free Bet Friday is ready — £5 free bet on any Premier League match. Reply YES to claim or STOP to opt out.</div>
+                <div class="chat-time">Fri 09:00</div>
+              </div>
+              <div class="chat-msg user">
+                <div class="chat-bubble" style="border-radius:14px 14px 4px 14px;">YES</div>
+                <div class="chat-time">Fri 09:04</div>
+              </div>
+              <div class="chat-msg bot">
+                <div class="chat-bubble" style="background:#1e1450;border-radius:14px 14px 14px 4px;">✅ Done! Your £5 free bet has been credited. It'll appear in your account within 5 minutes. Good luck! 🏆</div>
+                <div class="chat-time">Fri 09:04</div>
+              </div>
+              <div class="chat-msg user">
+                <div class="chat-bubble" style="border-radius:14px 14px 4px 14px;">What markets can I use it on?</div>
+                <div class="chat-time">Fri 09:05</div>
+              </div>
+              <div class="chat-msg bot">
+                <div class="chat-bubble" style="background:#1e1450;border-radius:14px 14px 14px 4px;">Your free bet is valid on any Premier League match-winner, both teams to score, or correct score market this weekend. Min odds 1.5. Full T&Cs: adagaming.com/terms</div>
+                <div class="chat-time">Fri 09:05</div>
+              </div>
+            </div>
+            <div class="chat-input-row" style="background:#1a1a2e;">
+              <div class="chat-input" style="background:#0d0d1e;border-color:#2a2a4e;">iMessage</div>
+              <div class="chat-send-btn">↑</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- WHATSAPP PANEL                              -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="ch-panel" id="panel-whatsapp">
+      <div class="generic-panel">
+        <div class="chat-container" style="padding-top:24px;">
+          <div class="chat-device" style="border-radius:14px;max-width:480px;margin:0 auto;">
+            <div class="chat-topbar" style="background:#075e54;">
+              <div style="width:36px;height:36px;border-radius:50%;background:#128c7e;display:flex;align-items:center;justify-content:center;font-size:18px;">🎮</div>
+              <div class="chat-topbar-info">
+                <div class="chat-topbar-name">Ada Gaming Support</div>
+                <div class="chat-topbar-status" style="color:rgba(255,255,255,0.7);">● online</div>
+              </div>
+            </div>
+            <div class="chat-messages" style="background:#0d2327;">
+              <div class="chat-system" style="background:rgba(0,0,0,0.3);color:rgba(255,255,255,0.5);">Today</div>
+              <div class="chat-msg user">
+                <div class="chat-bubble" style="background:#005c4b;">Hi, I tried to withdraw £200 yesterday and it hasn't arrived. Order ref W-449821</div>
+                <div class="chat-time">16:45 ✓✓</div>
+              </div>
+              <div class="chat-msg bot">
+                <div class="chat-bubble" style="background:#202c33;border-radius:14px 14px 14px 4px;">🔎 Checking withdrawal W-449821…<br><br>Found it — £200.00 withdrawal initiated yesterday at 16:32. It's currently in <strong style="color:#25d366;">processing</strong> with your bank. Standard processing is 1–3 working days.<br><br>Expected arrival: <strong>by 5pm today</strong> ⏱</div>
+                <div class="chat-time">16:45</div>
+              </div>
+              <div class="chat-msg user">
+                <div class="chat-bubble" style="background:#005c4b;">Ok great thanks. If it doesn't come can I cancel it?</div>
+                <div class="chat-time">16:46 ✓✓</div>
+              </div>
+              <div class="chat-msg bot">
+                <div class="chat-bubble" style="background:#202c33;border-radius:14px 14px 14px 4px;">Yes — if the funds don't arrive by end of day, just reply here and I'll cancel it and return the £200 to your Ada Gaming balance immediately. No waiting, no forms. 🙂</div>
+                <div class="chat-time">16:46</div>
+              </div>
+            </div>
+            <div class="chat-input-row" style="background:#1f2c34;">
+              <div class="chat-input" style="background:#2a3942;border-color:#3b4a54;">Message</div>
+              <div class="chat-send-btn" style="background:#00a884;">➤</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- MESSENGER PANEL                             -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="ch-panel" id="panel-messenger">
+      <div class="generic-panel">
+        <div class="chat-container" style="padding-top:24px;">
+          <div class="chat-device" style="border-radius:14px;max-width:480px;margin:0 auto;">
+            <div class="chat-topbar" style="background:#0084ff;">
+              <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#D4A843,#8B6914);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#1A0E00;">AG</div>
+              <div class="chat-topbar-info">
+                <div class="chat-topbar-name">Ada Gaming</div>
+                <div class="chat-topbar-status" style="color:rgba(255,255,255,0.85);">Typically replies instantly</div>
+              </div>
+            </div>
+            <div class="chat-messages" style="background:#1c1c2e;">
+              <div class="chat-msg user">
+                <div class="chat-bubble" style="background:#0084ff;">Hey — are there any promotions on for the Champions League tonight?</div>
+                <div class="chat-time">20:12 ✓✓</div>
+              </div>
+              <div class="chat-msg bot">
+                <div class="chat-bubble" style="background:#2d2d4e;border-radius:14px 14px 14px 4px;">Yes! ⚽ Tonight's Champions League promos for your account:<br><br>🏆 <strong>Acca Boost</strong> — 20% extra on any 4+ team accumulator<br>💸 <strong>Cash Out Boost</strong> — enhanced cash out value on live markets<br>🎰 <strong>Half-time free spin</strong> — one free spin on Gold Fever 5™ at half time if you have an active bet<br><br>All active on your account now!</div>
+                <div class="chat-time">20:12</div>
+              </div>
+              <div class="chat-msg user">
+                <div class="chat-bubble" style="background:#0084ff;">Brilliant, I'll go with the acca boost 🙌</div>
+                <div class="chat-time">20:13 ✓✓</div>
+              </div>
+              <div class="chat-msg bot">
+                <div class="chat-bubble" style="background:#2d2d4e;border-radius:14px 14px 14px 4px;">Enjoy! 🎉 Good luck with your acca — come back if you need anything during the match!</div>
+                <div class="chat-time">20:13</div>
+              </div>
+            </div>
+            <div class="chat-input-row" style="background:#2a2a3e;">
+              <div class="chat-input" style="background:#1c1c2e;border-color:#3d3d5c;">Aa</div>
+              <div class="chat-send-btn" style="background:#0084ff;">➤</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- INSTAGRAM PANEL                             -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="ch-panel" id="panel-instagram">
+      <div class="generic-panel">
+        <div class="chat-container" style="padding-top:24px;">
+          <div class="chat-device" style="border-radius:14px;max-width:480px;margin:0 auto;">
+            <div class="chat-topbar" style="background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);">
+              <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#D4A843,#8B6914);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#1A0E00;">AG</div>
+              <div class="chat-topbar-info">
+                <div class="chat-topbar-name">adagaming_official</div>
+                <div class="chat-topbar-status" style="color:rgba(255,255,255,0.85);">Active now</div>
+              </div>
+            </div>
+            <div class="chat-messages" style="background:#1a1a2e;">
+              <div class="chat-msg user">
+                <div class="chat-bubble" style="background:#3d3d5c;">Hey I saw your story about the 100 free spins — how do I get them?</div>
+                <div class="chat-time">11:34</div>
+              </div>
+              <div class="chat-msg bot">
+                <div class="chat-bubble" style="background:#2d2d4e;border-radius:14px 14px 14px 4px;">Hey! 🎰 The 100 free spins are part of our <strong>Summer Jackpot</strong> promo — here's how:<br><br>1. Deposit £20+ this week<br>2. Use code <strong>SPIN100</strong> at checkout<br>3. Spins credited to Dragon's Vault™ within 1 hour<br><br>Sign up at adagaming.com or DM me your username and I'll check if your account is eligible! 🔥</div>
+                <div class="chat-time">11:34</div>
+              </div>
+              <div class="chat-msg user">
+                <div class="chat-bubble" style="background:#3d3d5c;">I'm already a member — username Kirky_123</div>
+                <div class="chat-time">11:35</div>
+              </div>
+              <div class="chat-msg bot">
+                <div class="chat-bubble" style="background:#2d2d4e;border-radius:14px 14px 14px 4px;">✅ Kirky_123 — you're eligible! Your account is all set. Just make a £20+ deposit using code <strong>SPIN100</strong> and the spins will land automatically. Good luck! 🐉</div>
+                <div class="chat-time">11:35</div>
+              </div>
+            </div>
+            <div class="chat-input-row" style="background:#2a2a3e;">
+              <div class="chat-input" style="background:#1a1a2e;border-color:#3d3d5c;">Message…</div>
+              <div class="chat-send-btn" style="background:linear-gradient(135deg,#833ab4,#fd1d1d);">➤</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- VOICE PANEL                                 -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="ch-panel" id="panel-voice">
+      <div class="generic-panel" style="justify-content:center;align-items:center;padding:40px 20px;">
+        <div style="text-align:center;max-width:480px;">
+          <div style="font-size:64px;margin-bottom:20px;">📞</div>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;margin-bottom:10px;">Ada Voice Agent</h2>
+          <p style="color:var(--ag-text-2);margin-bottom:28px;line-height:1.6;">Ada handles inbound support calls and runs outbound campaigns — same brain as email, chat, and SMS. No separate IVR scripting required.</p>
+          <a href="voice.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:var(--ag-gold-grad);color:#1A0E00;font-weight:800;border-radius:10px;font-size:14px;">
+            ▶ Watch a live demo call
+          </a>
+          <div style="margin-top:24px;display:flex;justify-content:center;gap:24px;font-size:12px;color:var(--ag-text-3);">
+            <span>☎ Inbound support</span>
+            <span>📣 Outbound campaigns</span>
+            <span>🔄 Reactivation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /ch-stage -->
+</div><!-- /ch-page -->
+
+<!-- ── Bottom view switcher ── -->
+<div class="viewswitch">
+  <a class="vs-btn" href="index.html">Web</a>
+  <a class="vs-btn active" href="channels.html">Channels</a>
+  <a class="vs-btn" href="front-end-api.html">App</a>
+  <a class="vs-btn" href="front-end-api.html">Custom UI</a>
+  <a class="vs-btn" href="mcp-demo.html">MCP</a>
+</div>
+
+<script>
+function switchChannel(id, el) {
+  document.querySelectorAll('.ch-item').forEach(i => i.classList.remove('active'));
+  document.querySelectorAll('.ch-panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  const panel = document.getElementById('panel-' + id);
+  if (panel) panel.classList.add('active');
+}
+function selectThread(el) {
+  document.querySelectorAll('.inbox-thread').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const dot = el.querySelector('.unread-dot');
+  if (dot) dot.remove();
+  el.classList.remove('unread');
+}
+</script>
+</body>
+</html>
