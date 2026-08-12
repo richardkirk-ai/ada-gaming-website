@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>bet365 — Channels</title>
 <link rel="stylesheet" href="../ada-gaming.css?v=2">
-<link rel="stylesheet" href="brand.css?v=3">
+<link rel="stylesheet" href="brand.css?v=5">
 <style>
 /* ── Page layout ── */
 .ch-page { display: flex; height: calc(100vh - 115px); overflow: hidden; }
@@ -43,7 +43,7 @@
 }
 .ch-item:hover { background: rgba(212,168,67,0.06); color: var(--ag-text); }
 .ch-item.active {
-  background: rgba(212,168,67,0.1);
+  background: rgba(255,215,0,0.1);
   border-left-color: var(--ag-gold-1);
   color: var(--ag-gold-1);
   font-weight: 700;
@@ -56,7 +56,7 @@
   flex-shrink: 0;
 }
 .ch-ico svg { display: block; }
-.ch-ico-email  { background: #4A3FAF; }
+.ch-ico-email  { background: #1E6B3C; }
 .ch-ico-search { background: linear-gradient(135deg,#D4A843,#A87820); }
 .ch-ico-form   { background: #2E6DB4; }
 .ch-ico-chat   { background: var(--ag-surface); }
@@ -65,7 +65,7 @@
 .ch-ico-msgr   { background: linear-gradient(135deg,#0668E1,#0099FF); }
 .ch-ico-ig     { background: linear-gradient(135deg,#833AB4,#FD1D1D,#FCB045); }
 .ch-ico-voice  { background: #5B8DEF; }
-.ch-ico-app    { background: linear-gradient(135deg,#2E2270,#0E0928); border: 1px solid rgba(212,168,67,0.35); }
+.ch-ico-app    { background: linear-gradient(135deg,#1E6B3C,#0D4020); border: 1px solid rgba(255,215,0,0.35); }
 
 .ch-badge {
   margin-left: auto;
@@ -74,7 +74,7 @@
   letter-spacing: 0.5px;
   padding: 2px 7px;
   border-radius: 8px;
-  background: rgba(212,168,67,0.15);
+  background: rgba(255,215,0,0.15);
   color: var(--ag-gold-1);
   border: 1px solid rgba(212,168,67,0.25);
 }
@@ -104,7 +104,7 @@
   gap: 10px;
   padding: 8px 24px;
   background: linear-gradient(90deg, rgba(212,168,67,0.12) 0%, rgba(212,168,67,0.04) 100%);
-  border-bottom: 1px solid rgba(212,168,67,0.18);
+  border-bottom: 1px solid rgba(255,215,0,0.18);
   font-size: 11px;
   color: var(--ag-gold-3);
   font-weight: 600;
@@ -158,7 +158,7 @@
 
 .em-card { border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.35); }
 .em.from-customer .em-card { background: var(--ag-bg-2); border: 1px solid rgba(255,255,255,0.09); }
-.em.from-ada .em-card { background: rgba(30,20,80,0.85); border: 1px solid rgba(212,168,67,0.25); }
+.em.from-ada .em-card { background: rgba(19,40,22,0.90); border: 1px solid rgba(212,168,67,0.25); }
 
 .em-hdr {
   padding: 12px 16px;
@@ -168,7 +168,7 @@
 }
 .em.from-ada .em-hdr { background: rgba(212,168,67,0.05); }
 .em-av { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0; }
-.em-av.user { background: linear-gradient(135deg,#4A3FAF,#2E2270); color:#fff; }
+.em-av.user { background: linear-gradient(135deg,#1E6B3C,#0D4020); color:#fff; }
 .em-av.ada  { background: var(--ag-gold-grad); color:#1A0E00; }
 .em-sender { flex: 1; }
 .em-from-name { font-size: 12px; font-weight: 700; color: var(--ag-text); }
@@ -176,15 +176,15 @@
 .em-ts { font-size: 10px; color: var(--ag-text-muted); white-space: nowrap; }
 
 .ag-email-header {
-  background: linear-gradient(135deg, #1A0E45 0%, #2E1060 40%, #1A0E45 100%);
+  background: linear-gradient(135deg, #0D2414 0%, #1A3E20 40%, #0D2414 100%);
   padding: 20px 24px;
   display: flex; align-items: center; gap: 16px;
   border-bottom: 2px solid var(--ag-gold-1);
   position: relative; overflow: hidden;
 }
-.ag-email-header::before { content:''; position:absolute; top:-30px; right:-30px; width:120px; height:120px; border-radius:50%; border:2px solid rgba(212,168,67,0.15); }
-.ag-email-header::after  { content:''; position:absolute; bottom:-20px; left:40px; width:80px; height:80px; border-radius:50%; border:1px solid rgba(212,168,67,0.1); }
-.ag-logo-circle { width:52px; height:52px; border-radius:50%; border:2px solid var(--ag-gold-1); background:linear-gradient(135deg,#2A1870,#160D3A); display:flex; align-items:center; justify-content:center; flex-shrink:0; box-shadow:0 0 16px rgba(212,168,67,0.35); z-index:1; }
+.ag-email-header::before { content:''; position:absolute; top:-30px; right:-30px; width:120px; height:120px; border-radius:50%; border:2px solid rgba(255,215,0,0.15); }
+.ag-email-header::after  { content:''; position:absolute; bottom:-20px; left:40px; width:80px; height:80px; border-radius:50%; border:1px solid rgba(255,215,0,0.1); }
+.ag-logo-circle { width:52px; height:52px; border-radius:50%; border:2px solid var(--ag-gold-1); background:linear-gradient(135deg,#2A1870,#160D3A); display:flex; align-items:center; justify-content:center; flex-shrink:0; box-shadow:0 0 16px rgba(255,215,0,0.35); z-index:1; }
 .ag-logo-text { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:900; background:var(--ag-gold-text-grad); -webkit-background-clip:text; background-clip:text; color:transparent; line-height:1; }
 .ag-header-wordmark { z-index:1; }
 .ag-header-brand { font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:900; letter-spacing:0.15em; text-transform:uppercase; background:var(--ag-gold-text-grad); -webkit-background-clip:text; background-clip:text; color:transparent; line-height:1.1; }
@@ -211,7 +211,7 @@
 .typing-bubble {
   display:none; align-self:flex-end; margin-right:0; margin-left:auto; margin-bottom:16px;
   padding:12px 20px;
-  background:rgba(30,20,80,0.6); border:1px solid rgba(212,168,67,0.2); border-radius:12px;
+  background:rgba(19,40,22,0.60); border:1px solid rgba(212,168,67,0.2); border-radius:12px;
   align-items:center; gap:8px; font-size:11px; color:var(--ag-text-3);
   opacity:0; transition:opacity 0.3s;
 }
@@ -243,13 +243,13 @@
   overflow: hidden;
 }
 .ws-search-top {
-  background: linear-gradient(90deg,#1A0E45,#2E1060);
+  background: linear-gradient(90deg,#0D2414,#1A3E20);
   padding: 12px 18px;
   display: flex; align-items: center; gap: 10px;
   border-bottom: 1px solid rgba(212,168,67,0.2);
 }
 .ws-search-top .ws-logo { font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:900; background:var(--ag-gold-text-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
-.ws-ai-badge { font-size:10px; font-weight:700; background:rgba(212,168,67,0.15); border:1px solid rgba(212,168,67,0.35); color:var(--ag-gold-3); padding:3px 9px; border-radius:999px; margin-left:auto; }
+.ws-ai-badge { font-size:10px; font-weight:700; background:rgba(255,215,0,0.15); border:1px solid rgba(255,215,0,0.35); color:var(--ag-gold-3); padding:3px 9px; border-radius:999px; margin-left:auto; }
 
 .ws-search-inner { padding:18px 20px; }
 .ws-bar {
@@ -270,14 +270,14 @@
 
 .ws-suggest { margin-top:12px; display:flex; flex-wrap:wrap; gap:7px; align-items:center; font-size:12px; color:var(--ag-text-muted); }
 .ws-suggest button { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:var(--ag-text-2); border-radius:999px; padding:5px 12px; font-size:12px; cursor:pointer; font-family:inherit; }
-.ws-suggest button:hover { background:rgba(212,168,67,0.1); border-color:var(--ag-gold-border-strong); color:var(--ag-gold-1); }
+.ws-suggest button:hover { background:rgba(255,215,0,0.1); border-color:var(--ag-gold-border-strong); color:var(--ag-gold-1); }
 
 .ws-result { margin-top:14px; display:none; }
 .ws-result.show { display:block; animation:wsfade 0.3s ease; }
 @keyframes wsfade { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
 
 .ws-ans-card {
-  background:rgba(30,20,80,0.7); border:1px solid rgba(212,168,67,0.25); border-radius:12px; padding:16px 18px; margin-bottom:12px;
+  background:rgba(19,40,22,0.70); border:1px solid rgba(212,168,67,0.25); border-radius:12px; padding:16px 18px; margin-bottom:12px;
 }
 .ws-ans-head { font-size:10px; font-weight:700; color:var(--ag-gold-1); letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; display:flex; align-items:center; gap:8px; }
 .ws-ans-live { font-size:10px; color:var(--ag-green); font-weight:600; letter-spacing:0.3px; text-transform:none; }
@@ -315,7 +315,7 @@
 .cf-select { appearance:none; }
 .cf-submit { width:100%; padding:12px; background:var(--ag-gold-grad); color:#1A0E00; font-size:13px; font-weight:800; border:none; border-radius:8px; cursor:pointer; margin-top:4px; font-family:inherit; }
 .cf-side { flex:1; max-width:300px; }
-.cf-side-card { background:rgba(30,20,80,0.5); border:1px solid rgba(212,168,67,0.2); border-radius:12px; padding:18px 20px; margin-bottom:14px; }
+.cf-side-card { background:rgba(19,40,22,0.50); border:1px solid rgba(212,168,67,0.2); border-radius:12px; padding:18px 20px; margin-bottom:14px; }
 .cf-side-title { font-size:12px; font-weight:700; color:var(--ag-gold-1); margin-bottom:8px; }
 .cf-side-text { font-size:12px; color:var(--ag-text-2); line-height:1.6; }
 
@@ -358,7 +358,7 @@
   background:#0a0818;
   border-radius:50px;
   padding:12px;
-  box-shadow: 0 0 0 2px #1E1450, 0 0 0 5px #0E0928, 0 30px 70px rgba(0,0,0,0.7), 0 8px 24px rgba(46,34,112,0.4);
+  box-shadow: 0 0 0 2px #193D1C, 0 0 0 5px #0F1410, 0 30px 70px rgba(0,0,0,0.7), 0 8px 24px rgba(30,107,60,0.25);
   flex-shrink:0;
 }
 .phone-screen {
@@ -383,7 +383,7 @@
 .balance-card {
   margin:4px 16px 14px;
   border-radius:20px; padding:18px 20px;
-  background:linear-gradient(135deg,#2E2270 0%,#4A3FAF 50%,#2E1060 100%);
+  background:linear-gradient(135deg,#0D2414 0%,#1E6B3C 50%,#0D2414 100%);
   border:1px solid var(--ag-gold-border-strong);
   position:relative; overflow:hidden;
   box-shadow:0 14px 30px rgba(46,34,112,0.6);
@@ -459,7 +459,7 @@
 @keyframes cs2blink{0%,60%,100%{opacity:.3}30%{opacity:1}}
 .cs2-chips { display:flex; flex-wrap:wrap; gap:7px; padding:8px 14px 2px; flex:0 0 auto; }
 .cs2-chip { background:rgba(212,168,67,0.08); border:1px solid var(--ag-gold-border); color:var(--ag-gold-1); border-radius:999px; padding:7px 12px; font-size:11.5px; cursor:pointer; font-family:inherit; }
-.cs2-chip:active { background:rgba(212,168,67,0.18); }
+.cs2-chip:active { background:rgba(255,215,0,0.18); }
 .cs2-input { display:flex; align-items:center; gap:8px; padding:10px 12px 18px; flex:0 0 auto; border-top:1px solid rgba(255,255,255,0.08); }
 .cs2-input input { flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:999px; padding:10px 15px; font-size:13px; color:var(--ag-text); outline:none; font-family:inherit; }
 .cs2-input input::placeholder { color:var(--ag-text-muted); }
@@ -624,7 +624,7 @@
         <div class="em from-ada" id="em2">
           <div class="em-card">
             <div class="ag-email-header">
-              <div class="ag-logo-circle"><span class="ag-logo-text">AG</span></div>
+              <div class="ag-logo-circle" style="background:linear-gradient(135deg,#1E6B3C,#0D4020);"><span class="ag-logo-text" style="color:#fff;">b365</span></div>
               <div class="ag-header-wordmark">
                 <div class="ag-header-brand">bet365</div>
                 <div class="ag-header-sub">Customer Support</div>
@@ -683,7 +683,7 @@
         <div class="em from-ada" id="em4">
           <div class="em-card">
             <div class="ag-email-header">
-              <div class="ag-logo-circle"><span class="ag-logo-text">AG</span></div>
+              <div class="ag-logo-circle" style="background:linear-gradient(135deg,#1E6B3C,#0D4020);"><span class="ag-logo-text" style="color:#fff;">b365</span></div>
               <div class="ag-header-wordmark">
                 <div class="ag-header-brand">bet365</div>
                 <div class="ag-header-sub">Customer Support</div>
@@ -918,7 +918,7 @@
             <div class="chat-sheet2" id="chatSheet2">
               <div class="grabber2"></div>
               <div class="cs2-head">
-                <div class="cs2-logo">AG</div>
+                <div class="cs2-logo" style="background:linear-gradient(135deg,#1E6B3C,#0D4020);color:#fff;">b365</div>
                 <div class="cs2-t">
                   <div class="cs2-name">bet365 Support</div>
                   <div class="cs2-status"><span class="cs2-status-dot" id="cs2Dot"></span> <span id="cs2Txt">connecting…</span></div>
@@ -990,7 +990,7 @@
         <div class="chat-container" style="padding-top:24px;">
           <div class="chat-device" style="border-radius:28px;max-width:340px;margin:0 auto;flex:none;height:540px;">
             <div class="chat-topbar" style="background:#1a1a2e;">
-              <div style="width:34px;height:34px;border-radius:50%;background:var(--ag-gold-grad);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#1A0E00;">AG</div>
+              <div style="width:34px;height:34px;border-radius:50%;background:var(--ag-gold-grad);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#0A1208;">b365</div>
               <div style="flex:1;">
                 <div class="chat-topbar-name">bet365</div>
                 <div style="font-size:10px;color:var(--ag-text-3);">+44 7700 900888</div>
@@ -1047,7 +1047,7 @@
         <div class="chat-container" style="padding-top:24px;">
           <div class="chat-device" style="border-radius:14px;max-width:480px;margin:0 auto;">
             <div class="chat-topbar" style="background:#0084ff;">
-              <div style="width:34px;height:34px;border-radius:50%;background:var(--ag-gold-grad);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#1A0E00;">AG</div>
+              <div style="width:34px;height:34px;border-radius:50%;background:var(--ag-gold-grad);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#0A1208;">b365</div>
               <div style="flex:1;"><div class="chat-topbar-name">bet365</div><div style="font-size:10px;color:rgba(255,255,255,0.85);">Typically replies instantly</div></div>
             </div>
             <div class="chat-messages" style="background:#1c1c2e;">
@@ -1070,7 +1070,7 @@
         <div class="chat-container" style="padding-top:24px;">
           <div class="chat-device" style="border-radius:14px;max-width:480px;margin:0 auto;">
             <div class="chat-topbar" style="background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);">
-              <div style="width:34px;height:34px;border-radius:50%;background:var(--ag-gold-grad);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#1A0E00;">AG</div>
+              <div style="width:34px;height:34px;border-radius:50%;background:var(--ag-gold-grad);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#0A1208;">b365</div>
               <div style="flex:1;"><div class="chat-topbar-name">bet365_official</div><div style="font-size:10px;color:rgba(255,255,255,0.85);">Active now</div></div>
             </div>
             <div class="chat-messages" style="background:#1a1a2e;">
