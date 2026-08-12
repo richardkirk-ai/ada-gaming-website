@@ -672,7 +672,10 @@
   ];
 
   /* ── Bet slip state ───────────────────────────────────────── */
-  var betSlip = [];
+  var betSlip = [
+    { id: "H1", label: "Manchester City Win", odd: 1.44, match: "Manchester City v Brighton" },
+    { id: "H3", label: "Liverpool Win",        odd: 1.73, match: "Liverpool v Man United" }
+  ];
 
   function fmtOdd(val) {
     return val.toFixed(2);
@@ -747,6 +750,13 @@
     list.appendChild(card);
   });
 
+  /* Mark pre-loaded bets as selected and render the slip */
+  betSlip.forEach(function (b) {
+    var btn = list.querySelector('[data-bet-id="' + b.id + '"]');
+    if (btn) btn.classList.add("selected");
+  });
+  renderSlip();
+
   function mkMktBtn(id, label, odd, match) {
     return '<button class="mkt-btn" type="button" data-bet-id="' + id + '" data-label="' + label + '" data-odd="' + odd + '" data-match="' + match + '">' +
       '<span class="mkt-outcome">' + label + '</span>' +
@@ -787,7 +797,7 @@
     count.textContent = String(betSlip.length);
 
     if (betSlip.length === 0) {
-      body.innerHTML = '<div class="bet-slip-empty"><span class="empty-icon">empty-icon">&#127183;<#9917;/span>Select odds from any fixture to build your bet slip</div>';
+      body.innerHTML = '<div class="bet-slip-empty"><span class="empty-icon">&#9917;</span>Select odds from any fixture to build your bet slip</div>';
       return;
     }
 
