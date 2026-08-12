@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>bet365 — MCP</title>
+<link rel="stylesheet" href="ada-gaming.css">
+<link rel="stylesheet" href="brand.css">
+<style>
+.mcp-page {
+  min-height: calc(100vh - 115px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 36px 60px;
+}
+
+/* Eyebrow */
+.mcp-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ag-gold-1);
+  text-align: center;
+  margin-bottom: 10px;
+}
+.mcp-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.mcp-sub {
+  text-align: center;
+  color: var(--ag-text-2);
+  font-size: 15px;
+  max-width: 600px;
+  line-height: 1.6;
+  margin-bottom: 48px;
+}
+
+/* ── Main diagram ── */
+.mcp-diagram {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: stretch;
+  gap: 0;
+  width: 100%;
+  max-width: 1100px;
+  margin-bottom: 40px;
+}
+
+/* Column headers */
+.col-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ag-text);
+  text-align: center;
+  padding-bottom: 16px;
+}
+
+/* Systems column */
+.systems-col { display: flex; flex-direction: column; gap: 10px; }
+.sys-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--ag-bg-2);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 12px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.sys-card:hover { border-color: rgba(212,168,67,0.3); background: var(--ag-panel); }
+.sys-icon { font-size: 24px; flex-shrink: 0; }
+.sys-name { font-size: 12px; font-weight: 700; color: var(--ag-text); }
+.sys-sub { font-size: 10px; color: var(--ag-text-3); margin-top: 1px; }
+
+/* Arrow columns */
+.arrow-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  gap: 4px;
+}
+.arrow-line {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(212,168,67,0.3) 0%, rgba(212,168,67,0.8) 50%, rgba(212,168,67,0.3) 100%);
+  position: relative;
+}
+.arrow-line::after {
+  content: '▶';
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: var(--ag-gold-1);
+}
+.arrow-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ag-gold-1);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.arrow-sub {
+  font-size: 9px;
+  color: var(--ag-text-muted);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Ada hub */
+.ada-hub-col { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.ada-hub {
+  background: var(--ag-panel);
+  border: 2px solid var(--ag-gold-border-strong);
+  border-radius: 20px;
+  padding: 24px 28px;
+  text-align: center;
+  width: 200px;
+  box-shadow: 0 0 40px rgba(212,168,67,0.12), 0 20px 60px rgba(0,0,0,0.4);
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ada-hub::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(212,168,67,0.2) 0%, transparent 60%);
+  pointer-events: none;
+}
+.ada-hub-icon { font-size: 40px; margin-bottom: 10px; }
+.ada-hub-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  background: var(--ag-gold-text-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.ada-hub-tagline { font-size: 10px; color: var(--ag-text-3); line-height: 1.4; margin-bottom: 14px; }
+.ada-models {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.model-chip {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--ag-text-2);
+}
+.ada-models-label { font-size: 9px; color: var(--ag-text-muted); text-align: center; margin-top: 6px; }
+
+/* Creates column */
+.creates-col { display: flex; flex-direction: column; gap: 10px; }
+.create-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--ag-bg-2);
+  border: 1px solid rgba(212,168,67,0.15);
+  border-radius: 12px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.create-card:hover { border-color: var(--ag-gold-border-strong); background: var(--ag-panel); }
+.create-icon { font-size: 22px; flex-shrink: 0; }
+.create-name { font-size: 12px; font-weight: 700; color: var(--ag-text); }
+.create-sub { font-size: 10px; color: var(--ag-text-3); margin-top: 1px; }
+
+/* ── Loop band ── */
+.loop-band {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: linear-gradient(90deg, rgba(212,168,67,0.06), rgba(212,168,67,0.12), rgba(212,168,67,0.06));
+  border: 1px solid rgba(212,168,67,0.2);
+  border-radius: 50px;
+  padding: 12px 32px;
+  max-width: 640px;
+  width: 100%;
+  margin-bottom: 32px;
+}
+.loop-step {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ag-gold-1);
+  white-space: nowrap;
+}
+.loop-arrow {
+  font-size: 14px;
+  color: rgba(212,168,67,0.4);
+  padding: 0 14px;
+}
+.loop-label {
+  font-size: 10px;
+  color: var(--ag-text-muted);
+  text-align: center;
+  margin-top: 6px;
+}
+
+/* ── Channel strip ── */
+.channel-strip {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  max-width: 700px;
+}
+.ch-strip-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--ag-bg-2);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ag-text-2);
+}
+.ch-strip-icon { font-size: 16px; }
+
+/* View switcher */
+.viewswitch {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0 14px;
+  gap: 4px;
+  background: var(--ag-bg-2);
+  border-top: 1px solid var(--ag-gold-border);
+}
+.vs-btn {
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--ag-text-3);
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.vs-btn:hover { color: var(--ag-text); background: rgba(255,255,255,0.05); }
+.vs-btn.active { background: var(--ag-gold-grad); color: #1A0E00; }
+
+/* Pulse animation on hub */
+@keyframes hubPulse {
+  0%, 100% { box-shadow: 0 0 40px rgba(212,168,67,0.12), 0 20px 60px rgba(0,0,0,0.4); }
+  50% { box-shadow: 0 0 60px rgba(212,168,67,0.25), 0 20px 60px rgba(0,0,0,0.4); }
+}
+.ada-hub { animation: hubPulse 3s ease-in-out infinite; }
+</style>
+</head>
+<body>
+
+<!-- ── Site header ── -->
+<div class="wrap">
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="b365-mark">bet<em>365</em></span>
+    </a>
+    <nav class="site-nav">
+      <a href="sports-betting.html">Sports</a>
+      <a href="channels.html">Channels</a>
+      <a href="front-end-api.html">Front-end API</a>
+      <a href="voice.html">Voice</a>
+      <a href="mcp-demo.html" class="active">MCP</a>
+    </nav>
+    <div class="header-actions">
+      <div class="user-pill">
+        <span class="user-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#2A1870"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#2A1870" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <span class="user-name">Kirky_123</span>
+      </div>
+    </div>
+  </header>
+</div>
+<hr class="gold-rule">
+
+<div class="mcp-page">
+
+  <div class="mcp-eyebrow">Model Context Protocol</div>
+  <h1 class="mcp-title">Ada — the self-improving AI agent</h1>
+  <p class="mcp-sub">Through MCP, Ada connects to the systems you already run — and continuously turns what it learns into better playbooks, actions, instructions and knowledge.</p>
+
+  <!-- ── Main diagram ── -->
+  <div class="mcp-diagram">
+
+    <!-- Column 1: Your systems -->
+    <div>
+      <div class="col-label">Your systems</div>
+      <div class="systems-col">
+        <div class="sys-card">
+          <span class="sys-icon">👥</span>
+          <div>
+            <div class="sys-name">CRM</div>
+            <div class="sys-sub">Player profiles &amp; history</div>
+          </div>
+        </div>
+        <div class="sys-card">
+          <span class="sys-icon">🎧</span>
+          <div>
+            <div class="sys-name">CCaaS / Contact Centre</div>
+            <div class="sys-sub">Avaya · Genesys · Zendesk</div>
+          </div>
+        </div>
+        <div class="sys-card">
+          <span class="sys-icon">💳</span>
+          <div>
+            <div class="sys-name">Payments &amp; Billing</div>
+            <div class="sys-sub">Deposits, withdrawals, limits</div>
+          </div>
+        </div>
+        <div class="sys-card">
+          <span class="sys-icon">⭐</span>
+          <div>
+            <div class="sys-name">Customer Experience</div>
+            <div class="sys-sub">CSAT · VOC · surveys</div>
+          </div>
+        </div>
+        <div class="sys-card">
+          <span class="sys-icon">🗄️</span>
+          <div>
+            <div class="sys-name">Data Warehouse</div>
+            <div class="sys-sub">Snowflake · BigQuery · Redshift</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrow 1 -->
+    <div class="arrow-col">
+      <div class="arrow-label">MCP</div>
+      <div class="arrow-line"></div>
+      <div class="arrow-sub">secure<br>connection</div>
+    </div>
+
+    <!-- Column 2: Ada hub -->
+    <div class="ada-hub-col">
+      <div class="col-label">Ada</div>
+      <div class="ada-hub">
+        <!-- Ada logo mark — white -->
+        <div class="ada-hub-icon" style="font-size:unset;margin-bottom:14px;">
+          <svg viewBox="0 0 585 604" width="58" height="60" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto;filter:drop-shadow(0 2px 12px rgba(255,255,255,0.25));">
+            <!-- Arch body -->
+            <path d="M292.5 0C131 0 0 131 0 292.5V604h585V292.5C585 131 454 0 292.5 0z" fill="#ffffff"/>
+            <!-- Circle cutout (head) -->
+            <circle cx="292.5" cy="240" r="115" fill="#1E1450"/>
+            <!-- Shoulder cutout (semicircle at bottom) -->
+            <ellipse cx="292.5" cy="604" rx="138" ry="110" fill="#1E1450"/>
+          </svg>
+        </div>
+        <div class="ada-hub-name">Ada</div>
+        <div class="ada-hub-tagline">The self-improving<br>AI agent</div>
+        <div class="ada-models-label" style="margin-bottom:6px;">Works with any AI model</div>
+        <div class="ada-models">
+          <span class="model-chip">C</span>
+          <span class="model-chip">G</span>
+          <span class="model-chip">✦</span>
+          <span class="model-chip">◆</span>
+        </div>
+        <div class="ada-models-label">Claude · Gemini · Copilot · GPT</div>
+      </div>
+    </div>
+
+    <!-- Arrow 2 -->
+    <div class="arrow-col">
+      <div class="arrow-label">Creates</div>
+      <div class="arrow-line"></div>
+      <div class="arrow-sub">learns &amp;<br>improves</div>
+    </div>
+
+    <!-- Column 3: Ada Configuration -->
+    <div>
+      <div class="col-label">Ada Configuration</div>
+      <div class="creates-col">
+        <div class="create-card">
+          <span class="create-icon">📘</span>
+          <div>
+            <div class="create-name">Playbooks</div>
+            <div class="create-sub">Conversation flows, auto-updated</div>
+          </div>
+        </div>
+        <div class="create-card">
+          <span class="create-icon">⚡</span>
+          <div>
+            <div class="create-name">Actions</div>
+            <div class="create-sub">API calls, lookups, transactions</div>
+          </div>
+        </div>
+        <div class="create-card">
+          <span class="create-icon">📝</span>
+          <div>
+            <div class="create-name">Custom Instructions</div>
+            <div class="create-sub">Tone, brand, compliance guardrails</div>
+          </div>
+        </div>
+        <div class="create-card">
+          <span class="create-icon">📚</span>
+          <div>
+            <div class="create-name">Knowledge Base</div>
+            <div class="create-sub">Articles kept current automatically</div>
+          </div>
+        </div>
+        <div class="create-card">
+          <span class="create-icon">🧪</span>
+          <div>
+            <div class="create-name">Simulations</div>
+            <div class="create-sub">Test &amp; validate before going live</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /mcp-diagram -->
+
+  <!-- Self-improving loop -->
+  <div style="text-align:center;margin-bottom:12px;">
+    <div class="loop-band">
+      <span class="loop-step">Connect</span>
+      <span class="loop-arrow">→</span>
+      <span class="loop-step">Learn</span>
+      <span class="loop-arrow">→</span>
+      <span class="loop-step">Improve</span>
+      <span class="loop-arrow">→</span>
+      <span class="loop-step">Repeat</span>
+    </div>
+    <div class="loop-label">A loop that gets better on its own — no manual retraining required</div>
+  </div>
+
+  <!-- Channel strip -->
+  <div style="margin-bottom:8px;font-size:11px;color:var(--ag-text-muted);text-align:center;letter-spacing:0.5px;">Deployed across every channel — one configuration, no rebuilding</div>
+  <div class="channel-strip">
+    <div class="ch-strip-item"><span class="ch-strip-icon">🌐</span> Web</div>
+    <div class="ch-strip-item"><span class="ch-strip-icon">💬</span> Chat</div>
+    <div class="ch-strip-item"><span class="ch-strip-icon">✉️</span> Email</div>
+    <div class="ch-strip-item"><span class="ch-strip-icon">📱</span> SMS</div>
+    <div class="ch-strip-item"><span class="ch-strip-icon">🟢</span> WhatsApp</div>
+    <div class="ch-strip-item"><span class="ch-strip-icon">📞</span> Voice</div>
+    <div class="ch-strip-item"><span class="ch-strip-icon">🎮</span> In-Game</div>
+  </div>
+
+</div><!-- /mcp-page -->
+
+<!-- ── View switcher ── -->
+<div class="viewswitch">
+  <a class="vs-btn" href="index.html">Web</a>
+  <a class="vs-btn" href="channels.html">Channels</a>
+  <a class="vs-btn" href="front-end-api.html">App</a>
+  <a class="vs-btn" href="front-end-api.html">Custom UI</a>
+  <a class="vs-btn active" href="mcp-demo.html">MCP</a>
+</div>
+
+</body>
+</html>

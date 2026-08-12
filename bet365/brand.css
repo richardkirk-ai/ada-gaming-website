@@ -1,0 +1,80 @@
+/* ─────────────────────────────────────────────────────────
+   bet365 brand overrides — loaded after ada-gaming.css.
+   Only token values are changed; all layout rules inherit.
+   ───────────────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --ag-bg:          #0F1410;
+  --ag-bg-2:        #161D15;
+  --ag-panel:       #1B2D1E;
+  --ag-panel-2:     #1F3522;
+  --ag-surface:     #1A6B3C;
+
+  /* Primary accent — bet365 yellow */
+  --ag-gold-1:      #FFD700;
+  --ag-gold-2:      #CC9900;
+  --ag-gold-3:      #FFE84D;
+  --ag-gold-grad:   linear-gradient(135deg, #FFE84D 0%, #FFD700 50%, #CC9B00 100%);
+  --ag-gold-text-grad: linear-gradient(90deg, #FFE84D 0%, #FFD700 60%, #E5C200 100%);
+
+  /* Borders */
+  --ag-gold-border:        rgba(30, 107, 60, 0.45);
+  --ag-gold-border-strong: rgba(255, 215, 0, 0.45);
+
+  /* Text on yellow buttons */
+  --ag-ink-on-gold: #0A1208;
+
+  /* Body text */
+  --ag-text:        #FFFFFF;
+  --ag-text-2:      #C8D4C4;
+  --ag-text-3:      #7A9472;
+  --ag-text-muted:  #4A5E44;
+}
+
+/* ── bet365 wordmark ─────────────────────────────────────── */
+.b365-mark {
+  font-family: -apple-system, 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  text-decoration: none;
+  user-select: none;
+}
+.b365-mark em {
+  font-style: normal;
+  color: #FFD700;
+}
+
+/* ── Promo banner — dark green instead of purple ─────────── */
+.promo-banner {
+  background: linear-gradient(120deg, #0D2414 0%, #1A3E20 50%, #0D2414 100%) !important;
+}
+.promo-banner::before {
+  background: radial-gradient(ellipse at 80% 50%, rgba(255,215,0,0.06) 0%, transparent 60%) !important;
+}
+
+/* ── Fixture header tint ─────────────────────────────────── */
+.fixture-header {
+  background: rgba(26, 107, 60, 0.08) !important;
+}
+
+/* ── Odd-btn hover — yellow tint ─────────────────────────── */
+.odd-btn:hover,
+.mkt-btn:hover {
+  background: rgba(255, 215, 0, 0.12) !important;
+}
+
+/* ── League tab active — yellow bg ──────────────────────── */
+.league-tab.active {
+  background: var(--ag-gold-grad);
+  color: var(--ag-ink-on-gold);
+}
+
+/* ── User avatar SVG — match new surface colour ─────────── */
+.user-avatar circle,
+.user-avatar path {
+  fill: #1A3522 !important;
+  stroke: #1A3522 !important;
+}
