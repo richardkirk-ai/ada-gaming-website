@@ -161,3 +161,70 @@ body {
 .footer-inner {
   grid-template-columns: repeat(3, 1fr) !important;
 }
+
+/* ══════════════════════════════════════════════════════════════
+   VOICE PAGE — override purple/blue --vd-* palette to green
+   ══════════════════════════════════════════════════════════════ */
+
+/* CSS variable overrides (these live in :root in the <style> block
+   but can be overridden at a higher-specificity or later :root) */
+:root {
+  --vd-card:   #131E14;
+  --vd-card2:  #1B2D1C;
+  --vd-border: rgba(30, 107, 60, 0.28);
+  --vd-gold:   #FFD700;
+}
+
+/* Hero banner — was purple gradient */
+.vd-hero {
+  background: linear-gradient(135deg, #0F1410 0%, #1A3A1E 60%, #0F1410 100%) !important;
+}
+
+/* Hero icon — was deep violet */
+.vd-hero-icon {
+  background: linear-gradient(135deg, #1E6B3C, #0D4020) !important;
+}
+
+/* Brain / left panel cards — was #13103a */
+.bc {
+  background: #0F1810 !important;
+}
+
+/* Calibration box */
+#cal-box {
+  background: #131E14 !important;
+}
+
+/* KB result — was purple tint */
+.kb-result {
+  background: rgba(30, 107, 60, 0.07) !important;
+  border-color: rgba(30, 107, 60, 0.25) !important;
+}
+.kb-match { color: var(--ag-gold-1) !important; }
+.kb-step.active { background: rgba(255,215,0,0.08) !important; color: var(--ag-gold-1) !important; border-color: rgba(255,215,0,0.2) !important; }
+
+/* API reason bar — was purple tint */
+.api-reason { border-left-color: rgba(255, 215, 0, 0.4) !important; }
+.api-reason strong { color: var(--ag-gold-1) !important; }
+
+/* bc-badge search — was purple */
+.bc-badge.search { background: rgba(255,215,0,0.08) !important; color: var(--ag-gold-1) !important; border-color: rgba(255,215,0,0.2) !important; }
+.bc-badge.kb     { background: rgba(255,215,0,0.08) !important; color: var(--ag-gold-1) !important; border-color: rgba(255,215,0,0.2) !important; }
+
+/* Playbook keyword pills */
+.kw.ask  { background: rgba(255,215,0,0.15) !important; color: var(--ag-gold-1) !important; }
+.kw.run  { background: rgba(30,107,60,0.20) !important;  color: #4ade80 !important; }
+.kw.send { background: rgba(255,215,0,0.15) !important; color: var(--ag-gold-1) !important; }
+
+/* Caller avatar text colour (was #0e0928 purple-dark) */
+.caller-avatar { color: #0A1208 !important; }
+
+/* VD tab active */
+.vd-tab.active { background: rgba(255,215,0,0.12) !important; border-color: rgba(255,215,0,0.30) !important; color: var(--ag-gold-1) !important; }
+.vd-tab:hover  { color: var(--ag-gold-1) !important; background: rgba(255,215,0,0.06) !important; }
+
+/* kb-query highlight */
+.kb-query-text em { color: var(--ag-gold-1) !important; }
+
+/* ── Front-end API / other pages with purple traces ────────── */
+/* The front-end-api page inline styles may use purple vars */
