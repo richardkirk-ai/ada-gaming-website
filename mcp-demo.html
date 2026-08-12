@@ -55,13 +55,14 @@
 
 /* Column headers */
 .col-label {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--ag-text-muted);
+  color: var(--ag-text);
   text-align: center;
-  padding-bottom: 12px;
+  padding-bottom: 16px;
 }
 
 /* Systems column */
@@ -325,7 +326,7 @@
           <span class="sys-icon">🎧</span>
           <div>
             <div class="sys-name">CCaaS / Contact Centre</div>
-            <div class="sys-sub">Avaya · Genesys · Five9</div>
+            <div class="sys-sub">Avaya · Genesys · Zendesk</div>
           </div>
         </div>
         <div class="sys-card">
@@ -363,7 +364,24 @@
     <div class="ada-hub-col">
       <div class="col-label">Ada</div>
       <div class="ada-hub">
-        <div class="ada-hub-icon">🧠</div>
+        <!-- Ada logo mark — arch/person shape, white on transparent -->
+        <div class="ada-hub-icon" style="font-size:unset;margin-bottom:14px;">
+          <svg viewBox="0 0 585 604" width="54" height="56" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto;filter:drop-shadow(0 2px 10px rgba(212,168,67,0.4));">
+            <defs>
+              <linearGradient id="adaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#F0CC6A"/>
+                <stop offset="50%" style="stop-color:#D4A843"/>
+                <stop offset="100%" style="stop-color:#A87820"/>
+              </linearGradient>
+            </defs>
+            <!-- Arch body -->
+            <path d="M292.5 0C131 0 0 131 0 292.5V604h585V292.5C585 131 454 0 292.5 0z" fill="url(#adaGrad)"/>
+            <!-- Circle cutout (head) -->
+            <circle cx="292.5" cy="240" r="115" fill="#0E0928"/>
+            <!-- Shoulder cutout (semicircle at bottom) -->
+            <ellipse cx="292.5" cy="604" rx="138" ry="110" fill="#0E0928"/>
+          </svg>
+        </div>
         <div class="ada-hub-name">Ada</div>
         <div class="ada-hub-tagline">The self-improving<br>AI agent</div>
         <div class="ada-models-label" style="margin-bottom:6px;">Works with any AI model</div>
@@ -384,9 +402,9 @@
       <div class="arrow-sub">learns &amp;<br>improves</div>
     </div>
 
-    <!-- Column 3: Ada builds -->
+    <!-- Column 3: Ada Configuration -->
     <div>
-      <div class="col-label">Ada builds</div>
+      <div class="col-label">Ada Configuration</div>
       <div class="creates-col">
         <div class="create-card">
           <span class="create-icon">📘</span>
