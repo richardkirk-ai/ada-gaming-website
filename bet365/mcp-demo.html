@@ -276,6 +276,18 @@
   50% { box-shadow: 0 0 60px rgba(212,168,67,0.25), 0 20px 60px rgba(0,0,0,0.4); }
 }
 .ada-hub { animation: hubPulse 3s ease-in-out infinite; }
+
+/* ── AI logo trio in hub ── */
+.ai-logo-row { display:flex; justify-content:center; gap:14px; margin:6px 0 14px; }
+.ai-logo-item { display:flex; flex-direction:column; align-items:center; gap:5px; }
+.ai-logo-wrap {
+  width:46px; height:46px; border-radius:12px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.14);
+  display:flex; align-items:center; justify-content:center; padding:5px;
+  box-sizing:border-box;
+}
+.ai-logo-name { font-size:9px; font-weight:700; color:var(--ag-text-3); letter-spacing:0.3px; }
 </style>
 </head>
 <body>
@@ -306,8 +318,8 @@
 <div class="mcp-page">
 
   <div class="mcp-eyebrow">Model Context Protocol</div>
-  <h1 class="mcp-title">Ada — the self-improving AI agent</h1>
-  <p class="mcp-sub">Through MCP, Ada connects to the systems you already run — and continuously turns what it learns into better playbooks, actions, instructions and knowledge.</p>
+  <h1 class="mcp-title">Manage Ada with your AI assistant</h1>
+  <p class="mcp-sub">Connect Claude, ChatGPT, or Microsoft Copilot to Ada via MCP. Query your data, update playbooks, build knowledge, and run simulations — all in natural language.</p>
 
   <!-- ── Main diagram ── -->
   <div class="mcp-diagram">
@@ -351,6 +363,13 @@
             <div class="sys-sub">Snowflake · BigQuery · Redshift</div>
           </div>
         </div>
+        <div class="sys-card" style="border-color:var(--ag-gold-border-strong);background:var(--ag-panel);">
+          <span class="sys-icon"><svg viewBox="0 0 585 604" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M292.5 0C131 0 0 131 0 292.5V604h585V292.5C585 131 454 0 292.5 0z" fill="#ffffff"/><circle cx="292.5" cy="240" r="115" fill="var(--ag-bg,#0E0928)"/><ellipse cx="292.5" cy="604" rx="138" ry="110" fill="var(--ag-bg,#0E0928)"/></svg></span>
+          <div>
+            <div class="sys-name">Ada</div>
+            <div class="sys-sub">AI agent · config &amp; conversations</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -361,39 +380,34 @@
       <div class="arrow-sub">secure<br>connection</div>
     </div>
 
-    <!-- Column 2: Ada hub -->
+    <!-- Column 2: AI Assistant hub -->
     <div class="ada-hub-col">
-      <div class="col-label">Ada</div>
+      <div class="col-label">Your AI Assistant</div>
       <div class="ada-hub">
-        <!-- Ada logo mark — white -->
-        <div class="ada-hub-icon" style="font-size:unset;margin-bottom:14px;">
-          <svg viewBox="0 0 585 604" width="58" height="60" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto;filter:drop-shadow(0 2px 12px rgba(255,255,255,0.25));">
-            <!-- Arch body -->
-            <path d="M292.5 0C131 0 0 131 0 292.5V604h585V292.5C585 131 454 0 292.5 0z" fill="#ffffff"/>
-            <!-- Circle cutout (head) -->
-            <circle cx="292.5" cy="240" r="115" fill="#1E1450"/>
-            <!-- Shoulder cutout (semicircle at bottom) -->
-            <ellipse cx="292.5" cy="604" rx="138" ry="110" fill="#1E1450"/>
-          </svg>
+        <div class="ada-hub-tagline" style="font-size:11px;margin-bottom:16px;line-height:1.6;">Use Claude, ChatGPT, or Copilot<br>to query your systems &amp; manage Ada</div>
+        <div class="ai-logo-row">
+          <div class="ai-logo-item">
+            <div class="ai-logo-wrap" style="background:#2A1A14;border-color:rgba(217,119,87,0.4);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 13 170 136" width="32" height="32"><g transform="translate(-75.96,-223.53)"><path fill="#d97757" d="m 105.01,322.07 29.14,-16.35 0.49,-1.42 -0.49,-0.79 h -1.42 l -4.87,-0.3 -16.65,-0.45 -14.44,-0.6 -13.99,-0.75 -3.52,-0.75 -3.3,-4.35 0.34,-2.17 2.96,-1.99 4.24,0.37 9.37,0.64 14.06,0.97 10.2,0.6 15.11,1.57 h 2.4 l 0.34,-0.97 -0.82,-0.6 -0.64,-0.6 -14.55,-9.86 -15.75,-10.42 -8.25,-6 -4.46,-3.04 -2.25,-2.85 -0.97,-6.22 4.05,-4.46 5.44,0.37 1.39,0.37 5.51,4.24 11.77,9.11 15.37,11.32 2.25,1.87 0.9,-0.64 0.11,-0.45 -1.01,-1.69 -8.36,-15.11 -8.92,-15.37 -3.97,-6.37 -1.05,-3.82 c -0.37,-1.57 -0.64,-2.89 -0.64,-4.5 l 4.61,-6.26 2.55,-0.82 6.15,0.82 2.59,2.25 3.82,8.74 6.19,13.76 9.6,18.71 2.81,5.55 1.5,5.14 0.56,1.57 h 0.97 v -0.9 l 0.79,-10.54 1.46,-12.94 1.42,-16.65 0.49,-4.69 2.32,-5.62 4.61,-3.04 3.6,1.72 2.96,4.24 -0.41,2.74 -1.76,11.44 -3.45,17.92 -2.25,12 h 1.31 l 1.5,-1.5 6.07,-8.06 10.2,-12.75 4.5,-5.06 5.25,-5.59 3.37,-2.66 h 6.37 l 4.69,6.97 -2.1,7.2 -6.56,8.32 -5.44,7.05 -7.8,10.5 -4.87,8.4 0.45,0.67 1.16,-0.11 17.62,-3.75 9.52,-1.72 11.36,-1.95 5.14,2.4 0.56,2.44 -2.02,4.99 -12.15,3 -14.25,2.85 -21.22,5.02 -0.26,0.19 0.3,0.37 9.56,0.9 4.09,0.22 h 10.01 l 18.64,1.39 4.87,3.22 2.92,3.94 -0.49,3 -7.5,3.82 -10.12,-2.4 -23.62,-5.62 -8.1,-2.02 h -1.12 v 0.67 l 6.75,6.6 12.37,11.17 15.49,14.4 0.79,3.56 -1.99,2.81 -2.1,-0.3 -13.61,-10.24 -5.25,-4.61 -11.89,-10.01 h -0.79 v 1.05 l 2.74,4.01 14.47,21.75 0.75,6.67 -1.05,2.17 -3.75,1.31 -4.12,-0.75 -8.47,-11.89 -8.74,-13.39 -7.05,-12 -0.86,0.49 -4.16,44.81 -1.95,2.29 -4.5,1.72 -3.75,-2.85 -1.99,-4.61 1.99,-9.11 2.4,-11.89 1.95,-9.45 1.76,-11.74 1.05,-3.9 -0.07,-0.26 -0.86,0.11 -8.85,12.15 -13.46,18.19 -10.65,11.4 -2.55,1.01 -4.42,-2.29 0.41,-4.09 2.47,-3.64 14.74,-18.75 8.89,-11.62 5.74,-6.71 -0.04,-0.97 h -0.34 l -39.15,25.42 -6.97,0.9 -3,-2.81 0.37,-4.61 1.42,-1.5 11.77,-8.1 -0.04,0.04 z"/></g></svg></div>
+            <span class="ai-logo-name">Claude</span>
+          </div>
+          <div class="ai-logo-item">
+            <div class="ai-logo-wrap" style="background:#74aa9c;border-color:#5a9a8c;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 2406 2406" width="32" height="32"><path d="M1 578.4C1 259.5 259.5 1 578.4 1h1249.1c319 0 577.5 258.5 577.5 577.4V2406H578.4C259.5 2406 1 2147.5 1 1828.6V578.4z" fill="#74aa9c"/><path id="cgptA" d="M1107.3 299.1c-197.999 0-373.9 127.3-435.2 315.3L650 743.5v427.9c0 21.4 11 40.4 29.4 51.4l344.5 198.515V833.3h.1v-27.9L1372.7 604c33.715-19.52 70.44-32.857 108.47-39.828L1447.6 450.3C1361 353.5 1237.1 298.5 1107.3 299.1zm0 117.5-.6.6c79.699 0 156.3 27.5 217.6 78.4-2.5 1.2-7.4 4.3-11 6.1L952.8 709.3c-18.4 10.4-29.4 30-29.4 51.4V1248l-155.1-89.4V755.8c-.1-187.099 151.601-338.9 339-339.2z" fill="#fff"/><use xlink:href="#cgptA" transform="rotate(60 1203 1203)"/><use xlink:href="#cgptA" transform="rotate(120 1203 1203)"/><use xlink:href="#cgptA" transform="rotate(180 1203 1203)"/><use xlink:href="#cgptA" transform="rotate(240 1203 1203)"/><use xlink:href="#cgptA" transform="rotate(300 1203 1203)"/></svg></div>
+            <span class="ai-logo-name">ChatGPT</span>
+          </div>
+          <div class="ai-logo-item">
+            <div class="ai-logo-wrap" style="background:#fff;border-color:rgba(255,255,255,0.3);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32" fill="none"><path d="M34.1423 7.325C33.5634 5.354 31.7547 4 29.7003 4H28.3488C26.1142 4 24.1985 5.596 23.7952 7.794L21.4805 20.407 22.0549 18.442C22.6319 16.468 24.4419 15.111 26.4986 15.111H34.3524L37.6462 16.394 40.8213 15.111H39.8946C37.8401 15.111 36.0315 13.757 35.4525 11.786L34.1423 7.325Z" fill="url(#co_a)"/><path d="M14.3307 40.656C14.9032 42.637 16.7165 44 18.7783 44H21.6486C24.1592 44 26.2122 41.999 26.2767 39.489L26.5893 27.327 25.9354 29.56C25.3577 31.533 23.5481 32.889 21.4923 32.889H13.5732L10.7499 31.357 7.69336 32.889H8.60461C10.6663 32.889 12.4796 34.252 13.0521 36.233L14.3307 40.656Z" fill="url(#co_b)"/><path d="M29.4993 4H13.46C8.87732 4 6.12772 10.057 4.29466 16.113 2.12296 23.289-.718769 32.885 7.50252 32.885H14.4282C16.4978 32.885 18.3147 31.517 18.8835 29.527 20.0876 25.314 22.1978 17.966 23.8554 12.371 24.6977 9.528 25.3993 7.087 26.4762 5.566 27.0799 4.714 28.086 4 29.4993 4Z" fill="url(#co_c)"/><path d="M29.4993 4H13.46C8.87732 4 6.12772 10.057 4.29466 16.113 2.12296 23.289-.718769 32.885 7.50252 32.885H14.4282C16.4978 32.885 18.3147 31.517 18.8835 29.527 20.0876 25.314 22.1978 17.966 23.8554 12.371 24.6977 9.528 25.3993 7.087 26.4762 5.566 27.0799 4.714 28.086 4 29.4993 4Z" fill="url(#co_d)"/><path d="M18.498 44H34.5374C39.12 44 41.8696 37.942 43.7027 31.885 45.8744 24.708 48.7161 15.11 40.4948 15.11H33.5693C31.4996 15.11 29.6827 16.478 29.114 18.468 27.9098 22.682 25.7996 30.032 24.142 35.627 23.2996 38.471 22.598 40.913 21.5212 42.434 20.9175 43.286 19.9113 44 18.498 44Z" fill="url(#co_e)"/><path d="M18.498 44H34.5374C39.12 44 41.8696 37.942 43.7027 31.885 45.8744 24.708 48.7161 15.11 40.4948 15.11H33.5693C31.4996 15.11 29.6827 16.478 29.114 18.468 27.9098 22.682 25.7996 30.032 24.142 35.627 23.2996 38.471 22.598 40.913 21.5212 42.434 20.9175 43.286 19.9113 44 18.498 44Z" fill="url(#co_f)"/><defs><radialGradient id="co_a" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(38.005 20.514) rotate(-129.304) scale(17.303 16.271)"><stop offset=".096" stop-color="#00AEFF"/><stop offset=".773" stop-color="#2253CE"/><stop offset="1" stop-color="#0736C4"/></radialGradient><radialGradient id="co_b" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(11.122 32.817) rotate(51.84) scale(15.991 15.512)"><stop offset="0" stop-color="#FFB657"/><stop offset=".634" stop-color="#FF5F3D"/><stop offset=".923" stop-color="#C02B3C"/></radialGradient><linearGradient id="co_c" x1="12.5" y1="7.5" x2="14.788" y2="33.975" gradientUnits="userSpaceOnUse"><stop offset=".156" stop-color="#0D91E1"/><stop offset=".487" stop-color="#52B471"/><stop offset=".652" stop-color="#98BD42"/><stop offset=".937" stop-color="#FFC800"/></linearGradient><linearGradient id="co_d" x1="14.5" y1="4" x2="15.75" y2="32.885" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3DCBFF"/><stop offset=".247" stop-color="#0588F7" stop-opacity="0"/></linearGradient><radialGradient id="co_e" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(41.319 12.281) rotate(109.274) scale(38.387 45.987)"><stop offset=".066" stop-color="#8C48FF"/><stop offset=".5" stop-color="#F2598A"/><stop offset=".896" stop-color="#FFB152"/></radialGradient><linearGradient id="co_f" x1="42.586" y1="13.346" x2="42.57" y2="21.215" gradientUnits="userSpaceOnUse"><stop offset=".058" stop-color="#F8ADFA"/><stop offset=".708" stop-color="#A86EDD" stop-opacity="0"/></linearGradient></defs></svg></div>
+            <span class="ai-logo-name">Copilot</span>
+          </div>
         </div>
-        <div class="ada-hub-name">Ada</div>
-        <div class="ada-hub-tagline">The self-improving<br>AI agent</div>
-        <div class="ada-models-label" style="margin-bottom:6px;">Works with any AI model</div>
-        <div class="ada-models">
-          <span class="model-chip">C</span>
-          <span class="model-chip">G</span>
-          <span class="model-chip">✦</span>
-          <span class="model-chip">◆</span>
-        </div>
-        <div class="ada-models-label">Claude · Gemini · Copilot · GPT</div>
+        <div class="ada-hub-tagline" style="font-size:10px;margin-top:2px;color:var(--ag-text-3);">Reads your data · Updates Ada config</div>
       </div>
     </div>
 
     <!-- Arrow 2 -->
     <div class="arrow-col">
-      <div class="arrow-label">Creates</div>
+      <div class="arrow-label">Manages</div>
       <div class="arrow-line"></div>
-      <div class="arrow-sub">learns &amp;<br>improves</div>
+      <div class="arrow-sub">reads &amp;<br>updates</div>
     </div>
 
     <!-- Column 3: Ada Configuration -->
@@ -445,13 +459,13 @@
     <div class="loop-band">
       <span class="loop-step">Connect</span>
       <span class="loop-arrow">→</span>
-      <span class="loop-step">Learn</span>
+      <span class="loop-step">Query</span>
       <span class="loop-arrow">→</span>
-      <span class="loop-step">Improve</span>
+      <span class="loop-step">Update</span>
       <span class="loop-arrow">→</span>
-      <span class="loop-step">Repeat</span>
+      <span class="loop-step">Test</span>
     </div>
-    <div class="loop-label">A loop that gets better on its own — no manual retraining required</div>
+    <div class="loop-label">Your AI assistant keeps Ada performing — no manual configuration required</div>
   </div>
 
   <!-- Channel strip -->
