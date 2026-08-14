@@ -388,12 +388,12 @@
 .bet-actions-row { display:flex; gap:8px; margin-top:14px; align-items:stretch; }
 .place-bet-btn {
   flex: 1;
-  padding: 11px 8px;
+  padding: 8px 6px;
   border-radius: 10px;
   border: none;
   background: var(--ag-green);
   color: #fff;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -403,38 +403,47 @@
 .place-bet-btn:hover { filter: brightness(1.1); }
 .place-bet-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 .bet-questions-btn {
-  width: 44px; flex-shrink: 0;
+  width: 80px; flex-shrink: 0;
   border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.07);
-  color: #ccc;
+  border: none;
+  background: var(--ag-green);
+  color: #fff;
   cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 120ms, border-color 120ms;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  padding: 7px 4px 5px;
+  transition: filter 120ms;
   position: relative;
 }
-.bet-questions-btn:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.35); color: #fff; }
-.bet-questions-btn.active { background: rgba(6,204,77,0.15); border-color: var(--ag-green); color: var(--ag-green); }
+.bet-questions-btn:hover { filter: brightness(1.1); }
+.bet-questions-btn.active { filter: brightness(0.9); }
+.bet-questions-btn .bq-label {
+  font-size: 9px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; line-height: 1;
+}
 .bet-questions-btn .bq-badge {
   position: absolute; top: -5px; right: -5px;
   width: 10px; height: 10px; border-radius: 50%;
   background: #e84040; border: 2px solid var(--ag-surface,#1a1a2e);
+  display: none;
 }
 
 /* ── Bet Assistant slide-out panel ── */
 .ba-panel {
-  position: fixed; top: 0; right: 0; bottom: 0;
+  position: fixed; top: 50%; right: 0;
   width: 360px; max-width: 95vw;
+  height: 60vh; min-height: 400px;
   background: #111418;
-  border-left: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-right: none;
+  border-radius: 16px 0 0 16px;
   display: flex; flex-direction: column;
   z-index: 9000;
-  transform: translateX(100%);
+  transform: translateX(100%) translateY(-50%);
   transition: transform 280ms cubic-bezier(0.4,0,0.2,1);
-  box-shadow: -8px 0 32px rgba(0,0,0,0.55);
+  box-shadow: -8px 0 40px rgba(0,0,0,0.6);
   font-family: Inter, sans-serif;
+  overflow: hidden;
 }
-.ba-panel.open { transform: translateX(0); }
+.ba-panel.open { transform: translateX(0) translateY(-50%); }
 .ba-header {
   padding: 14px 16px 12px;
   background: #0e1114;
@@ -971,7 +980,13 @@
       '<button class="place-bet-btn" type="button">Place bet</button>' +
       '<button class="bet-questions-btn" type="button" id="bet-questions-btn" title="Betting questions">' +
         '<span class="bq-badge"></span>' +
-        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
+        '<svg width="26" height="26" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+          '<ellipse cx="28" cy="24" rx="20" ry="17" fill="white" fill-opacity="0.22"/>' +
+          '<ellipse cx="28" cy="24" rx="20" ry="17" stroke="white" stroke-width="2.2"/>' +
+          '<polygon points="20,38 28,50 36,38" fill="white" fill-opacity="0.22" stroke="white" stroke-width="2.2" stroke-linejoin="round"/>' +
+          '<text x="28" y="31" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="900" fill="white">?</text>' +
+        '</svg>' +
+        '<span class="bq-label">Questions</span>' +
       '</button>' +
     '</div>';
 
