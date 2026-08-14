@@ -385,15 +385,15 @@
   margin-top: 4px;
 }
 .est-return strong { color: var(--ag-green); font-weight: 800; }
+.bet-actions-row { display:flex; gap:8px; margin-top:14px; align-items:stretch; }
 .place-bet-btn {
-  width: 100%;
-  margin-top: 14px;
-  padding: 16px;
+  flex: 1;
+  padding: 11px 8px;
   border-radius: 10px;
   border: none;
   background: var(--ag-green);
   color: #fff;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -402,6 +402,151 @@
 }
 .place-bet-btn:hover { filter: brightness(1.1); }
 .place-bet-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.bet-questions-btn {
+  width: 44px; flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.07);
+  color: #ccc;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 120ms, border-color 120ms;
+  position: relative;
+}
+.bet-questions-btn:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.35); color: #fff; }
+.bet-questions-btn.active { background: rgba(6,204,77,0.15); border-color: var(--ag-green); color: var(--ag-green); }
+.bet-questions-btn .bq-badge {
+  position: absolute; top: -5px; right: -5px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #e84040; border: 2px solid var(--ag-surface,#1a1a2e);
+}
+
+/* ── Bet Assistant slide-out panel ── */
+.ba-panel {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: 360px; max-width: 95vw;
+  background: #111418;
+  border-left: 1px solid rgba(255,255,255,0.1);
+  display: flex; flex-direction: column;
+  z-index: 9000;
+  transform: translateX(100%);
+  transition: transform 280ms cubic-bezier(0.4,0,0.2,1);
+  box-shadow: -8px 0 32px rgba(0,0,0,0.55);
+  font-family: Inter, sans-serif;
+}
+.ba-panel.open { transform: translateX(0); }
+.ba-header {
+  padding: 14px 16px 12px;
+  background: #0e1114;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex; align-items: center; gap: 10px;
+}
+.ba-header-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: var(--ag-green);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.ba-header-text { flex: 1; }
+.ba-header-title { font-size: 12px; font-weight: 800; letter-spacing: 0.1em; color: #fff; text-transform: uppercase; }
+.ba-header-sub { font-size: 11px; color: #888; margin-top: 1px; }
+.ba-live-dot {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 700; color: var(--ag-green); letter-spacing: 0.05em;
+}
+.ba-live-dot::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--ag-green); animation: blink 1.4s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.ba-close {
+  width: 28px; height: 28px; border-radius: 6px;
+  border: none; background: rgba(255,255,255,0.07); color: #aaa; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; font-size: 16px;
+  transition: background 120ms;
+}
+.ba-close:hover { background: rgba(255,255,255,0.14); color: #fff; }
+.ba-user-bar {
+  padding: 10px 14px;
+  background: #0e1114;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; gap: 8px;
+}
+.ba-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg,#06CC4D,#04a33d);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800; color: #000; flex-shrink: 0;
+}
+.ba-username { font-size: 12px; font-weight: 700; color: #fff; flex: 1; }
+.ba-chip {
+  font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px;
+  background: rgba(6,204,77,0.15); border: 1px solid rgba(6,204,77,0.35); color: var(--ag-green);
+}
+.ba-context-card {
+  margin: 12px 14px 4px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  display: flex; align-items: center; gap: 10px;
+}
+.ba-context-icon { font-size: 18px; flex-shrink: 0; }
+.ba-context-label { font-size: 10px; color: #777; text-transform: uppercase; letter-spacing: 0.06em; }
+.ba-context-value { font-size: 12px; font-weight: 700; color: #fff; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ba-messages {
+  flex: 1; overflow-y: auto; padding: 14px;
+  display: flex; flex-direction: column; gap: 10px;
+  scroll-behavior: smooth;
+}
+.ba-msg { display: flex; gap: 8px; align-items: flex-end; }
+.ba-msg.bot .ba-bubble {
+  background: #1e2228; color: #e8e8e8; border-radius: 14px 14px 14px 4px;
+}
+.ba-msg.user { justify-content: flex-end; }
+.ba-msg.user .ba-bubble {
+  background: var(--ag-green); color: #000; border-radius: 14px 14px 4px 14px;
+}
+.ba-bubble { font-size: 13px; line-height: 1.5; padding: 9px 12px; max-width: 270px; }
+.ba-bot-avatar {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--ag-green);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-size: 11px; font-weight: 800; color: #000;
+}
+.ba-typing { display: flex; gap: 4px; align-items: center; padding: 10px 14px; }
+.ba-typing span { width: 6px; height: 6px; border-radius: 50%; background: #555; animation: typingDot 1.2s infinite; }
+.ba-typing span:nth-child(2) { animation-delay: 0.2s; }
+.ba-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingDot { 0%,80%,100%{transform:scale(1);opacity:0.4} 40%{transform:scale(1.3);opacity:1} }
+.ba-chips-bar {
+  padding: 8px 14px;
+  display: flex; flex-wrap: wrap; gap: 6px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.ba-qchip {
+  font-size: 11px; padding: 5px 10px; border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.05);
+  color: #ccc; cursor: pointer; transition: all 120ms;
+}
+.ba-qchip:hover { background: rgba(6,204,77,0.12); border-color: rgba(6,204,77,0.4); color: var(--ag-green); }
+.ba-input-bar {
+  padding: 10px 14px 14px;
+  display: flex; gap: 8px; align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.ba-input {
+  flex: 1; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px; padding: 8px 14px;
+  color: #fff; font-size: 13px; outline: none;
+  font-family: inherit;
+}
+.ba-input::placeholder { color: #555; }
+.ba-input:focus { border-color: rgba(6,204,77,0.4); }
+.ba-send {
+  width: 34px; height: 34px; border-radius: 50%; border: none;
+  background: var(--ag-green); color: #000; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: filter 120ms;
+}
+.ba-send:hover { filter: brightness(1.15); }
 
 @media (max-width: 1100px) {
   .betting-layout { grid-template-columns: 1fr; }
@@ -822,18 +967,194 @@
       '<input class="stake-input" type="number" value="10" min="0.10" step="0.10">' +
       '<div class="est-return"><span>Est. return</span><strong>&pound;' + ret + '</strong></div>' +
     '</div>' +
-    '<button class="place-bet-btn" type="button">Place bet</button>';
+    '<div class="bet-actions-row">' +
+      '<button class="place-bet-btn" type="button">Place bet</button>' +
+      '<button class="bet-questions-btn" type="button" id="bet-questions-btn" title="Betting questions">' +
+        '<span class="bq-badge"></span>' +
+        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
+      '</button>' +
+    '</div>';
 
     body.innerHTML = html;
 
     body.querySelector(".stake-input").addEventListener("input", function () {
       var s = parseFloat(this.value) || 0;
-      body.querySelector(".est-return strong").textContent = "&pound;" + (totalOdds * s).toFixed(2);
+      body.querySelector(".est-return strong").textContent = "£" + (totalOdds * s).toFixed(2);
     });
     body.querySelector(".place-bet-btn").addEventListener("click", function () {
       alert("Demo only — no real bets placed. 18+ | BeGambleAware.org");
     });
+    document.getElementById("bet-questions-btn").addEventListener("click", function () {
+      toggleBetAssistant();
+    });
   }
+})();
+</script>
+
+<!-- Bet Assistant panel -->
+<div class="ba-panel" id="ba-panel">
+  <div class="ba-header">
+    <div class="ba-header-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </div>
+    <div class="ba-header-text">
+      <div class="ba-header-title">Betting Concierge</div>
+      <div class="ba-header-sub">Powered by Ada Front-end API</div>
+    </div>
+    <div class="ba-live-dot">LIVE</div>
+    <button class="ba-close" id="ba-close" aria-label="Close">✕</button>
+  </div>
+  <div class="ba-user-bar">
+    <div class="ba-avatar">K</div>
+    <div class="ba-username">Kirky_123</div>
+    <div class="ba-chip" id="ba-sel-chip">2 selections</div>
+    <div class="ba-chip" style="background:rgba(212,168,67,0.12);border-color:rgba(212,168,67,0.3);color:#D4A843;">VIP</div>
+  </div>
+  <div class="ba-context-card" id="ba-context-card">
+    <div class="ba-context-icon">⚽</div>
+    <div>
+      <div class="ba-context-label">Your current bet</div>
+      <div class="ba-context-value" id="ba-context-value">Manchester City Win + Liverpool Win</div>
+    </div>
+  </div>
+  <div class="ba-messages" id="ba-messages">
+    <div class="ba-msg bot">
+      <div class="ba-bot-avatar">B</div>
+      <div class="ba-bubble">Hi Kirky_123! I'm Betty, your Betting Concierge. I can see your current selections — ask me anything about the teams, rules, or your bet.</div>
+    </div>
+  </div>
+  <div class="ba-typing" id="ba-typing" style="display:none;">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="ba-chips-bar" id="ba-chips-bar">
+    <button class="ba-qchip" data-q="Tell me about Man City's form">Man City form?</button>
+    <button class="ba-qchip" data-q="How do accumulators work?">How accas work?</button>
+    <button class="ba-qchip" data-q="What does BTTS mean?">What is BTTS?</button>
+    <button class="ba-qchip" data-q="Can I cash out early?">Cash out?</button>
+    <button class="ba-qchip" data-q="What's the minimum stake?">Min stake?</button>
+  </div>
+  <div class="ba-input-bar">
+    <input class="ba-input" id="ba-input" type="text" placeholder="Ask about your bet…">
+    <button class="ba-send" id="ba-send" aria-label="Send">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var RESPONSES = {
+    "tell me about man city": "Man City are in top form — 4 wins from their last 5 Premier League matches, scoring 14 goals and conceding just 3. Haaland has 6 goals in that run. They're strong favourites at home.",
+    "how do accumulators work": "An accumulator (or acca) combines multiple selections into one bet. All selections must win for your bet to pay out. Your odds multiply together — your current 2-leg acca gives combined odds of " + "{{ODDS}}" + ". Higher risk, higher reward!",
+    "what does btts mean": "BTTS stands for Both Teams To Score. Your bet wins if both teams score at least one goal, regardless of the final result. It doesn't matter who wins — as long as neither team keeps a clean sheet.",
+    "can i cash out early": "Yes! bet365 offers Cash Out on selected bets before the event ends. If your selections are eligible, you'll see a Cash Out button in My Bets. The value updates in real-time based on how the match is going.",
+    "what's the minimum stake": "The minimum stake on bet365 is £0.10 for most markets. For accumulators and complex bets the minimum may vary. Your stake input in the bet slip accepts values from £0.10 upwards.",
+    "minimum stake": "The minimum stake on bet365 is £0.10 for most markets, including accumulators. You can update the stake directly in the bet slip on the right.",
+    "liverpool": "Liverpool have been in strong form at home — winning their last 3 at Anfield. Man United arrive in poor away form, having won just 1 of their last 5 on the road. Liverpool are clear favourites.",
+    "man united": "Man United have struggled away from home this season, winning just 1 of their last 5 away fixtures. They've also been defensively vulnerable, conceding 2+ goals in 3 of those games.",
+    "odds": "Your current selections give you combined odds of {{ODDS}}. With a £10 stake your estimated return is £{{RETURN}}. Remember: the higher the odds, the higher the risk.",
+    "acca": "An accumulator combines all your selections into one bet. Currently you have {{COUNT}} selections giving combined odds of {{ODDS}}. A £10 stake returns an estimated £{{RETURN}}.",
+    "default": "Great question! As your Betting Concierge I can help with team form, how markets work, bet rules, cash out, and anything else about your current selections. What would you like to know?"
+  };
+
+  var panel = document.getElementById("ba-panel");
+  var msgs  = document.getElementById("ba-messages");
+  var typing = document.getElementById("ba-typing");
+  var input  = document.getElementById("ba-input");
+  var chips  = document.querySelectorAll(".ba-qchip");
+
+  function getBetInfo() {
+    var slip = typeof betSlip !== "undefined" ? betSlip : [];
+    var labels = slip.map(function(b){ return b.label; });
+    var totalOdds = slip.reduce(function(acc,b){ return acc * b.odd; }, 1);
+    var stake = 10;
+    var ret = (totalOdds * stake).toFixed(2);
+    return { labels: labels, odds: totalOdds.toFixed(2), ret: ret, count: slip.length };
+  }
+
+  function updateContext() {
+    var info = getBetInfo();
+    var ctxVal = document.getElementById("ba-context-value");
+    var selChip = document.getElementById("ba-sel-chip");
+    if (ctxVal) ctxVal.textContent = info.labels.length ? info.labels.join(" + ") : "No selections yet";
+    if (selChip) selChip.textContent = info.count + (info.count === 1 ? " selection" : " selections");
+  }
+
+  window.toggleBetAssistant = function () {
+    var isOpen = panel.classList.contains("open");
+    panel.classList.toggle("open");
+    var btn = document.getElementById("bet-questions-btn");
+    if (btn) btn.classList.toggle("active", !isOpen);
+    if (!isOpen) {
+      updateContext();
+      var badge = btn && btn.querySelector(".bq-badge");
+      if (badge) badge.style.display = "none";
+    }
+  };
+
+  document.getElementById("ba-close").addEventListener("click", function () {
+    panel.classList.remove("open");
+    var btn = document.getElementById("bet-questions-btn");
+    if (btn) btn.classList.remove("active");
+  });
+
+  function addMsg(text, role) {
+    var div = document.createElement("div");
+    div.className = "ba-msg " + role;
+    if (role === "bot") {
+      div.innerHTML = '<div class="ba-bot-avatar">B</div><div class="ba-bubble">' + text + '</div>';
+    } else {
+      div.innerHTML = '<div class="ba-bubble">' + text + '</div>';
+    }
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function botReply(question) {
+    var info = getBetInfo();
+    var q = question.toLowerCase();
+    var answer = RESPONSES["default"];
+    for (var key in RESPONSES) {
+      if (q.includes(key)) { answer = RESPONSES[key]; break; }
+    }
+    answer = answer
+      .replace("{{ODDS}}", info.odds)
+      .replace("{{RETURN}}", info.ret)
+      .replace("{{COUNT}}", info.count);
+
+    typing.style.display = "flex";
+    msgs.scrollTop = msgs.scrollHeight;
+    setTimeout(function () {
+      typing.style.display = "none";
+      addMsg(answer, "bot");
+    }, 900 + Math.random() * 400);
+  }
+
+  function sendMessage(text) {
+    if (!text.trim()) return;
+    addMsg(text, "user");
+    input.value = "";
+    botReply(text);
+  }
+
+  chips.forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      sendMessage(this.dataset.q);
+    });
+  });
+
+  document.getElementById("ba-send").addEventListener("click", function () {
+    sendMessage(input.value);
+  });
+
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") sendMessage(input.value);
+  });
+
+  setTimeout(function () {
+    var btn = document.getElementById("bet-questions-btn");
+    if (btn) { var b = btn.querySelector(".bq-badge"); if (b) b.style.display = "block"; }
+  }, 3000);
 })();
 </script>
 
