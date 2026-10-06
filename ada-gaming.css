@@ -1,36 +1,18 @@
 /* Ada Gaming — Global Stylesheet */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Barlow+Condensed:wght@600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap');
 
 /* ── Design tokens ────────────────────────────────────────── */
 :root {
-  --ag-bg:          #0E0928;
-  --ag-bg-2:        #160D3A;
-  --ag-panel:       #1E1450;
-  --ag-panel-2:     #251A60;
-  --ag-surface:     #2E2270;
-
-  --ag-gold-1:      #D4A843;
-  --ag-gold-2:      #B8922C;
-  --ag-gold-3:      #F0CC6A;
-  --ag-gold-grad:   linear-gradient(135deg, #F0CC6A 0%, #D4A843 45%, #A87820 100%);
-  --ag-gold-text-grad: linear-gradient(90deg, #F0CC6A 0%, #D4A843 60%, #C9A040 100%);
-  --ag-gold-border: rgba(212, 168, 67, 0.28);
-  --ag-gold-border-strong: rgba(212, 168, 67, 0.55);
-  --ag-ink-on-gold: #1A0E00;
-
-  --ag-green:       #2ECC71;
-  --ag-green-dim:   rgba(46, 204, 113, 0.18);
-  --ag-red:         #E74C3C;
-  --ag-blue:        #3498DB;
-
-  --ag-text:        #F5F1FF;
-  --ag-text-2:      #C0B4E8;
-  --ag-text-3:      #8A7DB8;
-  --ag-text-muted:  #5A4E88;
-
-  --ag-ease:        cubic-bezier(0.22, 1, 0.36, 1);
-  --ag-radius:      14px;
+  --ag-bg: #0A0B0C; --ag-bg-2: #101215; --ag-panel: #15181C; --ag-panel-2: #1B1F25; --ag-surface: #232830;
+  --ag-gold-1: #ABCBF9; --ag-gold-2: #86AEEA; --ag-gold-3: #CFE0FC;
+  --ag-gold-grad: linear-gradient(0deg, #ABCBF9, #ABCBF9);
+  --ag-gold-text-grad: linear-gradient(0deg, #ABCBF9, #ABCBF9);
+  --ag-gold-border: rgba(171,203,249,0.22); --ag-gold-border-strong: rgba(171,203,249,0.5);
+  --ag-ink-on-gold: #0A0B0C;
+  --ag-green: #5BD99B; --ag-green-dim: rgba(91,217,155,0.16); --ag-red: #FF6B6B; --ag-blue: #ABCBF9;
+  --ag-text: #F9F9F9; --ag-text-2: #C9CDD3; --ag-text-3: #8E95A0; --ag-text-muted: #5F6672;
+  --ag-radius: 8px; --ag-btn-radius: 8px; --ag-shadow: 0,0,0;
 }
 
 /* ── Reset ────────────────────────────────────────────────── */
@@ -54,11 +36,11 @@ img { display: block; max-width: 100%; }
 
 /* ── Typography ───────────────────────────────────────────── */
 .display-gold {
-  font-family: 'Barlow Condensed', 'Inter Tight', sans-serif;
-  font-weight: 900;
+  font-family: var(--ag-font);
+  font-weight:500;
   line-height: 0.92;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
+  letter-spacing:-.01em;
+  text-transform:none;
   background: var(--ag-gold-text-grad);
   -webkit-background-clip: text;
   background-clip: text;
@@ -100,7 +82,7 @@ img { display: block; max-width: 100%; }
   text-transform: uppercase;
   white-space: nowrap;
   transition: filter 140ms var(--ag-ease), transform 120ms var(--ag-ease);
-  box-shadow: 0 4px 22px rgba(212,168,67,0.35);
+  box-shadow: 0 4px 22px rgba(171,203,249,0.35);
 }
 .btn-gold:hover { filter: brightness(1.08); transform: translateY(-1px); }
 
@@ -122,7 +104,7 @@ img { display: block; max-width: 100%; }
   white-space: nowrap;
   transition: background 140ms var(--ag-ease), border-color 140ms var(--ag-ease);
 }
-.btn-outline:hover { background: rgba(212,168,67,0.1); border-color: var(--ag-gold-1); }
+.btn-outline:hover { background: rgba(171,203,249,0.1); border-color: var(--ag-gold-1); }
 
 .btn-green {
   display: inline-flex;
@@ -174,15 +156,15 @@ img { display: block; max-width: 100%; }
   border-radius: 50%;
   flex-shrink: 0;
   display: block;
-  filter: drop-shadow(0 4px 14px rgba(212,168,67,0.4));
+  filter: drop-shadow(0 4px 14px rgba(171,203,249,0.4));
 }
 .brand-name { display: flex; flex-direction: column; }
 .brand-title {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: var(--ag-font);
   font-size: 18px;
-  font-weight: 900;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-weight:500;
+  letter-spacing:-.01em;
+  text-transform:none;
   background: var(--ag-gold-text-grad);
   -webkit-background-clip: text;
   background-clip: text;
@@ -242,7 +224,7 @@ img { display: block; max-width: 100%; }
   padding: 6px 14px 6px 6px;
   border-radius: 999px;
   border: 1.5px solid var(--ag-gold-border-strong);
-  background: rgba(212,168,67,0.08);
+  background: rgba(171,203,249,0.08);
 }
 .user-avatar {
   width: 30px;
@@ -253,7 +235,7 @@ img { display: block; max-width: 100%; }
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(212,168,67,0.35);
+  box-shadow: 0 2px 8px rgba(171,203,249,0.35);
 }
 .user-name {
   font-size: 12px;
@@ -271,8 +253,8 @@ img { display: block; max-width: 100%; }
 
 /* ── Responsible gambling banner ──────────────────────────── */
 .rg-bar {
-  background: rgba(14,9,40,0.8);
-  border-bottom: 1px solid rgba(212,168,67,0.1);
+  background: rgba(10,11,12,0.8);
+  border-bottom: 1px solid rgba(171,203,249,0.1);
   padding: 7px 0;
   text-align: center;
   font-size: 11px;
@@ -352,3 +334,31 @@ img { display: block; max-width: 100%; }
   .site-nav { display: none; }
   .header-actions { margin-left: auto; }
 }
+
+
+/* ── Clean, modern override layer (Ada brand: Inter Tight, light weights, sentence case) ── */
+:root{--ag-font:'Inter Tight',system-ui,sans-serif}
+body{font-family:var(--ag-font);font-weight:400}
+.display-gold{font-family:var(--ag-font)!important;font-weight:300!important;text-transform:none!important;letter-spacing:-.025em!important;line-height:1.02!important;
+  background:none!important;-webkit-text-fill-color:currentColor!important;color:var(--ag-text)!important}
+.section-title{font-family:var(--ag-font)!important;font-weight:400!important;text-transform:none!important;letter-spacing:-.01em!important;
+  background:none!important;-webkit-text-fill-color:currentColor!important;color:var(--ag-text)!important}
+.eyebrow{letter-spacing:.14em;font-weight:600}
+.btn-gold,.btn-outline{border-radius:var(--ag-btn-radius);text-transform:none;letter-spacing:.01em;font-weight:600;font-size:14px;box-shadow:none}
+.btn-gold:hover{filter:none;transform:translateY(-1px);box-shadow:0 8px 22px rgba(var(--ag-shadow),.18)}
+.btn-green{border-radius:var(--ag-btn-radius);text-transform:none;letter-spacing:.01em;font-weight:600}
+.gold-card{background:var(--ag-panel);box-shadow:0 1px 2px rgba(var(--ag-shadow),.06)}
+.gold-card:hover{box-shadow:0 14px 36px rgba(var(--ag-shadow),.2)}
+.brand-title{font-family:var(--ag-font)!important;font-weight:600!important;text-transform:none!important;letter-spacing:-.01em!important;font-size:20px!important;
+  background:none!important;-webkit-text-fill-color:currentColor!important;color:var(--ag-text)!important}
+.brand-tag{letter-spacing:.12em;font-weight:500}
+.site-nav a{text-transform:none;letter-spacing:0;font-size:14px;font-weight:500}
+.site-nav{gap:26px}
+.age-pill,.user-pill{font-weight:600}
+.user-name{letter-spacing:0;font-weight:600;font-size:13px}
+.brand .ag-mark{width:44px;height:44px;flex-shrink:0;display:block}
+.gold-rule{display:none}
+h1,h2,h3{font-family:var(--ag-font)}
+
+.site-nav a.active::after{background:var(--ag-gold-1)}
+.user-pill{background:rgba(171,203,249,.08)}

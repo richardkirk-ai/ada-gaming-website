@@ -16,7 +16,7 @@
   margin-bottom: 28px;
   aspect-ratio: 1900 / 280;
   max-height: 280px;
-  background: #0E0928;
+  background: #0A0B0C;
 }
 .hero-slides {
   display: flex;
@@ -40,15 +40,15 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(14,9,40,0.5) 0%, transparent 60%);
+  background: linear-gradient(90deg, rgba(10,11,12,0.5) 0%, transparent 60%);
   pointer-events: none;
 }
 .hero-prev, .hero-next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(14,9,40,0.7);
-  border: 1px solid rgba(212,168,67,0.4);
+  background: rgba(10,11,12,0.7);
+  border: 1px solid rgba(171,203,249,0.4);
   color: var(--ag-gold-1);
   width: 36px;
   height: 36px;
@@ -61,7 +61,7 @@
   z-index: 2;
   transition: background 140ms;
 }
-.hero-prev:hover, .hero-next:hover { background: rgba(212,168,67,0.25); }
+.hero-prev:hover, .hero-next:hover { background: rgba(171,203,249,0.25); }
 .hero-prev { left: 12px; }
 .hero-next { right: 12px; }
 .hero-dots {
@@ -97,7 +97,7 @@
   align-items: center;
   gap: 10px;
   padding: 10px 14px 10px 10px;
-  background: linear-gradient(120deg, #1A1050, #2A1870);
+  background: linear-gradient(120deg, #1A2230, #131A26);
   border: 1px solid var(--ag-gold-border);
   border-radius: 10px;
   flex: 0 0 auto;
@@ -110,11 +110,11 @@
   border-radius: 8px;
   object-fit: cover;
   flex-shrink: 0;
-  background: #1a1050;
+  background: #15181C;
 }
 .winner-info { min-width: 0; }
 .winner-who { font-size: 11px; color: var(--ag-text-3); margin-bottom: 1px; }
-.winner-amount { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 900; background: var(--ag-gold-text-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.winner-amount { font-family: var(--ag-font); font-size: 18px; font-weight:500; background: var(--ag-gold-text-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .winner-game { font-size: 10px; color: var(--ag-text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .winners-head {
   display: flex;
@@ -173,7 +173,7 @@
   white-space: nowrap;
   transition: border-color 140ms, background 140ms;
 }
-.lobby-filter:hover { border-color: var(--ag-gold-border-strong); background: rgba(212,168,67,0.08); }
+.lobby-filter:hover { border-color: var(--ag-gold-border-strong); background: rgba(171,203,249,0.08); }
 .lobby-filter svg { opacity: 0.5; }
 .lobby-sort {
   display: flex;
@@ -219,7 +219,7 @@
   white-space: nowrap;
   transition: background 120ms, color 120ms, border-color 120ms;
 }
-.cat-tab:hover { background: rgba(212,168,67,0.1); color: var(--ag-gold-1); }
+.cat-tab:hover { background: rgba(171,203,249,0.1); color: var(--ag-gold-1); }
 .cat-tab.active {
   background: var(--ag-gold-grad);
   color: var(--ag-ink-on-gold);
@@ -233,13 +233,13 @@
   gap: 20px;
   padding: 16px 28px;
   border-radius: 14px;
-  background: linear-gradient(120deg, #1A1050, #2A1870);
+  background: linear-gradient(120deg, #1A2230, #131A26);
   border: 1.5px solid var(--ag-gold-border-strong);
   margin-bottom: 40px;
-  box-shadow: 0 0 40px rgba(212,168,67,0.1);
+  box-shadow: 0 0 40px rgba(171,203,249,0.1);
 }
 .jt-label { font-size: 11px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ag-gold-1); white-space: nowrap; }
-.jt-amount { font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 900; background: var(--ag-gold-text-grad); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: 0.04em; }
+.jt-amount { font-family: var(--ag-font); font-size: 32px; font-weight:500; background: var(--ag-gold-text-grad); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing:-.01em; }
 .jt-sub { font-size: 11px; color: var(--ag-text-3); }
 .jt-game { font-size: 13px; font-weight: 700; color: var(--ag-text-2); }
 
@@ -269,7 +269,7 @@
   transition: background 140ms, border-color 140ms;
   white-space: nowrap;
 }
-.view-more-btn:hover { background: rgba(212,168,67,0.1); border-color: var(--ag-gold-border-strong); color: var(--ag-gold-1); }
+.view-more-btn:hover { background: rgba(171,203,249,0.1); border-color: var(--ag-gold-border-strong); color: var(--ag-gold-1); }
 .arrow-btn {
   width: 28px;
   height: 28px;
@@ -284,7 +284,7 @@
   font-size: 13px;
   transition: background 140ms;
 }
-.arrow-btn:hover { background: rgba(212,168,67,0.12); color: var(--ag-gold-1); }
+.arrow-btn:hover { background: rgba(171,203,249,0.12); color: var(--ag-gold-1); }
 
 /* ── Game tile (shared base) ──────────────────────────────── */
 .game-grid {
@@ -318,7 +318,7 @@
   aspect-ratio: 428 / 268;
   position: relative;
   overflow: hidden;
-  background: #1a1050;
+  background: #15181C;
 }
 .game-thumb img {
   width: 100%;
@@ -344,7 +344,7 @@
 .game-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(14,9,40,0.75);
+  background: rgba(10,11,12,0.75);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -362,7 +362,7 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 4px 18px rgba(212,168,67,0.4);
+  box-shadow: 0 4px 18px rgba(171,203,249,0.4);
 }
 
 /* Badges */
@@ -397,7 +397,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  background: rgba(14,9,40,0.75);
+  background: rgba(10,11,12,0.75);
   padding: 3px 8px;
   border-radius: 999px;
   border: 1px solid rgba(231,76,60,0.4);
@@ -413,7 +413,7 @@
   font-size: 10px;
   font-weight: 700;
   color: var(--ag-text-2);
-  background: rgba(14,9,40,0.75);
+  background: rgba(10,11,12,0.75);
   padding: 2px 8px;
   border-radius: 999px;
   z-index: 1;
@@ -507,7 +507,7 @@
 <div class="wrap">
   <header class="site-header">
     <a class="brand" href="index.html">
-      <img src="logo.png" alt="Ada Gaming" width="52" height="52" style="border-radius:50%;display:block;filter:drop-shadow(0 4px 14px rgba(212,168,67,0.4));">
+      <svg class="ag-mark" viewBox="0 0 44 44" aria-label="Ada Gaming"><rect width="44" height="44" rx="14" fill="#ABCBF9"/><text x="22" y="29" text-anchor="middle" font-family="Inter Tight,system-ui,sans-serif" font-size="19" font-weight="600" fill="#0A0B0C" letter-spacing="-1">ag</text></svg>
       <span class="brand-name">
         <span class="brand-title">Ada Gaming</span>
         <span class="brand-tag">Betting &middot; Casino &middot; Live</span>
@@ -527,8 +527,8 @@
       <div class="user-pill">
         <span class="user-avatar">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="8" r="4" fill="#2A1870"/>
-            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#2A1870" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="12" cy="8" r="4" fill="#1B1F25"/>
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#1B1F25" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </span>
         <span class="user-name">Kirky_123</span>
@@ -805,7 +805,7 @@
     <div class="game-grid game-grid-4">
 
       <div class="game-card" onclick="demoAlert('Age of the Gods™')">
-        <div class="game-thumb" style="background:linear-gradient(135deg,#1a0a40 0%,#4a1870 50%,#2a0a60 100%)">
+        <div class="game-thumb" style="background:linear-gradient(135deg, #1B1F25, #15181C)">
           <img src="https://s3.eu-west-3.amazonaws.com/prod.mp-engagement.com/marketplace/AgeOfTheDogsicon_428x268_1764232915323.jpg" alt="Age of the Gods™" onerror="this.style.display='none'">
           <span class="badge badge-jackpot">&#128142; Jackpot</span>
           <div class="game-overlay"><button class="game-play-btn">Play</button></div>
@@ -818,7 +818,7 @@
       </div>
 
       <div class="game-card" onclick="demoAlert('Age of the Gods: King of Olympus™')">
-        <div class="game-thumb" style="background:linear-gradient(135deg,#0a2040 0%,#1a4070 50%,#0a3060 100%)">
+        <div class="game-thumb" style="background:linear-gradient(135deg, #1A2230, #131A26)">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px">⚡</div>
           <span class="badge badge-jackpot">&#128142; Jackpot</span>
           <div class="game-overlay"><button class="game-play-btn">Play</button></div>
@@ -831,7 +831,7 @@
       </div>
 
       <div class="game-card" onclick="demoAlert('Age of the Gods: Furious Four™')">
-        <div class="game-thumb" style="background:linear-gradient(135deg,#200a0a 0%,#601020 50%,#400a10 100%)">
+        <div class="game-thumb" style="background:linear-gradient(135deg, #202530, #171B24)">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px">🔱</div>
           <span class="badge badge-hot">&#128293; Hot</span>
           <div class="game-overlay"><button class="game-play-btn">Play</button></div>
@@ -844,7 +844,7 @@
       </div>
 
       <div class="game-card" onclick="demoAlert('Age of the Gods: Ruler of the Skies™')">
-        <div class="game-thumb" style="background:linear-gradient(135deg,#0a1820 0%,#103050 50%,#0a2040 100%)">
+        <div class="game-thumb" style="background:linear-gradient(135deg, #202530, #171B24)">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px">🦅</div>
           <div class="game-overlay"><button class="game-play-btn">Play</button></div>
         </div>
@@ -909,7 +909,7 @@
       </div>
 
       <div class="game-card" onclick="demoAlert('Adventure Trail: Fire Blaze Jackpots™')">
-        <div class="game-thumb" style="background:linear-gradient(135deg,#0a200a 0%,#204010 50%,#103010 100%)">
+        <div class="game-thumb" style="background:linear-gradient(135deg, #202530, #171B24)">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px">🗺️</div>
           <span class="badge badge-hot">&#128293; Hot</span>
           <div class="game-overlay"><button class="game-play-btn">Play</button></div>
@@ -950,7 +950,7 @@
       </div>
 
       <div class="game-card" onclick="demoAlert('Sahara Riches: Cash Collect™')">
-        <div class="game-thumb" style="background:linear-gradient(135deg,#201000 0%,#503010 50%,#302000 100%)">
+        <div class="game-thumb" style="background:linear-gradient(135deg, #1B1F25, #15181C)">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px">🌙</div>
           <div class="game-overlay"><button class="game-play-btn">Play</button></div>
         </div>
@@ -962,7 +962,7 @@
       </div>
 
       <div class="game-card" onclick="demoAlert('Goal Goal Goal!: Cash Collect™')">
-        <div class="game-thumb" style="background:linear-gradient(135deg,#001a08 0%,#004020 50%,#002010 100%)">
+        <div class="game-thumb" style="background:linear-gradient(135deg, #202530, #171B24)">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px">⚽</div>
           <span class="badge badge-hot">&#128293; Hot</span>
           <div class="game-overlay"><button class="game-play-btn">Play</button></div>
@@ -975,7 +975,7 @@
       </div>
 
       <div class="game-card" onclick="demoAlert('Breaking Bad™: Cash Collect &amp; Link™')">
-        <div class="game-thumb" style="background:linear-gradient(135deg,#100010 0%,#300040 50%,#200030 100%)">
+        <div class="game-thumb" style="background:linear-gradient(135deg, #1B1F25, #15181C)">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px">⚗️</div>
           <span class="badge badge-new">New</span>
           <div class="game-overlay"><button class="game-play-btn">Play</button></div>
@@ -1003,7 +1003,7 @@
     <div class="game-grid game-grid-4">
 
       <div class="game-card" onclick="demoAlert('Lightning Roulette')">
-        <div class="game-thumb-emoji" style="background:linear-gradient(135deg,#1a0a00,#3a1800)">
+        <div class="game-thumb-emoji" style="background:linear-gradient(135deg, #1A2230, #131A26)">
           ⚡
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 1,247 playing</div>
@@ -1017,7 +1017,7 @@
       </div>
 
       <div class="game-card" onclick="demoAlert('Immersive Roulette')">
-        <div class="game-thumb-emoji" style="background:linear-gradient(135deg,#001a00,#003000)">
+        <div class="game-thumb-emoji" style="background:linear-gradient(135deg, #202530, #171B24)">
           🎡
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 634 playing</div>
@@ -1031,7 +1031,7 @@
       </div>
 
       <div class="game-card" onclick="demoAlert('Infinite Blackjack')">
-        <div class="game-thumb-emoji" style="background:linear-gradient(135deg,#0a0a20,#1a1a40)">
+        <div class="game-thumb-emoji" style="background:linear-gradient(135deg, #1B1F25, #15181C)">
           ♟
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 889 playing</div>
@@ -1045,7 +1045,7 @@
       </div>
 
       <div class="game-card" onclick="demoAlert('Baccarat Squeeze')">
-        <div class="game-thumb-emoji" style="background:linear-gradient(135deg,#001818,#002a2a)">
+        <div class="game-thumb-emoji" style="background:linear-gradient(135deg, #1B1F25, #15181C)">
           🃏
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 421 playing</div>
@@ -1059,7 +1059,7 @@
       </div>
 
       <div class="game-card" onclick="demoAlert('Speed Baccarat')">
-        <div class="game-thumb-emoji" style="background:linear-gradient(135deg,#100018,#220030)">
+        <div class="game-thumb-emoji" style="background:linear-gradient(135deg, #202530, #171B24)">
           🃏
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 203 playing</div>
@@ -1073,7 +1073,7 @@
       </div>
 
       <div class="game-card" onclick="demoAlert('Blackjack VIP')">
-        <div class="game-thumb-emoji" style="background:linear-gradient(135deg,#1a0820,#2a1038)">
+        <div class="game-thumb-emoji" style="background:linear-gradient(135deg, #1B1F25, #15181C)">
           ♠
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 12 playing</div>
@@ -1087,7 +1087,7 @@
       </div>
 
       <div class="game-card" onclick="demoAlert('American Roulette')">
-        <div class="game-thumb-emoji" style="background:linear-gradient(135deg,#1a0000,#320000)">
+        <div class="game-thumb-emoji" style="background:linear-gradient(135deg, #1A2230, #131A26)">
           🎰
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 178 playing</div>
@@ -1101,7 +1101,7 @@
       </div>
 
       <div class="game-card" onclick="demoAlert('Speed Blackjack')">
-        <div class="game-thumb-emoji" style="background:linear-gradient(135deg,#0a1a00,#1a3000)">
+        <div class="game-thumb-emoji" style="background:linear-gradient(135deg, #202530, #171B24)">
           ♠
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 556 playing</div>
@@ -1130,7 +1130,7 @@
     <div class="shows-grid">
 
       <div class="show-card" onclick="demoAlert('Crazy Time')">
-        <div class="show-thumb-emoji" style="background:linear-gradient(160deg,#1a0820,#3a0840)">
+        <div class="show-thumb-emoji" style="background:linear-gradient(160deg, #1A2230, #131A26)">
           🎉
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 3,841 playing</div>
@@ -1146,7 +1146,7 @@
       </div>
 
       <div class="show-card" onclick="demoAlert('Monopoly Live')">
-        <div class="show-thumb-emoji" style="background:linear-gradient(160deg,#001a08,#003018)">
+        <div class="show-thumb-emoji" style="background:linear-gradient(160deg, #1A2230, #131A26)">
           🏘
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 1,203 playing</div>
@@ -1162,7 +1162,7 @@
       </div>
 
       <div class="show-card" onclick="demoAlert('Dream Catcher')">
-        <div class="show-thumb-emoji" style="background:linear-gradient(160deg,#1a1000,#301800)">
+        <div class="show-thumb-emoji" style="background:linear-gradient(160deg, #1B1F25, #15181C)">
           🎡
           <div class="live-dot"><div class="live-dot-circle"></div><span class="live-dot-label">Live</span></div>
           <div class="players-count">&#128100; 742 playing</div>

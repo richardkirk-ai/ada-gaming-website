@@ -69,11 +69,11 @@
   box-shadow: 0 8px 28px rgba(0,0,0,0.4);
 }
 .hero-cat-name {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: var(--ag-font);
   font-size: 30px;
-  font-weight: 900;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  font-weight:500;
+  letter-spacing:-.01em;
+  text-transform:none;
   background: var(--ag-gold-text-grad);
   -webkit-background-clip: text;
   background-clip: text;
@@ -91,11 +91,11 @@
   border-radius: 14px;
   padding: 12px 18px;
   text-align: center;
-  box-shadow: 0 8px 28px rgba(212,168,67,0.45);
+  box-shadow: 0 8px 28px rgba(171,203,249,0.45);
   z-index: 2;
 }
 .jackpot-badge .jb-label { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; }
-.jackpot-badge .jb-amount { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 900; line-height: 1.1; }
+.jackpot-badge .jb-amount { font-family: var(--ag-font); font-size: 26px; font-weight:500; line-height: 1.1; }
 
 /* Slots preview strip */
 .slots-strip {
@@ -133,13 +133,13 @@
   margin: 0;
   padding: 36px 48px;
   border-radius: 20px;
-  background: linear-gradient(120deg, #1A1050 0%, #2A1A70 50%, #1A1050 100%);
+  background: linear-gradient(120deg, #1A2230, #131A26);
   border: 1.5px solid var(--ag-gold-border-strong);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 32px;
-  box-shadow: 0 0 60px rgba(212,168,67,0.12);
+  box-shadow: 0 0 60px rgba(171,203,249,0.12);
   position: relative;
   overflow: hidden;
 }
@@ -147,7 +147,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 80% 50%, rgba(212,168,67,0.08) 0%, transparent 60%);
+  background: radial-gradient(ellipse at 80% 50%, rgba(171,203,249,0.08) 0%, transparent 60%);
   pointer-events: none;
 }
 .promo-copy { display: flex; flex-direction: column; gap: 10px; }
@@ -246,7 +246,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 30%, rgba(212,168,67,0.08), transparent 60%);
+  background: radial-gradient(circle at 50% 30%, rgba(171,203,249,0.08), transparent 60%);
 }
 .game-info { padding: 14px 16px 16px; }
 .game-name {
@@ -362,7 +362,7 @@
   cursor: pointer;
   transition: background 120ms, border-color 120ms;
 }
-.odd-btn:hover { background: rgba(212,168,67,0.15); border-color: var(--ag-gold-border-strong); }
+.odd-btn:hover { background: rgba(171,203,249,0.15); border-color: var(--ag-gold-border-strong); }
 .odd-label { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ag-text-3); display: block; }
 .odd-val { font-size: 14px; font-weight: 800; color: var(--ag-gold-1); display: block; margin-top: 2px; }
 
@@ -388,7 +388,7 @@
 <div class="wrap">
   <header class="site-header">
     <a class="brand" href="index.html">
-      <img src="logo.png" alt="Ada Gaming" width="52" height="52" style="border-radius:50%;display:block;filter:drop-shadow(0 4px 14px rgba(212,168,67,0.4));">
+      <svg class="ag-mark" viewBox="0 0 44 44" aria-label="Ada Gaming"><rect width="44" height="44" rx="14" fill="#ABCBF9"/><text x="22" y="29" text-anchor="middle" font-family="Inter Tight,system-ui,sans-serif" font-size="19" font-weight="600" fill="#0A0B0C" letter-spacing="-1">ag</text></svg>
       <span class="brand-name">
         <span class="brand-title">Ada Gaming</span>
         <span class="brand-tag">Betting &middot; Casino &middot; Live</span>
@@ -408,8 +408,8 @@
       <div class="user-pill">
         <span class="user-avatar">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="8" r="4" fill="#2A1870"/>
-            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#2A1870" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="12" cy="8" r="4" fill="#1B1F25"/>
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#1B1F25" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </span>
         <span class="user-name">Kirky_123</span>
@@ -510,7 +510,7 @@
     </div>
     <div class="games-grid">
       <a class="game-card" href="live-casino.html">
-        <div class="game-thumb" style="background:linear-gradient(160deg,#1a0a40,#3a1060)">&#127774;</div>
+        <div class="game-thumb" style="background:linear-gradient(160deg, #1B1F25, #15181C)">&#127774;</div>
         <div class="game-info">
           <div class="game-name">Starburst</div>
           <div class="game-provider">NetEnt</div>
@@ -519,7 +519,7 @@
         </div>
       </a>
       <a class="game-card" href="live-casino.html">
-        <div class="game-thumb" style="background:linear-gradient(160deg,#1a0a00,#3a2000)">&#129470;</div>
+        <div class="game-thumb" style="background:linear-gradient(160deg, #1B1F25, #15181C)">&#129470;</div>
         <div class="game-info">
           <div class="game-name">Book of Ra</div>
           <div class="game-provider">Novomatic</div>
@@ -528,7 +528,7 @@
         </div>
       </a>
       <a class="game-card" href="live-casino.html">
-        <div class="game-thumb" style="background:linear-gradient(160deg,#001a10,#003020)">&#129473;</div>
+        <div class="game-thumb" style="background:linear-gradient(160deg, #202530, #171B24)">&#129473;</div>
         <div class="game-info">
           <div class="game-name">Gonzo's Quest</div>
           <div class="game-provider">NetEnt</div>
@@ -537,7 +537,7 @@
         </div>
       </a>
       <a class="game-card" href="live-casino.html">
-        <div class="game-thumb" style="background:linear-gradient(160deg,#0a1a00,#1a3000)">&#127808;</div>
+        <div class="game-thumb" style="background:linear-gradient(160deg, #202530, #171B24)">&#127808;</div>
         <div class="game-info">
           <div class="game-name">Sweet Bonanza</div>
           <div class="game-provider">Pragmatic Play</div>

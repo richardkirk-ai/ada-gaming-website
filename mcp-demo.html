@@ -26,12 +26,12 @@
   margin-bottom: 10px;
 }
 .mcp-title {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: var(--ag-font);
   font-size: clamp(28px, 4vw, 44px);
-  font-weight: 900;
+  font-weight:500;
   text-align: center;
   margin-bottom: 10px;
-  letter-spacing: 0.5px;
+  letter-spacing:-.01em;
 }
 .mcp-sub {
   text-align: center;
@@ -55,11 +55,11 @@
 
 /* Column headers */
 .col-label {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: var(--ag-font);
   font-size: 22px;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-weight:500;
+  letter-spacing:-.01em;
+  text-transform:none;
   color: var(--ag-text);
   text-align: center;
   padding-bottom: 16px;
@@ -77,7 +77,7 @@
   border-radius: 12px;
   transition: border-color 0.2s, background 0.2s;
 }
-.sys-card:hover { border-color: rgba(212,168,67,0.3); background: var(--ag-panel); }
+.sys-card:hover { border-color: rgba(171,203,249,0.3); background: var(--ag-panel); }
 .sys-icon { font-size: 24px; flex-shrink: 0; }
 .sys-name { font-size: 12px; font-weight: 700; color: var(--ag-text); }
 .sys-sub { font-size: 10px; color: var(--ag-text-3); margin-top: 1px; }
@@ -94,7 +94,7 @@
 .arrow-line {
   width: 60px;
   height: 2px;
-  background: linear-gradient(90deg, rgba(212,168,67,0.3) 0%, rgba(212,168,67,0.8) 50%, rgba(212,168,67,0.3) 100%);
+  background: linear-gradient(90deg, rgba(171,203,249,0.3) 0%, rgba(171,203,249,0.8) 50%, rgba(171,203,249,0.3) 100%);
   position: relative;
 }
 .arrow-line::after {
@@ -129,7 +129,7 @@
   padding: 24px 28px;
   text-align: center;
   width: 200px;
-  box-shadow: 0 0 40px rgba(212,168,67,0.12), 0 20px 60px rgba(0,0,0,0.4);
+  box-shadow: 0 0 40px rgba(171,203,249,0.12), 0 20px 60px rgba(0,0,0,0.4);
   position: relative;
   flex: 1;
   display: flex;
@@ -142,15 +142,15 @@
   position: absolute;
   inset: -1px;
   border-radius: 20px;
-  background: linear-gradient(135deg, rgba(212,168,67,0.2) 0%, transparent 60%);
+  background: linear-gradient(135deg, rgba(171,203,249,0.2) 0%, transparent 60%);
   pointer-events: none;
 }
 .ada-hub-icon { font-size: 40px; margin-bottom: 10px; }
 .ada-hub-name {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: var(--ag-font);
   font-size: 20px;
-  font-weight: 900;
-  letter-spacing: 1px;
+  font-weight:500;
+  letter-spacing:-.01em;
   margin-bottom: 4px;
   background: var(--ag-gold-text-grad);
   -webkit-background-clip: text;
@@ -184,7 +184,7 @@
   gap: 12px;
   padding: 12px 16px;
   background: var(--ag-bg-2);
-  border: 1px solid rgba(212,168,67,0.15);
+  border: 1px solid rgba(171,203,249,0.15);
   border-radius: 12px;
   transition: border-color 0.2s, background 0.2s;
 }
@@ -199,8 +199,8 @@
   align-items: center;
   justify-content: center;
   gap: 0;
-  background: linear-gradient(90deg, rgba(212,168,67,0.06), rgba(212,168,67,0.12), rgba(212,168,67,0.06));
-  border: 1px solid rgba(212,168,67,0.2);
+  background: linear-gradient(90deg, rgba(171,203,249,0.06), rgba(171,203,249,0.12), rgba(171,203,249,0.06));
+  border: 1px solid rgba(171,203,249,0.2);
   border-radius: 50px;
   padding: 12px 32px;
   max-width: 640px;
@@ -215,7 +215,7 @@
 }
 .loop-arrow {
   font-size: 14px;
-  color: rgba(212,168,67,0.4);
+  color: rgba(171,203,249,0.4);
   padding: 0 14px;
 }
 .loop-label {
@@ -271,8 +271,8 @@
 
 /* Pulse animation on hub */
 @keyframes hubPulse {
-  0%, 100% { box-shadow: 0 0 40px rgba(212,168,67,0.12), 0 20px 60px rgba(0,0,0,0.4); }
-  50% { box-shadow: 0 0 60px rgba(212,168,67,0.25), 0 20px 60px rgba(0,0,0,0.4); }
+  0%, 100% { box-shadow: 0 0 40px rgba(171,203,249,0.12), 0 20px 60px rgba(0,0,0,0.4); }
+  50% { box-shadow: 0 0 60px rgba(171,203,249,0.25), 0 20px 60px rgba(0,0,0,0.4); }
 }
 .ada-hub { animation: hubPulse 3s ease-in-out infinite; }
 
@@ -295,7 +295,7 @@
 <div class="wrap">
   <header class="site-header">
     <a class="brand" href="index.html">
-      <img src="logo.png" alt="Ada Gaming" width="52" height="52" style="border-radius:50%;display:block;filter:drop-shadow(0 4px 14px rgba(212,168,67,0.4));">
+      <svg class="ag-mark" viewBox="0 0 44 44" aria-label="Ada Gaming"><rect width="44" height="44" rx="14" fill="#ABCBF9"/><text x="22" y="29" text-anchor="middle" font-family="Inter Tight,system-ui,sans-serif" font-size="19" font-weight="600" fill="#0A0B0C" letter-spacing="-1">ag</text></svg>
       <span class="brand-name">
         <span class="brand-title">Ada Gaming</span>
         <span class="brand-tag">Betting &middot; Casino &middot; Live</span>
@@ -312,7 +312,7 @@
     </nav>
     <div class="header-actions">
       <div class="user-pill">
-        <span class="user-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#2A1870"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#2A1870" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <span class="user-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#1B1F25"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#1B1F25" stroke-width="2" stroke-linecap="round"/></svg></span>
         <span class="user-name">Kirky_123</span>
       </div>
     </div>
@@ -369,7 +369,7 @@
           </div>
         </div>
         <div class="sys-card" style="border-color:var(--ag-gold-border-strong);background:var(--ag-panel);">
-          <span class="sys-icon"><svg viewBox="0 0 585 604" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M292.5 0C131 0 0 131 0 292.5V604h585V292.5C585 131 454 0 292.5 0z" fill="#ffffff"/><circle cx="292.5" cy="240" r="115" fill="var(--ag-bg,#0E0928)"/><ellipse cx="292.5" cy="604" rx="138" ry="110" fill="var(--ag-bg,#0E0928)"/></svg></span>
+          <span class="sys-icon"><svg viewBox="0 0 585 604" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M292.5 0C131 0 0 131 0 292.5V604h585V292.5C585 131 454 0 292.5 0z" fill="#ffffff"/><circle cx="292.5" cy="240" r="115" fill="var(--ag-bg,#0A0B0C)"/><ellipse cx="292.5" cy="604" rx="138" ry="110" fill="var(--ag-bg,#0A0B0C)"/></svg></span>
           <div>
             <div class="sys-name">Ada</div>
             <div class="sys-sub">AI agent · config &amp; conversations</div>
@@ -400,7 +400,7 @@
             <span class="ai-logo-name">ChatGPT</span>
           </div>
           <div class="ai-logo-item">
-            <div class="ai-logo-wrap" style="background:#fff;border-color:rgba(255,255,255,0.3);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32" fill="none"><path d="M34.1423 7.325C33.5634 5.354 31.7547 4 29.7003 4H28.3488C26.1142 4 24.1985 5.596 23.7952 7.794L21.4805 20.407 22.0549 18.442C22.6319 16.468 24.4419 15.111 26.4986 15.111H34.3524L37.6462 16.394 40.8213 15.111H39.8946C37.8401 15.111 36.0315 13.757 35.4525 11.786L34.1423 7.325Z" fill="url(#co_a)"/><path d="M14.3307 40.656C14.9032 42.637 16.7165 44 18.7783 44H21.6486C24.1592 44 26.2122 41.999 26.2767 39.489L26.5893 27.327 25.9354 29.56C25.3577 31.533 23.5481 32.889 21.4923 32.889H13.5732L10.7499 31.357 7.69336 32.889H8.60461C10.6663 32.889 12.4796 34.252 13.0521 36.233L14.3307 40.656Z" fill="url(#co_b)"/><path d="M29.4993 4H13.46C8.87732 4 6.12772 10.057 4.29466 16.113 2.12296 23.289-.718769 32.885 7.50252 32.885H14.4282C16.4978 32.885 18.3147 31.517 18.8835 29.527 20.0876 25.314 22.1978 17.966 23.8554 12.371 24.6977 9.528 25.3993 7.087 26.4762 5.566 27.0799 4.714 28.086 4 29.4993 4Z" fill="url(#co_c)"/><path d="M29.4993 4H13.46C8.87732 4 6.12772 10.057 4.29466 16.113 2.12296 23.289-.718769 32.885 7.50252 32.885H14.4282C16.4978 32.885 18.3147 31.517 18.8835 29.527 20.0876 25.314 22.1978 17.966 23.8554 12.371 24.6977 9.528 25.3993 7.087 26.4762 5.566 27.0799 4.714 28.086 4 29.4993 4Z" fill="url(#co_d)"/><path d="M18.498 44H34.5374C39.12 44 41.8696 37.942 43.7027 31.885 45.8744 24.708 48.7161 15.11 40.4948 15.11H33.5693C31.4996 15.11 29.6827 16.478 29.114 18.468 27.9098 22.682 25.7996 30.032 24.142 35.627 23.2996 38.471 22.598 40.913 21.5212 42.434 20.9175 43.286 19.9113 44 18.498 44Z" fill="url(#co_e)"/><path d="M18.498 44H34.5374C39.12 44 41.8696 37.942 43.7027 31.885 45.8744 24.708 48.7161 15.11 40.4948 15.11H33.5693C31.4996 15.11 29.6827 16.478 29.114 18.468 27.9098 22.682 25.7996 30.032 24.142 35.627 23.2996 38.471 22.598 40.913 21.5212 42.434 20.9175 43.286 19.9113 44 18.498 44Z" fill="url(#co_f)"/><defs><radialGradient id="co_a" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(38.005 20.514) rotate(-129.304) scale(17.303 16.271)"><stop offset=".096" stop-color="#00AEFF"/><stop offset=".773" stop-color="#2253CE"/><stop offset="1" stop-color="#0736C4"/></radialGradient><radialGradient id="co_b" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(11.122 32.817) rotate(51.84) scale(15.991 15.512)"><stop offset="0" stop-color="#FFB657"/><stop offset=".634" stop-color="#FF5F3D"/><stop offset=".923" stop-color="#C02B3C"/></radialGradient><linearGradient id="co_c" x1="12.5" y1="7.5" x2="14.788" y2="33.975" gradientUnits="userSpaceOnUse"><stop offset=".156" stop-color="#0D91E1"/><stop offset=".487" stop-color="#52B471"/><stop offset=".652" stop-color="#98BD42"/><stop offset=".937" stop-color="#FFC800"/></linearGradient><linearGradient id="co_d" x1="14.5" y1="4" x2="15.75" y2="32.885" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3DCBFF"/><stop offset=".247" stop-color="#0588F7" stop-opacity="0"/></linearGradient><radialGradient id="co_e" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(41.319 12.281) rotate(109.274) scale(38.387 45.987)"><stop offset=".066" stop-color="#8C48FF"/><stop offset=".5" stop-color="#F2598A"/><stop offset=".896" stop-color="#FFB152"/></radialGradient><linearGradient id="co_f" x1="42.586" y1="13.346" x2="42.57" y2="21.215" gradientUnits="userSpaceOnUse"><stop offset=".058" stop-color="#F8ADFA"/><stop offset=".708" stop-color="#A86EDD" stop-opacity="0"/></linearGradient></defs></svg></div>
+            <div class="ai-logo-wrap" style="background:#fff;border-color:rgba(255,255,255,0.3);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32" fill="none"><path d="M34.1423 7.325C33.5634 5.354 31.7547 4 29.7003 4H28.3488C26.1142 4 24.1985 5.596 23.7952 7.794L21.4805 20.407 22.0549 18.442C22.6319 16.468 24.4419 15.111 26.4986 15.111H34.3524L37.6462 16.394 40.8213 15.111H39.8946C37.8401 15.111 36.0315 13.757 35.4525 11.786L34.1423 7.325Z" fill="url(#co_a)"/><path d="M14.3307 40.656C14.9032 42.637 16.7165 44 18.7783 44H21.6486C24.1592 44 26.2122 41.999 26.2767 39.489L26.5893 27.327 25.9354 29.56C25.3577 31.533 23.5481 32.889 21.4923 32.889H13.5732L10.7499 31.357 7.69336 32.889H8.60461C10.6663 32.889 12.4796 34.252 13.0521 36.233L14.3307 40.656Z" fill="url(#co_b)"/><path d="M29.4993 4H13.46C8.87732 4 6.12772 10.057 4.29466 16.113 2.12296 23.289-.718769 32.885 7.50252 32.885H14.4282C16.4978 32.885 18.3147 31.517 18.8835 29.527 20.0876 25.314 22.1978 17.966 23.8554 12.371 24.6977 9.528 25.3993 7.087 26.4762 5.566 27.0799 4.714 28.086 4 29.4993 4Z" fill="url(#co_c)"/><path d="M29.4993 4H13.46C8.87732 4 6.12772 10.057 4.29466 16.113 2.12296 23.289-.718769 32.885 7.50252 32.885H14.4282C16.4978 32.885 18.3147 31.517 18.8835 29.527 20.0876 25.314 22.1978 17.966 23.8554 12.371 24.6977 9.528 25.3993 7.087 26.4762 5.566 27.0799 4.714 28.086 4 29.4993 4Z" fill="url(#co_d)"/><path d="M18.498 44H34.5374C39.12 44 41.8696 37.942 43.7027 31.885 45.8744 24.708 48.7161 15.11 40.4948 15.11H33.5693C31.4996 15.11 29.6827 16.478 29.114 18.468 27.9098 22.682 25.7996 30.032 24.142 35.627 23.2996 38.471 22.598 40.913 21.5212 42.434 20.9175 43.286 19.9113 44 18.498 44Z" fill="url(#co_e)"/><path d="M18.498 44H34.5374C39.12 44 41.8696 37.942 43.7027 31.885 45.8744 24.708 48.7161 15.11 40.4948 15.11H33.5693C31.4996 15.11 29.6827 16.478 29.114 18.468 27.9098 22.682 25.7996 30.032 24.142 35.627 23.2996 38.471 22.598 40.913 21.5212 42.434 20.9175 43.286 19.9113 44 18.498 44Z" fill="url(#co_f)"/><defs><radialGradient id="co_a" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(38.005 20.514) rotate(-129.304) scale(17.303 16.271)"><stop offset=".096" stop-color="#00AEFF"/><stop offset=".773" stop-color="#2253CE"/><stop offset="1" stop-color="#0736C4"/></radialGradient><radialGradient id="co_b" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(11.122 32.817) rotate(51.84) scale(15.991 15.512)"><stop offset="0" stop-color="#FFB657"/><stop offset=".634" stop-color="#FF5F3D"/><stop offset=".923" stop-color="#C02B3C"/></radialGradient><linearGradient id="co_c" x1="12.5" y1="7.5" x2="14.788" y2="33.975" gradientUnits="userSpaceOnUse"><stop offset=".156" stop-color="#0D91E1"/><stop offset=".487" stop-color="#52B471"/><stop offset=".652" stop-color="#98BD42"/><stop offset=".937" stop-color="#ABCBF9"/></linearGradient><linearGradient id="co_d" x1="14.5" y1="4" x2="15.75" y2="32.885" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3DCBFF"/><stop offset=".247" stop-color="#0588F7" stop-opacity="0"/></linearGradient><radialGradient id="co_e" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(41.319 12.281) rotate(109.274) scale(38.387 45.987)"><stop offset=".066" stop-color="#86AEEA"/><stop offset=".5" stop-color="#F2598A"/><stop offset=".896" stop-color="#FFB152"/></radialGradient><linearGradient id="co_f" x1="42.586" y1="13.346" x2="42.57" y2="21.215" gradientUnits="userSpaceOnUse"><stop offset=".058" stop-color="#F8ADFA"/><stop offset=".708" stop-color="#ABCBF9" stop-opacity="0"/></linearGradient></defs></svg></div>
             <span class="ai-logo-name">Copilot</span>
           </div>
         </div>

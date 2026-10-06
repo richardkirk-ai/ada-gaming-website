@@ -23,17 +23,17 @@
   gap: 24px;
   padding: 20px 28px;
   border-radius: 14px;
-  background: linear-gradient(120deg, #160A30, #241260);
+  background: linear-gradient(120deg, #202530, #171B24);
   border: 1.5px solid var(--ag-gold-border-strong);
   margin-bottom: 48px;
-  box-shadow: 0 0 40px rgba(212,168,67,0.08);
+  box-shadow: 0 0 40px rgba(171,203,249,0.08);
 }
 .int-banner-logo {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: var(--ag-font);
   font-size: 22px;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-weight:500;
+  letter-spacing:-.01em;
+  text-transform:none;
   background: var(--ag-gold-text-grad);
   -webkit-background-clip: text;
   background-clip: text;
@@ -128,7 +128,7 @@
 .api-card.active {
   border-color: var(--ag-gold-1);
   background: linear-gradient(160deg, var(--ag-panel-2) 0%, var(--ag-panel) 100%);
-  box-shadow: 0 0 0 1px rgba(212,168,67,0.3), 0 12px 36px rgba(0,0,0,0.5);
+  box-shadow: 0 0 0 1px rgba(171,203,249,0.3), 0 12px 36px rgba(0,0,0,0.5);
 }
 
 .card-icon {
@@ -144,7 +144,7 @@
   flex-shrink: 0;
 }
 .api-card.active .card-icon {
-  background: rgba(212,168,67,0.15);
+  background: rgba(171,203,249,0.15);
   border-color: var(--ag-gold-border-strong);
 }
 
@@ -178,8 +178,8 @@
 }
 .card-tag.auth  { background: rgba(52,152,219,0.15); color: #5DADE2; border: 1px solid rgba(52,152,219,0.3); }
 .card-tag.rg    { background: rgba(46,204,113,0.12); color: #58D68D; border: 1px solid rgba(46,204,113,0.3); }
-.card-tag.player{ background: rgba(212,168,67,0.12); color: var(--ag-gold-1); border: 1px solid var(--ag-gold-border); }
-.card-tag.payment{background: rgba(155,89,182,0.15); color: #C39BD3; border: 1px solid rgba(155,89,182,0.3); }
+.card-tag.player{ background: rgba(171,203,249,0.12); color: var(--ag-gold-1); border: 1px solid var(--ag-gold-border); }
+.card-tag.payment{background: rgba(134,174,234,0.15); color: #CFE0FC; border: 1px solid rgba(134,174,234,0.3); }
 .card-tag.bonus { background: rgba(231,76,60,0.12); color: #F1948A; border: 1px solid rgba(231,76,60,0.3); }
 .card-tag.gaming{ background: rgba(26,188,156,0.12); color: #76D7C4; border: 1px solid rgba(26,188,156,0.3); }
 
@@ -218,7 +218,7 @@
 
 .panel-header {
   padding: 18px 22px 16px;
-  background: linear-gradient(120deg, rgba(212,168,67,0.12), rgba(212,168,67,0.04));
+  background: linear-gradient(120deg, rgba(171,203,249,0.12), rgba(171,203,249,0.04));
   border-bottom: 1px solid var(--ag-gold-border);
   display: flex;
   align-items: flex-start;
@@ -265,7 +265,7 @@
   flex-shrink: 0;
   transition: background 120ms;
 }
-.panel-close:hover { background: rgba(212,168,67,0.12); }
+.panel-close:hover { background: rgba(171,203,249,0.12); }
 
 .panel-body {
   padding: 20px 22px;
@@ -332,7 +332,7 @@
 }
 .panel-code .key { color: #7EB8E8; }
 .panel-code .val { color: #A8E6A3; }
-.panel-code .str { color: #F0CC6A; }
+.panel-code .str { color: #CFE0FC; }
 
 .use-case-list {
   display: flex;
@@ -398,7 +398,7 @@
 <div class="wrap">
   <header class="site-header">
     <a class="brand" href="index.html">
-      <img src="logo.png" alt="Ada Gaming" width="52" height="52" style="border-radius:50%;display:block;filter:drop-shadow(0 4px 14px rgba(212,168,67,0.4));">
+      <svg class="ag-mark" viewBox="0 0 44 44" aria-label="Ada Gaming"><rect width="44" height="44" rx="14" fill="#ABCBF9"/><text x="22" y="29" text-anchor="middle" font-family="Inter Tight,system-ui,sans-serif" font-size="19" font-weight="600" fill="#0A0B0C" letter-spacing="-1">ag</text></svg>
       <span class="brand-name">
         <span class="brand-title">Ada Gaming</span>
         <span class="brand-tag">Betting &middot; Casino &middot; Live</span>
@@ -418,8 +418,8 @@
       <div class="user-pill">
         <span class="user-avatar">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="8" r="4" fill="#2A1870"/>
-            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#2A1870" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="12" cy="8" r="4" fill="#1B1F25"/>
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#1B1F25" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </span>
         <span class="user-name">Kirky_123</span>

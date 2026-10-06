@@ -6,19 +6,19 @@
 <title>Ada Gaming — Voice Agent: Outbound 1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="ada-gaming.css">
 <style>
   :root {
-    --vd-bg:      #0b0820;
-    --vd-card:    #130f30;
-    --vd-card2:   #1a1650;
+    --vd-bg:      #0A0B0C;
+    --vd-card:    #101215;
+    --vd-card2:   #15181C;
     --vd-border:  rgba(255,255,255,0.09);
-    --vd-gold:    #d4a843;
+    --vd-gold:    #ABCBF9;
     --vd-green:   #2ecc71;
-    --vd-purple:  #a78bfa;
+    --vd-purple:  #ABCBF9;
     --vd-blue:    #60a5fa;
-    --vd-orange:  #f59e0b;
+    --vd-orange:  #86AEEA;
     --vd-red:     #ef4444;
     --vd-muted:   rgba(255,255,255,0.38);
     --vd-left:    300px;
@@ -31,28 +31,28 @@
 
   /* ── Hero ── */
   .vd-hero { display: flex; align-items: center; gap: 14px; padding: 14px 20px 10px; border-bottom: 1px solid var(--vd-border); }
-  .vd-hero-icon { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, #059669, #064e3b); border: 1px solid var(--vd-border); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
-  .vd-hero-text h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 800; margin: 0 0 2px; letter-spacing: 0.5px; }
+  .vd-hero-icon { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, #1B1F25, #15181C); border: 1px solid var(--vd-border); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+  .vd-hero-text h1 { font-family: var(--ag-font); font-size: 24px; font-weight:500; margin: 0 0 2px; letter-spacing:-.01em; }
   .vd-hero-text p { margin: 0; font-size: 11px; color: var(--vd-muted); }
   /* ── Call tabs ── */
   .vd-tabs { margin-left: auto; display: flex; gap: 3px; flex-shrink: 0; background: rgba(255,255,255,0.04); border: 1px solid var(--vd-border); border-radius: 10px; padding: 3px; }
   .vd-tab { padding: 5px 16px; border-radius: 7px; font-size: 11px; font-weight: 700; color: var(--vd-muted); cursor: pointer; text-decoration: none; display: block; transition: all 0.18s; letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap; border: 1px solid transparent; }
-  .vd-tab:hover { color: var(--vd-gold); background: rgba(212,168,67,0.07); }
-  .vd-tab.active { background: rgba(212,168,67,0.14); border-color: rgba(212,168,67,0.32); color: var(--vd-gold); }
+  .vd-tab:hover { color: var(--vd-gold); background: rgba(171,203,249,0.07); }
+  .vd-tab.active { background: rgba(171,203,249,0.14); border-color: rgba(171,203,249,0.32); color: var(--vd-gold); }
   .vd-tab.disabled { opacity: 0.32; cursor: not-allowed; pointer-events: none; }
 
   /* ── Stage ── */
   .vd-stage { display: grid; grid-template-columns: var(--vd-left) 1fr; gap: var(--vd-gap); padding: 16px 20px calc(var(--footer-h) + 20px); align-items: start; }
   .vd-left { background: var(--vd-card); border: 1px solid var(--vd-border); border-radius: 14px; overflow: hidden; }
   .panel-hdr { padding: 11px 14px 9px; border-bottom: 1px solid var(--vd-border); display: flex; align-items: center; gap: 7px; }
-  .panel-hdr h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; margin: 0; letter-spacing: 1px; text-transform: uppercase; color: var(--vd-gold); }
+  .panel-hdr h2 { font-family: var(--ag-font); font-size: 13px; font-weight:500; margin: 0; letter-spacing:-.01em; text-transform:none; color: var(--vd-gold); }
   .panel-body { padding: 12px; max-height: calc(100vh - var(--footer-h) - 160px); overflow-y: auto; }
   .panel-body::-webkit-scrollbar { width: 3px; }
   .panel-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
 
   /* Campaign context card */
   .caller-card { background: var(--vd-card2); border: 1px solid var(--vd-border); border-radius: 10px; padding: 12px; margin-bottom: 12px; }
-  .caller-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #059669, #064e3b); display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 7px; }
+  .caller-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #1B1F25, #15181C); display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 7px; }
   .caller-name { font-weight: 600; font-size: 13px; margin-bottom: 1px; }
   .caller-handle { color: var(--vd-muted); font-size: 10px; margin-bottom: 8px; }
   .caller-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
@@ -63,21 +63,21 @@
   .val.promo { color: var(--vd-gold); }
 
   /* Playbook */
-  .pb-active-pill { display: none; font-size: 10px; font-weight: 700; color: var(--vd-gold); background: rgba(212,168,67,0.1); border: 1px solid rgba(212,168,67,0.3); border-radius: 5px; padding: 3px 8px; margin-bottom: 5px; }
+  .pb-active-pill { display: none; font-size: 10px; font-weight: 700; color: var(--vd-gold); background: rgba(171,203,249,0.1); border: 1px solid rgba(171,203,249,0.3); border-radius: 5px; padding: 3px 8px; margin-bottom: 5px; }
   .pb-active-pill.on { display: block; }
   .pb-section-lbl { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--vd-muted); margin: 10px 0 4px; }
   .pb-step { display: flex; align-items: flex-start; gap: 6px; padding: 5px 6px; border-radius: 6px; margin-bottom: 2px; opacity: 0.28; transition: all 0.4s; font-size: 10px; border: 1px solid transparent; line-height: 1.45; }
-  .pb-step.active { opacity: 1; background: rgba(212,168,67,0.08); border-color: rgba(212,168,67,0.25); }
+  .pb-step.active { opacity: 1; background: rgba(171,203,249,0.08); border-color: rgba(171,203,249,0.25); }
   .pb-step.done { opacity: 0.55; }
   .pb-icon { font-size: 10px; margin-top: 1px; flex-shrink: 0; width: 12px; text-align: center; }
   .kw { font-size: 8px; font-weight: 700; padding: 1px 4px; border-radius: 3px; margin-right: 3px; }
   .kw.ask   { background: rgba(96,165,250,0.2);  color: var(--vd-blue); }
-  .kw.send  { background: rgba(167,139,250,0.2); color: var(--vd-purple); }
+  .kw.send  { background: rgba(171,203,249,0.2); color: var(--vd-purple); }
   .kw.run   { background: rgba(34,197,94,0.2);   color: var(--vd-green); }
-  .kw.if    { background: rgba(251,191,36,0.2);  color: #fbbf24; }
+  .kw.if    { background: rgba(171,203,249,0.2);  color: #ABCBF9; }
   .kw.else  { background: rgba(148,163,184,0.15);color: #94a3b8; }
   .kw.action{ background: rgba(34,197,94,0.2);   color: var(--vd-green); }
-  .kw.reason{ background: rgba(212,168,67,0.2);  color: var(--vd-gold); }
+  .kw.reason{ background: rgba(171,203,249,0.2);  color: var(--vd-gold); }
   .var-pill { display: inline-block; background: rgba(96,165,250,0.12); border: 1px solid rgba(96,165,250,0.3); color: var(--vd-blue); border-radius: 4px; font-size: 8px; padding: 0 4px; font-weight: 600; }
   .val-pill { display: inline-block; background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3); color: var(--vd-green); border-radius: 4px; font-size: 8px; padding: 0 4px; font-weight: 600; }
   .else-row { opacity: 0.35; }
@@ -85,7 +85,7 @@
   /* ── Brain (right) ── */
   .vd-brain { background: var(--vd-card); border: 1px solid var(--vd-border); border-radius: 14px; overflow: hidden; }
   .brain-hdr { padding: 11px 14px 9px; border-bottom: 1px solid var(--vd-border); display: flex; align-items: center; gap: 7px; }
-  .brain-hdr h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; margin: 0; letter-spacing: 1px; text-transform: uppercase; color: var(--vd-gold); }
+  .brain-hdr h2 { font-family: var(--ag-font); font-size: 13px; font-weight:500; margin: 0; letter-spacing:-.01em; text-transform:none; color: var(--vd-gold); }
   #phase-text { margin-left: auto; font-size: 10px; color: var(--vd-muted); font-style: italic; }
   .brain-body { padding: 12px; display: flex; flex-direction: column; gap: 10px; min-height: 200px; max-height: calc(100vh - var(--footer-h) - 160px); overflow-y: auto; }
   .brain-body::-webkit-scrollbar { width: 3px; }
@@ -100,8 +100,8 @@
   .bc-badge { font-size: 9px; padding: 2px 7px; border-radius: 10px; font-weight: 600; white-space: nowrap; }
   .bc-badge.api    { background: rgba(96,165,250,0.15);  color: var(--vd-blue);   border: 1px solid rgba(96,165,250,0.3); }
   .bc-badge.action { background: rgba(34,197,94,0.15);   color: var(--vd-green);  border: 1px solid rgba(34,197,94,0.3); }
-  .bc-badge.pb     { background: rgba(212,168,67,0.15);  color: var(--vd-gold);   border: 1px solid rgba(212,168,67,0.3); }
-  .bc-badge.if     { background: rgba(251,191,36,0.15);  color: #fbbf24;          border: 1px solid rgba(251,191,36,0.3); }
+  .bc-badge.pb     { background: rgba(171,203,249,0.15);  color: var(--vd-gold);   border: 1px solid rgba(171,203,249,0.3); }
+  .bc-badge.if     { background: rgba(171,203,249,0.15);  color: #ABCBF9;          border: 1px solid rgba(171,203,249,0.3); }
   .bc-body { padding: 10px 12px; font-size: 10px; display: flex; flex-direction: column; gap: 7px; }
 
   /* API ep */
@@ -119,8 +119,8 @@
   .mv.highlight { color: var(--vd-gold); }
 
   /* Decision card */
-  .if-row { display: flex; align-items: center; gap: 6px; background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.2); border-radius: 6px; padding: 6px 8px; }
-  .if-kw { font-size: 9px; font-weight: 800; color: #fbbf24; flex-shrink: 0; }
+  .if-row { display: flex; align-items: center; gap: 6px; background: rgba(171,203,249,0.06); border: 1px solid rgba(171,203,249,0.2); border-radius: 6px; padding: 6px 8px; }
+  .if-kw { font-size: 9px; font-weight: 800; color: #ABCBF9; flex-shrink: 0; }
   .if-cond { font-size: 9px; color: rgba(255,255,255,0.7); flex: 1; }
   .branch-taken { display: flex; align-items: center; gap: 6px; background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.25); border-radius: 6px; padding: 6px 10px; }
   .branch-icon { font-size: 12px; }
@@ -137,8 +137,8 @@
   .action-sub { font-size: 9px; color: var(--vd-muted); margin-top: 1px; }
 
   /* ── Footer player ── */
-  .vd-footer { position: fixed; bottom: 0; left: 0; right: 0; height: var(--footer-h); background: rgba(11,8,32,0.96); border-top: 1px solid var(--vd-border); backdrop-filter: blur(14px); display: flex; align-items: center; gap: 14px; padding: 0 20px; z-index: 100; }
-  .play-btn { width: 38px; height: 38px; border-radius: 50%; border: none; background: linear-gradient(135deg, #d4a843, #a87820); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; flex-shrink: 0; box-shadow: 0 3px 12px rgba(212,168,67,0.4); transition: transform 0.12s; color: #1a0e00; }
+  .vd-footer { position: fixed; bottom: 0; left: 0; right: 0; height: var(--footer-h); background: rgba(10,11,12,0.96); border-top: 1px solid var(--vd-border); backdrop-filter: blur(14px); display: flex; align-items: center; gap: 14px; padding: 0 20px; z-index: 100; }
+  .play-btn { width: 38px; height: 38px; border-radius: 50%; border: none; background: linear-gradient(135deg, #ABCBF9, #86AEEA); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; flex-shrink: 0; box-shadow: 0 3px 12px rgba(171,203,249,0.4); transition: transform 0.12s; color: #1a0e00; }
   .play-btn:hover { transform: scale(1.06); }
   .time-lbl { font-size: 11px; font-weight: 600; color: var(--vd-muted); white-space: nowrap; flex-shrink: 0; min-width: 72px; }
   .waveform { flex: 1; height: 44px; display: flex; align-items: center; gap: 1.5px; cursor: pointer; overflow: hidden; }
@@ -148,14 +148,14 @@
   .caller-tag { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
   .ctag { font-size: 9px; font-weight: 700; padding: 3px 7px; border-radius: 6px; }
   .ctag.ai   { background: rgba(34,197,94,0.15);   color: var(--vd-green);  border: 1px solid rgba(34,197,94,0.3); }
-  .ctag.user { background: rgba(212,168,67,0.12);   color: var(--vd-gold);   border: 1px solid rgba(212,168,67,0.25); }
+  .ctag.user { background: rgba(171,203,249,0.12);   color: var(--vd-gold);   border: 1px solid rgba(171,203,249,0.25); }
   .ctag-lbl  { font-size: 9px; color: var(--vd-muted); }
 
   /* Calibration overlay */
   #cal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 999; align-items: center; justify-content: center; }
   #cal-overlay.on { display: flex; }
   .cal-box { background: var(--vd-card); border: 1px solid var(--vd-border); border-radius: 14px; padding: 28px 32px; max-width: 460px; width: 90%; }
-  .cal-box h3 { font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:800; color:var(--vd-gold); margin-bottom:8px; }
+  .cal-box h3 { font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:500; color:var(--vd-gold); margin-bottom:8px; }
   #cal-line { font-size: 14px; min-height: 48px; color: #fff; margin: 14px 0; line-height: 1.5; }
   #cal-progress { font-size: 11px; color: var(--vd-muted); margin-bottom: 12px; }
   .cal-hint { font-size: 10px; color: var(--vd-muted); }
@@ -166,7 +166,7 @@
 <div class="wrap">
   <header class="site-header">
     <a class="brand" href="index.html">
-      <img src="logo.png" alt="Ada Gaming" width="52" height="52" style="border-radius:50%;display:block;filter:drop-shadow(0 4px 14px rgba(212,168,67,0.4));">
+      <svg class="ag-mark" viewBox="0 0 44 44" aria-label="Ada Gaming"><rect width="44" height="44" rx="14" fill="#ABCBF9"/><text x="22" y="29" text-anchor="middle" font-family="Inter Tight,system-ui,sans-serif" font-size="19" font-weight="600" fill="#0A0B0C" letter-spacing="-1">ag</text></svg>
       <span class="brand-name">
         <span class="brand-title">Ada Gaming</span>
         <span class="brand-tag">Betting &middot; Casino &middot; Live</span>
@@ -183,7 +183,7 @@
     </nav>
     <div class="header-actions">
       <div class="user-pill">
-        <span class="user-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#2A1870"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#2A1870" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <span class="user-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#1B1F25"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#1B1F25" stroke-width="2" stroke-linecap="round"/></svg></span>
         <span class="user-name">Kirky_123</span>
       </div>
     </div>
@@ -341,7 +341,7 @@ function makeBrainCard(id) {
       hdr:'📋', title:'Playbook Triggered', badge:'pb', badgeTxt:'OUTBOUND: PROMO-2026 v1',
       body:`
         <div style="font-size:10px;color:var(--vd-muted);margin-bottom:6px;">Ada matched the campaign code and launched the correct outbound playbook.</div>
-        <div style="background:rgba(212,168,67,0.07);border:1px solid rgba(212,168,67,0.2);border-radius:6px;padding:8px 10px;display:flex;flex-direction:column;gap:4px;">
+        <div style="background:rgba(171,203,249,0.07);border:1px solid rgba(171,203,249,0.2);border-radius:6px;padding:8px 10px;display:flex;flex-direction:column;gap:4px;">
           <div style="font-size:10px;font-weight:700;color:var(--vd-gold);">OUTBOUND: PROMO-2026 v1</div>
           <div style="font-size:9px;color:var(--vd-muted);">Step 1 of 6 — presenting Summer Welcome Bonus</div>
           <div style="font-size:9px;color:rgba(255,255,255,0.6);line-height:1.5;">"100% deposit match · up to €400 · min €20 deposit · funds within 10 min"</div>
