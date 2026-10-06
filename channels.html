@@ -282,6 +282,43 @@
 .ws-ans-live { font-size:10px; color:var(--ag-green); font-weight:600; letter-spacing:0.3px; text-transform:none; }
 .ws-ans-body { font-size:13px; color:var(--ag-text-2); line-height:1.6; }
 .ws-ans-body b { color:var(--ag-text); }
+.ws-ans-body ul, .wsc-msg ul { margin:6px 0; padding-left:18px; }
+.ws-ans-body li, .wsc-msg li { margin:3px 0; }
+
+.ws-live-meta { font-size:10px; color:var(--ag-text-muted); margin-top:10px; }
+.ws-typing { display:inline-flex; gap:4px; align-items:center; padding:4px 0; }
+.ws-typing span { width:6px; height:6px; border-radius:50%; background:var(--ag-gold-1); opacity:.35; animation:wsdot 1.2s infinite; }
+.ws-typing span:nth-child(2){ animation-delay:.2s } .ws-typing span:nth-child(3){ animation-delay:.4s }
+@keyframes wsdot { 0%,80%,100%{opacity:.25; transform:translateY(0)} 40%{opacity:1; transform:translateY(-3px)} }
+.ws-continue {
+  display:inline-flex; align-items:center; gap:8px; margin-top:14px;
+  background:var(--ag-gold-grad); color:var(--ag-ink-on-gold); border:0; border-radius:8px;
+  padding:10px 16px; font-size:13px; font-weight:800; cursor:pointer; font-family:inherit;
+}
+.ws-continue:hover { filter:brightness(1.08); }
+.ws-ctx { margin-top:12px; font-size:12px; color:var(--ag-text-3); }
+.ws-ctx summary { cursor:pointer; color:var(--ag-text-muted); font-weight:600; }
+.ws-ctx-box { margin-top:8px; padding:10px 12px; border:1px dashed var(--ag-gold-border); border-radius:8px; background:rgba(255,255,255,0.03); line-height:1.5; }
+.ws-ctx-box b { color:var(--ag-gold-3); font-size:10px; letter-spacing:.8px; text-transform:uppercase; display:block; margin-top:6px; }
+.ws-ctx-box b:first-child { margin-top:0; }
+.ws-chat {
+  position:fixed; right:28px; bottom:28px; width:390px; max-width:calc(100vw - 32px); height:540px; max-height:calc(100vh - 56px);
+  background:var(--ag-bg-2); border:1px solid var(--ag-gold-border-strong); border-radius:16px; z-index:60;
+  box-shadow:0 24px 70px rgba(0,0,0,.6); display:none; flex-direction:column; overflow:hidden;
+}
+.ws-chat.open { display:flex; animation:wsfade .25s ease; }
+.wsc-head { background:linear-gradient(90deg,#1A0E45,#2E1060); padding:12px 14px; display:flex; align-items:center; gap:10px; border-bottom:1px solid rgba(212,168,67,.2); }
+.wsc-head .wsc-t { font-weight:700; font-size:13px; color:var(--ag-text); }
+.wsc-head .wsc-s { font-size:10px; color:var(--ag-green); }
+.wsc-head button { margin-left:auto; background:none; border:0; color:var(--ag-text-2); font-size:20px; cursor:pointer; line-height:1; }
+.wsc-body { flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px; }
+.wsc-msg { max-width:86%; padding:9px 12px; border-radius:12px; font-size:13px; line-height:1.5; color:var(--ag-text-2); background:rgba(255,255,255,.07); align-self:flex-start; }
+.wsc-msg b { color:var(--ag-text); }
+.wsc-msg.user { align-self:flex-end; background:var(--ag-gold-grad); color:var(--ag-ink-on-gold); font-weight:600; }
+.wsc-note { align-self:center; font-size:10px; color:var(--ag-text-muted); letter-spacing:.4px; text-transform:uppercase; }
+.wsc-foot { display:flex; gap:8px; padding:10px; border-top:1px solid rgba(255,255,255,.08); }
+.wsc-foot input { flex:1; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:8px; color:var(--ag-text); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; }
+.wsc-foot button { background:var(--ag-gold-grad); border:0; border-radius:8px; color:var(--ag-ink-on-gold); font-weight:800; padding:0 14px; cursor:pointer; }
 
 .ws-rel { margin-top:4px; }
 .ws-rel-h { font-size:10px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; color:var(--ag-text-muted); margin-bottom:8px; }
@@ -736,7 +773,7 @@
       <div class="web-search-panel">
         <div class="ws-header">
           <div class="ws-title">Web Search — AI-powered answers</div>
-          <div class="ws-sub">Ada surfaces an instant AI answer above search results, so players get help without leaving the site. Try a search below.</div>
+          <div class="ws-sub">Live: your question goes to the real Ada agent, which answers from the knowledge base and the player&rsquo;s account. One click continues in chat with the question and answer already in the conversation.</div>
         </div>
         <div class="ws-search-wrap">
           <div class="ws-search-top">
@@ -1114,6 +1151,14 @@
   </div><!-- /ch-stage -->
 </div><!-- /ch-page -->
 
+
+<!-- Web Search: chat drawer (same live Ada conversation as the search answer) -->
+<div class="ws-chat" id="wsChat">
+  <div class="wsc-head"><div><div class="wsc-t">Ada Gaming Support</div><div class="wsc-s">&#9679; online &middot; continuing from your search</div></div><button onclick="wsCloseChat()" aria-label="Close chat">&times;</button></div>
+  <div class="wsc-body" id="wscBody"></div>
+  <div class="wsc-foot"><input id="wscText" type="text" placeholder="Reply to Ada&hellip;" autocomplete="off" onkeydown="if(event.key==='Enter')wsChatSend()"><button onclick="wsChatSend()">Send</button></div>
+</div>
+
 <!-- ═══════════════════════════════════════
      Ada headless SDK (for Web App panel)
 ═══════════════════════════════════════ -->
@@ -1144,6 +1189,7 @@ function switchChannel(id, el) {
   const panel = document.getElementById('panel-' + id);
   if (panel) { panel.style.display = 'flex'; panel.classList.add('active'); }
   if (id === 'email') { resetAnimation(); setTimeout(startAnimation, 300); }
+  if (id !== 'websearch') wsCloseChat();
 }
 
 /* ══════════════════════════════════════════
@@ -1194,101 +1240,125 @@ function startAnimation() {
 window.addEventListener('load', () => setTimeout(startAnimation, 600));
 
 /* ══════════════════════════════════════════
-   WEB SEARCH — Ada Gaming KB
+   WEB SEARCH — live Ada answer + chat handoff
+   One headless Ada conversation: the search question is sent to the agent, its reply is shown as the
+   AI answer, and "Continue in chat" opens a drawer whose transcript already holds both.
 ══════════════════════════════════════════ */
-var WS_DEFAULT = {
-  answer: "I can help with withdrawals, bonuses, account access, responsible gaming, and how Ada Gaming works. Try one of the suggested searches, or type your question — I'll give you a direct answer and link you to the right help article.",
-  articles: [
-    { t: "Getting started with Ada Gaming — account setup guide", c: "Account" },
-    { t: "How to contact Ada Gaming support", c: "Support" }
-  ]
-};
+var agSurface = 'app';
+var wsPending = null, wsChatTypingEl = null;
+var WS_GREETING_RX = /\bI am Betty\b|you are a \*?Diamond VIP\*? customer|^\s*Hey Kirky/i;
 
-var WS = [
-  { rx: /withdraw|cash.?out|payout|get.*money.?out|funds.*out/i,
-    answer: "You can withdraw winnings via <b>My Account → Withdraw</b>. Bank transfer takes <b>1–3 working days</b>; e-wallets (PayPal, Skrill) usually arrive within <b>4 hours</b>. Minimum withdrawal is <b>£10</b>. If your account isn't verified yet, complete identity verification first — we'll guide you through it.",
-    articles: [
-      { t: "How to withdraw your winnings — step-by-step guide", c: "Payments" },
-      { t: "Withdrawal processing times and payment methods", c: "Payments" }
-    ]
-  },
-  { rx: /bonus.*(not|hasn|didn|missing|appear|show)|missing.*bonus|where.*bonus/i,
-    answer: "If a bonus hasn't appeared, it's usually still processing — bonuses can take up to <b>15 minutes</b> after qualifying. Check <b>My Account → Bonuses</b> to see pending rewards. If it's been over an hour and you met the qualifying criteria, contact support and we'll investigate right away.",
-    articles: [
-      { t: "My bonus hasn't credited — what should I do?", c: "Bonuses" },
-      { t: "How long does a deposit bonus take to appear?", c: "Bonuses" }
-    ]
-  },
-  { rx: /wager|wagering|playthrough|rollover|requirement/i,
-    answer: "Wagering requirements are a multiplier on your bonus amount — for example, a <b>5x wagering requirement</b> on a £25 bonus means you need to place £125 in bets before it converts to withdrawable cash. Progress is shown in <b>My Account → Bonuses</b>. Sports bets count 100%; some casino games count at a reduced rate — check the specific bonus T&Cs.",
-    articles: [
-      { t: "What are wagering requirements and how do they work?", c: "Bonuses" },
-      { t: "Which games count towards wagering requirements?", c: "Bonuses" }
-    ]
-  },
-  { rx: /password|reset.*pass|forgot.*pass|can.?t.*log.?in|login|locked.?out/i,
-    answer: "To reset your password, click <b>Forgot Password</b> on the login screen and enter your email or username. You'll receive a reset link within a few minutes — check your spam folder if it doesn't arrive. The link expires after <b>15 minutes</b>. If your account is locked after too many attempts, wait 30 minutes or contact support.",
-    articles: [
-      { t: "How to reset your Ada Gaming password", c: "Account" },
-      { t: "My account is locked — what should I do?", c: "Account" }
-    ]
-  },
-  { rx: /deposit|add.*money|top.?up|fund.*account/i,
-    answer: "To deposit, go to <b>My Account → Deposit</b> and choose your payment method — we accept Visa, Mastercard, PayPal, Skrill, and bank transfer. Minimum deposit is <b>£10</b>. Most deposits are instant; bank transfers can take 1–3 working days. A deposit bonus may be automatically applied if one is active on your account.",
-    articles: [
-      { t: "How to make a deposit at Ada Gaming", c: "Payments" },
-      { t: "Supported payment methods and deposit limits", c: "Payments" }
-    ]
-  },
-  { rx: /responsible|self.?exclud|time.?out|limit|gamble.*safe|problem.*gambl/i,
-    answer: "Ada Gaming takes responsible gambling seriously. You can set <b>deposit limits, loss limits, session time limits</b>, or take a <b>time-out or self-exclusion</b> at any time via <b>My Account → Responsible Gaming</b>. Self-exclusion takes effect immediately and can last from 6 months to 5 years. You can also contact <a href='#' style='color:var(--ag-gold-1);'>BeGambleAware</a> for independent support.",
-    articles: [
-      { t: "Setting deposit and loss limits on your account", c: "Responsible Gaming" },
-      { t: "How to self-exclude or take a time-out", c: "Responsible Gaming" }
-    ]
-  },
-  { rx: /free.*bet|free.?spin|promo|promotion|offer/i,
-    answer: "Current promotions available to your account include: <b>Free Bet Friday</b> (£5 free bet on Premier League), <b>Re-Activation Bonus</b> (50% deposit match up to £100), and <b>Casino Welcome Back</b> (20 free spins on Gold Fever 5™). Go to <b>My Account → Bonuses</b> or tap <b>Promotions</b> in the app to see all your available offers.",
-    articles: [
-      { t: "Current promotions and how to claim them", c: "Bonuses" },
-      { t: "Free Bet Friday — terms and conditions", c: "Bonuses" }
-    ]
-  },
-  { rx: /verify|verification|identity|kyc|id.*check|document/i,
-    answer: "Identity verification (KYC) is required before your first withdrawal. You'll need to upload a <b>photo ID</b> (passport or driving licence) and <b>proof of address</b> (utility bill or bank statement, dated within 3 months). Verification usually completes within <b>2 hours</b> but can take up to 24 hours during busy periods.",
-    articles: [
-      { t: "How to verify your identity (KYC guide)", c: "Account" },
-      { t: "What documents are accepted for verification?", c: "Account" }
-    ]
-  }
-];
-
-function wsMatch(q) { for (var i = 0; i < WS.length; i++) { if (WS[i].rx.test(q)) return WS[i]; } return WS_DEFAULT; }
 function wsAsk(q) { document.getElementById('wsInput').value = q; wsSearch(); }
-var wsTypingInterval = null;
+
+var agGreeted = false;
+function wsMd(md) {
+  return mdToHtml(md).replace(/<\/ul>(?:<br>)*<ul>/g, '').replace(/(?:<br>)+<ul>/g, '<ul>').replace(/<\/ul>(?:<br>)+/g, '</ul>');
+}
+function wsWhenReady(fn, tries) {
+  tries = tries || 0;
+  var ready = window.adaEmbed && window.adaEmbed.sendMessage;
+  if (ready && (agGreeted || tries > 40)) return fn();
+  if (tries > 100) return fn(new Error('not ready'));
+  setTimeout(function() { wsWhenReady(fn, tries + 1); }, 200);
+}
+
+function wsSend(text, onError) {
+  agSurface = 'ws';
+  wsWhenReady(function(err) {
+    if (err || !window.adaEmbed || !window.adaEmbed.sendMessage) return onError();
+    window.adaEmbed.sendMessage(text).catch(onError);
+  });
+}
 
 function wsSearch() {
   var q = document.getElementById('wsInput').value.trim();
   if (!q) return;
-  var m = wsMatch(q);
-  var articles = m.articles.map(function(a) {
-    return '<a class="ws-rel-item" href="#"><span class="ri-ic">📄</span><span class="ri-t"><div class="ri-title">' + a.t + '</div><div class="ri-cat">' + a.c + ' · Ada Gaming Help Centre</div></span><span class="ri-chev">›</span></a>';
-  }).join('');
-
+  if (wsPending) { clearTimeout(wsPending.quiet); clearTimeout(wsPending.limit); clearTimeout(wsPending.slow); }
+  wsPending = { q: q, parts: [], start: Date.now(), quiet: null, limit: null };
+  var pending = wsPending;
   var r = document.getElementById('wsResult');
-  r.innerHTML = '<div class="ws-ans-card"><div class="ws-ans-head">🧠 Ada Gaming · AI Answer <span class="ws-ans-live">● answered instantly</span></div><div class="ws-ans-body" id="wsAnsBody"></div></div><div class="ws-rel"><div class="ws-rel-h">Related help articles</div>' + articles + '</div>';
+  r.innerHTML = '<div class="ws-ans-card"><div class="ws-ans-head">&#129504; Ada Gaming &middot; AI Answer <span class="ws-ans-live">&#9679; asking Ada&hellip;</span></div><div class="ws-ans-body" id="wsAnsBody"><span class="ws-typing"><span></span><span></span><span></span></span></div></div>';
   r.classList.add('show');
+  wsChatReset(q);
+  pending.limit = setTimeout(function() { wsFinish(pending, true); }, 70000);
+  pending.slow = setTimeout(function() {
+    var l = document.querySelector('#wsResult .ws-ans-live');
+    if (wsPending === pending && !pending.parts.length && l) l.innerHTML = '&#9679; checking your account&hellip;';
+  }, 7000);
+  wsSend(q, function() { wsFinish(pending, true); });
+}
 
-  if (wsTypingInterval) clearInterval(wsTypingInterval);
-  var el = document.getElementById('wsAnsBody');
-  var html = m.answer;
-  var plain = html.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&');
-  var i = 0, step = Math.max(1, Math.ceil(plain.length / 55));
-  wsTypingInterval = setInterval(function() {
-    i += step;
-    el.textContent = plain.slice(0, i);
-    if (i >= plain.length) { clearInterval(wsTypingInterval); el.innerHTML = html; }
-  }, 12);
+function wsOnBot(text) {
+  if (WS_GREETING_RX.test(text)) return;
+  wsChatHideTyping();
+  wsChatAdd('bot', text);
+  if (wsPending) {
+    wsPending.parts.push(text);
+    clearTimeout(wsPending.quiet);
+    var pending = wsPending;
+    pending.quiet = setTimeout(function() { wsFinish(pending, false); }, 3500);
+  }
+}
+
+function wsOnTyping() {
+  if (wsPending && wsPending.parts.length) clearTimeout(wsPending.quiet);
+  if (document.getElementById('wsChat').classList.contains('open')) wsChatShowTyping();
+}
+
+function wsFinish(pending, failed) {
+  if (wsPending !== pending) return;
+  clearTimeout(pending.quiet); clearTimeout(pending.limit); clearTimeout(pending.slow);
+  wsPending = null;
+  var r = document.getElementById('wsResult');
+  var answer = pending.parts.join('\n\n');
+  if (!answer) {
+    r.innerHTML = '<div class="ws-ans-card"><div class="ws-ans-head">&#129504; Ada Gaming &middot; AI Answer</div><div class="ws-ans-body">I couldn&rsquo;t get an answer from Ada just now. Please try the search again.</div></div>';
+    return;
+  }
+  var secs = ((Date.now() - pending.start) / 1000).toFixed(1);
+  r.innerHTML =
+    '<div class="ws-ans-card"><div class="ws-ans-head">&#129504; Ada Gaming &middot; AI Answer <span class="ws-ans-live">&#9679; answered live in ' + secs + 's</span></div>' +
+    '<div class="ws-ans-body">' + wsMd(answer) + '</div>' +
+    '<button class="ws-continue" onclick="wsOpenChat()">&#128172; Continue in chat &mdash; question and answer already loaded</button>' +
+    '<details class="ws-ctx"><summary>What the chat receives</summary><div class="ws-ctx-box"><b>Customer question</b>' + esc(pending.q) +
+    '<b>Ada&rsquo;s answer</b>' + wsMd(answer) + '<b>How</b>Same live Ada conversation, so the agent continues from here with full context and can act on the account or hand off to a person.</div></details></div>';
+}
+
+function wsChatScroll() { var b = document.getElementById('wscBody'); b.scrollTop = b.scrollHeight; }
+function wsChatAdd(role, text) {
+  var d = document.createElement('div');
+  d.className = 'wsc-msg ' + (role === 'user' ? 'user' : '');
+  if (role === 'user') d.textContent = text; else d.innerHTML = wsMd(text);
+  document.getElementById('wscBody').appendChild(d);
+  wsChatScroll();
+}
+function wsChatReset(q) {
+  var b = document.getElementById('wscBody');
+  b.innerHTML = '<div class="wsc-note">Continued from Help Centre search</div>';
+  wsChatTypingEl = null;
+  wsChatAdd('user', q);
+}
+function wsChatShowTyping() {
+  wsChatHideTyping();
+  wsChatTypingEl = document.createElement('div');
+  wsChatTypingEl.className = 'wsc-msg';
+  wsChatTypingEl.innerHTML = '<span class="ws-typing"><span></span><span></span><span></span></span>';
+  document.getElementById('wscBody').appendChild(wsChatTypingEl); wsChatScroll();
+}
+function wsChatHideTyping() { if (wsChatTypingEl) { wsChatTypingEl.remove(); wsChatTypingEl = null; } }
+function wsOpenChat() {
+  document.getElementById('wsChat').classList.add('open');
+  wsChatScroll();
+  setTimeout(function() { document.getElementById('wscText').focus(); }, 100);
+}
+function wsCloseChat() { document.getElementById('wsChat').classList.remove('open'); }
+function wsChatSend() {
+  var i = document.getElementById('wscText'), t = i.value.trim();
+  if (!t) return;
+  i.value = '';
+  wsChatAdd('user', t);
+  wsChatShowTyping();
+  wsSend(t, function() { wsChatHideTyping(); wsChatAdd('bot', "I had trouble sending that. Please try again in a moment."); });
 }
 
 /* ══════════════════════════════════════════
@@ -1342,7 +1412,7 @@ function agWire() {
   agWired = true;
   try {
     window.adaEmbed.subscribeEvent('ada:message:received', function(p) { var m = p && p.message; if (m) agOnBot(m); });
-    window.adaEmbed.subscribeEvent('ada:typing:start', function() { if (appStarted) cs2ShowTyping(); });
+    window.adaEmbed.subscribeEvent('ada:typing:start', function() { if (agSurface === 'ws') wsOnTyping(); else if (appStarted) cs2ShowTyping(); });
     window.adaEmbed.subscribeEvent('ada:ready', function() { cs2SetStatus(true); });
   } catch(e) {}
   if (window.adaEmbed.sendMessage) cs2SetStatus(true);
@@ -1356,7 +1426,9 @@ function agOnBot(m) {
   if (m.id) { if (appRenderedIds[m.id]) return; appRenderedIds[m.id] = 1; }
   var b = (m.body || '').trim();
   if (!b) return;
+  if (WS_GREETING_RX.test(b)) agGreeted = true;
   if (AG_GREETING_RX.test(b)) return;
+  if (agSurface === 'ws') { wsOnBot(b); return; }
   appAwaitingReply = false; clearTimeout(appWatchdog);
   cs2AddBot(b);
 }
@@ -1392,6 +1464,7 @@ function closeAppChat() {
 function appSend() { var t = document.getElementById('cs2Text').value.trim(); if (t) appSendMsg(t); }
 
 function appSendMsg(text) {
+  agSurface = 'app';
   document.getElementById('cs2Text').value = '';
   document.getElementById('cs2Chips').innerHTML = '';
   cs2AddUser(text);
