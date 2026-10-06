@@ -356,7 +356,7 @@ body{font-family:var(--ag-font);font-weight:400}
 .site-nav{gap:26px}
 .age-pill,.user-pill{font-weight:600}
 .user-name{letter-spacing:0;font-weight:600;font-size:13px}
-.brand .ag-mark{width:44px;height:44px;flex-shrink:0;display:block}
+.brand .ag-mark{width:52px;height:52px;flex-shrink:0;display:block;object-fit:contain;filter:none}
 .gold-rule{display:none}
 h1,h2,h3{font-family:var(--ag-font)}
 
