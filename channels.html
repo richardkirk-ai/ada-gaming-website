@@ -282,8 +282,9 @@
 .ws-ans-live { font-size:10px; color:var(--ag-green); font-weight:600; letter-spacing:0.3px; text-transform:none; }
 .ws-ans-body { font-size:13px; color:var(--ag-text-2); line-height:1.6; }
 .ws-ans-body b { color:var(--ag-text); }
-.ws-ans-body ul, .wsc-msg ul { margin:6px 0; padding-left:18px; }
-.ws-ans-body li, .wsc-msg li { margin:3px 0; }
+#ada-button-frame { display:none !important; }
+.ws-ans-body ul { margin:6px 0; padding-left:18px; }
+.ws-ans-body li { margin:3px 0; }
 
 .ws-live-meta { font-size:10px; color:var(--ag-text-muted); margin-top:10px; }
 .ws-typing { display:inline-flex; gap:4px; align-items:center; padding:4px 0; }
@@ -301,24 +302,6 @@
 .ws-ctx-box { margin-top:8px; padding:10px 12px; border:1px dashed var(--ag-gold-border); border-radius:8px; background:rgba(255,255,255,0.03); line-height:1.5; }
 .ws-ctx-box b { color:var(--ag-gold-3); font-size:10px; letter-spacing:.8px; text-transform:uppercase; display:block; margin-top:6px; }
 .ws-ctx-box b:first-child { margin-top:0; }
-.ws-chat {
-  position:fixed; right:28px; bottom:28px; width:390px; max-width:calc(100vw - 32px); height:540px; max-height:calc(100vh - 56px);
-  background:var(--ag-bg-2); border:1px solid var(--ag-gold-border-strong); border-radius:16px; z-index:60;
-  box-shadow:0 24px 70px rgba(0,0,0,.6); display:none; flex-direction:column; overflow:hidden;
-}
-.ws-chat.open { display:flex; animation:wsfade .25s ease; }
-.wsc-head { background:linear-gradient(90deg,#1A0E45,#2E1060); padding:12px 14px; display:flex; align-items:center; gap:10px; border-bottom:1px solid rgba(212,168,67,.2); }
-.wsc-head .wsc-t { font-weight:700; font-size:13px; color:var(--ag-text); }
-.wsc-head .wsc-s { font-size:10px; color:var(--ag-green); }
-.wsc-head button { margin-left:auto; background:none; border:0; color:var(--ag-text-2); font-size:20px; cursor:pointer; line-height:1; }
-.wsc-body { flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px; }
-.wsc-msg { max-width:86%; padding:9px 12px; border-radius:12px; font-size:13px; line-height:1.5; color:var(--ag-text-2); background:rgba(255,255,255,.07); align-self:flex-start; }
-.wsc-msg b { color:var(--ag-text); }
-.wsc-msg.user { align-self:flex-end; background:var(--ag-gold-grad); color:var(--ag-ink-on-gold); font-weight:600; }
-.wsc-note { align-self:center; font-size:10px; color:var(--ag-text-muted); letter-spacing:.4px; text-transform:uppercase; }
-.wsc-foot { display:flex; gap:8px; padding:10px; border-top:1px solid rgba(255,255,255,.08); }
-.wsc-foot input { flex:1; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:8px; color:var(--ag-text); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; }
-.wsc-foot button { background:var(--ag-gold-grad); border:0; border-radius:8px; color:var(--ag-ink-on-gold); font-weight:800; padding:0 14px; cursor:pointer; }
 
 .ws-rel { margin-top:4px; }
 .ws-rel-h { font-size:10px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; color:var(--ag-text-muted); margin-bottom:8px; }
@@ -1152,20 +1135,12 @@
 </div><!-- /ch-page -->
 
 
-<!-- Web Search: chat drawer (same live Ada conversation as the search answer) -->
-<div class="ws-chat" id="wsChat">
-  <div class="wsc-head"><div><div class="wsc-t">Ada Gaming Support</div><div class="wsc-s">&#9679; online &middot; continuing from your search</div></div><button onclick="wsCloseChat()" aria-label="Close chat">&times;</button></div>
-  <div class="wsc-body" id="wscBody"></div>
-  <div class="wsc-foot"><input id="wscText" type="text" placeholder="Reply to Ada&hellip;" autocomplete="off" onkeydown="if(event.key==='Enter')wsChatSend()"><button onclick="wsChatSend()">Send</button></div>
-</div>
-
 <!-- ═══════════════════════════════════════
-     Ada headless SDK (for Web App panel)
+     Ada web SDK (standard widget, launcher hidden; opened from Web Search)
 ═══════════════════════════════════════ -->
 <script>
 window.adaSettings = {
   handle: "rkirk-gaming-demo",
-  headless: true,
   enableProgrammaticControl: true,
   onAdaEmbedLoaded: function(){ if (window.__agWire) window.__agWire(); }
 };
@@ -1245,7 +1220,7 @@ window.addEventListener('load', () => setTimeout(startAnimation, 600));
    AI answer, and "Continue in chat" opens a drawer whose transcript already holds both.
 ══════════════════════════════════════════ */
 var agSurface = 'app';
-var wsPending = null, wsChatTypingEl = null;
+var wsPending = null, wsHold = false;
 var WS_GREETING_RX = /\bI am Betty\b|you are a \*?Diamond VIP\*? customer|^\s*Hey Kirky/i;
 
 function wsAsk(q) { document.getElementById('wsInput').value = q; wsSearch(); }
@@ -1276,10 +1251,10 @@ function wsSearch() {
   if (wsPending) { clearTimeout(wsPending.quiet); clearTimeout(wsPending.limit); clearTimeout(wsPending.slow); }
   wsPending = { q: q, parts: [], start: Date.now(), quiet: null, limit: null };
   var pending = wsPending;
+  wsHold = true;
   var r = document.getElementById('wsResult');
   r.innerHTML = '<div class="ws-ans-card"><div class="ws-ans-head">&#129504; Ada Gaming &middot; AI Answer <span class="ws-ans-live">&#9679; asking Ada&hellip;</span></div><div class="ws-ans-body" id="wsAnsBody"><span class="ws-typing"><span></span><span></span><span></span></span></div></div>';
   r.classList.add('show');
-  wsChatReset(q);
   pending.limit = setTimeout(function() { wsFinish(pending, true); }, 70000);
   pending.slow = setTimeout(function() {
     var l = document.querySelector('#wsResult .ws-ans-live');
@@ -1290,8 +1265,6 @@ function wsSearch() {
 
 function wsOnBot(text) {
   if (WS_GREETING_RX.test(text)) return;
-  wsChatHideTyping();
-  wsChatAdd('bot', text);
   if (wsPending) {
     wsPending.parts.push(text);
     clearTimeout(wsPending.quiet);
@@ -1302,13 +1275,13 @@ function wsOnBot(text) {
 
 function wsOnTyping() {
   if (wsPending && wsPending.parts.length) clearTimeout(wsPending.quiet);
-  if (document.getElementById('wsChat').classList.contains('open')) wsChatShowTyping();
 }
 
 function wsFinish(pending, failed) {
   if (wsPending !== pending) return;
   clearTimeout(pending.quiet); clearTimeout(pending.limit); clearTimeout(pending.slow);
   wsPending = null;
+  wsHold = false;
   var r = document.getElementById('wsResult');
   var answer = pending.parts.join('\n\n');
   if (!answer) {
@@ -1319,46 +1292,17 @@ function wsFinish(pending, failed) {
   r.innerHTML =
     '<div class="ws-ans-card"><div class="ws-ans-head">&#129504; Ada Gaming &middot; AI Answer <span class="ws-ans-live">&#9679; answered live in ' + secs + 's</span></div>' +
     '<div class="ws-ans-body">' + wsMd(answer) + '</div>' +
-    '<button class="ws-continue" onclick="wsOpenChat()">&#128172; Continue in chat &mdash; question and answer already loaded</button>' +
+    '<button class="ws-continue" onclick="wsOpenChat()">&#128172; Continue in Ada chat &mdash; question and answer already loaded</button>' +
     '<details class="ws-ctx"><summary>What the chat receives</summary><div class="ws-ctx-box"><b>Customer question</b>' + esc(pending.q) +
-    '<b>Ada&rsquo;s answer</b>' + wsMd(answer) + '<b>How</b>Same live Ada conversation, so the agent continues from here with full context and can act on the account or hand off to a person.</div></details></div>';
+    '<b>Ada&rsquo;s answer</b>' + wsMd(answer) + '<b>How</b>The standard Ada chat window opens on this same live conversation, so the agent carries on with full context and can act on the account or hand off to a person.</div></details></div>';
 }
 
-function wsChatScroll() { var b = document.getElementById('wscBody'); b.scrollTop = b.scrollHeight; }
-function wsChatAdd(role, text) {
-  var d = document.createElement('div');
-  d.className = 'wsc-msg ' + (role === 'user' ? 'user' : '');
-  if (role === 'user') d.textContent = text; else d.innerHTML = wsMd(text);
-  document.getElementById('wscBody').appendChild(d);
-  wsChatScroll();
-}
-function wsChatReset(q) {
-  var b = document.getElementById('wscBody');
-  b.innerHTML = '<div class="wsc-note">Continued from Help Centre search</div>';
-  wsChatTypingEl = null;
-  wsChatAdd('user', q);
-}
-function wsChatShowTyping() {
-  wsChatHideTyping();
-  wsChatTypingEl = document.createElement('div');
-  wsChatTypingEl.className = 'wsc-msg';
-  wsChatTypingEl.innerHTML = '<span class="ws-typing"><span></span><span></span><span></span></span>';
-  document.getElementById('wscBody').appendChild(wsChatTypingEl); wsChatScroll();
-}
-function wsChatHideTyping() { if (wsChatTypingEl) { wsChatTypingEl.remove(); wsChatTypingEl = null; } }
 function wsOpenChat() {
-  document.getElementById('wsChat').classList.add('open');
-  wsChatScroll();
-  setTimeout(function() { document.getElementById('wscText').focus(); }, 100);
+  wsHold = false;
+  if (window.adaEmbed && window.adaEmbed.open) window.adaEmbed.open();
 }
-function wsCloseChat() { document.getElementById('wsChat').classList.remove('open'); }
-function wsChatSend() {
-  var i = document.getElementById('wscText'), t = i.value.trim();
-  if (!t) return;
-  i.value = '';
-  wsChatAdd('user', t);
-  wsChatShowTyping();
-  wsSend(t, function() { wsChatHideTyping(); wsChatAdd('bot', "I had trouble sending that. Please try again in a moment."); });
+function wsCloseChat() {
+  if (window.adaEmbed && window.adaEmbed.close) try { window.adaEmbed.close(); } catch(e) {}
 }
 
 /* ══════════════════════════════════════════
@@ -1413,9 +1357,22 @@ function agWire() {
   try {
     window.adaEmbed.subscribeEvent('ada:message:received', function(p) { var m = p && p.message; if (m) agOnBot(m); });
     window.adaEmbed.subscribeEvent('ada:typing:start', function() { if (agSurface === 'ws') wsOnTyping(); else if (appStarted) cs2ShowTyping(); });
-    window.adaEmbed.subscribeEvent('ada:ready', function() { cs2SetStatus(true); });
+    window.adaEmbed.subscribeEvent('ada:ready', function() { cs2SetStatus(true); agStartConversation(); });
+    window.adaEmbed.subscribeEvent('ada:toggle', function(p) {
+      var opened = p === true || !!(p && (p.isOpen || p.open || p.isDrawerOpen));
+      if (opened && wsHold) { try { window.adaEmbed.close(); } catch(e) {} }
+    });
   } catch(e) {}
   if (window.adaEmbed.sendMessage) cs2SetStatus(true);
+  agStartConversation();
+}
+var agGreetTries = 0, agGreetTimer = null;
+function agStartConversation() {
+  if (agGreetTimer || agGreeted) return;
+  agGreetTimer = setInterval(function() {
+    if (agGreeted || ++agGreetTries > 12) { clearInterval(agGreetTimer); return; }
+    try { if (window.adaEmbed && window.adaEmbed.triggerGreeting) window.adaEmbed.triggerGreeting(); } catch(e) {}
+  }, 1500);
 }
 window.__agWire = agWire;
 var agPoll = setInterval(function() { agWire(); if (agWired && window.adaEmbed && window.adaEmbed.sendMessage) { cs2SetStatus(true); clearInterval(agPoll); } }, 150);
@@ -1465,6 +1422,7 @@ function appSend() { var t = document.getElementById('cs2Text').value.trim(); if
 
 function appSendMsg(text) {
   agSurface = 'app';
+  wsHold = true;
   document.getElementById('cs2Text').value = '';
   document.getElementById('cs2Chips').innerHTML = '';
   cs2AddUser(text);
