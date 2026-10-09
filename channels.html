@@ -1252,6 +1252,7 @@ function wsWhenReady(fn, tries) {
 
 function wsSend(text, onError) {
   agSurface = 'ws';
+  agStartConversation();
   wsWhenReady(function(err) {
     if (err || !window.adaEmbed || !window.adaEmbed.sendMessage) return onError();
     window.adaEmbed.sendMessage(text).catch(onError);
@@ -1293,8 +1294,9 @@ function wsOnTyping() {
 var WS_HOW_LINKS =
   '<b>The idea</b>The search box and the chat window are two views of one live Ada conversation. The page never copies the question and answer into the chat; the chat simply opens on the conversation that is already there.' +
   '<b>What happens, step by step</b><ol>' +
-  '<li><strong>Start quietly.</strong> When the page loads, the Ada web SDK starts a conversation in the background (<code>triggerGreeting()</code>) and the chat button is hidden.</li>' +
-  '<li><strong>Ask.</strong> When the visitor searches, the page sends the question with <code>adaEmbed.sendMessage(question)</code>, exactly as if they had typed it into chat.</li>' +
+  '<li><strong>Load, but do not start.</strong> The Ada web SDK loads with the page and the chat button is hidden, but no conversation exists yet. Visitors who never search create nothing.</li>' +
+  '<li><strong>Start on the first search.</strong> The first time someone searches, the page starts the conversation (<code>triggerGreeting()</code>) and waits for Ada&rsquo;s greeting before sending, so the question is never lost.</li>' +
+  '<li><strong>Ask.</strong> The page sends the question with <code>adaEmbed.sendMessage(question)</code>, exactly as if they had typed it into chat.</li>' +
   '<li><strong>Answer.</strong> The page listens for the reply with <code>subscribeEvent("ada:message:received")</code> and shows it above the results. Questions that need the player&rsquo;s account can take longer, so the page shows &ldquo;checking your account&hellip;&rdquo; while it waits.</li>' +
   '<li><strong>Hold the window closed.</strong> Sending a message normally pops the chat open, so the page listens for <code>ada:toggle</code> and calls <code>adaEmbed.close()</code> until the visitor chooses to continue.</li>' +
   '<li><strong>Continue.</strong> The button calls <code>adaEmbed.open()</code>. The standard Ada window appears with the question and answer already in the transcript, and the visitor carries on from there.</li></ol>' +
@@ -1305,18 +1307,23 @@ var WS_HOW_TO =
   '<b>What you need</b>An Ada AI agent with your help content connected, and its handle (for example <code>your-handle</code>).' +
   '<b>The five calls</b><ol>' +
   '<li><strong>Load the SDK</strong> with programmatic control on: <code>ada.start({ handle, enableProgrammaticControl: true })</code>. This unlocks sending messages and reading replies from your own code.</li>' +
-  '<li><strong>Warm up the conversation</strong> once the SDK is ready: <code>ada.triggerGreeting()</code>, so the first search is never lost.</li>' +
+  '<li><strong>Start the conversation on the first search</strong>, not at page load: call <code>ada.triggerGreeting()</code> and wait for Ada&rsquo;s greeting before sending. This keeps conversation counts down, because visitors who never search never start one.</li>' +
   '<li><strong>Ask</strong> when the visitor submits the search: <code>ada.sendMessage(query)</code>.</li>' +
   '<li><strong>Listen</strong> for the answer: <code>ada.subscribeEvent("ada:message:received", handler)</code>. Use <code>ada:typing:start</code> to show a &ldquo;thinking&rdquo; state.</li>' +
   '<li><strong>Hand over to chat</strong> with <code>ada.open()</code>, or keep the window closed with <code>ada.close()</code> while the visitor is still searching.</li></ol>' +
   '<pre class="ws-code">import { createAdaEmbedInterface } from "https://static.ada.support/embed.js";\n' +
   'const ada = createAdaEmbedInterface();\n' +
   'await ada.start({ handle: "your-handle", enableProgrammaticControl: true });\n' +
-  'ada.triggerGreeting();\n' +
+  '// nothing is started yet: no conversation exists until the first search\n' +
   'ada.subscribeEvent("ada:message:received", ({ message }) =&gt; showAnswer(message.body));\n' +
-  'searchForm.onsubmit = (e) =&gt; { e.preventDefault(); ada.sendMessage(searchBox.value); };\n' +
+  'searchForm.onsubmit = async (e) =&gt; {\n' +
+  '  e.preventDefault();\n' +
+  '  await startConversationOnce();   // first search only: ada.triggerGreeting(), then wait for the greeting\n' +
+  '  ada.sendMessage(searchBox.value);\n' +
+  '};\n' +
   'continueButton.onclick = () =&gt; ada.open();</pre>' +
   '<b>Good to know</b><ol>' +
+  '<li><strong>Conversation counts.</strong> One visitor session is one conversation, however many searches they make, and a page that is only viewed starts none. Check with your Ada team how your contract counts conversations that never receive a customer message.</li>' +
   '<li>Pass page context with <code>setMetaFields({ ... })</code> (for example the article being read). Use <code>setSensitiveMetaFields</code> for anything personal.</li>' +
   '<li>Hide the chat button with CSS if the search box is the only entry point, and keep a visible &ldquo;Continue in chat&rdquo; control.</li>' +
   '<li>Answers that need account data are slower than knowledge answers. Show progress rather than a blank box.</li></ol>' +
@@ -1414,22 +1421,24 @@ function agWire() {
   try {
     window.adaEmbed.subscribeEvent('ada:message:received', function(p) { var m = p && p.message; if (m) agOnBot(m); });
     window.adaEmbed.subscribeEvent('ada:typing:start', function() { if (agSurface === 'ws') wsOnTyping(); else if (appStarted) cs2ShowTyping(); });
-    window.adaEmbed.subscribeEvent('ada:ready', function() { cs2SetStatus(true); agStartConversation(); });
+    window.adaEmbed.subscribeEvent('ada:ready', function() { cs2SetStatus(true); });
     window.adaEmbed.subscribeEvent('ada:toggle', function(p) {
       var opened = p === true || !!(p && (p.isOpen || p.open || p.isDrawerOpen));
       if (opened && wsHold) { try { window.adaEmbed.close(); } catch(e) {} }
     });
   } catch(e) {}
   if (window.adaEmbed.sendMessage) cs2SetStatus(true);
-  agStartConversation();
 }
 var agGreetTries = 0, agGreetTimer = null;
+function agTriggerOnce() { try { if (window.adaEmbed && window.adaEmbed.triggerGreeting) window.adaEmbed.triggerGreeting(); } catch(e) {} }
+// A conversation is only started when a visitor first needs one (first search, or first message in the app chat), never on page load.
 function agStartConversation() {
   if (agGreetTimer || agGreeted) return;
+  agTriggerOnce();
   agGreetTimer = setInterval(function() {
-    if (agGreeted || ++agGreetTries > 12) { clearInterval(agGreetTimer); return; }
-    try { if (window.adaEmbed && window.adaEmbed.triggerGreeting) window.adaEmbed.triggerGreeting(); } catch(e) {}
-  }, 1500);
+    if (agGreeted || ++agGreetTries > 8) { clearInterval(agGreetTimer); return; }
+    agTriggerOnce();
+  }, 2500);
 }
 window.__agWire = agWire;
 var agPoll = setInterval(function() { agWire(); if (agWired && window.adaEmbed && window.adaEmbed.sendMessage) { cs2SetStatus(true); clearInterval(agPoll); } }, 150);
@@ -1491,12 +1500,14 @@ function appSendMsg(text) {
     appAwaitingReply = false; cs2HideTyping();
     cs2AddBot("I'm having a little trouble connecting right now — please try again in a moment. 🙏");
   }, 24000);
-  if (window.adaEmbed && window.adaEmbed.sendMessage) {
+  agStartConversation();
+  wsWhenReady(function(err) {
+    if (err || !window.adaEmbed || !window.adaEmbed.sendMessage) return;
     window.adaEmbed.sendMessage(text).catch(function() {
       appAwaitingReply = false; clearTimeout(appWatchdog); cs2HideTyping();
       cs2AddBot("I had trouble sending that — please try again in a moment.");
     });
-  }
+  });
 }
 
 var proTimer = setTimeout(function() {
