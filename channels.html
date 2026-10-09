@@ -303,6 +303,18 @@
 .ws-ctx-box { margin-top:8px; padding:10px 12px; border:1px dashed var(--ag-gold-border); border-radius:8px; background:rgba(255,255,255,0.03); line-height:1.5; }
 .ws-ctx-box b { color:var(--ag-gold-3); font-size:10px; letter-spacing:.8px; text-transform:uppercase; display:block; margin-top:6px; }
 .ws-ctx-box b:first-child { margin-top:0; }
+.ws-ctx-row { display:flex; flex-wrap:wrap; gap:28px; margin-top:12px; font-size:12px; }
+.ws-ctx-tab { background:none; border:0; padding:0; font:inherit; font-size:12px; font-weight:600; color:var(--ag-text-muted); cursor:pointer; }
+.ws-ctx-tab::before { content:"\25B8\00a0"; }
+.ws-ctx-tab[aria-expanded="true"]::before { content:"\25BE\00a0"; }
+.ws-ctx-tab:hover { color:var(--ag-text-2); }
+.ws-ctx-box[hidden] { display:none; }
+.ws-ctx-box { font-size:12px; color:var(--ag-text-3); }
+.ws-ctx-box ol { margin:6px 0 0 18px; padding:0; }
+.ws-ctx-box li { margin:5px 0; }
+.ws-ctx-box code { font-family:'SF Mono','Fira Code',monospace; font-size:11px; color:var(--ag-gold-3); }
+.ws-ctx-box pre.ws-code { margin:8px 0 0; padding:10px 12px; border-radius:6px; background:rgba(0,0,0,0.35); overflow-x:auto; font-family:'SF Mono','Fira Code',monospace; font-size:11px; line-height:1.55; color:var(--ag-text-2); }
+.ws-ctx-box .ws-why { margin-top:10px; padding:8px 10px; border-left:2px solid var(--ag-gold-border-strong); background:rgba(255,255,255,0.03); }
 
 .ws-rel { margin-top:4px; }
 .ws-rel-h { font-size:10px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; color:var(--ag-text-muted); margin-bottom:8px; }
@@ -1278,6 +1290,38 @@ function wsOnTyping() {
   if (wsPending && wsPending.parts.length) clearTimeout(wsPending.quiet);
 }
 
+var WS_HOW_LINKS =
+  '<b>The idea</b>The search box and the chat window are two views of one live Ada conversation. The page never copies the question and answer into the chat; the chat simply opens on the conversation that is already there.' +
+  '<b>What happens, step by step</b><ol>' +
+  '<li><strong>Start quietly.</strong> When the page loads, the Ada web SDK starts a conversation in the background (<code>triggerGreeting()</code>) and the chat button is hidden.</li>' +
+  '<li><strong>Ask.</strong> When the visitor searches, the page sends the question with <code>adaEmbed.sendMessage(question)</code>, exactly as if they had typed it into chat.</li>' +
+  '<li><strong>Answer.</strong> The page listens for the reply with <code>subscribeEvent("ada:message:received")</code> and shows it above the results. Questions that need the player&rsquo;s account can take longer, so the page shows &ldquo;checking your account&hellip;&rdquo; while it waits.</li>' +
+  '<li><strong>Hold the window closed.</strong> Sending a message normally pops the chat open, so the page listens for <code>ada:toggle</code> and calls <code>adaEmbed.close()</code> until the visitor chooses to continue.</li>' +
+  '<li><strong>Continue.</strong> The button calls <code>adaEmbed.open()</code>. The standard Ada window appears with the question and answer already in the transcript, and the visitor carries on from there.</li></ol>' +
+  '<div class="ws-why"><strong>Why it matters:</strong> the visitor never repeats themselves, the answer in search and in chat always agree, and the same agent can look up the account, run playbooks or hand over to a human with the full history attached.</div>';
+
+var WS_HOW_TO =
+  '<b>What you build</b>A search box and a results area on your own site. Ada supplies the answer; your page supplies the design. It can use the same AI agent, knowledge and playbooks you already run in chat.' +
+  '<b>What you need</b>An Ada AI agent with your help content connected, and its handle (for example <code>your-handle</code>).' +
+  '<b>The five calls</b><ol>' +
+  '<li><strong>Load the SDK</strong> with programmatic control on: <code>ada.start({ handle, enableProgrammaticControl: true })</code>. This unlocks sending messages and reading replies from your own code.</li>' +
+  '<li><strong>Warm up the conversation</strong> once the SDK is ready: <code>ada.triggerGreeting()</code>, so the first search is never lost.</li>' +
+  '<li><strong>Ask</strong> when the visitor submits the search: <code>ada.sendMessage(query)</code>.</li>' +
+  '<li><strong>Listen</strong> for the answer: <code>ada.subscribeEvent("ada:message:received", handler)</code>. Use <code>ada:typing:start</code> to show a &ldquo;thinking&rdquo; state.</li>' +
+  '<li><strong>Hand over to chat</strong> with <code>ada.open()</code>, or keep the window closed with <code>ada.close()</code> while the visitor is still searching.</li></ol>' +
+  '<pre class="ws-code">import { createAdaEmbedInterface } from "https://static.ada.support/embed.js";\n' +
+  'const ada = createAdaEmbedInterface();\n' +
+  'await ada.start({ handle: "your-handle", enableProgrammaticControl: true });\n' +
+  'ada.triggerGreeting();\n' +
+  'ada.subscribeEvent("ada:message:received", ({ message }) =&gt; showAnswer(message.body));\n' +
+  'searchForm.onsubmit = (e) =&gt; { e.preventDefault(); ada.sendMessage(searchBox.value); };\n' +
+  'continueButton.onclick = () =&gt; ada.open();</pre>' +
+  '<b>Good to know</b><ol>' +
+  '<li>Pass page context with <code>setMetaFields({ ... })</code> (for example the article being read). Use <code>setSensitiveMetaFields</code> for anything personal.</li>' +
+  '<li>Hide the chat button with CSS if the search box is the only entry point, and keep a visible &ldquo;Continue in chat&rdquo; control.</li>' +
+  '<li>Answers that need account data are slower than knowledge answers. Show progress rather than a blank box.</li></ol>' +
+  '<div class="ws-why"><strong>Why teams build this:</strong> instant answers where visitors already look, fewer tickets to the contact centre, one consistent agent across search, chat and voice, and a warm, context-rich path to a human when it is needed.</div>';
+
 function wsFinish(pending, failed) {
   if (wsPending !== pending) return;
   clearTimeout(pending.quiet); clearTimeout(pending.limit); clearTimeout(pending.slow);
@@ -1294,8 +1338,20 @@ function wsFinish(pending, failed) {
     '<div class="ws-ans-card"><div class="ws-ans-head">&#129504; Ada Gaming &middot; AI Answer <span class="ws-ans-live">&#9679; answered live in ' + secs + 's</span></div>' +
     '<div class="ws-ans-body">' + wsMd(answer) + '</div>' +
     '<button class="ws-continue" onclick="wsOpenChat()">&#128172; Continue in Ada chat &mdash; question and answer already loaded</button>' +
-    '<details class="ws-ctx"><summary>What the chat receives</summary><div class="ws-ctx-box"><b>Customer question</b>' + esc(pending.q) +
-    '<b>Ada&rsquo;s answer</b>' + wsMd(answer) + '<b>How</b>The standard Ada chat window opens on this same live conversation, so the agent carries on with full context and can act on the account or hand off to a person.</div></details></div>';
+    '<div class="ws-ctx-row"><button class="ws-ctx-tab" aria-expanded="false" data-p="wsP1" onclick="wsTogglePanel(this)">What the chat receives</button>' +
+    '<button class="ws-ctx-tab" aria-expanded="false" data-p="wsP2" onclick="wsTogglePanel(this)">How search links to chat</button></div>' +
+    '<div class="ws-ctx-box" id="wsP1" hidden><b>Customer question</b>' + esc(pending.q) +
+    '<b>Ada&rsquo;s answer</b>' + wsMd(answer) + '<b>How</b>The standard Ada chat window opens on this same live conversation, so the agent carries on with full context and can act on the account or hand off to a person.</div>' +
+    '<div class="ws-ctx-box" id="wsP2" hidden>' + WS_HOW_LINKS + '</div>' +
+    '<div class="ws-ctx-row"><button class="ws-ctx-tab" aria-expanded="false" data-p="wsP3" onclick="wsTogglePanel(this)">Implementing an Ada powered search experience</button></div>' +
+    '<div class="ws-ctx-box" id="wsP3" hidden>' + WS_HOW_TO + '</div></div>';
+}
+
+function wsTogglePanel(btn) {
+  var p = document.getElementById(btn.getAttribute('data-p'));
+  var opening = p.hasAttribute('hidden');
+  if (opening) p.removeAttribute('hidden'); else p.setAttribute('hidden', '');
+  btn.setAttribute('aria-expanded', opening ? 'true' : 'false');
 }
 
 function wsOpenChat() {
