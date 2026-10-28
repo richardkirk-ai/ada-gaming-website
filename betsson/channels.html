@@ -366,26 +366,35 @@
    WEB APP PANEL
 ══════════════════════════════════════════ */
 .webapp-panel {
-  flex:1; display:flex; align-items:center; justify-content:center;
+  flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
   padding:20px; overflow:hidden;
-  background: radial-gradient(900px 700px at 50% -5%, rgba(46,34,112,0.4) 0%, transparent 70%);
+  background:
+    radial-gradient(420px 520px at 50% 52%, color-mix(in srgb, var(--ag-gold-1) 30%, transparent) 0%, transparent 70%),
+    radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1.5px) 0 0/22px 22px,
+    linear-gradient(180deg, #232a36 0%, #121620 100%);
 }
+.phone-caption { font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--ag-text-2); background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.12); padding:6px 14px; border-radius:999px; }
+.phone-caption b { color:var(--ag-gold-1); }
 .phone-wrap {
   position:relative;
   width:360px;
-  height:min(760px, calc(100vh - 180px));
-  background:#0a0818;
-  border-radius:50px;
-  padding:12px;
-  box-shadow: 0 0 0 2px #3A3638, 0 0 0 5px #0F0F12, 0 30px 70px rgba(0,0,0,0.7), 0 8px 24px rgba(249,161,52,0.12);
+  height:min(760px, calc(100vh - 220px));
+  background:linear-gradient(145deg, #e6e9ee 0%, #9aa1ab 28%, #5f6670 55%, #b9bec6 80%, #eef0f3 100%);
+  border-radius:56px;
+  padding:5px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6), 0 0 0 1px #1c2028, 0 40px 90px rgba(0,0,0,0.8), 0 0 90px color-mix(in srgb, var(--ag-gold-1) 35%, transparent);
   flex-shrink:0;
 }
+.phone-wrap::before { content:''; position:absolute; right:-4px; top:170px; width:4px; height:84px; border-radius:0 3px 3px 0; background:linear-gradient(90deg,#7c838d,#c9cdd3); }
+.phone-wrap::after { content:''; position:absolute; left:-4px; top:140px; width:4px; height:130px; border-radius:3px 0 0 3px;
+  background:linear-gradient(90deg,#c9cdd3,#7c838d) 0 0/4px 30px no-repeat, linear-gradient(90deg,#c9cdd3,#7c838d) 0 50px/4px 36px no-repeat, linear-gradient(90deg,#c9cdd3,#7c838d) 0 96px/4px 36px no-repeat; }
 .phone-screen {
   position:relative; width:100%; height:100%;
-  background:var(--ag-bg); border-radius:40px; overflow:hidden;
+  background:var(--ag-bg); border-radius:51px; overflow:hidden;
+  border:7px solid #050505;
   display:flex; flex-direction:column;
 }
-.phone-island { position:absolute; top:10px; left:50%; transform:translateX(-50%); width:110px; height:30px; background:#000; border-radius:18px; z-index:60; }
+.phone-island { position:absolute; top:16px; left:50%; transform:translateX(-50%); width:110px; height:30px; background:#000; border-radius:18px; z-index:60; }
 .phone-status { display:flex; align-items:center; justify-content:space-between; padding:14px 24px 6px; font-size:13px; font-weight:600; flex:0 0 auto; color:var(--ag-text); }
 .phone-status .ps-r { display:flex; align-items:center; gap:6px; font-size:11px; }
 
@@ -862,6 +871,7 @@
     <!-- ════════════════════════════════════ -->
     <div class="ch-panel" id="panel-webapp">
       <div class="webapp-panel">
+        <div class="phone-caption">&#128241; Inside the <b>betsson</b> app</div>
         <div class="phone-wrap">
           <div class="phone-island"></div>
           <div class="phone-screen">
