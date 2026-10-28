@@ -1194,7 +1194,7 @@ function switchChannel(id, el) {
   const panel = document.getElementById('panel-' + id);
   if (panel) { panel.style.display = 'flex'; panel.classList.add('active'); }
   if (id === 'email') { resetAnimation(); setTimeout(startAnimation, 300); }
-  if (id === 'websearch' || id === 'webform') { agWire(); wsPrepare(); }
+  if (id === 'websearch' || id === 'webform') { agSurface = 'ws'; agWire(); wsPrepare(); }
   else wsCloseChat();
 }
 
@@ -1281,7 +1281,6 @@ function wsFresh() {
 }
 function wsPrepare() {
   if (!(window.adaEmbed && window.adaEmbed.sendMessage)) return;
-  agSurface = 'ws';
   wsFresh().then(agStartConversation);
 }
 
@@ -1550,7 +1549,8 @@ function agOnBot(m) {
   if (m.id) { if (appRenderedIds[m.id]) return; appRenderedIds[m.id] = 1; }
   var b = (m.body || '').trim();
   if (!b) return;
-  if (!agGreeted && (WS_GREETING_RX.test(b) || (agSurface === 'ws' && !wsSent))) { agGreeted = true; agGreetAt = Date.now(); }
+  if (!agGreeted && (WS_GREETING_RX.test(b) || !wsSent)) { agGreeted = true; agGreetAt = Date.now(); }
+  if (!wsSent) return;
   if (AG_GREETING_RX.test(b)) return;
   if (agSurface === 'ws') { wsOnBot(b); return; }
   appAwaitingReply = false; clearTimeout(appWatchdog);
@@ -1600,10 +1600,11 @@ function appSendMsg(text) {
     if (!appAwaitingReply) return;
     appAwaitingReply = false; cs2HideTyping();
     cs2AddBot("I'm having a little trouble connecting right now — please try again in a moment. 🙏");
-  }, 24000);
+  }, 45000);
   agStartConversation();
   wsWhenReady(function(err) {
     if (err || !window.adaEmbed || !window.adaEmbed.sendMessage) return;
+    wsSent = true;
     window.adaEmbed.sendMessage(text).catch(function() {
       appAwaitingReply = false; clearTimeout(appWatchdog); cs2HideTyping();
       cs2AddBot("I had trouble sending that — please try again in a moment.");
