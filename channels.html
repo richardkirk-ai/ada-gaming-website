@@ -1178,6 +1178,7 @@ function switchChannel(id, el) {
   if (panel) { panel.style.display = 'flex'; panel.classList.add('active'); }
   if (id === 'email') { resetAnimation(); setTimeout(startAnimation, 300); }
   if (id !== 'websearch') wsCloseChat();
+  else { agWire(); wsPrepare(); }
 }
 
 /* ══════════════════════════════════════════
@@ -1238,31 +1239,74 @@ var WS_GREETING_RX = /\bI am Betty\b|you are a \*?Diamond VIP\*? customer|^\s*He
 
 function wsAsk(q) { document.getElementById('wsInput').value = q; wsSearch(); }
 
-var agGreeted = false;
+var agGreeted = false, agGreetAt = 0, wsSent = false, wsFreshDone = false, wsFreshP = null;
 function wsMd(md) {
   return mdToHtml(md).replace(/<\/ul>(?:<br>)*<ul>/g, '').replace(/(?:<br>)+<ul>/g, '<ul>').replace(/<\/ul>(?:<br>)+/g, '</ul>');
 }
+
+// A resumed conversation that already has customer messages may be handed off to Zendesk, where Ada
+// stays silent. Search always runs on a fresh conversation so an answer is generated.
+function wsFresh() {
+  if (wsFreshP) return wsFreshP;
+  var e = window.adaEmbed;
+  if (!e || !e.getMessages) return Promise.resolve();
+  wsFreshP = Promise.resolve().then(function() { return e.getMessages(); }).then(function(msgs) {
+    msgs = msgs || [];
+    if (msgs.some(function(m) { return m.role === 'user'; }) && e.reset) {
+      agGreeted = false; agGreetAt = 0; clearInterval(agGreetTimer); agGreetTimer = null; agGreetTries = 0;
+      return Promise.resolve(e.reset()).catch(function() {});
+    }
+    if (msgs.some(function(m) { return m.role !== 'user'; })) { agGreeted = true; agGreetAt = 0; }
+  }).catch(function() {}).then(function() { wsFreshDone = true; });
+  return wsFreshP;
+}
+function wsPrepare() {
+  if (!(window.adaEmbed && window.adaEmbed.sendMessage)) return;
+  agSurface = 'ws';
+  wsFresh().then(agStartConversation);
+}
+
 function wsWhenReady(fn, tries) {
   tries = tries || 0;
-  var ready = window.adaEmbed && window.adaEmbed.sendMessage;
-  if (ready && (agGreeted || tries > 40)) return fn();
-  if (tries > 100) return fn(new Error('not ready'));
+  var e = window.adaEmbed, ready = e && e.sendMessage && wsFreshDone;
+  if (ready && ((agGreeted && Date.now() - agGreetAt > 800) || tries > 40)) return fn();
+  if (tries > 120) return fn(new Error('not ready'));
+  if (e && e.sendMessage && !wsFreshP) wsPrepare();
+  else if (wsFreshDone) agStartConversation();
   setTimeout(function() { wsWhenReady(fn, tries + 1); }, 200);
 }
 
-function wsSend(text, onError) {
+function wsSend(text, onError, retries) {
+  retries = retries || 0;
   agSurface = 'ws';
-  agStartConversation();
   wsWhenReady(function(err) {
     if (err || !window.adaEmbed || !window.adaEmbed.sendMessage) return onError();
-    window.adaEmbed.sendMessage(text).catch(onError);
+    wsSent = true;
+    Promise.resolve().then(function() { return window.adaEmbed.sendMessage(text); }).catch(function() {
+      if (retries < 3) setTimeout(function() { wsSend(text, onError, retries + 1); }, 1200);
+      else onError();
+    });
+  });
+}
+
+// If nothing comes back, the conversation is likely stuck (e.g. handed off): start a new one and ask again, once.
+function wsRescue(pending) {
+  if (wsPending !== pending || pending.parts.length || pending.rescued || !window.adaEmbed || !window.adaEmbed.reset) return;
+  pending.rescued = true;
+  var l = document.querySelector('#wsResult .ws-ans-live');
+  if (l) l.innerHTML = '&#9679; reconnecting to Ada&hellip;';
+  agGreeted = false; agGreetAt = 0; clearInterval(agGreetTimer); agGreetTimer = null; agGreetTries = 0; wsSent = false;
+  Promise.resolve(window.adaEmbed.reset()).catch(function() {}).then(function() {
+    wsFreshP = Promise.resolve(); wsFreshDone = true;
+    agStartConversation();
+    wsSend(pending.q, function() { wsFinish(pending, true); });
   });
 }
 
 function wsSearch() {
   var q = document.getElementById('wsInput').value.trim();
   if (!q) return;
-  if (wsPending) { clearTimeout(wsPending.quiet); clearTimeout(wsPending.limit); clearTimeout(wsPending.slow); }
+  if (wsPending) { clearTimeout(wsPending.quiet); clearTimeout(wsPending.limit); clearTimeout(wsPending.slow); clearTimeout(wsPending.rescue); }
   wsPending = { q: q, parts: [], start: Date.now(), quiet: null, limit: null };
   var pending = wsPending;
   wsHold = true;
@@ -1274,16 +1318,18 @@ function wsSearch() {
     var l = document.querySelector('#wsResult .ws-ans-live');
     if (wsPending === pending && !pending.parts.length && l) l.innerHTML = '&#9679; checking your account&hellip;';
   }, 7000);
+  pending.rescue = setTimeout(function() { wsRescue(pending); }, 20000);
   wsSend(q, function() { wsFinish(pending, true); });
 }
 
 function wsOnBot(text) {
+  if (!wsSent) return;
   if (WS_GREETING_RX.test(text)) return;
   if (wsPending) {
     wsPending.parts.push(text);
-    clearTimeout(wsPending.quiet);
+    clearTimeout(wsPending.quiet); clearTimeout(wsPending.rescue);
     var pending = wsPending;
-    pending.quiet = setTimeout(function() { wsFinish(pending, false); }, 3500);
+    pending.quiet = setTimeout(function() { wsFinish(pending, false); }, 700);
   }
 }
 
@@ -1331,7 +1377,7 @@ var WS_HOW_TO =
 
 function wsFinish(pending, failed) {
   if (wsPending !== pending) return;
-  clearTimeout(pending.quiet); clearTimeout(pending.limit); clearTimeout(pending.slow);
+  clearTimeout(pending.quiet); clearTimeout(pending.limit); clearTimeout(pending.slow); clearTimeout(pending.rescue);
   wsPending = null;
   wsHold = false;
   var r = document.getElementById('wsResult');
@@ -1449,7 +1495,7 @@ function agOnBot(m) {
   if (m.id) { if (appRenderedIds[m.id]) return; appRenderedIds[m.id] = 1; }
   var b = (m.body || '').trim();
   if (!b) return;
-  if (WS_GREETING_RX.test(b)) agGreeted = true;
+  if (!agGreeted && (WS_GREETING_RX.test(b) || (agSurface === 'ws' && !wsSent))) { agGreeted = true; agGreetAt = Date.now(); }
   if (AG_GREETING_RX.test(b)) return;
   if (agSurface === 'ws') { wsOnBot(b); return; }
   appAwaitingReply = false; clearTimeout(appWatchdog);
