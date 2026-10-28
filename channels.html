@@ -348,6 +348,22 @@
 .cf-select { appearance:none; }
 .cf-submit { width:100%; padding:12px; background:var(--ag-gold-grad); color:#1A0E00; font-size:13px; font-weight:800; border:none; border-radius:8px; cursor:pointer; margin-top:4px; font-family:inherit; }
 .cf-result { margin-top:16px; }
+.cf-mail { border:1px solid rgba(255,255,255,0.12); border-radius:12px; overflow:hidden; background:var(--ag-panel); animation:wsfade .3s ease; }
+.cf-mail-bar { display:flex; align-items:center; gap:8px; padding:9px 14px; background:rgba(255,255,255,0.04); border-bottom:1px solid rgba(255,255,255,0.08); font-size:11px; color:var(--ag-text-3); }
+.cf-mail-bar b { color:var(--ag-text-2); font-weight:700; }
+.cf-mail-bar .cf-mail-tag { margin-left:auto; color:var(--ag-green); font-weight:700; }
+.cf-mail-hd { padding:14px 18px 10px; border-bottom:1px solid rgba(255,255,255,0.06); }
+.cf-mail-subj { font-size:15px; font-weight:700; color:var(--ag-text); margin-bottom:8px; }
+.cf-mail-meta { display:flex; align-items:center; gap:10px; font-size:12px; color:var(--ag-text-3); }
+.cf-mail-av { width:30px; height:30px; border-radius:50%; background:var(--ag-gold-grad); color:#1A0E00; font-weight:800; font-size:11px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.cf-mail-meta b { color:var(--ag-text); }
+.cf-mail-body { padding:14px 18px 6px; font-size:13px; line-height:1.65; color:var(--ag-text-2); }
+.cf-mail-body b { color:var(--ag-text); }
+.cf-mail-body ul { margin:6px 0 6px 18px; }
+.cf-mail-sig { padding:4px 18px 16px; font-size:12px; color:var(--ag-text-3); line-height:1.6; }
+.cf-mail-quote { margin:0 18px 16px; padding:8px 12px; border-left:3px solid rgba(255,255,255,0.15); font-size:12px; color:var(--ag-text-muted); line-height:1.5; }
+.cf-mail-wait { padding:16px 18px; font-size:12.5px; color:var(--ag-text-3); display:flex; align-items:center; gap:10px; }
+
 .cf-submit[disabled] { opacity:.6; cursor:default; }
 .cf-side { flex:1; max-width:300px; }
 .cf-side-card { background:rgba(21,24,28,0.5); border:1px solid rgba(171,203,249,0.2); border-radius:12px; padding:18px 20px; margin-bottom:14px; }
@@ -1236,6 +1252,7 @@ window.addEventListener('load', () => setTimeout(startAnimation, 600));
 ══════════════════════════════════════════ */
 var agSurface = 'app';
 var wsPending = null, wsHold = false;
+var WS_EMAIL = 'support@adagaming.com';
 var WS_BRAND = 'Ada Gaming';
 var WS_GREETING_RX =/\bI am Betty\b|you are a \*?Diamond VIP\*? customer|^\s*Hey Kirky/i;
 
@@ -1315,10 +1332,29 @@ function cfSubmit() {
   var q = document.getElementById('cfMsg').value.trim();
   if (!q) return;
   var b = document.getElementById('cfBtn');
-  b.disabled = true; b.textContent = 'Submitted — Ada is replying…';
+  b.disabled = true; b.textContent = 'Submitted — reply on its way by email…';
   wsRun(q, 'cfResult', '&#9993;&#65039; ' + WS_BRAND + ' &middot; Instant reply', function() {
     b.disabled = false; b.textContent = 'Submit — Ada will respond instantly';
   });
+}
+
+function cfEsc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function cfMailShell(inner) {
+  return '<div class="cf-mail"><div class="cf-mail-bar">&#128229; <b>Inbox</b> &middot; kirky_123@email.com<span class="cf-mail-tag" id="cfMailTag"></span></div>' + inner + '</div>';
+}
+function cfMailWaiting() {
+  return cfMailShell('<div class="cf-mail-wait"><span class="ws-typing"><span></span><span></span><span></span></span> Form received &mdash; Ada is drafting your email reply&hellip;</div>');
+}
+function cfMailReply(pending, answer, secs) {
+  var now = new Date(), t = ('0' + now.getHours()).slice(-2) + ':' + ('0' + now.getMinutes()).slice(-2);
+  var cat = (document.getElementById('cfCat') || {}).value || 'Your enquiry';
+  return cfMailShell(
+    '<div class="cf-mail-hd"><div class="cf-mail-subj">Re: ' + cfEsc(cat) + ' &mdash; your contact form enquiry</div>' +
+    '<div class="cf-mail-meta"><span class="cf-mail-av">' + (WS_BRAND.indexOf(' ') > 0 ? WS_BRAND.split(' ').map(function(w){ return w[0]; }).join('') : WS_BRAND.slice(0, 2)).toUpperCase() + '</span><span><b>' + cfEsc(WS_BRAND) + ' Support</b> &lt;' + WS_EMAIL + '&gt;<br>to kirky_123@email.com &middot; Today ' + t + '</span></div></div>' +
+    '<div class="cf-mail-body">' + (/^\s*(hi|hello|hey|dear)\b/i.test(answer) ? '' : 'Hi Kirky_123,<br><br>') + wsMd(answer) + '</div>' +
+    '<div class="cf-mail-sig">If there&rsquo;s anything else, just reply to this email.<br><br>Best regards,<br><b>Ada</b> &middot; ' + cfEsc(WS_BRAND) + ' Support<br>' + WS_EMAIL + '</div>' +
+    '<div class="cf-mail-quote">On ' + t + ', Kirky_123 wrote via the contact form:<br>&ldquo;' + cfEsc(pending.q) + '&rdquo;</div>'
+  ).replace('<span class="cf-mail-tag" id="cfMailTag"></span>', '<span class="cf-mail-tag">&#9679; replied by email in ' + secs + 's</span>');
 }
 
 function wsRun(q, rid, label, onDone) {
@@ -1327,7 +1363,7 @@ function wsRun(q, rid, label, onDone) {
   var pending = wsPending;
   wsHold = true;
   var r = document.getElementById(rid);
-  r.innerHTML = '<div class="ws-ans-card"><div class="ws-ans-head">' + label + ' <span class="ws-ans-live">&#9679; asking Ada&hellip;</span></div><div class="ws-ans-body"><span class="ws-typing"><span></span><span></span><span></span></span></div></div>';
+  r.innerHTML = rid === 'cfResult' ? cfMailWaiting() : '<div class="ws-ans-card"><div class="ws-ans-head">' + label + ' <span class="ws-ans-live">&#9679; asking Ada&hellip;</span></div><div class="ws-ans-body"><span class="ws-typing"><span></span><span></span><span></span></span></div></div>';
   r.classList.add('show');
   pending.limit = setTimeout(function() { wsFinish(pending, true); }, 70000);
   pending.slow = setTimeout(function() {
@@ -1408,7 +1444,7 @@ function wsFinish(pending, failed) {
   var head = '<div class="ws-ans-card"><div class="ws-ans-head">' + pending.label + ' <span class="ws-ans-live">&#9679; answered live in ' + secs + 's</span></div>' +
     '<div class="ws-ans-body">' + wsMd(answer) + '</div>' +
     '<button class="ws-continue" onclick="wsOpenChat()">&#128172; Continue in chat</button>';
-  if (pending.rid !== 'wsResult') { r.innerHTML = head + '</div>'; return; }
+  if (pending.rid === 'cfResult') { r.innerHTML = cfMailReply(pending, answer, secs); r.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
   r.innerHTML = head +
     '<div class="ws-ctx-row"><button class="ws-ctx-tab" aria-expanded="false" data-p="wsP1" onclick="wsTogglePanel(this)">What the chat receives</button>' +
     '<button class="ws-ctx-tab" aria-expanded="false" data-p="wsP2" onclick="wsTogglePanel(this)">How search links to chat</button></div>' +
