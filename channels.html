@@ -56,16 +56,17 @@
   flex-shrink: 0;
 }
 .ch-ico svg { display: block; }
-.ch-ico-email  { background: #86AEEA; }
-.ch-ico-search { background: linear-gradient(135deg,#ABCBF9,#86AEEA); }
-.ch-ico-form   { background: #2E6DB4; }
-.ch-ico-chat   { background: var(--ag-surface); }
-.ch-ico-sms    { background: #2ECC71; }
+.ch-ico-email  { background: linear-gradient(135deg,#4C8DF6,#2A62D6); }
+.ch-ico-search { background: linear-gradient(135deg,#F9B233,#F0782F); }
+.ch-ico-form   { background: linear-gradient(135deg,#6E7BFF,#4A55D9); }
+.ch-ico-chat   { background: linear-gradient(135deg,#4F46E5,#9333EA); }
+.ch-ico-sms    { background: linear-gradient(180deg,#65E070,#1DB53C); }
 .ch-ico-wa     { background: #25D366; }
-.ch-ico-msgr   { background: linear-gradient(135deg, #202530, #171B24); }
-.ch-ico-ig     { background: linear-gradient(135deg, #202530, #171B24); }
-.ch-ico-voice  { background: #5B8DEF; }
-.ch-ico-app    { background: linear-gradient(135deg, #202530, #171B24); border: 1px solid rgba(171,203,249,0.35); }
+.ch-ico-msgr   { background: linear-gradient(160deg,#00B2FF,#006AFF); }
+.ch-ico-ig     { background: radial-gradient(circle at 30% 107%,#FDF497 0%,#FDF497 5%,#FD5949 45%,#D6249F 60%,#285AEB 90%); }
+.ch-ico-voice  { background: linear-gradient(135deg,#3DDC84,#1E9E58); }
+.ch-ico-app    { background: linear-gradient(135deg,#FF4E9B,#8E2DE2); }
+.ch-ico { box-shadow: 0 4px 12px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.18); }
 
 .ch-badge {
   margin-left: auto;
@@ -346,6 +347,8 @@
 .cf-textarea { min-height:100px; resize:vertical; }
 .cf-select { appearance:none; }
 .cf-submit { width:100%; padding:12px; background:var(--ag-gold-grad); color:#1A0E00; font-size:13px; font-weight:800; border:none; border-radius:8px; cursor:pointer; margin-top:4px; font-family:inherit; }
+.cf-result { margin-top:16px; }
+.cf-submit[disabled] { opacity:.6; cursor:default; }
 .cf-side { flex:1; max-width:300px; }
 .cf-side-card { background:rgba(21,24,28,0.5); border:1px solid rgba(171,203,249,0.2); border-radius:12px; padding:18px 20px; margin-bottom:14px; }
 .cf-side-title { font-size:12px; font-weight:700; color:var(--ag-gold-1); margin-bottom:8px; }
@@ -545,66 +548,63 @@
 
     <div class="ch-item active" data-panel="email" onclick="switchChannel('email',this)">
       <span class="ch-ico ch-ico-email">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6.5 9 6.5 9-6.5"/></svg>
       </span>
       Email
       <span class="ch-badge">NEW</span>
     </div>
     <div class="ch-item" data-panel="websearch" onclick="switchChannel('websearch',this)">
       <span class="ch-ico ch-ico-search">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m21 21-5-5"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20.5 20.5-5-5"/><path d="M8 9.2l1.2-1.2M8 12.2l4.2-4.2" stroke-width="1.6" opacity=".8"/></svg>
       </span>
       Web Search
     </div>
     <div class="ch-item" data-panel="webform" onclick="switchChannel('webform',this)">
       <span class="ch-ico ch-ico-form">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
       </span>
       Web Contact Form
     </div>
     <div class="ch-item" data-panel="webapp" onclick="switchChannel('webapp',this)">
       <span class="ch-ico ch-ico-app">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ABCBF9" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h.01" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10.5 5h3" stroke-linecap="round"/><path d="M9 10.5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 10.5v2a1.5 1.5 0 0 1-1.5 1.5H12l-2 1.6V14a1.5 1.5 0 0 1-1-1.4z" fill="#fff" stroke="none"/></svg>
       </span>
       Mobile App
     </div>
     <div class="ch-divider"></div>
     <div class="ch-item" data-panel="webchat" onclick="switchChannel('webchat',this)">
       <span class="ch-ico ch-ico-chat">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-11.3 7.6L3 21l1.9-6.7A8.4 8.4 0 1 1 21 11.5z"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.8 2 11.5c0 2.5 1.3 4.8 3.4 6.3L4.5 21.5l4.3-2.2c1 .3 2.1.4 3.2.4 5.5 0 10-3.8 10-8.6S17.5 3 12 3z" fill="#fff"/><circle cx="8" cy="11.5" r="1.4" fill="#6D3DE8"/><circle cx="12" cy="11.5" r="1.4" fill="#6D3DE8"/><circle cx="16" cy="11.5" r="1.4" fill="#6D3DE8"/></svg>
       </span>
       Web Chat
     </div>
     <div class="ch-item" data-panel="sms" onclick="switchChannel('sms',this)">
       <span class="ch-ico ch-ico-sms">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-11.3 7.6L3 21l1.9-6.7A8.4 8.4 0 1 1 21 11.5z"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 3.5c-5.2 0-9.5 3.6-9.5 8 0 2.6 1.5 4.9 3.8 6.4-.2 1.2-.8 2.4-1.8 3.3 1.9-.1 3.6-.8 4.8-1.8.9.2 1.8.3 2.7.3 5.2 0 9.5-3.6 9.5-8.1S17.2 3.5 12 3.5z"/></svg>
       </span>
       SMS
     </div>
     <div class="ch-item" data-panel="whatsapp" onclick="switchChannel('whatsapp',this)">
       <span class="ch-ico ch-ico-wa">
-        <!-- WhatsApp logo -->
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm5.6 14.2c-.2.6-1.2 1.2-1.7 1.2-.4 0-1 .1-3.3-.8-2.7-1.1-4.4-3.9-4.5-4.1-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6c-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1 2 1.3 2.3 1.5.2.1.4.1.6-.1l.9-1c.2-.2.4-.2.6-.1l1.9.9c.3.2.5.3.6.4.1.3.1.9-.1 1.6z"/></svg>
+        <svg width="22" height="22" viewBox="0 0 32 32" fill="#fff"><path d="M16 3C8.82 3 3 8.82 3 16c0 2.42.67 4.7 1.83 6.65L3 29l6.53-1.8A13 13 0 0 0 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3zm5.82 18.65c-.32.9-1.88 1.77-2.59 1.88-.71.11-1.59.16-2.55-.16-.59-.19-1.34-.44-2.3-.86-4.04-1.74-6.68-5.8-6.88-6.07-.2-.27-1.61-2.14-1.61-4.08s1.02-2.9 1.38-3.29c.36-.4.79-.5 1.05-.5h.76c.24 0 .56-.09.87.67.32.78 1.1 2.69 1.2 2.89.1.2.16.43.03.7-.13.27-.2.43-.39.67-.2.24-.41.54-.59.73-.2.2-.4.41-.17.81.23.4.99 1.63 2.12 2.64 1.46 1.3 2.69 1.7 3.08 1.89.38.19.61.16.83-.1.23-.26.97-1.13 1.23-1.52.26-.38.52-.32.87-.19.35.13 2.22 1.04 2.6 1.23.38.19.63.28.72.44.1.17.1 1.01-.22 1.91z"/></svg>
       </span>
       WhatsApp
     </div>
     <div class="ch-item" data-panel="messenger" onclick="switchChannel('messenger',this)">
       <span class="ch-ico ch-ico-msgr">
-        <!-- Facebook Messenger logo -->
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.3 2 2 6.2 2 11.7c0 3 1.4 5.6 3.7 7.4V23l3.4-1.9c.9.3 1.9.4 2.9.4 5.7 0 10-4.2 10-9.8S17.7 2 12 2zm1 12.1-2.5-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.5 5.8z"/></svg>
+        <svg width="22" height="22" viewBox="0 0 32 32" fill="#fff"><path d="M16 3C8.82 3 3 8.27 3 14.73c0 3.62 1.8 6.85 4.62 8.98V27l4.23-2.32c1.12.31 2.31.48 3.54.48 7.18 0 13-5.27 13-11.73S23.18 3 16 3zm1.29 15.8l-3.31-3.54-6.47 3.54 7.13-7.57 3.39 3.54 6.39-3.54-7.13 7.57z"/></svg>
       </span>
       Facebook Messenger
     </div>
     <div class="ch-item" data-panel="instagram" onclick="switchChannel('instagram',this)">
       <span class="ch-ico ch-ico-ig">
-        <!-- Instagram logo -->
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg>
+        <svg width="21" height="21" viewBox="0 0 32 32" fill="#fff"><path d="M16 4.8c3.7 0 4.14.01 5.6.08 1.35.06 2.08.29 2.57.48.64.25 1.1.55 1.58 1.03.48.48.78.94 1.03 1.58.19.49.42 1.22.48 2.57.07 1.46.08 1.9.08 5.6s-.01 4.14-.08 5.6c-.06 1.35-.29 2.08-.48 2.57a4.28 4.28 0 0 1-1.03 1.58 4.28 4.28 0 0 1-1.58 1.03c-.49.19-1.22.42-2.57.48-1.46.07-1.9.08-5.6.08s-4.14-.01-5.6-.08c-1.35-.06-2.08-.29-2.57-.48a4.28 4.28 0 0 1-1.58-1.03 4.28 4.28 0 0 1-1.03-1.58c-.19-.49-.42-1.22-.48-2.57C4.81 20.14 4.8 19.7 4.8 16s.01-4.14.08-5.6c.06-1.35.29-2.08.48-2.57.25-.64.55-1.1 1.03-1.58a4.28 4.28 0 0 1 1.58-1.03c.49-.19 1.22-.42 2.57-.48C11.86 4.81 12.3 4.8 16 4.8zm0 7.06a4.14 4.14 0 1 0 0 8.28 4.14 4.14 0 0 0 0-8.28zm0 6.84a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.33-7.98a.97.97 0 1 1-1.94 0 .97.97 0 0 1 1.94 0z"/></svg>
       </span>
       Instagram
     </div>
     <div class="ch-item" data-panel="voice" onclick="switchChannel('voice',this)">
       <span class="ch-ico ch-ico-voice">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="#fff"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       </span>
       Voice
     </div>
@@ -814,7 +814,7 @@
             </div>
             <div class="cf-field">
               <label class="cf-label">Category</label>
-              <select class="cf-input cf-select">
+              <select class="cf-input cf-select" id="cfCat">
                 <option>Account &amp; Login</option>
                 <option>Payments &amp; Withdrawals</option>
                 <option>Bonuses &amp; Promotions</option>
@@ -824,9 +824,10 @@
             </div>
             <div class="cf-field">
               <label class="cf-label">Tell us what's happening</label>
-              <textarea class="cf-input cf-textarea">I can't log in — I think I've forgotten my password. Can someone help me reset it?</textarea>
+              <textarea class="cf-input cf-textarea" id="cfMsg">I can't log in — I think I've forgotten my password. Can someone help me reset it?</textarea>
             </div>
-            <button class="cf-submit">Submit — Ada will respond instantly</button>
+            <button class="cf-submit" id="cfBtn" onclick="cfSubmit()">Submit — Ada will respond instantly</button>
+            <div class="ws-result cf-result" id="cfResult"></div>
           </div>
           <div class="cf-side">
             <div class="cf-side-card">
@@ -1177,8 +1178,8 @@ function switchChannel(id, el) {
   const panel = document.getElementById('panel-' + id);
   if (panel) { panel.style.display = 'flex'; panel.classList.add('active'); }
   if (id === 'email') { resetAnimation(); setTimeout(startAnimation, 300); }
-  if (id !== 'websearch') wsCloseChat();
-  else { agWire(); wsPrepare(); }
+  if (id === 'websearch' || id === 'webform') { agWire(); wsPrepare(); }
+  else wsCloseChat();
 }
 
 /* ══════════════════════════════════════════
@@ -1235,7 +1236,8 @@ window.addEventListener('load', () => setTimeout(startAnimation, 600));
 ══════════════════════════════════════════ */
 var agSurface = 'app';
 var wsPending = null, wsHold = false;
-var WS_GREETING_RX = /\bI am Betty\b|you are a \*?Diamond VIP\*? customer|^\s*Hey Kirky/i;
+var WS_BRAND = 'Ada Gaming';
+var WS_GREETING_RX =/\bI am Betty\b|you are a \*?Diamond VIP\*? customer|^\s*Hey Kirky/i;
 
 function wsAsk(q) { document.getElementById('wsInput').value = q; wsSearch(); }
 
@@ -1293,7 +1295,7 @@ function wsSend(text, onError, retries) {
 function wsRescue(pending) {
   if (wsPending !== pending || pending.parts.length || pending.rescued || !window.adaEmbed || !window.adaEmbed.reset) return;
   pending.rescued = true;
-  var l = document.querySelector('#wsResult .ws-ans-live');
+  var l = document.querySelector('#' + pending.rid + ' .ws-ans-live');
   if (l) l.innerHTML = '&#9679; reconnecting to Ada&hellip;';
   agGreeted = false; agGreetAt = 0; clearInterval(agGreetTimer); agGreetTimer = null; agGreetTries = 0; wsSent = false;
   Promise.resolve(window.adaEmbed.reset()).catch(function() {}).then(function() {
@@ -1305,20 +1307,34 @@ function wsRescue(pending) {
 
 function wsSearch() {
   var q = document.getElementById('wsInput').value.trim();
+  if (q) wsRun(q, 'wsResult', '&#129504; ' + WS_BRAND + ' &middot; AI Answer');
+}
+
+// Contact form: the message is sent to the same live agent and its reply is shown under the form.
+function cfSubmit() {
+  var q = document.getElementById('cfMsg').value.trim();
   if (!q) return;
-  if (wsPending) { clearTimeout(wsPending.quiet); clearTimeout(wsPending.limit); clearTimeout(wsPending.slow); clearTimeout(wsPending.rescue); }
-  wsPending = { q: q, parts: [], start: Date.now(), quiet: null, limit: null };
+  var b = document.getElementById('cfBtn');
+  b.disabled = true; b.textContent = 'Submitted — Ada is replying…';
+  wsRun(q, 'cfResult', '&#9993;&#65039; ' + WS_BRAND + ' &middot; Instant reply', function() {
+    b.disabled = false; b.textContent = 'Submit — Ada will respond instantly';
+  });
+}
+
+function wsRun(q, rid, label, onDone) {
+  if (wsPending) { clearTimeout(wsPending.quiet); clearTimeout(wsPending.limit); clearTimeout(wsPending.slow); clearTimeout(wsPending.rescue); if (wsPending.onDone) wsPending.onDone(); }
+  wsPending = { q: q, rid: rid, label: label, onDone: onDone, parts: [], start: Date.now(), quiet: null, limit: null };
   var pending = wsPending;
   wsHold = true;
-  var r = document.getElementById('wsResult');
-  r.innerHTML = '<div class="ws-ans-card"><div class="ws-ans-head">&#129504; Ada Gaming &middot; AI Answer <span class="ws-ans-live">&#9679; asking Ada&hellip;</span></div><div class="ws-ans-body" id="wsAnsBody"><span class="ws-typing"><span></span><span></span><span></span></span></div></div>';
+  var r = document.getElementById(rid);
+  r.innerHTML = '<div class="ws-ans-card"><div class="ws-ans-head">' + label + ' <span class="ws-ans-live">&#9679; asking Ada&hellip;</span></div><div class="ws-ans-body"><span class="ws-typing"><span></span><span></span><span></span></span></div></div>';
   r.classList.add('show');
   pending.limit = setTimeout(function() { wsFinish(pending, true); }, 70000);
   pending.slow = setTimeout(function() {
-    var l = document.querySelector('#wsResult .ws-ans-live');
+    var l = document.querySelector('#' + rid + ' .ws-ans-live');
     if (wsPending === pending && !pending.parts.length && l) l.innerHTML = '&#9679; checking your account&hellip;';
   }, 7000);
-  pending.rescue = setTimeout(function() { wsRescue(pending); }, 20000);
+  pending.rescue = setTimeout(function() { wsRescue(pending); }, 30000);
   wsSend(q, function() { wsFinish(pending, true); });
 }
 
@@ -1334,6 +1350,7 @@ function wsOnBot(text) {
 }
 
 function wsOnTyping() {
+  if (wsPending) clearTimeout(wsPending.rescue);
   if (wsPending && wsPending.parts.length) clearTimeout(wsPending.quiet);
 }
 
@@ -1380,17 +1397,19 @@ function wsFinish(pending, failed) {
   clearTimeout(pending.quiet); clearTimeout(pending.limit); clearTimeout(pending.slow); clearTimeout(pending.rescue);
   wsPending = null;
   wsHold = false;
-  var r = document.getElementById('wsResult');
+  if (pending.onDone) pending.onDone();
+  var r = document.getElementById(pending.rid);
   var answer = pending.parts.join('\n\n');
   if (!answer) {
-    r.innerHTML = '<div class="ws-ans-card"><div class="ws-ans-head">&#129504; Ada Gaming &middot; AI Answer</div><div class="ws-ans-body">I couldn&rsquo;t get an answer from Ada just now. Please try the search again.</div></div>';
+    r.innerHTML = '<div class="ws-ans-card"><div class="ws-ans-head">' + pending.label + '</div><div class="ws-ans-body">I couldn&rsquo;t get an answer from Ada just now. Please try again.</div></div>';
     return;
   }
   var secs = ((Date.now() - pending.start) / 1000).toFixed(1);
-  r.innerHTML =
-    '<div class="ws-ans-card"><div class="ws-ans-head">&#129504; Ada Gaming &middot; AI Answer <span class="ws-ans-live">&#9679; answered live in ' + secs + 's</span></div>' +
+  var head = '<div class="ws-ans-card"><div class="ws-ans-head">' + pending.label + ' <span class="ws-ans-live">&#9679; answered live in ' + secs + 's</span></div>' +
     '<div class="ws-ans-body">' + wsMd(answer) + '</div>' +
-    '<button class="ws-continue" onclick="wsOpenChat()">&#128172; Continue in chat</button>' +
+    '<button class="ws-continue" onclick="wsOpenChat()">&#128172; Continue in chat</button>';
+  if (pending.rid !== 'wsResult') { r.innerHTML = head + '</div>'; return; }
+  r.innerHTML = head +
     '<div class="ws-ctx-row"><button class="ws-ctx-tab" aria-expanded="false" data-p="wsP1" onclick="wsTogglePanel(this)">What the chat receives</button>' +
     '<button class="ws-ctx-tab" aria-expanded="false" data-p="wsP2" onclick="wsTogglePanel(this)">How search links to chat</button></div>' +
     '<div class="ws-ctx-box" id="wsP1" hidden><b>Customer question</b>' + esc(pending.q) +
