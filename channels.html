@@ -348,6 +348,33 @@
 .cf-select { appearance:none; }
 .cf-submit { width:100%; padding:12px; background:var(--ag-gold-grad); color:#1A0E00; font-size:13px; font-weight:800; border:none; border-radius:8px; cursor:pointer; margin-top:4px; font-family:inherit; }
 .cf-result { margin-top:16px; }
+/* web search as a light help-centre page */
+.ws-search-wrap.ws-light { background:#fff; border:1px solid #d6dbe2; box-shadow:0 18px 50px rgba(0,0,0,0.55); border-radius:12px; overflow:hidden; color:#1d2430; }
+.ws-search-wrap.ws-light .ws-search-top { background:#f7f9fc; border-bottom:1px solid #e3e7ed; }
+.ws-search-wrap.ws-light .ws-search-top .ws-logo { background:none; -webkit-background-clip:initial; background-clip:initial; color:#111827; font-weight:700; }
+.ws-search-wrap.ws-light .ws-ai-badge { background:#eef4ff; border-color:#c9dafb; color:#2a62d6; }
+.ws-search-wrap.ws-light .ws-bar { background:#fff; border:1px solid #c5ccd6; box-shadow:inset 0 1px 2px rgba(16,24,40,0.05); }
+.ws-search-wrap.ws-light .ws-bar:focus-within { border-color:#4C8DF6; box-shadow:0 0 0 3px rgba(76,141,246,0.2); }
+.ws-search-wrap.ws-light .ws-bar input { color:#111827; }
+.ws-search-wrap.ws-light .ws-bar input::placeholder { color:#8a94a3; }
+.ws-search-wrap.ws-light .ws-suggest { color:#6b7280; }
+.ws-search-wrap.ws-light .ws-suggest button { background:#f3f5f8; border-color:#dde2e8; color:#374151; }
+.ws-search-wrap.ws-light .ws-suggest button:hover { background:#eef4ff; border-color:#c9dafb; color:#2a62d6; }
+.ws-search-wrap.ws-light .ws-ans-card { background:#f7f9fc; border:1px solid #dfe5ee; border-left:3px solid #4C8DF6; }
+.ws-search-wrap.ws-light .ws-ans-head { color:#2a62d6; }
+.ws-search-wrap.ws-light .ws-ans-live { color:#15803d; }
+.ws-search-wrap.ws-light .ws-ans-body { color:#374151; }
+.ws-search-wrap.ws-light .ws-ans-body b { color:#111827; }
+.ws-search-wrap.ws-light .ws-ans-body a { color:#2a62d6; }
+.ws-search-wrap.ws-light .ws-typing span { background:#4C8DF6; }
+.ws-search-wrap.ws-light .ws-ctx-tab { color:#6b7280; }
+.ws-search-wrap.ws-light .ws-ctx-tab:hover { color:#111827; }
+.ws-search-wrap.ws-light .ws-ctx-box { background:#fff; border-color:#d6dbe2; color:#4b5563; }
+.ws-search-wrap.ws-light .ws-ctx-box b { color:#2a62d6; }
+.ws-search-wrap.ws-light .ws-ctx-box code { color:#b4235a; }
+.ws-search-wrap.ws-light .ws-ctx-box pre.ws-code { background:#0f172a; color:#e2e8f0; }
+.ws-search-wrap.ws-light .ws-ctx-box .ws-why { background:#f7f9fc; border-left-color:#4C8DF6; }
+
 .cf-page { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 18px 50px rgba(0,0,0,0.55); border:1px solid #d6dbe2; }
 .cf-browser { display:flex; align-items:center; gap:10px; padding:9px 12px; background:#eceff3; border-bottom:1px solid #d6dbe2; }
 .cf-dots { display:flex; gap:6px; }
@@ -810,7 +837,8 @@
           <div class="ws-title">Web Search — AI-powered answers</div>
           <div class="ws-sub">Live: your question goes to the real Ada agent, which answers from the knowledge base and the player&rsquo;s account. One click continues in chat with the question and answer already in the conversation.</div>
         </div>
-        <div class="ws-search-wrap">
+        <div class="ws-search-wrap ws-light">
+          <div class="cf-browser"><span class="cf-dots"><i></i><i></i><i></i></span><span class="cf-url">&#128274; adagaming.com/help/search</span></div>
           <div class="ws-search-top">
             <span class="ws-logo">Ada Gaming · Help Centre</span>
             <span class="ws-ai-badge">✨ AI-powered</span>
