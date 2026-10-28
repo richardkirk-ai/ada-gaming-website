@@ -316,6 +316,21 @@
 .cf-select { appearance:none; }
 .cf-submit { width:100%; padding:12px; background:var(--ag-gold-grad); color:#1A0E00; font-size:13px; font-weight:800; border:none; border-radius:8px; cursor:pointer; margin-top:4px; font-family:inherit; }
 .cf-result { margin-top:16px; }
+.cf-page { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 18px 50px rgba(0,0,0,0.55); border:1px solid #d6dbe2; }
+.cf-browser { display:flex; align-items:center; gap:10px; padding:9px 12px; background:#eceff3; border-bottom:1px solid #d6dbe2; }
+.cf-dots { display:flex; gap:6px; }
+.cf-dots i { width:10px; height:10px; border-radius:50%; background:#ff5f57; display:block; }
+.cf-dots i:nth-child(2) { background:#febc2e; } .cf-dots i:nth-child(3) { background:#28c840; }
+.cf-url { flex:1; background:#fff; border:1px solid #d6dbe2; border-radius:999px; padding:4px 12px; font-size:11.5px; color:#5b6573; }
+.cf-page-body { padding:22px 24px 24px; color:#1d2430; }
+.cf-page .cf-title { color:#111827; }
+.cf-page .cf-sub { color:#5b6573; }
+.cf-page .cf-label { color:#1f2937; }
+.cf-page .cf-input { background:#fff; border:1px solid #c5ccd6; color:#111827; box-shadow:inset 0 1px 2px rgba(16,24,40,0.05); }
+.cf-page .cf-input:focus { border-color:#4C8DF6; box-shadow:0 0 0 3px rgba(76,141,246,0.2); }
+.cf-page .cf-select { background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235b6573' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center; padding-right:34px; }
+.cf-page .cf-input[readonly] { background:#f5f7fa; color:#4b5563; }
+
 .cf-mail { border:1px solid rgba(255,255,255,0.12); border-radius:12px; overflow:hidden; background:var(--ag-panel); animation:wsfade .3s ease; }
 .cf-mail-bar { display:flex; align-items:center; gap:8px; padding:9px 14px; background:rgba(255,255,255,0.04); border-bottom:1px solid rgba(255,255,255,0.08); font-size:11px; color:var(--ag-text-3); }
 .cf-mail-bar b { color:var(--ag-text-2); font-weight:700; }
@@ -819,6 +834,9 @@
       <div class="contact-form-panel">
         <div class="cf-split">
           <div class="cf-form">
+            <div class="cf-page">
+            <div class="cf-browser"><span class="cf-dots"><i></i><i></i><i></i></span><span class="cf-url">&#128274; bet365.com/help/contact-us</span></div>
+            <div class="cf-page-body">
             <div class="cf-title">📋 Web Contact Form</div>
             <div class="cf-sub">Ada pre-fills what it already knows, resolves the query instantly if it can, and routes to a human only when needed.</div>
             <div class="cf-field">
@@ -844,6 +862,7 @@
               <textarea class="cf-input cf-textarea" id="cfMsg">I can't log in — I think I've forgotten my password. Can someone help me reset it?</textarea>
             </div>
             <button class="cf-submit" id="cfBtn" onclick="cfSubmit()">Submit — Ada will respond instantly</button>
+            </div></div>
             <div class="ws-result cf-result" id="cfResult"></div>
           </div>
           <div class="cf-side">
