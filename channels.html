@@ -1390,7 +1390,7 @@ function wsFinish(pending, failed) {
   r.innerHTML =
     '<div class="ws-ans-card"><div class="ws-ans-head">&#129504; Ada Gaming &middot; AI Answer <span class="ws-ans-live">&#9679; answered live in ' + secs + 's</span></div>' +
     '<div class="ws-ans-body">' + wsMd(answer) + '</div>' +
-    '<button class="ws-continue" onclick="wsOpenChat()">&#128172; Continue in Ada chat &mdash; question and answer already loaded</button>' +
+    '<button class="ws-continue" onclick="wsOpenChat()">&#128172; Continue in chat</button>' +
     '<div class="ws-ctx-row"><button class="ws-ctx-tab" aria-expanded="false" data-p="wsP1" onclick="wsTogglePanel(this)">What the chat receives</button>' +
     '<button class="ws-ctx-tab" aria-expanded="false" data-p="wsP2" onclick="wsTogglePanel(this)">How search links to chat</button></div>' +
     '<div class="ws-ctx-box" id="wsP1" hidden><b>Customer question</b>' + esc(pending.q) +
